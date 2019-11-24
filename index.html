@@ -8543,10 +8543,11 @@ var $MacCASOutreach$graphicsvg$GraphicSVG$EllieApp$gameApp = F2(
 	});
 var $author$project$Main$Home = {$: 'Home'};
 var $author$project$FundamentalIdentities$Default = {$: 'Default'};
+var $author$project$FundamentalIdentities$NoPopUp = {$: 'NoPopUp'};
 var $author$project$FundamentalIdentities$NotifyTap = {$: 'NotifyTap'};
 var $author$project$FundamentalIdentities$Question1 = {$: 'Question1'};
 var $author$project$FundamentalIdentities$Step1 = {$: 'Step1'};
-var $author$project$FundamentalIdentities$init = {answer: $author$project$FundamentalIdentities$Default, notify: $author$project$FundamentalIdentities$NotifyTap, question: $author$project$FundamentalIdentities$Question1, step: $author$project$FundamentalIdentities$Step1, time: 0};
+var $author$project$FundamentalIdentities$init = {answer: $author$project$FundamentalIdentities$Default, hintState: $author$project$FundamentalIdentities$NoPopUp, notify: $author$project$FundamentalIdentities$NotifyTap, question: $author$project$FundamentalIdentities$Question1, step: $author$project$FundamentalIdentities$Step1, time: 0};
 var $author$project$OtherFormulas$Default = {$: 'Default'};
 var $author$project$OtherFormulas$NotifyTap = {$: 'NotifyTap'};
 var $author$project$OtherFormulas$Question1 = {$: 'Question1'};
@@ -8595,6 +8596,10 @@ var $author$project$ReciprocalIdentities$Tick = F2(
 	});
 var $author$project$FundamentalIdentities$Correct = {$: 'Correct'};
 var $author$project$FundamentalIdentities$Incorrect = {$: 'Incorrect'};
+var $author$project$FundamentalIdentities$PopUp = F2(
+	function (a, b) {
+		return {$: 'PopUp', a: a, b: b};
+	});
 var $author$project$FundamentalIdentities$Question2 = {$: 'Question2'};
 var $author$project$FundamentalIdentities$Step2 = {$: 'Step2'};
 var $author$project$FundamentalIdentities$Step3 = {$: 'Step3'};
@@ -8641,10 +8646,22 @@ var $author$project$FundamentalIdentities$update = F2(
 				return _Utils_update(
 					model,
 					{answer: $author$project$FundamentalIdentities$Default, question: $author$project$FundamentalIdentities$Question1, step: $author$project$FundamentalIdentities$Step1});
-			default:
+			case 'GoToQuestion2':
 				return _Utils_update(
 					model,
 					{answer: $author$project$FundamentalIdentities$Default, question: $author$project$FundamentalIdentities$Question2, step: $author$project$FundamentalIdentities$Step1});
+			case 'ClickedHint':
+				var question = msg.a;
+				var step = msg.b;
+				return _Utils_update(
+					model,
+					{
+						hintState: A2($author$project$FundamentalIdentities$PopUp, question, step)
+					});
+			default:
+				return _Utils_update(
+					model,
+					{hintState: $author$project$FundamentalIdentities$NoPopUp});
 		}
 	});
 var $author$project$OtherFormulas$Correct = {$: 'Correct'};
@@ -10130,6 +10147,11 @@ var $author$project$Main$twoColour = function (model) {
 		model.twoSat,
 		0.85);
 };
+var $author$project$FundamentalIdentities$ClickedHint = F2(
+	function (a, b) {
+		return {$: 'ClickedHint', a: a, b: b};
+	});
+var $author$project$FundamentalIdentities$ExitHint = {$: 'ExitHint'};
 var $author$project$FundamentalIdentities$GoToQuestion1 = {$: 'GoToQuestion1'};
 var $author$project$FundamentalIdentities$GoToQuestion2 = {$: 'GoToQuestion2'};
 var $author$project$FundamentalIdentities$GoToStep2 = {$: 'GoToStep2'};
@@ -10145,6 +10167,77 @@ var $MacCASOutreach$graphicsvg$GraphicSVG$circle = function (r) {
 	return $MacCASOutreach$graphicsvg$GraphicSVG$Circle(r);
 };
 var $MacCASOutreach$graphicsvg$GraphicSVG$green = A4($MacCASOutreach$graphicsvg$GraphicSVG$RGBA, 115, 210, 22, 1);
+var $author$project$FundamentalIdentities$strHint = F2(
+	function (question, step) {
+		var _v0 = _Utils_Tuple2(question, step);
+		_v0$2:
+		while (true) {
+			if (_v0.a.$ === 'Question1') {
+				switch (_v0.b.$) {
+					case 'Step1':
+						var _v1 = _v0.a;
+						var _v2 = _v0.b;
+						return _List_fromArray(
+							['Discover', 'the problem', 'through', 'interviewing', 'the end user.']);
+					case 'Step2':
+						var _v3 = _v0.a;
+						var _v4 = _v0.b;
+						return _List_fromArray(
+							['Define', 'the right', 'problem through', 'converging to', 'an idea.']);
+					default:
+						break _v0$2;
+				}
+			} else {
+				break _v0$2;
+			}
+		}
+		var otherwise = _v0;
+		return _List_Nil;
+	});
+var $author$project$FundamentalIdentities$txt = function (lst) {
+	return $MacCASOutreach$graphicsvg$GraphicSVG$group(
+		A2(
+			$elm$core$List$indexedMap,
+			F2(
+				function (idx, line) {
+					return A2(
+						$MacCASOutreach$graphicsvg$GraphicSVG$move,
+						_Utils_Tuple2(0, 14 - (7 * idx)),
+						A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+							$MacCASOutreach$graphicsvg$GraphicSVG$black,
+							$MacCASOutreach$graphicsvg$GraphicSVG$centered(
+								A2(
+									$MacCASOutreach$graphicsvg$GraphicSVG$size,
+									6,
+									$MacCASOutreach$graphicsvg$GraphicSVG$sansserif(
+										$MacCASOutreach$graphicsvg$GraphicSVG$text(line))))));
+				}),
+			lst));
+};
+var $author$project$FundamentalIdentities$hintCard = F2(
+	function (question, step) {
+		return A2(
+			$MacCASOutreach$graphicsvg$GraphicSVG$move,
+			_Utils_Tuple2(50, 0),
+			$MacCASOutreach$graphicsvg$GraphicSVG$group(
+				_List_fromArray(
+					[
+						A3(
+						$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
+						$MacCASOutreach$graphicsvg$GraphicSVG$solid(0.3),
+						$MacCASOutreach$graphicsvg$GraphicSVG$black,
+						A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$makeTransparent,
+							0.9,
+							A2(
+								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+								$MacCASOutreach$graphicsvg$GraphicSVG$white,
+								A2($MacCASOutreach$graphicsvg$GraphicSVG$rect, 200, 150)))),
+						$author$project$FundamentalIdentities$txt(
+						A2($author$project$FundamentalIdentities$strHint, question, step))
+					])));
+	});
 var $MacCASOutreach$graphicsvg$GraphicSVG$red = A4($MacCASOutreach$graphicsvg$GraphicSVG$RGBA, 204, 0, 0, 1);
 var $elm$core$Basics$clamp = F3(
 	function (low, high, number) {
@@ -11475,42 +11568,69 @@ var $author$project$FundamentalIdentities$view = function (model) {
 				}
 			}
 		}(),
-		_List_fromArray(
-			[
-				$MacCASOutreach$graphicsvg$GraphicSVG$group(
-				_List_fromArray(
-					[
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(234, 125),
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$makeTransparent,
-							0.75,
-							A3(
-								$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
-								$MacCASOutreach$graphicsvg$GraphicSVG$solid(3),
-								$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$blank,
-									$MacCASOutreach$graphicsvg$GraphicSVG$circle(12))))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(228, 118),
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$makeTransparent,
-							0.75,
+		_Utils_ap(
+			_List_fromArray(
+				[
+					$MacCASOutreach$graphicsvg$GraphicSVG$group(
+					_List_fromArray(
+						[
 							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-								$MacCASOutreach$graphicsvg$GraphicSVG$orange,
+							$MacCASOutreach$graphicsvg$GraphicSVG$notifyLeave,
+							$author$project$FundamentalIdentities$ExitHint,
+							A2(
+								$MacCASOutreach$graphicsvg$GraphicSVG$notifyEnter,
+								A2($author$project$FundamentalIdentities$ClickedHint, model.question, model.step),
 								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$size,
-									20,
-									$MacCASOutreach$graphicsvg$GraphicSVG$sansserif(
-										$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('?')))))))
-					]))
-			]));
+									$MacCASOutreach$graphicsvg$GraphicSVG$move,
+									_Utils_Tuple2(234, 125),
+									A2(
+										$MacCASOutreach$graphicsvg$GraphicSVG$makeTransparent,
+										0.75,
+										A3(
+											$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
+											$MacCASOutreach$graphicsvg$GraphicSVG$solid(3),
+											$MacCASOutreach$graphicsvg$GraphicSVG$orange,
+											A2(
+												$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+												$MacCASOutreach$graphicsvg$GraphicSVG$blank,
+												$MacCASOutreach$graphicsvg$GraphicSVG$circle(12))))))),
+							A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$notifyLeave,
+							$author$project$FundamentalIdentities$ExitHint,
+							A2(
+								$MacCASOutreach$graphicsvg$GraphicSVG$notifyEnter,
+								A2($author$project$FundamentalIdentities$ClickedHint, model.question, model.step),
+								A2(
+									$MacCASOutreach$graphicsvg$GraphicSVG$move,
+									_Utils_Tuple2(228, 118),
+									A2(
+										$MacCASOutreach$graphicsvg$GraphicSVG$makeTransparent,
+										0.75,
+										A2(
+											$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+											$MacCASOutreach$graphicsvg$GraphicSVG$orange,
+											A2(
+												$MacCASOutreach$graphicsvg$GraphicSVG$size,
+												20,
+												$MacCASOutreach$graphicsvg$GraphicSVG$sansserif(
+													$MacCASOutreach$graphicsvg$GraphicSVG$bold(
+														$MacCASOutreach$graphicsvg$GraphicSVG$text('?')))))))))
+						]))
+				]),
+			function () {
+				var _v3 = model.hintState;
+				if (_v3.$ === 'PopUp') {
+					var question = _v3.a;
+					var step = _v3.b;
+					return _List_fromArray(
+						[
+							A2($author$project$FundamentalIdentities$hintCard, question, step)
+						]);
+				} else {
+					var otherwise = _v3;
+					return _List_Nil;
+				}
+			}()));
 };
 var $author$project$OtherFormulas$GoToQuestion1 = {$: 'GoToQuestion1'};
 var $author$project$OtherFormulas$GoToQuestion2 = {$: 'GoToQuestion2'};

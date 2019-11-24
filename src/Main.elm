@@ -82,7 +82,7 @@ fiveColour model =
 
 
 fiveAccent model =
-    hsl (degrees 355) model.fiveSat 0.75
+    hsl (degrees 355) model.fiveSat 0.6
 
 
 type Msg m1 m2 m3 m4 m5
@@ -115,9 +115,9 @@ view model =
     collage 640 380 <|
         (case model.page of
             Home ->
-                [ rectangle 400 290 |> filled blank |> addOutline (solid 2) orange |> move ( 55, 0 )
-                , text "Welcome!" |> size 20 |> bold |> filled orange |> move ( 10, 10 )
-                , text "Please select a lesson in the left panel to get started." |> size 16 |> filled orange |> move ( -110, -10 )
+                [ rectangle 400 290 |> filled blank |> addOutline (solid 2) charcoal |> move ( 55, 0 )
+                , text "Welcome!" |> size 20 |> bold |> filled charcoal |> move ( 10, 10 )
+                , text "Please select a lesson in the left panel to get started." |> size 16 |> filled charcoal |> move ( -110, -10 )
                 ]
             FundamentalIdentities ->
                 List.map (map Msg1) (FundamentalIdentities.view model.model1)

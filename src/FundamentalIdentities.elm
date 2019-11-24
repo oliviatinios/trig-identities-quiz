@@ -30,6 +30,10 @@ type Steps
 type Questions
     = Question1
     | Question2
+ --   | Question3
+--    | Question4
+--    | Question5
+
 
 -- change you app's state based on your new messages
 update msg model =
@@ -90,9 +94,23 @@ update msg model =
                 , step = Step1
                 , question = Question2
                 }
-        
+
+--        GoToQuestion3
+  --          -> { model
+    --            | answer = Default
+      --          , step = Step1
+        --        , question = Question3
+          --      }
+
+  --      GoToQuestion4
+    --        -> { model
+    --    --        | answer = Default
+            --    , step = Step1
+          --      , question = Question4
+            --    }
+
         ClickedHint question step -> {model | hintState = PopUp question step }
-        
+
         ExitHint -> {model | hintState = NoPopUp }
 
 --         -- ran out of room for notifications, but left them here for a possible future improvement
@@ -570,30 +588,40 @@ view model =
                         |> move ( -130, -130 )
                     ]
             )
+
+
     )
-    ++ [ group 
+    ++ [ group
             [ circle 12 |> filled blank |> addOutline (solid 3) orange |> makeTransparent 0.75 |> move ( 234, 125 ) |> notifyEnter (ClickedHint model.question model.step) |> notifyLeave ExitHint
             , text "?" |> bold |> sansserif |> size 20 |> filled orange |> makeTransparent 0.75 |> move ( 228, 118 ) |> notifyEnter (ClickedHint model.question model.step) |> notifyLeave ExitHint ]
        ]
-    ++ 
-        case model.hintState of 
+    ++
+        case model.hintState of
             PopUp question step -> [hintCard question step]
             otherwise -> []
 
-hintCard question step = group [rect 200 150 |> filled white |> makeTransparent 0.9 |> addOutline (solid 0.3) black
+hintCard question step = group [rect 70 70 |> filled black |> makeTransparent 0.3 |> addOutline (solid 0.3) black
                                , txt (strHint question step)
-                               ] |> move ( 50, 0 )
+                               ] |> move ( 60, 0 )
 
-txt lst =  group (List.indexedMap (\idx line -> text line 
-                                                        |> sansserif
-                                                        |> size 6 
-                                                        |> centered 
-                                                        |> filled black 
+
+txt lst =  group (List.indexedMap (\idx line -> text line
+                                                    --    |> sansserif
+                                                        |> size 10
+                                                        |> centered
+                                                        |> filled black
                                                         |> move (0,14-7*(Basics.toFloat idx))) lst)
 
-strHint question step = case (question,step) of 
-                  (Question1,Step1) -> ["Discover", "the problem", "through", "interviewing", "the end user." ]
-                  (Question1, Step2) -> ["Define","the right" , "problem through", "converging to", "an idea."]
+
+strHint question step = case (question,step) of
+                  (Question1,Step1) -> ["Express", "with", "sine", "and", "cosine" ]
+                  (Question1, Step2) -> ["Use", "the" , "relationship", "between secant", "and cosine", "to simplify"]
+                  (Question1, Step3) -> ["Simplify", "the" , "derived", "result", "from", "step 2"]
+                  (Question2, Step1) -> ["Take the", "comon", "denominator", "sine" ]
+                  (Question2, Step2) -> ["Express", "as" , "secant"]
+                  (Question2, Step3) -> ["Express", "as" , "sine"]
+                  (Question2, Step4) -> ["Simplify"]
+                  (Question2, Step5) -> ["Express", "as" , "cosecant"]
                   otherwise -> []
 
 
@@ -632,6 +660,3 @@ type Notifications
     | NotifyTouchEnd
     | NotifyTouchEndAt
     | NotifyTouchMoveAt
-
-
-

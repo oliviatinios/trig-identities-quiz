@@ -150,7 +150,7 @@ questionStr question = case question of
                 Question2 -> "Simplify the following: sin(4y)cos(2y)"
                 Question3 -> "Write cos(3y)cos(5y) as a sum or difference."
                 Question4 -> "Write the following difference of sines expression as a product: sin(4y) - sin(2y)"
-                Question5 -> "Prove that (1-sin(y))(1+csc(y))=cos(y)*cot(y)"
+                Question5 -> "Prove that csc^2(y) - 2 = cos(2y) / sin^2(y)"
 
 stepStr step = case step of
                 Step1 -> "What is the first step?"
@@ -175,9 +175,9 @@ solutionStr question = case question of
                                "Step 2: = 2sin(2y/2)cos(6y/2)",
                                "Step 3: = 2sinycos3y"
                              ]
-                Question5 -> [ "Step 1: LHS = (1+(1/sin(y)))(1-(sin(y)))",
-                               "Step 2: LHS = (1+sin(y))*(1-sin(y))/sin(y)",
-                               "Step 3: LHS = (cos^2(y))/sin(y)"
+                Question5 -> [ "Step 1: RHS = 1 - 2sin^2(y) / sin^2(y)",
+                               "Step 2: RHS = 1/sin^2(y) - 2sin^2(y) / sin^2(y)",
+                               "Step 3: RHS = csc^2(y) - 2"
                              ]
 
 
@@ -242,20 +242,20 @@ optionsStr question step = case (question, step) of
                                       , ( "c) = 2sinycos3y", RightAnswer)
                                       , ( "d) = 2sinycos7y", WrongAnswer)
                                       ]
-                (Question5, Step1) -> [ ( "a) LHS =  sin2 y", WrongAnswer)
-                                      , ( "b) LHS =  cos(y)/csc(y)", WrongAnswer)
-                                      , ( "c) LHS = (cos(y)/sin(y))+(sin(y)/cos(y))", WrongAnswer)
-                                      , ( "d) LHS = (1+(1/sin(y)))(1-(sin(y)))", RightAnswer)
+                (Question5, Step1) -> [ ( "a) RHS = 1 - 3sin^3(y) / sin^2(y)", WrongAnswer)
+                                      , ( "b) RHS = 1 - 2sin^2(y) / sin^2(2y)", WrongAnswer)
+                                      , ( "c) RHS = 1 - 3sin^2(y) / sin^2(2y)", WrongAnswer)
+                                      , ( "d) RHS = 1 - 2sin^2(y) / sin^2(y)", RightAnswer)
                                       ]
-                (Question5, Step2) -> [ ( "a) LHS = (1+sin(y))*(1-sin(y))/sin(y)", RightAnswer)
-                                      , ( "b) LHS = (cos(y)/sin(y))", WrongAnswer)
-                                      , ( "c) LHS = sin(y)/(1/tan(y)", WrongAnswer)
-                                      , ( "d) LHS = sin y", WrongAnswer)
+                (Question5, Step2) -> [ ( "a) RHS = 1/sin^2(y) - 2sin^2(y) / sin^2(y)", RightAnswer)
+                                      , ( "b) RHS = 2/sin^2(y) - 2sin^2(y) / sin^2(y)", WrongAnswer)
+                                      , ( "c) RHS = 2/sin^2(y) - 1sin^2(y) / sin^2(y)", WrongAnswer)
+                                      , ( "d) RHS = 1/sin^2(y) - 1sin^2(y) / sin^2(y)", WrongAnswer)
                                       ]
-                (Question5, Step3) -> [ ( "a) LHS = (cos^2(y))/sin(y)", RightAnswer)
-                                      , ( "b) LHS = (sin(y))/csc(y)", WrongAnswer)
-                                      , ( "c) LHS = (cos(y)*sin(y)", WrongAnswer)
-                                      , ( "d) LHS = csc y", WrongAnswer)
+                (Question5, Step3) -> [ ( "a) RHS = csc^2(y) - 2", RightAnswer)
+                                      , ( "b) RHS = cot^2(y) - 2", WrongAnswer)
+                                      , ( "c) RHS = csc^2(y) - 1", WrongAnswer)
+                                      , ( "d) RHS = cot^2(y) - 1", WrongAnswer)
                                       ]
                 otherwise -> []
 
@@ -349,9 +349,9 @@ hintStr question step = case (question, step) of
                 (Question4, Step1) -> ["Use the", "difference", "of sines" ]
                 (Question4, Step2) -> ["Simplify"]
                 (Question4, Step3) -> ["Simplify"]
-                (Question5, Step1) -> ["Express", "with", "sine", "and", "cosine" ]
-                (Question5, Step2) -> ["Simplify", "terms in", "step 1" ]
-                (Question5, Step3) -> ["Use", "1-sin^2(y)=cos^2(y)"]
+                (Question5, Step1) -> ["Use a", "double", "angle", "formula" ]
+                (Question5, Step2) -> ["Can you try", "splitting", "the terms?" ]
+                (Question5, Step3) -> ["Use a", "reciprocal", "formula"]
                 otherwise -> []
 
 

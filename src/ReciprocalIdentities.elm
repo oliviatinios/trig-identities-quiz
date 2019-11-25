@@ -147,10 +147,10 @@ questionTitleStr question = case question of
 
 questionStr question = case question of
                 Question1 -> "Which of the following expressions is equal to (sin y - tan y)(cos y - cot y)?"
-                Question2 -> "Prove that sin y + sin y * cot2 y = cscy"
-                Question3 -> "Prove that cot y / csc y = cos y"
-                Question4 -> "Prove that cot(y)+tan(y)=sec(y)*csc(y)"
-                Question5 -> "Prove that (1-sin(y))(1+csc(y))=cos(y)*cot(y)"
+                Question2 -> "Prove that (sec^2(y) - 1)/sec^2(y) = sin^2(y)"
+                Question3 -> "Prove that 2tan(y)sec(y) = 2(sin(y)/cos(y))(1/cos(y))"
+                Question4 -> "Prove that 4cos^2(y) - 1 = (2cos(y))^2 - 1"
+                Question5 -> "Simplify csc^2(y) - cot^2(y)"
 
 stepStr step = case step of
                 Step1 -> "What is the first step?"
@@ -167,22 +167,19 @@ solutionStr question = case question of
                              , "Step 4: = sin y cos y * ((cos y - 1) (sin y - 1) / cos y sin y)"
                              , "Step 5: = (cos y - 1) (sin y - 1)"
                              ]
-                Question2 -> [ "Step 1: LHS = sin y * (1 + cot2 y)"
-                             , "Step 2: LHS = sin y * (csc2 y)"
-                             , "Step 3: LHS = (sin y / sin2 y)"
-                             , "Step 4: LHS = 1 / sin y"
+                Question2 -> [ "Step 1: RHS = ((tan^2(y) + 1) - 1)/sec^2(y)"
+                             , "Step 2: RHS = tan^2(y) / sec^2(y)"
+                             , "Step 3: RHS = tan^2(y) * (1/sec^2(y))"
+                             , "Step 4: RHS = tan^2(y) cos^2(y) "
+                             , "Step 5: RHS = (sin^2(y) / cos^2(y))(cos^2(y)) = sin^2(y)"
                              ]
-                Question3 -> [ "Step 1: LHS = (cos(y)/sin(y))/csc(y)"
-                             , "Step 2: LHS = (cos(y)/sin(y))/(1/sin(y))"
-                             , "Step 3: LHS = cos(y)"
+                Question3 -> [ "Step 1: RHS = 2sin(y)/cos^2(y)"
+                             , "Step 2: RHS = sin(y)/(1-sin^2(y))"
                              ]
-                Question4 -> [ "Step 1: LHS = (cos(y)/sin(y))+(sin(y)/cos(y))",
-                               "Step 2: LHS = (cos^2(y)+sin^2(y))/(cos(y)*sin(y))",
-                               "Step 3: LHS = 1/(cos(y)*sin(y))"
+                Question4 -> [ "Step 1: RHS = (2cos(y) - 1)(2(cos(y)) + 1)"
                              ]
-                Question5 -> [ "Step 1: LHS = (1+(1/sin(y)))(1-(sin(y)))",
-                               "Step 2: LHS = (1+sin(y))*(1-sin(y))/sin(y)",
-                               "Step 3: LHS = (cos^2(y))/sin(y)"
+                Question5 -> [ "Step 1: = 1 + cot^2(y) - cot^2(y)",
+                               "Step 2: = 1"
                              ]
 
 
@@ -222,75 +219,55 @@ optionsStr question step = case (question, step) of
                                       , ( "c) = (cos y - 1) (tan y - 1)", WrongAnswer)
                                       , ( "d) = (tan y - 1) (sin y - 1)", WrongAnswer)
                                       ]
-                (Question2, Step1) -> [ ( "a) LHS = sin y + sin y * (1 / tan2 y)", WrongAnswer)
-                                      , ( "b) LHS = sin y * (1 + cot2 y)", RightAnswer)
-                                      , ( "c) LHS = sin y + (sin y / tan2 y)", WrongAnswer)
-                                      , ( "d) LHS = sin y + ( (sin y * cos2 y) / sin2 y", WrongAnswer)
+                (Question2, Step1) -> [ ( "a) RHS = ((cos^2(y) + 1) - 1)/sec^2(y)", WrongAnswer)
+                                      , ( "b) RHS = ((tan^2(y) + 1) - 1)/sec^2(y))", RightAnswer)
+                                      , ( "c) RHS = ((cos^2(y) + 1) - 1)/sin^2(y)", WrongAnswer)
+                                      , ( "d) RHS = ((tan^2(y) + 1) - 1)/sin^2(y)", WrongAnswer)
                                       ]
-                (Question2, Step2) -> [ ( "a) LHS = sin y * (1 + (cos2 y / sin2 y))", WrongAnswer)
-                                      , ( "b) LHS = sin y * (1 + (sin2 y / cos2 y))", WrongAnswer)
-                                      , ( "c) LHS = sin y * (csc2 y)", RightAnswer)
-                                      , ( "d) LHS = sin y * (cos2 y)", WrongAnswer)
+                (Question2, Step2) -> [ ( "a) RHS = cos^2(y) / sec^2(y)", WrongAnswer)
+                                      , ( "b) RHS = cos^2(y) / tan^2(y)", WrongAnswer)
+                                      , ( "c) RHS = tan^2(y) / sec^2(y)", RightAnswer)
+                                      , ( "d) RHS = sec^2(y) / tan^2(y)", WrongAnswer)
                                       ]
-                (Question2, Step3) -> [ ( "a) LHS = sin y * (1 / cos2 y)", WrongAnswer)
-                                      , ( "b) LHS = sin y * (cos2 y / sin2 y)", WrongAnswer)
-                                      , ( "c) LHS = (sin2 y / cos y)", WrongAnswer)
-                                      , ( "d) LHS = (sin y / sin2 y)", RightAnswer)
+                (Question2, Step3) -> [ ( "a) RHS = sec^2(y) * (1/tan^2(y))", WrongAnswer)
+                                      , ( "b) RHS = sec^2(y) * (2/tan^2(y))", WrongAnswer)
+                                      , ( "c) RHS = tan^2(y) * (2/sec^2(y))", WrongAnswer)
+                                      , ( "d) RHS = tan^2(y) * (/sec^2(y))", RightAnswer)
                                       ]
-                (Question2, Step4) -> [ ( "a) LHS = 1 / sin y", RightAnswer)
-                                      , ( "b) LHS = sin y / (1 + tan2 y)", WrongAnswer)
-                                      , ( "c) LHS = (1 + sin y) / sin y", WrongAnswer)
-                                      , ( "d) LHS = 1 / sin2 y", WrongAnswer)
+                (Question2, Step4) -> [ ( "a) RHS = tan^2(y) cos^2(y) ", RightAnswer)
+                                      , ( "b) RHS = cos^2(y) tan^2(y) ", WrongAnswer)
+                                      , ( "c) RHS = cos^2(2y) tan^2(y) ", WrongAnswer)
+                                      , ( "d) RHS = tan^2(2y) cos^2(y) ", WrongAnswer)
                                       ]
-                (Question2, Step5) -> [ ( "a) LHS = cos y / sin2 y", WrongAnswer)
-                                      , ( "b) LHS = csc y", RightAnswer)
-                                      , ( "c) LHS = tan y / (sin y * tan y)", WrongAnswer)
-                                      , ( "d) LHS = cot y", WrongAnswer)
+                (Question2, Step5) -> [ ( "a) RHS = (cos^2(y) / cos^2(y))(cos^2(y)) = sin^2(y)", WrongAnswer)
+                                      , ( "b) RHS = (sin^2(y) / cos^2(y))(cos^2(y)) = sin^2(y)", RightAnswer)
+                                      , ( "c) RHS = (cos^2(y) / cos^2(y))(tan^2(y)) = sin^2(y)", WrongAnswer)
+                                      , ( "d) RHS = (sin^2(y) / cos^2(y))(tan^2(y)) = sin^2(y)", WrongAnswer)
                                       ]
-                (Question3, Step1) -> [ ( "a) LHS = cos2 y / sin2 y", WrongAnswer)
-                                      , ( "b) LHS = (cos(y)/sin(y))/csc(y)", RightAnswer)
-                                      , ( "c) LHS = secy / (tan y * tan y)", WrongAnswer)
-                                      , ( "d) LHS = cot y", WrongAnswer)
+                (Question3, Step1) -> [ ( "a) RHS = 4sin(y)/cos^2(y)", WrongAnswer)
+                                      , ( "b) RHS = 2sin(y)/cos^2(y)", RightAnswer)
+                                      , ( "c) RHS = 4sin(y)/cos^4(y)", WrongAnswer)
+                                      , ( "d) RHS = 2sin(y)/cos^4(y)", WrongAnswer)
                                       ]
-                (Question3, Step2) -> [ ( "a) LHS = cos3 y / sin3 y", WrongAnswer)
-                                      , ( "b) LHS = (cos(y)/sin(y))/csc(y)", WrongAnswer)
-                                      , ( "c) LHS = (cos(y)/sin(y))/(1/sin(y))", RightAnswer)
-                                      , ( "d) LHS = cot y", WrongAnswer)
+                (Question3, Step2) -> [ ( "a) RHS = sin(y)/(1-cot^2(y)", WrongAnswer)
+                                      , ( "b) RHS = tan(y)/(1-cot^2(y)", WrongAnswer)
+                                      , ( "c) RHS = sin(y)/(1-sin^2(y)", RightAnswer)
+                                      , ( "d) RHS = tan(y)/(1-sin^2(y)", WrongAnswer)
                                       ]
-                (Question3, Step3) -> [ ( "a) LHS = cos3 y / sin3 y", WrongAnswer)
-                                      , ( "b) LHS = (cos(y)/sin(y))/csc(y)", WrongAnswer)
-                                      , ( "c) LHS = cos(y)", RightAnswer)
-                                      , ( "d) LHS = csc y", WrongAnswer)
+                (Question4, Step1) -> [ ( "a) RHS = (2cos(y) - 1)(2(tan(y)) + 1)", WrongAnswer)
+                                      , ( "b) RHS = (2sin(y) - 1)(2(tan(y)) + 1)", WrongAnswer)
+                                      , ( "c) RHS = (2cos(y) - 1)(2(cos(y)) + 1)", RightAnswer)
+                                      , ( "d) RHS = (2cos(y) - 1)(2(cos(y)) + 1)", WrongAnswer)
                                       ]
-                (Question4, Step1) -> [ ( "a) LHS = cos2 y / sin2 y", WrongAnswer)
-                                      , ( "b) LHS = (cos(y)/sin(y))/csc(y)", WrongAnswer)
-                                      , ( "c) LHS = (cos(y)/sin(y))+(sin(y)/cos(y))", RightAnswer)
-                                      , ( "d) LHS = cot y", WrongAnswer)
+                (Question5, Step1) -> [ ( "a) = 1 + csc^2(y) - cot^2(y)", WrongAnswer)
+                                      , ( "b) = 1 + cot^2(y) - csc^2(y)", WrongAnswer)
+                                      , ( "c) = 1 + csc^2(y) - csc^2(y)", WrongAnswer)
+                                      , ( "d) = 1 + cot^2(y) - cot^2(y)", RightAnswer)
                                       ]
-                (Question4, Step2) -> [ ( "a) LHS = (cos^2(y)+sin^2(y))/(cos(y)*sin(y))", RightAnswer)
-                                      , ( "b) LHS = (cos(y)/sin(y))/csc(y)", WrongAnswer)
-                                      , ( "c) LHS = cos(y)/(1/sin(y)", WrongAnswer)
-                                      , ( "d) LHS = cot y", WrongAnswer)
-                                      ]
-                (Question4, Step3) -> [ ( "a) LHS = cos y / sin y", WrongAnswer)
-                                      , ( "b) LHS = (sin(y))/csc(y)", WrongAnswer)
-                                      , ( "c) LHS = 1/(cos(y)*sin(y))", RightAnswer)
-                                      , ( "d) LHS = sec y", WrongAnswer)
-                                      ]
-                (Question5, Step1) -> [ ( "a) LHS =  sin2 y", WrongAnswer)
-                                      , ( "b) LHS =  cos(y)/csc(y)", WrongAnswer)
-                                      , ( "c) LHS = (cos(y)/sin(y))+(sin(y)/cos(y))", WrongAnswer)
-                                      , ( "d) LHS = (1+(1/sin(y)))(1-(sin(y)))", RightAnswer)
-                                      ]
-                (Question5, Step2) -> [ ( "a) LHS = (1+sin(y))*(1-sin(y))/sin(y)", RightAnswer)
-                                      , ( "b) LHS = (cos(y)/sin(y))", WrongAnswer)
-                                      , ( "c) LHS = sin(y)/(1/tan(y)", WrongAnswer)
-                                      , ( "d) LHS = sin y", WrongAnswer)
-                                      ]
-                (Question5, Step3) -> [ ( "a) LHS = (cos^2(y))/sin(y)", RightAnswer)
-                                      , ( "b) LHS = (sin(y))/csc(y)", WrongAnswer)
-                                      , ( "c) LHS = (cos(y)*sin(y)", WrongAnswer)
-                                      , ( "d) LHS = csc y", WrongAnswer)
+                (Question5, Step2) -> [ ( "a) = 1", RightAnswer)
+                                      , ( "b) = cosy", WrongAnswer)
+                                      , ( "c) = siny/tany", WrongAnswer)
+                                      , ( "d) = tany/siny", WrongAnswer)
                                       ]
                 otherwise -> []
 
@@ -314,9 +291,9 @@ optionsSection question step = group [ text (stepStr step)
 isLastStep question step = case (question, step) of
                 (Question1, Step5) -> True
                 (Question2, Step5) -> True
-                (Question3, Step3) -> True
-                (Question4, Step3) -> True
-                (Question5, Step3) -> True
+                (Question3, Step2) -> True
+                (Question4, Step1) -> True
+                (Question5, Step2) -> True
                 otherwise -> False
 
 
@@ -379,20 +356,16 @@ hintStr question step = case (question, step) of
                 (Question1, Step3) -> ["Simplify", "the" , "derived", "result", "from", "step 2"]
                 (Question1, Step4) -> ["Simplify", "the" , "derived", "result", "from", "step 3"]
                 (Question1, Step5) -> ["Simplify", "the" , "derived", "result", "from", "step 4"]
-                (Question2, Step1) -> ["Take the", "comon", "denominator", "sine" ]
-                (Question2, Step2) -> ["Express", "as" , "secant"]
-                (Question2, Step3) -> ["Express", "as" , "sine"]
-                (Question2, Step4) -> ["Simplify"]
-                (Question2, Step5) -> ["Express", "as" , "cosecant"]
-                (Question3, Step1) -> ["Express", "with", "sine", "and", "cosine" ]
-                (Question3, Step2) -> ["Simplify", "cot"]
-                (Question3, Step3) -> ["Simplify", "csc"]
-                (Question4, Step1) -> ["Express", "with", "sine", "and", "cosine" ]
-                (Question4, Step2) -> ["Add the", "terms in", "step 1" ]
-                (Question4, Step3) -> ["Use", "sin^2y+cos^2y=1"]
-                (Question5, Step1) -> ["Express", "with", "sine", "and", "cosine" ]
-                (Question5, Step2) -> ["Simplify", "terms in", "step 1" ]
-                (Question5, Step3) -> ["Use", "1-sin^2(y)=cos^2(y)"]
+                (Question2, Step1) -> ["Use that", "sec^2(y) = tan^2(y) + 1"]
+                (Question2, Step2) -> ["Simplify"]
+                (Question2, Step3) -> ["Simplify"]
+                (Question2, Step4) -> ["Use", "cos^2(y) = 1/sec^2(y)"]
+                (Question2, Step5) -> ["Use", "a reciprocal", "identity", "then simplify"]
+                (Question3, Step1) -> ["Use a", "fundamental", "trig", "identity" ]
+                (Question3, Step2) -> ["Substitute", "1 - sin^2(y)"]
+                (Question4, Step1) -> ["Use the", "difference", "of squares" ]
+                (Question5, Step1) -> ["Use the", "Pythagorean", "identity" ]
+                (Question5, Step2) -> ["Simplify" ]
                 otherwise -> []
 
 

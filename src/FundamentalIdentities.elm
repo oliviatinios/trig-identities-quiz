@@ -31,8 +31,8 @@ type Steps
 type Questions
     = Question1
     | Question2
- --   | Question3
---    | Question4
+    | Question3
+    | Question4
 --    | Question5
 
 
@@ -61,7 +61,7 @@ update msg model =
         NextStep
             -> { model
                 | answer = Default
-                , step = 
+                , step =
                     case model.step of
                         Step1 -> Step2
                         Step2 -> Step3
@@ -74,12 +74,12 @@ update msg model =
             -> { model
                 | answer = Default
                 , step = Step1
-                , question = 
+                , question =
                     case model.question of
                         Question1 -> Question2
-                        Question2 -> Question1
-                        -- Question3 -> Question4
-                        -- Question4 -> Question5
+                        Question2 -> Question3
+                        Question3 -> Question4
+                        Question4 -> Question1
                         -- Question5 -> Question1
                 }
 
@@ -87,10 +87,12 @@ update msg model =
             -> { model
                 | answer = Default
                 , step = Step1
-                , question = 
+                , question =
                     case model.question of
                         Question2 -> Question1
                         Question1 -> Question1
+                        Question3 -> Question2
+                        Question4 -> Question3
                         -- Add to this if more questions are added
                 }
 
@@ -127,7 +129,7 @@ view model =
 
 
 -- helper function
-getIndexFromStep step = case step of 
+getIndexFromStep step = case step of
                 Step1 -> 0
                 Step2 -> 1
                 Step3 -> 2
@@ -138,12 +140,15 @@ getIndexFromStep step = case step of
 questionTitleStr question = case question of
                 Question1 -> "Question 1"
                 Question2 -> "Question 2"
+                Question3 -> "Question 3"
+                Question4 -> "Question 4"
 
 
 questionStr question = case question of
                 Question1 -> "Prove that tan y / sin y = sec y"
                 Question2 -> "Prove that sin y + sin y * cot2 y = cscy"
-
+                Question3 -> "Prove that cot y / csc y = cos y"
+                Question4 -> "Prove that cot(y)+tan(y)=sec(y)*csc(y)"
 
 stepStr step = case step of
                 Step1 -> "What is the first step?"
@@ -152,7 +157,7 @@ stepStr step = case step of
                 Step4 -> "What is the fourth step?"
                 Step5 -> "What is the fifth step?"
 
-            
+
 solutionStr question = case question of
                 Question1 -> [ "Step 1: LHS = (sin y / cos y) * (1 / sin y)"
                              , "Step 2: LHS = 1 / cos y"
@@ -162,6 +167,15 @@ solutionStr question = case question of
                              , "Step 3: LHS = (sin y / sin2 y)"
                              , "Step 4: LHS = 1 / sin y"
                              ]
+                Question3 -> [ "Step 1: LHS = (cos(y)/sin(y))/csc(y)"
+                             , "Step 2: LHS = (cos(y)/sin(y))/(1/sin(y))"
+                             , "Step 3: LHS = cos(y)"
+                             ]
+                Question4 -> [ "Step 1: LHS = (cos(y)/sin(y))+(sin(y)/cos(y))",
+                               "Step 2: LHS = (cos^2(y)+sin^2(y))/(cos(y)*sin(y))",
+                               "Step 3: LHS = 1/(cos(y)*sin(y))"
+                             ]
+
 
 
 solutionText step lst = group (List.indexedMap (\idx line -> text line
@@ -214,7 +228,38 @@ optionsStr question step = case (question, step) of
                                       , ( "c) LHS = tan y / (sin y * tan y)", WrongAnswer)
                                       , ( "d) LHS = cot y", WrongAnswer)
                                       ]
+                (Question3, Step1) -> [ ( "a) LHS = cos2 y / sin2 y", WrongAnswer)
+                                      , ( "b) LHS = (cos(y)/sin(y))/csc(y)", RightAnswer)
+                                      , ( "c) LHS = secy / (tan y * tan y)", WrongAnswer)
+                                      , ( "d) LHS = cot y", WrongAnswer)
+                                      ]
+                (Question3, Step2) -> [ ( "a) LHS = cos3 y / sin3 y", WrongAnswer)
+                                      , ( "b) LHS = (cos(y)/sin(y))/csc(y)", WrongAnswer)
+                                      , ( "c) LHS = (cos(y)/sin(y))/(1/sin(y))", RightAnswer)
+                                      , ( "d) LHS = cot y", WrongAnswer)
+                                      ]
+                (Question3, Step3) -> [ ( "a) LHS = cos3 y / sin3 y", WrongAnswer)
+                                      , ( "b) LHS = (cos(y)/sin(y))/csc(y)", WrongAnswer)
+                                      , ( "c) LHS = cos(y)", RightAnswer)
+                                      , ( "d) LHS = csc y", WrongAnswer)
+                                      ]
+                (Question4, Step1) -> [ ( "a) LHS = cos2 y / sin2 y", WrongAnswer)
+                                      , ( "b) LHS = (cos(y)/sin(y))/csc(y)", WrongAnswer)
+                                      , ( "c) LHS = (cos(y)/sin(y))+(sin(y)/cos(y))", RightAnswer)
+                                      , ( "d) LHS = cot y", WrongAnswer)
+                                      ]
+                (Question4, Step2) -> [ ( "a) LHS = (cos^2(y)+sin^2(y))/(cos(y)*sin(y))", RightAnswer)
+                                      , ( "b) LHS = (cos(y)/sin(y))/csc(y)", WrongAnswer)
+                                      , ( "c) LHS = cos(y)/(1/sin(y)", WrongAnswer)
+                                      , ( "d) LHS = cot y", WrongAnswer)
+                                      ]
+                (Question4, Step3) -> [ ( "a) LHS = cos y / sin y", WrongAnswer)
+                                      , ( "b) LHS = (sin(y))/csc(y)", WrongAnswer)
+                                      , ( "c) LHS = 1/(cos(y)*sin(y))", RightAnswer)
+                                      , ( "d) LHS = sec y", WrongAnswer)
+                                      ]
                 otherwise -> []
+
 
 
 optionsText lst = group (List.indexedMap (\idx tuple -> text (Tuple.first tuple)
@@ -224,9 +269,9 @@ optionsText lst = group (List.indexedMap (\idx tuple -> text (Tuple.first tuple)
                                                             |> notifyTap (Tuple.second tuple) ) lst)
 
 
-optionsSection question step = group [ text (stepStr step) 
-                                            |> size 12 
-                                            |> filled orange 
+optionsSection question step = group [ text (stepStr step)
+                                            |> size 12
+                                            |> filled orange
                                             |> move ( -130, 65 )
                                      , optionsText (optionsStr question step)
                                      ] |> move ( 0, -20*(Basics.toFloat(getIndexFromStep step)) )
@@ -236,11 +281,13 @@ optionsSection question step = group [ text (stepStr step)
 isLastStep question step = case (question, step) of
                 (Question1, Step3) -> True
                 (Question2, Step5) -> True
+                (Question3, Step3) -> True
+                (Question4, Step3) -> True
                 otherwise -> False
 
 
 resultsSection question step answer =
-                if (isLastStep question step) 
+                if (isLastStep question step)
                     then group [ text (if answer == Incorrect
                                     then "Incorrect"
                                     else if answer == Correct
@@ -255,7 +302,7 @@ resultsSection question step answer =
                                                         else white
                                                 )
                                     |> move ( -130, -40 - 20*(Basics.toFloat(getIndexFromStep step)) )
-                                ] 
+                                ]
                     else group [ text (if answer == Incorrect
                                     then "Incorrect"
                                     else if answer == Correct
@@ -288,8 +335,8 @@ resultsSection question step answer =
                                                 )
                                     |> move ( -112, -63 - 20*(Basics.toFloat(getIndexFromStep step)) )
                                     |> notifyTap NextStep
-                                ] 
-                    
+                                ]
+
 
 
 hintStr question step = case (question, step) of
@@ -301,6 +348,12 @@ hintStr question step = case (question, step) of
                 (Question2, Step3) -> ["Express", "as" , "sine"]
                 (Question2, Step4) -> ["Simplify"]
                 (Question2, Step5) -> ["Express", "as" , "cosecant"]
+                (Question3, Step1) -> ["Express", "with", "sine", "and", "cosine" ]
+                (Question3, Step2) -> ["Simplify", "cot"]
+                (Question3, Step3) -> ["Simplify", "csc"]
+                (Question4, Step1) -> ["Express", "with", "sine", "and", "cosine" ]
+                (Question4, Step2) -> ["Add the", "terms in", "step 1" ]
+                (Question4, Step3) -> ["Use", "sin^2y+cos^2y=1"]
                 otherwise -> []
 
 

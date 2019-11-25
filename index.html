@@ -8603,6 +8603,7 @@ var $author$project$FundamentalIdentities$PopUp = F2(
 var $author$project$FundamentalIdentities$Question2 = {$: 'Question2'};
 var $author$project$FundamentalIdentities$Question3 = {$: 'Question3'};
 var $author$project$FundamentalIdentities$Question4 = {$: 'Question4'};
+var $author$project$FundamentalIdentities$Question5 = {$: 'Question5'};
 var $author$project$FundamentalIdentities$Step2 = {$: 'Step2'};
 var $author$project$FundamentalIdentities$Step3 = {$: 'Step3'};
 var $author$project$FundamentalIdentities$Step4 = {$: 'Step4'};
@@ -8663,6 +8664,8 @@ var $author$project$FundamentalIdentities$update = F2(
 									return $author$project$FundamentalIdentities$Question3;
 								case 'Question3':
 									return $author$project$FundamentalIdentities$Question4;
+								case 'Question4':
+									return $author$project$FundamentalIdentities$Question5;
 								default:
 									return $author$project$FundamentalIdentities$Question1;
 							}
@@ -8683,8 +8686,10 @@ var $author$project$FundamentalIdentities$update = F2(
 									return $author$project$FundamentalIdentities$Question1;
 								case 'Question3':
 									return $author$project$FundamentalIdentities$Question2;
-								default:
+								case 'Question4':
 									return $author$project$FundamentalIdentities$Question3;
+								default:
+									return $author$project$FundamentalIdentities$Question4;
 							}
 						}(),
 						step: $author$project$FundamentalIdentities$Step1
@@ -10202,7 +10207,7 @@ var $MacCASOutreach$graphicsvg$GraphicSVG$circle = function (r) {
 var $author$project$FundamentalIdentities$hintStr = F2(
 	function (question, step) {
 		var _v0 = _Utils_Tuple2(question, step);
-		_v0$14:
+		_v0$17:
 		while (true) {
 			switch (_v0.a.$) {
 				case 'Question1':
@@ -10223,7 +10228,7 @@ var $author$project$FundamentalIdentities$hintStr = F2(
 							return _List_fromArray(
 								['Simplify', 'the', 'derived', 'result', 'from', 'step 2']);
 						default:
-							break _v0$14;
+							break _v0$17;
 					}
 				case 'Question2':
 					switch (_v0.b.$) {
@@ -10271,9 +10276,9 @@ var $author$project$FundamentalIdentities$hintStr = F2(
 							return _List_fromArray(
 								['Simplify', 'csc']);
 						default:
-							break _v0$14;
+							break _v0$17;
 					}
-				default:
+				case 'Question4':
 					switch (_v0.b.$) {
 						case 'Step1':
 							var _v23 = _v0.a;
@@ -10291,7 +10296,27 @@ var $author$project$FundamentalIdentities$hintStr = F2(
 							return _List_fromArray(
 								['Use', 'sin^2y+cos^2y=1']);
 						default:
-							break _v0$14;
+							break _v0$17;
+					}
+				default:
+					switch (_v0.b.$) {
+						case 'Step1':
+							var _v29 = _v0.a;
+							var _v30 = _v0.b;
+							return _List_fromArray(
+								['Express', 'with', 'sine', 'and', 'cosine']);
+						case 'Step2':
+							var _v31 = _v0.a;
+							var _v32 = _v0.b;
+							return _List_fromArray(
+								['Simplify', 'terms in', 'step 1']);
+						case 'Step3':
+							var _v33 = _v0.a;
+							var _v34 = _v0.b;
+							return _List_fromArray(
+								['Use', '1-sin^2(y)=cos^2(y)']);
+						default:
+							break _v0$17;
 					}
 			}
 		}
@@ -10360,7 +10385,7 @@ var $author$project$FundamentalIdentities$WrongAnswer = {$: 'WrongAnswer'};
 var $author$project$FundamentalIdentities$optionsStr = F2(
 	function (question, step) {
 		var _v0 = _Utils_Tuple2(question, step);
-		_v0$14:
+		_v0$17:
 		while (true) {
 			switch (_v0.a.$) {
 				case 'Question1':
@@ -10396,7 +10421,7 @@ var $author$project$FundamentalIdentities$optionsStr = F2(
 									_Utils_Tuple2('d) LHS = sin y * cos y', $author$project$FundamentalIdentities$WrongAnswer)
 								]);
 						default:
-							break _v0$14;
+							break _v0$17;
 					}
 				case 'Question2':
 					switch (_v0.b.$) {
@@ -10484,9 +10509,9 @@ var $author$project$FundamentalIdentities$optionsStr = F2(
 									_Utils_Tuple2('d) LHS = csc y', $author$project$FundamentalIdentities$WrongAnswer)
 								]);
 						default:
-							break _v0$14;
+							break _v0$17;
 					}
-				default:
+				case 'Question4':
 					switch (_v0.b.$) {
 						case 'Step1':
 							var _v23 = _v0.a;
@@ -10519,7 +10544,42 @@ var $author$project$FundamentalIdentities$optionsStr = F2(
 									_Utils_Tuple2('d) LHS = sec y', $author$project$FundamentalIdentities$WrongAnswer)
 								]);
 						default:
-							break _v0$14;
+							break _v0$17;
+					}
+				default:
+					switch (_v0.b.$) {
+						case 'Step1':
+							var _v29 = _v0.a;
+							var _v30 = _v0.b;
+							return _List_fromArray(
+								[
+									_Utils_Tuple2('a) LHS =  sin2 y', $author$project$FundamentalIdentities$WrongAnswer),
+									_Utils_Tuple2('b) LHS =  cos(y)/csc(y)', $author$project$FundamentalIdentities$WrongAnswer),
+									_Utils_Tuple2('c) LHS = (cos(y)/sin(y))+(sin(y)/cos(y))', $author$project$FundamentalIdentities$WrongAnswer),
+									_Utils_Tuple2('d) LHS = (1+(1/sin(y)))(1-(sin(y)))', $author$project$FundamentalIdentities$RightAnswer)
+								]);
+						case 'Step2':
+							var _v31 = _v0.a;
+							var _v32 = _v0.b;
+							return _List_fromArray(
+								[
+									_Utils_Tuple2('a) LHS = (1+sin(y))*(1-sin(y))/sin(y)', $author$project$FundamentalIdentities$RightAnswer),
+									_Utils_Tuple2('b) LHS = (cos(y)/sin(y))', $author$project$FundamentalIdentities$WrongAnswer),
+									_Utils_Tuple2('c) LHS = sin(y)/(1/tan(y)', $author$project$FundamentalIdentities$WrongAnswer),
+									_Utils_Tuple2('d) LHS = sin y', $author$project$FundamentalIdentities$WrongAnswer)
+								]);
+						case 'Step3':
+							var _v33 = _v0.a;
+							var _v34 = _v0.b;
+							return _List_fromArray(
+								[
+									_Utils_Tuple2('a) LHS = (cos^2(y))/sin(y)', $author$project$FundamentalIdentities$RightAnswer),
+									_Utils_Tuple2('b) LHS = (sin(y))/csc(y)', $author$project$FundamentalIdentities$WrongAnswer),
+									_Utils_Tuple2('c) LHS = (cos(y)*sin(y)', $author$project$FundamentalIdentities$WrongAnswer),
+									_Utils_Tuple2('d) LHS = csc y', $author$project$FundamentalIdentities$WrongAnswer)
+								]);
+						default:
+							break _v0$17;
 					}
 			}
 		}
@@ -10595,8 +10655,10 @@ var $author$project$FundamentalIdentities$questionStr = function (question) {
 			return 'Prove that sin y + sin y * cot2 y = cscy';
 		case 'Question3':
 			return 'Prove that cot y / csc y = cos y';
-		default:
+		case 'Question4':
 			return 'Prove that cot(y)+tan(y)=sec(y)*csc(y)';
+		default:
+			return 'Prove that (1-sin(y))(1+csc(y))=cos(y)*cot(y)';
 	}
 };
 var $author$project$FundamentalIdentities$questionTitleStr = function (question) {
@@ -10607,8 +10669,10 @@ var $author$project$FundamentalIdentities$questionTitleStr = function (question)
 			return 'Question 2';
 		case 'Question3':
 			return 'Question 3';
-		default:
+		case 'Question4':
 			return 'Question 4';
+		default:
+			return 'Question 5';
 	}
 };
 var $author$project$FundamentalIdentities$NextStep = {$: 'NextStep'};
@@ -10616,7 +10680,7 @@ var $MacCASOutreach$graphicsvg$GraphicSVG$green = A4($MacCASOutreach$graphicsvg$
 var $author$project$FundamentalIdentities$isLastStep = F2(
 	function (question, step) {
 		var _v0 = _Utils_Tuple2(question, step);
-		_v0$4:
+		_v0$5:
 		while (true) {
 			switch (_v0.b.$) {
 				case 'Step5':
@@ -10625,7 +10689,7 @@ var $author$project$FundamentalIdentities$isLastStep = F2(
 						var _v4 = _v0.b;
 						return true;
 					} else {
-						break _v0$4;
+						break _v0$5;
 					}
 				case 'Step3':
 					switch (_v0.a.$) {
@@ -10641,11 +10705,15 @@ var $author$project$FundamentalIdentities$isLastStep = F2(
 							var _v7 = _v0.a;
 							var _v8 = _v0.b;
 							return true;
+						case 'Question5':
+							var _v9 = _v0.a;
+							var _v10 = _v0.b;
+							return true;
 						default:
-							break _v0$4;
+							break _v0$5;
 					}
 				default:
-					break _v0$4;
+					break _v0$5;
 			}
 		}
 		var otherwise = _v0;
@@ -10743,9 +10811,12 @@ var $author$project$FundamentalIdentities$solutionStr = function (question) {
 		case 'Question3':
 			return _List_fromArray(
 				['Step 1: LHS = (cos(y)/sin(y))/csc(y)', 'Step 2: LHS = (cos(y)/sin(y))/(1/sin(y))', 'Step 3: LHS = cos(y)']);
-		default:
+		case 'Question4':
 			return _List_fromArray(
 				['Step 1: LHS = (cos(y)/sin(y))+(sin(y)/cos(y))', 'Step 2: LHS = (cos^2(y)+sin^2(y))/(cos(y)*sin(y))', 'Step 3: LHS = 1/(cos(y)*sin(y))']);
+		default:
+			return _List_fromArray(
+				['Step 1: LHS = (1+(1/sin(y)))(1-(sin(y)))', 'Step 2: LHS = (1+sin(y))*(1-sin(y))/sin(y)', 'Step 3: LHS = (cos^2(y))/sin(y)']);
 	}
 };
 var $elm$core$List$takeReverse = F3(

@@ -33,7 +33,7 @@ type Questions
     | Question2
     | Question3
     | Question4
---    | Question5
+    | Question5
 
 
 -- change you app's state based on your new messages
@@ -79,8 +79,8 @@ update msg model =
                         Question1 -> Question2
                         Question2 -> Question3
                         Question3 -> Question4
-                        Question4 -> Question1
-                        -- Question5 -> Question1
+                        Question4 -> Question5
+                        Question5 -> Question1
                 }
 
         PreviousQuestion
@@ -93,6 +93,7 @@ update msg model =
                         Question1 -> Question1
                         Question3 -> Question2
                         Question4 -> Question3
+                        Question5 -> Question4
                         -- Add to this if more questions are added
                 }
 
@@ -142,6 +143,7 @@ questionTitleStr question = case question of
                 Question2 -> "Question 2"
                 Question3 -> "Question 3"
                 Question4 -> "Question 4"
+                Question5 -> "Question 5"
 
 
 questionStr question = case question of
@@ -149,6 +151,7 @@ questionStr question = case question of
                 Question2 -> "Prove that sin y + sin y * cot2 y = cscy"
                 Question3 -> "Prove that cot y / csc y = cos y"
                 Question4 -> "Prove that cot(y)+tan(y)=sec(y)*csc(y)"
+                Question5 -> "Prove that (1-sin(y))(1+csc(y))=cos(y)*cot(y)"
 
 stepStr step = case step of
                 Step1 -> "What is the first step?"
@@ -174,6 +177,10 @@ solutionStr question = case question of
                 Question4 -> [ "Step 1: LHS = (cos(y)/sin(y))+(sin(y)/cos(y))",
                                "Step 2: LHS = (cos^2(y)+sin^2(y))/(cos(y)*sin(y))",
                                "Step 3: LHS = 1/(cos(y)*sin(y))"
+                             ]
+                Question5 -> [ "Step 1: LHS = (1+(1/sin(y)))(1-(sin(y)))",
+                               "Step 2: LHS = (1+sin(y))*(1-sin(y))/sin(y)",
+                               "Step 3: LHS = (cos^2(y))/sin(y)"
                              ]
 
 
@@ -258,8 +265,22 @@ optionsStr question step = case (question, step) of
                                       , ( "c) LHS = 1/(cos(y)*sin(y))", RightAnswer)
                                       , ( "d) LHS = sec y", WrongAnswer)
                                       ]
+                (Question5, Step1) -> [ ( "a) LHS =  sin2 y", WrongAnswer)
+                                      , ( "b) LHS =  cos(y)/csc(y)", WrongAnswer)
+                                      , ( "c) LHS = (cos(y)/sin(y))+(sin(y)/cos(y))", WrongAnswer)
+                                      , ( "d) LHS = (1+(1/sin(y)))(1-(sin(y)))", RightAnswer)
+                                      ]
+                (Question5, Step2) -> [ ( "a) LHS = (1+sin(y))*(1-sin(y))/sin(y)", RightAnswer)
+                                      , ( "b) LHS = (cos(y)/sin(y))", WrongAnswer)
+                                      , ( "c) LHS = sin(y)/(1/tan(y)", WrongAnswer)
+                                      , ( "d) LHS = sin y", WrongAnswer)
+                                      ]
+                (Question5, Step3) -> [ ( "a) LHS = (cos^2(y))/sin(y)", RightAnswer)
+                                      , ( "b) LHS = (sin(y))/csc(y)", WrongAnswer)
+                                      , ( "c) LHS = (cos(y)*sin(y)", WrongAnswer)
+                                      , ( "d) LHS = csc y", WrongAnswer)
+                                      ]
                 otherwise -> []
-
 
 
 optionsText lst = group (List.indexedMap (\idx tuple -> text (Tuple.first tuple)
@@ -283,6 +304,7 @@ isLastStep question step = case (question, step) of
                 (Question2, Step5) -> True
                 (Question3, Step3) -> True
                 (Question4, Step3) -> True
+                (Question5, Step3) -> True
                 otherwise -> False
 
 
@@ -354,6 +376,9 @@ hintStr question step = case (question, step) of
                 (Question4, Step1) -> ["Express", "with", "sine", "and", "cosine" ]
                 (Question4, Step2) -> ["Add the", "terms in", "step 1" ]
                 (Question4, Step3) -> ["Use", "sin^2y+cos^2y=1"]
+                (Question5, Step1) -> ["Express", "with", "sine", "and", "cosine" ]
+                (Question5, Step2) -> ["Simplify", "terms in", "step 1" ]
+                (Question5, Step3) -> ["Use", "1-sin^2(y)=cos^2(y)"]
                 otherwise -> []
 
 

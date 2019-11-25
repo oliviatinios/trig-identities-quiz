@@ -8626,30 +8626,57 @@ var $author$project$FundamentalIdentities$update = F2(
 				return _Utils_update(
 					model,
 					{answer: $author$project$FundamentalIdentities$Correct});
-			case 'GoToStep2':
+			case 'NextStep':
 				return _Utils_update(
 					model,
-					{answer: $author$project$FundamentalIdentities$Default, step: $author$project$FundamentalIdentities$Step2});
-			case 'GoToStep3':
+					{
+						answer: $author$project$FundamentalIdentities$Default,
+						step: function () {
+							var _v1 = model.step;
+							switch (_v1.$) {
+								case 'Step1':
+									return $author$project$FundamentalIdentities$Step2;
+								case 'Step2':
+									return $author$project$FundamentalIdentities$Step3;
+								case 'Step3':
+									return $author$project$FundamentalIdentities$Step4;
+								case 'Step4':
+									return $author$project$FundamentalIdentities$Step5;
+								default:
+									return $author$project$FundamentalIdentities$Step5;
+							}
+						}()
+					});
+			case 'NextQuestion':
 				return _Utils_update(
 					model,
-					{answer: $author$project$FundamentalIdentities$Default, step: $author$project$FundamentalIdentities$Step3});
-			case 'GoToStep4':
+					{
+						answer: $author$project$FundamentalIdentities$Default,
+						question: function () {
+							var _v2 = model.question;
+							if (_v2.$ === 'Question1') {
+								return $author$project$FundamentalIdentities$Question2;
+							} else {
+								return $author$project$FundamentalIdentities$Question1;
+							}
+						}(),
+						step: $author$project$FundamentalIdentities$Step1
+					});
+			case 'PreviousQuestion':
 				return _Utils_update(
 					model,
-					{answer: $author$project$FundamentalIdentities$Default, step: $author$project$FundamentalIdentities$Step4});
-			case 'GoToStep5':
-				return _Utils_update(
-					model,
-					{answer: $author$project$FundamentalIdentities$Default, step: $author$project$FundamentalIdentities$Step5});
-			case 'GoToQuestion1':
-				return _Utils_update(
-					model,
-					{answer: $author$project$FundamentalIdentities$Default, question: $author$project$FundamentalIdentities$Question1, step: $author$project$FundamentalIdentities$Step1});
-			case 'GoToQuestion2':
-				return _Utils_update(
-					model,
-					{answer: $author$project$FundamentalIdentities$Default, question: $author$project$FundamentalIdentities$Question2, step: $author$project$FundamentalIdentities$Step1});
+					{
+						answer: $author$project$FundamentalIdentities$Default,
+						question: function () {
+							var _v3 = model.question;
+							if (_v3.$ === 'Question2') {
+								return $author$project$FundamentalIdentities$Question1;
+							} else {
+								return $author$project$FundamentalIdentities$Question1;
+							}
+						}(),
+						step: $author$project$FundamentalIdentities$Step1
+					});
 			case 'ClickedHint':
 				var question = msg.a;
 				var step = msg.b;
@@ -10152,49 +10179,69 @@ var $author$project$FundamentalIdentities$ClickedHint = F2(
 		return {$: 'ClickedHint', a: a, b: b};
 	});
 var $author$project$FundamentalIdentities$ExitHint = {$: 'ExitHint'};
-var $author$project$FundamentalIdentities$GoToQuestion1 = {$: 'GoToQuestion1'};
-var $author$project$FundamentalIdentities$GoToQuestion2 = {$: 'GoToQuestion2'};
-var $author$project$FundamentalIdentities$GoToStep2 = {$: 'GoToStep2'};
-var $author$project$FundamentalIdentities$GoToStep3 = {$: 'GoToStep3'};
-var $author$project$FundamentalIdentities$GoToStep4 = {$: 'GoToStep4'};
-var $author$project$FundamentalIdentities$GoToStep5 = {$: 'GoToStep5'};
-var $author$project$FundamentalIdentities$RightAnswer = {$: 'RightAnswer'};
-var $author$project$FundamentalIdentities$WrongAnswer = {$: 'WrongAnswer'};
+var $author$project$FundamentalIdentities$NextQuestion = {$: 'NextQuestion'};
+var $author$project$FundamentalIdentities$PreviousQuestion = {$: 'PreviousQuestion'};
 var $MacCASOutreach$graphicsvg$GraphicSVG$Circle = function (a) {
 	return {$: 'Circle', a: a};
 };
 var $MacCASOutreach$graphicsvg$GraphicSVG$circle = function (r) {
 	return $MacCASOutreach$graphicsvg$GraphicSVG$Circle(r);
 };
-var $MacCASOutreach$graphicsvg$GraphicSVG$green = A4($MacCASOutreach$graphicsvg$GraphicSVG$RGBA, 115, 210, 22, 1);
-var $author$project$FundamentalIdentities$strHint = F2(
+var $author$project$FundamentalIdentities$hintStr = F2(
 	function (question, step) {
 		var _v0 = _Utils_Tuple2(question, step);
-		_v0$2:
-		while (true) {
-			if (_v0.a.$ === 'Question1') {
-				switch (_v0.b.$) {
-					case 'Step1':
-						var _v1 = _v0.a;
-						var _v2 = _v0.b;
-						return _List_fromArray(
-							['Discover', 'the problem', 'through', 'interviewing', 'the end user.']);
-					case 'Step2':
-						var _v3 = _v0.a;
-						var _v4 = _v0.b;
-						return _List_fromArray(
-							['Define', 'the right', 'problem through', 'converging to', 'an idea.']);
-					default:
-						break _v0$2;
-				}
-			} else {
-				break _v0$2;
+		if (_v0.a.$ === 'Question1') {
+			switch (_v0.b.$) {
+				case 'Step1':
+					var _v1 = _v0.a;
+					var _v2 = _v0.b;
+					return _List_fromArray(
+						['Express', 'with', 'sine', 'and', 'cosine']);
+				case 'Step2':
+					var _v3 = _v0.a;
+					var _v4 = _v0.b;
+					return _List_fromArray(
+						['Use', 'the', 'relationship', 'between secant', 'and cosine', 'to simplify']);
+				case 'Step3':
+					var _v5 = _v0.a;
+					var _v6 = _v0.b;
+					return _List_fromArray(
+						['Simplify', 'the', 'derived', 'result', 'from', 'step 2']);
+				default:
+					var otherwise = _v0;
+					return _List_Nil;
+			}
+		} else {
+			switch (_v0.b.$) {
+				case 'Step1':
+					var _v7 = _v0.a;
+					var _v8 = _v0.b;
+					return _List_fromArray(
+						['Take the', 'comon', 'denominator', 'sine']);
+				case 'Step2':
+					var _v9 = _v0.a;
+					var _v10 = _v0.b;
+					return _List_fromArray(
+						['Express', 'as', 'secant']);
+				case 'Step3':
+					var _v11 = _v0.a;
+					var _v12 = _v0.b;
+					return _List_fromArray(
+						['Express', 'as', 'sine']);
+				case 'Step4':
+					var _v13 = _v0.a;
+					var _v14 = _v0.b;
+					return _List_fromArray(
+						['Simplify']);
+				default:
+					var _v15 = _v0.a;
+					var _v16 = _v0.b;
+					return _List_fromArray(
+						['Express', 'as', 'cosecant']);
 			}
 		}
-		var otherwise = _v0;
-		return _List_Nil;
 	});
-var $author$project$FundamentalIdentities$txt = function (lst) {
+var $author$project$FundamentalIdentities$hintText = function (lst) {
 	return $MacCASOutreach$graphicsvg$GraphicSVG$group(
 		A2(
 			$elm$core$List$indexedMap,
@@ -10209,9 +10256,8 @@ var $author$project$FundamentalIdentities$txt = function (lst) {
 							$MacCASOutreach$graphicsvg$GraphicSVG$centered(
 								A2(
 									$MacCASOutreach$graphicsvg$GraphicSVG$size,
-									6,
-									$MacCASOutreach$graphicsvg$GraphicSVG$sansserif(
-										$MacCASOutreach$graphicsvg$GraphicSVG$text(line))))));
+									10,
+									$MacCASOutreach$graphicsvg$GraphicSVG$text(line)))));
 				}),
 			lst));
 };
@@ -10219,7 +10265,7 @@ var $author$project$FundamentalIdentities$hintCard = F2(
 	function (question, step) {
 		return A2(
 			$MacCASOutreach$graphicsvg$GraphicSVG$move,
-			_Utils_Tuple2(50, 0),
+			_Utils_Tuple2(60, 0),
 			$MacCASOutreach$graphicsvg$GraphicSVG$group(
 				_List_fromArray(
 					[
@@ -10229,16 +10275,289 @@ var $author$project$FundamentalIdentities$hintCard = F2(
 						$MacCASOutreach$graphicsvg$GraphicSVG$black,
 						A2(
 							$MacCASOutreach$graphicsvg$GraphicSVG$makeTransparent,
-							0.9,
+							0.3,
 							A2(
 								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-								$MacCASOutreach$graphicsvg$GraphicSVG$white,
-								A2($MacCASOutreach$graphicsvg$GraphicSVG$rect, 200, 150)))),
-						$author$project$FundamentalIdentities$txt(
-						A2($author$project$FundamentalIdentities$strHint, question, step))
+								$MacCASOutreach$graphicsvg$GraphicSVG$black,
+								A2($MacCASOutreach$graphicsvg$GraphicSVG$rect, 70, 70)))),
+						$author$project$FundamentalIdentities$hintText(
+						A2($author$project$FundamentalIdentities$hintStr, question, step))
 					])));
 	});
+var $author$project$FundamentalIdentities$getIndexFromStep = function (step) {
+	switch (step.$) {
+		case 'Step1':
+			return 0;
+		case 'Step2':
+			return 1;
+		case 'Step3':
+			return 2;
+		case 'Step4':
+			return 3;
+		default:
+			return 4;
+	}
+};
+var $author$project$FundamentalIdentities$RightAnswer = {$: 'RightAnswer'};
+var $author$project$FundamentalIdentities$WrongAnswer = {$: 'WrongAnswer'};
+var $author$project$FundamentalIdentities$optionsStr = F2(
+	function (question, step) {
+		var _v0 = _Utils_Tuple2(question, step);
+		if (_v0.a.$ === 'Question1') {
+			switch (_v0.b.$) {
+				case 'Step1':
+					var _v1 = _v0.a;
+					var _v2 = _v0.b;
+					return _List_fromArray(
+						[
+							_Utils_Tuple2('a) tan y * (sin y / cos y)', $author$project$FundamentalIdentities$WrongAnswer),
+							_Utils_Tuple2('b) tan y * (cos y / sin y)', $author$project$FundamentalIdentities$WrongAnswer),
+							_Utils_Tuple2('c) (cos y / sin y) * (1 / sin y)', $author$project$FundamentalIdentities$WrongAnswer),
+							_Utils_Tuple2('d) (sin y / cos y) * (1 / sin y)', $author$project$FundamentalIdentities$RightAnswer)
+						]);
+				case 'Step2':
+					var _v3 = _v0.a;
+					var _v4 = _v0.b;
+					return _List_fromArray(
+						[
+							_Utils_Tuple2('a) sin y / cos y', $author$project$FundamentalIdentities$WrongAnswer),
+							_Utils_Tuple2('b) 1 / cos y', $author$project$FundamentalIdentities$RightAnswer),
+							_Utils_Tuple2('c) 1 / sin y', $author$project$FundamentalIdentities$WrongAnswer),
+							_Utils_Tuple2('d) (sin y * cos y)/(cos2 y * sin y)', $author$project$FundamentalIdentities$WrongAnswer)
+						]);
+				case 'Step3':
+					var _v5 = _v0.a;
+					var _v6 = _v0.b;
+					return _List_fromArray(
+						[
+							_Utils_Tuple2('a) sec y', $author$project$FundamentalIdentities$RightAnswer),
+							_Utils_Tuple2('b) tan y', $author$project$FundamentalIdentities$WrongAnswer),
+							_Utils_Tuple2('c) cos y', $author$project$FundamentalIdentities$WrongAnswer),
+							_Utils_Tuple2('d) sin y * cos y', $author$project$FundamentalIdentities$WrongAnswer)
+						]);
+				default:
+					var otherwise = _v0;
+					return _List_Nil;
+			}
+		} else {
+			switch (_v0.b.$) {
+				case 'Step1':
+					var _v7 = _v0.a;
+					var _v8 = _v0.b;
+					return _List_fromArray(
+						[
+							_Utils_Tuple2('a) sin y + sin y * (1 / tan2 y)', $author$project$FundamentalIdentities$WrongAnswer),
+							_Utils_Tuple2('b) sin y * (1 + cot2 y)', $author$project$FundamentalIdentities$RightAnswer),
+							_Utils_Tuple2('c) sin y + (sin y / tan2 y)', $author$project$FundamentalIdentities$WrongAnswer),
+							_Utils_Tuple2('d) sin y + ( (sin y * cos2 y) / sin2 y', $author$project$FundamentalIdentities$WrongAnswer)
+						]);
+				case 'Step2':
+					var _v9 = _v0.a;
+					var _v10 = _v0.b;
+					return _List_fromArray(
+						[
+							_Utils_Tuple2('a) sin y * (1 + (cos2 y / sin2 y))', $author$project$FundamentalIdentities$WrongAnswer),
+							_Utils_Tuple2('b) sin y * (1 + (sin2 y / cos2 y))', $author$project$FundamentalIdentities$WrongAnswer),
+							_Utils_Tuple2('c) sin y * (csc2 y)', $author$project$FundamentalIdentities$RightAnswer),
+							_Utils_Tuple2('d) sin y * (cos2 y)', $author$project$FundamentalIdentities$WrongAnswer)
+						]);
+				case 'Step3':
+					var _v11 = _v0.a;
+					var _v12 = _v0.b;
+					return _List_fromArray(
+						[
+							_Utils_Tuple2('a) sin y * (1 / cos2 y)', $author$project$FundamentalIdentities$WrongAnswer),
+							_Utils_Tuple2('b) sin y * (cos2 y / sin2 y)', $author$project$FundamentalIdentities$WrongAnswer),
+							_Utils_Tuple2('c) (sin2 y / cos y)', $author$project$FundamentalIdentities$WrongAnswer),
+							_Utils_Tuple2('d) (sin y / sin2 y)', $author$project$FundamentalIdentities$RightAnswer)
+						]);
+				case 'Step4':
+					var _v13 = _v0.a;
+					var _v14 = _v0.b;
+					return _List_fromArray(
+						[
+							_Utils_Tuple2('a) 1 / sin y', $author$project$FundamentalIdentities$RightAnswer),
+							_Utils_Tuple2('b) sin y / (1 + tan2 y)', $author$project$FundamentalIdentities$WrongAnswer),
+							_Utils_Tuple2('c) (1 + sin y) / sin y', $author$project$FundamentalIdentities$WrongAnswer),
+							_Utils_Tuple2('d) 1 / sin2 y', $author$project$FundamentalIdentities$WrongAnswer)
+						]);
+				default:
+					var _v15 = _v0.a;
+					var _v16 = _v0.b;
+					return _List_fromArray(
+						[
+							_Utils_Tuple2('a) cos y / sin2 y', $author$project$FundamentalIdentities$WrongAnswer),
+							_Utils_Tuple2('b) csc y', $author$project$FundamentalIdentities$RightAnswer),
+							_Utils_Tuple2('c) tan y / (sin y * tan y)', $author$project$FundamentalIdentities$WrongAnswer),
+							_Utils_Tuple2('d) cot y', $author$project$FundamentalIdentities$WrongAnswer)
+						]);
+			}
+		}
+	});
+var $author$project$FundamentalIdentities$optionsText = function (lst) {
+	return $MacCASOutreach$graphicsvg$GraphicSVG$group(
+		A2(
+			$elm$core$List$indexedMap,
+			F2(
+				function (idx, tuple) {
+					return A2(
+						$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
+						tuple.b,
+						A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$move,
+							_Utils_Tuple2(-130, 45 - (20 * idx)),
+							A2(
+								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+								$MacCASOutreach$graphicsvg$GraphicSVG$orange,
+								A2(
+									$MacCASOutreach$graphicsvg$GraphicSVG$size,
+									12,
+									$MacCASOutreach$graphicsvg$GraphicSVG$text(tuple.a)))));
+				}),
+			lst));
+};
+var $author$project$FundamentalIdentities$stepStr = function (step) {
+	switch (step.$) {
+		case 'Step1':
+			return 'What is the first step?';
+		case 'Step2':
+			return 'What is the second step?';
+		case 'Step3':
+			return 'What is the third step?';
+		case 'Step4':
+			return 'What is the fourth step?';
+		default:
+			return 'What is the fifth step?';
+	}
+};
+var $author$project$FundamentalIdentities$optionsSection = F2(
+	function (question, step) {
+		return A2(
+			$MacCASOutreach$graphicsvg$GraphicSVG$move,
+			_Utils_Tuple2(
+				0,
+				(-20) * $author$project$FundamentalIdentities$getIndexFromStep(step)),
+			$MacCASOutreach$graphicsvg$GraphicSVG$group(
+				_List_fromArray(
+					[
+						A2(
+						$MacCASOutreach$graphicsvg$GraphicSVG$move,
+						_Utils_Tuple2(-130, 65),
+						A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+							$MacCASOutreach$graphicsvg$GraphicSVG$orange,
+							A2(
+								$MacCASOutreach$graphicsvg$GraphicSVG$size,
+								12,
+								$MacCASOutreach$graphicsvg$GraphicSVG$text(
+									$author$project$FundamentalIdentities$stepStr(step))))),
+						$author$project$FundamentalIdentities$optionsText(
+						A2($author$project$FundamentalIdentities$optionsStr, question, step))
+					])));
+	});
+var $author$project$FundamentalIdentities$questionStr = function (question) {
+	if (question.$ === 'Question1') {
+		return 'Prove that tan y / sin y = sec y';
+	} else {
+		return 'Prove that sin y + sin y * cot2 y = cscy';
+	}
+};
+var $author$project$FundamentalIdentities$questionTitleStr = function (question) {
+	if (question.$ === 'Question1') {
+		return 'Question 1';
+	} else {
+		return 'Question 2';
+	}
+};
+var $author$project$FundamentalIdentities$NextStep = {$: 'NextStep'};
+var $MacCASOutreach$graphicsvg$GraphicSVG$green = A4($MacCASOutreach$graphicsvg$GraphicSVG$RGBA, 115, 210, 22, 1);
+var $author$project$FundamentalIdentities$isLastStep = F2(
+	function (question, step) {
+		var _v0 = _Utils_Tuple2(question, step);
+		_v0$2:
+		while (true) {
+			if (_v0.a.$ === 'Question1') {
+				if (_v0.b.$ === 'Step3') {
+					var _v1 = _v0.a;
+					var _v2 = _v0.b;
+					return true;
+				} else {
+					break _v0$2;
+				}
+			} else {
+				if (_v0.b.$ === 'Step5') {
+					var _v3 = _v0.a;
+					var _v4 = _v0.b;
+					return true;
+				} else {
+					break _v0$2;
+				}
+			}
+		}
+		var otherwise = _v0;
+		return false;
+	});
 var $MacCASOutreach$graphicsvg$GraphicSVG$red = A4($MacCASOutreach$graphicsvg$GraphicSVG$RGBA, 204, 0, 0, 1);
+var $author$project$FundamentalIdentities$resultsSection = F3(
+	function (question, step, answer) {
+		return A2($author$project$FundamentalIdentities$isLastStep, question, step) ? $MacCASOutreach$graphicsvg$GraphicSVG$group(
+			_List_fromArray(
+				[
+					A2(
+					$MacCASOutreach$graphicsvg$GraphicSVG$move,
+					_Utils_Tuple2(
+						-130,
+						(-40) - (20 * $author$project$FundamentalIdentities$getIndexFromStep(step))),
+					A2(
+						$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+						_Utils_eq(answer, $author$project$FundamentalIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$red : (_Utils_eq(answer, $author$project$FundamentalIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$green : $MacCASOutreach$graphicsvg$GraphicSVG$white),
+						A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$size,
+							12,
+							$MacCASOutreach$graphicsvg$GraphicSVG$text(
+								_Utils_eq(answer, $author$project$FundamentalIdentities$Incorrect) ? 'Incorrect' : (_Utils_eq(answer, $author$project$FundamentalIdentities$Correct) ? 'Correct! You have solved the problem.' : '')))))
+				])) : $MacCASOutreach$graphicsvg$GraphicSVG$group(
+			_List_fromArray(
+				[
+					A2(
+					$MacCASOutreach$graphicsvg$GraphicSVG$move,
+					_Utils_Tuple2(
+						-130,
+						(-40) - (20 * $author$project$FundamentalIdentities$getIndexFromStep(step))),
+					A2(
+						$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+						_Utils_eq(answer, $author$project$FundamentalIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$red : (_Utils_eq(answer, $author$project$FundamentalIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$green : $MacCASOutreach$graphicsvg$GraphicSVG$white),
+						A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$size,
+							12,
+							$MacCASOutreach$graphicsvg$GraphicSVG$text(
+								_Utils_eq(answer, $author$project$FundamentalIdentities$Incorrect) ? 'Incorrect' : (_Utils_eq(answer, $author$project$FundamentalIdentities$Correct) ? 'Correct' : ''))))),
+					A2(
+					$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
+					$author$project$FundamentalIdentities$NextStep,
+					A2(
+						$MacCASOutreach$graphicsvg$GraphicSVG$move,
+						_Utils_Tuple2(
+							-100,
+							(-60) - (20 * $author$project$FundamentalIdentities$getIndexFromStep(step))),
+						A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+							_Utils_eq(answer, $author$project$FundamentalIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$blank : (_Utils_eq(answer, $author$project$FundamentalIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$orange : $MacCASOutreach$graphicsvg$GraphicSVG$blank),
+							A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 60, 25)))),
+					A2(
+					$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
+					$author$project$FundamentalIdentities$NextStep,
+					A2(
+						$MacCASOutreach$graphicsvg$GraphicSVG$move,
+						_Utils_Tuple2(
+							-112,
+							(-63) - (20 * $author$project$FundamentalIdentities$getIndexFromStep(step))),
+						A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+							_Utils_eq(answer, $author$project$FundamentalIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$blank : (_Utils_eq(answer, $author$project$FundamentalIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$white : $MacCASOutreach$graphicsvg$GraphicSVG$blank),
+							$MacCASOutreach$graphicsvg$GraphicSVG$text('Next'))))
+				]));
+	});
 var $elm$core$Basics$clamp = F3(
 	function (low, high, number) {
 		return (_Utils_cmp(number, low) < 0) ? low : ((_Utils_cmp(number, high) > 0) ? high : number);
@@ -10258,6 +10577,171 @@ var $MacCASOutreach$graphicsvg$GraphicSVG$rgb = F3(
 var $MacCASOutreach$graphicsvg$GraphicSVG$rotate = F2(
 	function (theta, shape) {
 		return A2($MacCASOutreach$graphicsvg$GraphicSVG$Rotate, theta, shape);
+	});
+var $author$project$FundamentalIdentities$solutionStr = function (question) {
+	if (question.$ === 'Question1') {
+		return _List_fromArray(
+			['Step 1: (sin y / cos y) * (1 / sin y)', 'Step 2: 1 / cos y']);
+	} else {
+		return _List_fromArray(
+			['Step 1: sin y * (1 + cot2 y)', 'Step 2: sin y * (csc2 y)', 'Step 3: (sin y / sin2 y)', 'Step 4: 1 / sin y']);
+	}
+};
+var $elm$core$List$takeReverse = F3(
+	function (n, list, kept) {
+		takeReverse:
+		while (true) {
+			if (n <= 0) {
+				return kept;
+			} else {
+				if (!list.b) {
+					return kept;
+				} else {
+					var x = list.a;
+					var xs = list.b;
+					var $temp$n = n - 1,
+						$temp$list = xs,
+						$temp$kept = A2($elm$core$List$cons, x, kept);
+					n = $temp$n;
+					list = $temp$list;
+					kept = $temp$kept;
+					continue takeReverse;
+				}
+			}
+		}
+	});
+var $elm$core$List$takeTailRec = F2(
+	function (n, list) {
+		return $elm$core$List$reverse(
+			A3($elm$core$List$takeReverse, n, list, _List_Nil));
+	});
+var $elm$core$List$takeFast = F3(
+	function (ctr, n, list) {
+		if (n <= 0) {
+			return _List_Nil;
+		} else {
+			var _v0 = _Utils_Tuple2(n, list);
+			_v0$1:
+			while (true) {
+				_v0$5:
+				while (true) {
+					if (!_v0.b.b) {
+						return list;
+					} else {
+						if (_v0.b.b.b) {
+							switch (_v0.a) {
+								case 1:
+									break _v0$1;
+								case 2:
+									var _v2 = _v0.b;
+									var x = _v2.a;
+									var _v3 = _v2.b;
+									var y = _v3.a;
+									return _List_fromArray(
+										[x, y]);
+								case 3:
+									if (_v0.b.b.b.b) {
+										var _v4 = _v0.b;
+										var x = _v4.a;
+										var _v5 = _v4.b;
+										var y = _v5.a;
+										var _v6 = _v5.b;
+										var z = _v6.a;
+										return _List_fromArray(
+											[x, y, z]);
+									} else {
+										break _v0$5;
+									}
+								default:
+									if (_v0.b.b.b.b && _v0.b.b.b.b.b) {
+										var _v7 = _v0.b;
+										var x = _v7.a;
+										var _v8 = _v7.b;
+										var y = _v8.a;
+										var _v9 = _v8.b;
+										var z = _v9.a;
+										var _v10 = _v9.b;
+										var w = _v10.a;
+										var tl = _v10.b;
+										return (ctr > 1000) ? A2(
+											$elm$core$List$cons,
+											x,
+											A2(
+												$elm$core$List$cons,
+												y,
+												A2(
+													$elm$core$List$cons,
+													z,
+													A2(
+														$elm$core$List$cons,
+														w,
+														A2($elm$core$List$takeTailRec, n - 4, tl))))) : A2(
+											$elm$core$List$cons,
+											x,
+											A2(
+												$elm$core$List$cons,
+												y,
+												A2(
+													$elm$core$List$cons,
+													z,
+													A2(
+														$elm$core$List$cons,
+														w,
+														A3($elm$core$List$takeFast, ctr + 1, n - 4, tl)))));
+									} else {
+										break _v0$5;
+									}
+							}
+						} else {
+							if (_v0.a === 1) {
+								break _v0$1;
+							} else {
+								break _v0$5;
+							}
+						}
+					}
+				}
+				return list;
+			}
+			var _v1 = _v0.b;
+			var x = _v1.a;
+			return _List_fromArray(
+				[x]);
+		}
+	});
+var $elm$core$List$take = F2(
+	function (n, list) {
+		return A3($elm$core$List$takeFast, 0, n, list);
+	});
+var $author$project$FundamentalIdentities$solutionText = F2(
+	function (step, lst) {
+		return $MacCASOutreach$graphicsvg$GraphicSVG$group(
+			A2(
+				$elm$core$List$indexedMap,
+				F2(
+					function (idx, line) {
+						return A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$move,
+							_Utils_Tuple2(-130, 75 - (20 * idx)),
+							A2(
+								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+								$MacCASOutreach$graphicsvg$GraphicSVG$orange,
+								A2(
+									$MacCASOutreach$graphicsvg$GraphicSVG$size,
+									12,
+									$MacCASOutreach$graphicsvg$GraphicSVG$text(line))));
+					}),
+				A2(
+					$elm$core$List$take,
+					$author$project$FundamentalIdentities$getIndexFromStep(step),
+					lst)));
+	});
+var $author$project$FundamentalIdentities$solutionSection = F2(
+	function (question, step) {
+		return A2(
+			$author$project$FundamentalIdentities$solutionText,
+			step,
+			$author$project$FundamentalIdentities$solutionStr(question));
 	});
 var $MacCASOutreach$graphicsvg$GraphicSVG$Polygon = function (a) {
 	return {$: 'Polygon', a: a};
@@ -10288,1349 +10772,141 @@ var $MacCASOutreach$graphicsvg$GraphicSVG$triangle = function (r) {
 };
 var $author$project$FundamentalIdentities$view = function (model) {
 	return _Utils_ap(
-		function () {
-			var _v0 = model.question;
-			if (_v0.$ === 'Question1') {
-				var _v1 = model.step;
-				switch (_v1.$) {
-					case 'Step1':
-						return _List_fromArray(
-							[
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(55, 0),
-								A3(
-									$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
-									$MacCASOutreach$graphicsvg$GraphicSVG$solid(2),
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$blank,
-										A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 400, 290)))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(20, 120),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											16,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('Question 1'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$GoToQuestion2,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(150, 125),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										A3($MacCASOutreach$graphicsvg$GraphicSVG$rgb, 230, 125, 50),
-										$MacCASOutreach$graphicsvg$GraphicSVG$triangle(8)))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$GoToQuestion1,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-50, 125),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$rotate,
-										$elm$core$Basics$degrees(-60),
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-											A3($MacCASOutreach$graphicsvg$GraphicSVG$rgb, 230, 125, 50),
-											$MacCASOutreach$graphicsvg$GraphicSVG$triangle(8))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(-130, 95),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('Prove that tan y / sin y = sec y'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(-130, 65),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$size,
-										12,
-										$MacCASOutreach$graphicsvg$GraphicSVG$text('What is the first step?')))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$WrongAnswer,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-130, 45),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('a) tan y * (sin y / cos y)'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$WrongAnswer,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-130, 25),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('b) tan y * (cos y / sin y)'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$WrongAnswer,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-130, 5),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('c) (cos y / sin y) * (1 / sin y)'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$RightAnswer,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-130, -15),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('d) (sin y / cos y) * (1 / sin y)'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(-130, -40),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									_Utils_eq(model.answer, $author$project$FundamentalIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$red : (_Utils_eq(model.answer, $author$project$FundamentalIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$green : $MacCASOutreach$graphicsvg$GraphicSVG$white),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$size,
-										12,
-										$MacCASOutreach$graphicsvg$GraphicSVG$text(
-											_Utils_eq(model.answer, $author$project$FundamentalIdentities$Incorrect) ? 'Incorrect' : (_Utils_eq(model.answer, $author$project$FundamentalIdentities$Correct) ? 'Correct' : ''))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$GoToStep2,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-100, -60),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										_Utils_eq(model.answer, $author$project$FundamentalIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$blank : (_Utils_eq(model.answer, $author$project$FundamentalIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$orange : $MacCASOutreach$graphicsvg$GraphicSVG$blank),
-										A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 60, 25)))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$GoToStep2,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-112, -63),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										_Utils_eq(model.answer, $author$project$FundamentalIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$blank : (_Utils_eq(model.answer, $author$project$FundamentalIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$white : $MacCASOutreach$graphicsvg$GraphicSVG$blank),
-										$MacCASOutreach$graphicsvg$GraphicSVG$text('Next'))))
-							]);
-					case 'Step2':
-						return _List_fromArray(
-							[
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(55, 0),
-								A3(
-									$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
-									$MacCASOutreach$graphicsvg$GraphicSVG$solid(2),
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$blank,
-										A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 400, 290)))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(20, 120),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											16,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('Question 1'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$GoToQuestion2,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(150, 125),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										A3($MacCASOutreach$graphicsvg$GraphicSVG$rgb, 230, 125, 50),
-										$MacCASOutreach$graphicsvg$GraphicSVG$triangle(8)))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$GoToQuestion1,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-50, 125),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$rotate,
-										$elm$core$Basics$degrees(-60),
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-											A3($MacCASOutreach$graphicsvg$GraphicSVG$rgb, 230, 125, 50),
-											$MacCASOutreach$graphicsvg$GraphicSVG$triangle(8))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(-130, 95),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('Prove that tan y / sin y = sec y'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(-130, 75),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$size,
-										12,
-										$MacCASOutreach$graphicsvg$GraphicSVG$text('Step 1: (sin y / cos y) * (1 / sin y)')))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(-130, 45),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$size,
-										12,
-										$MacCASOutreach$graphicsvg$GraphicSVG$text('What is the second step?')))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$WrongAnswer,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-130, 25),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('a) sin y / cos y'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$RightAnswer,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-130, 5),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('b) 1 / cos y'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$WrongAnswer,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-130, -15),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('c) 1 / sin y'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$WrongAnswer,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-130, -35),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('d) (sin y * cos y) / (cos2 y * sin y)'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(-130, -60),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									_Utils_eq(model.answer, $author$project$FundamentalIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$red : (_Utils_eq(model.answer, $author$project$FundamentalIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$green : $MacCASOutreach$graphicsvg$GraphicSVG$white),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$size,
-										12,
-										$MacCASOutreach$graphicsvg$GraphicSVG$text(
-											_Utils_eq(model.answer, $author$project$FundamentalIdentities$Incorrect) ? 'Incorrect' : (_Utils_eq(model.answer, $author$project$FundamentalIdentities$Correct) ? 'Correct' : ''))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$GoToStep3,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-100, -80),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										_Utils_eq(model.answer, $author$project$FundamentalIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$blank : (_Utils_eq(model.answer, $author$project$FundamentalIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$orange : $MacCASOutreach$graphicsvg$GraphicSVG$blank),
-										A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 60, 25)))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$GoToStep3,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-112, -83),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										_Utils_eq(model.answer, $author$project$FundamentalIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$blank : (_Utils_eq(model.answer, $author$project$FundamentalIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$white : $MacCASOutreach$graphicsvg$GraphicSVG$blank),
-										$MacCASOutreach$graphicsvg$GraphicSVG$text('Next'))))
-							]);
-					case 'Step3':
-						return _List_fromArray(
-							[
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(55, 0),
-								A3(
-									$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
-									$MacCASOutreach$graphicsvg$GraphicSVG$solid(2),
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$blank,
-										A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 400, 290)))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(20, 120),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											16,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('Question 1'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$GoToQuestion2,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(150, 125),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										A3($MacCASOutreach$graphicsvg$GraphicSVG$rgb, 230, 125, 50),
-										$MacCASOutreach$graphicsvg$GraphicSVG$triangle(8)))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$GoToQuestion1,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-50, 125),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$rotate,
-										$elm$core$Basics$degrees(-60),
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-											A3($MacCASOutreach$graphicsvg$GraphicSVG$rgb, 230, 125, 50),
-											$MacCASOutreach$graphicsvg$GraphicSVG$triangle(8))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(-130, 95),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('Prove that tan y / sin y = sec y'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(-130, 75),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$size,
-										12,
-										$MacCASOutreach$graphicsvg$GraphicSVG$text('Step 1: (sin y / cos y) * (1 / sin y)')))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(-130, 55),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$size,
-										12,
-										$MacCASOutreach$graphicsvg$GraphicSVG$text('Step 2: 1 / cos y')))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(-130, 15),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$size,
-										12,
-										$MacCASOutreach$graphicsvg$GraphicSVG$text('What is the third step?')))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$RightAnswer,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-130, -5),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('a) sec y'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$WrongAnswer,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-130, -25),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('b) tan y'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$WrongAnswer,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-130, -45),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('c) cos y'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$WrongAnswer,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-130, -65),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('d) sin y * cos y'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(-130, -85),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									_Utils_eq(model.answer, $author$project$FundamentalIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$red : (_Utils_eq(model.answer, $author$project$FundamentalIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$green : $MacCASOutreach$graphicsvg$GraphicSVG$white),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$size,
-										12,
-										$MacCASOutreach$graphicsvg$GraphicSVG$text(
-											_Utils_eq(model.answer, $author$project$FundamentalIdentities$Incorrect) ? 'Incorrect' : (_Utils_eq(model.answer, $author$project$FundamentalIdentities$Correct) ? 'Correct! You have solved the problem.' : '')))))
-							]);
-					case 'Step4':
-						return _List_Nil;
-					default:
-						return _List_Nil;
-				}
-			} else {
-				var _v2 = model.step;
-				switch (_v2.$) {
-					case 'Step1':
-						return _List_fromArray(
-							[
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(55, 0),
-								A3(
-									$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
-									$MacCASOutreach$graphicsvg$GraphicSVG$solid(2),
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$blank,
-										A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 400, 290)))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(20, 120),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											16,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('Question 2'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$GoToQuestion1,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-50, 125),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$rotate,
-										$elm$core$Basics$degrees(-60),
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-											A3($MacCASOutreach$graphicsvg$GraphicSVG$rgb, 230, 125, 50),
-											$MacCASOutreach$graphicsvg$GraphicSVG$triangle(8))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(-130, 95),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('Prove that sin y + sin y * cot2 y = cscy'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(-130, 65),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$size,
-										12,
-										$MacCASOutreach$graphicsvg$GraphicSVG$text('What is the first step?')))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$WrongAnswer,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-130, 45),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('a) sin y + sin y * (1 / tan2 y)'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$RightAnswer,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-130, 25),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('b) sin y * (1 + cot2 y)'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$WrongAnswer,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-130, 5),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('c) sin y + (sin y / tan2 y)'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$WrongAnswer,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-130, -15),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('d) sin y + ( (sin y * cos2 y) / sin2 y'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(-130, -40),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									_Utils_eq(model.answer, $author$project$FundamentalIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$red : (_Utils_eq(model.answer, $author$project$FundamentalIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$green : $MacCASOutreach$graphicsvg$GraphicSVG$white),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$size,
-										12,
-										$MacCASOutreach$graphicsvg$GraphicSVG$text(
-											_Utils_eq(model.answer, $author$project$FundamentalIdentities$Incorrect) ? 'Incorrect' : (_Utils_eq(model.answer, $author$project$FundamentalIdentities$Correct) ? 'Correct' : ''))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$GoToStep2,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-100, -60),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										_Utils_eq(model.answer, $author$project$FundamentalIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$blank : (_Utils_eq(model.answer, $author$project$FundamentalIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$orange : $MacCASOutreach$graphicsvg$GraphicSVG$blank),
-										A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 60, 25)))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$GoToStep2,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-112, -63),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										_Utils_eq(model.answer, $author$project$FundamentalIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$blank : (_Utils_eq(model.answer, $author$project$FundamentalIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$white : $MacCASOutreach$graphicsvg$GraphicSVG$blank),
-										$MacCASOutreach$graphicsvg$GraphicSVG$text('Next'))))
-							]);
-					case 'Step2':
-						return _List_fromArray(
-							[
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(55, 0),
-								A3(
-									$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
-									$MacCASOutreach$graphicsvg$GraphicSVG$solid(2),
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$blank,
-										A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 400, 290)))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(20, 120),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											16,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('Question 2'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$GoToQuestion1,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-50, 125),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$rotate,
-										$elm$core$Basics$degrees(-60),
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-											A3($MacCASOutreach$graphicsvg$GraphicSVG$rgb, 230, 125, 50),
-											$MacCASOutreach$graphicsvg$GraphicSVG$triangle(8))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(-130, 95),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('Prove that tan y / sin y = sec y'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(-130, 75),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$size,
-										12,
-										$MacCASOutreach$graphicsvg$GraphicSVG$text('Step 1: sin y * (1 + cot2 y)')))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(-130, 45),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$size,
-										12,
-										$MacCASOutreach$graphicsvg$GraphicSVG$text('What is the second step?')))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$WrongAnswer,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-130, 25),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('a) sin y * (1 + (cos2 y / sin2 y))'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$WrongAnswer,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-130, 5),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('b) sin y * (1 + (sin2 y / cos2 y))'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$RightAnswer,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-130, -15),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('c) sin y * (csc2 y)'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$WrongAnswer,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-130, -35),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('d) sin y * (cos2 y)'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(-130, -60),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									_Utils_eq(model.answer, $author$project$FundamentalIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$red : (_Utils_eq(model.answer, $author$project$FundamentalIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$green : $MacCASOutreach$graphicsvg$GraphicSVG$white),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$size,
-										12,
-										$MacCASOutreach$graphicsvg$GraphicSVG$text(
-											_Utils_eq(model.answer, $author$project$FundamentalIdentities$Incorrect) ? 'Incorrect' : (_Utils_eq(model.answer, $author$project$FundamentalIdentities$Correct) ? 'Correct' : ''))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$GoToStep3,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-100, -80),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										_Utils_eq(model.answer, $author$project$FundamentalIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$blank : (_Utils_eq(model.answer, $author$project$FundamentalIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$orange : $MacCASOutreach$graphicsvg$GraphicSVG$blank),
-										A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 60, 25)))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$GoToStep3,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-112, -83),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										_Utils_eq(model.answer, $author$project$FundamentalIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$blank : (_Utils_eq(model.answer, $author$project$FundamentalIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$white : $MacCASOutreach$graphicsvg$GraphicSVG$blank),
-										$MacCASOutreach$graphicsvg$GraphicSVG$text('Next'))))
-							]);
-					case 'Step3':
-						return _List_fromArray(
-							[
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(55, 0),
-								A3(
-									$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
-									$MacCASOutreach$graphicsvg$GraphicSVG$solid(2),
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$blank,
-										A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 400, 290)))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(20, 120),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											16,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('Question 2'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$GoToQuestion1,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-50, 125),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$rotate,
-										$elm$core$Basics$degrees(-60),
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-											A3($MacCASOutreach$graphicsvg$GraphicSVG$rgb, 230, 125, 50),
-											$MacCASOutreach$graphicsvg$GraphicSVG$triangle(8))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(-130, 95),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('Prove that tan y / sin y = sec y'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(-130, 75),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$size,
-										12,
-										$MacCASOutreach$graphicsvg$GraphicSVG$text('Step 1: (sin y / cos y) * (1 / sin y)')))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(-130, 55),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$size,
-										12,
-										$MacCASOutreach$graphicsvg$GraphicSVG$text('Step 2: sin y * (csc2 y)')))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(-130, 15),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$size,
-										12,
-										$MacCASOutreach$graphicsvg$GraphicSVG$text('What is the third step?')))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$WrongAnswer,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-130, -5),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('a) sin y * (1 / cos2 y)'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$WrongAnswer,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-130, -25),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('b) sin y * (cos2 y / sin2 y)'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$WrongAnswer,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-130, -45),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('c) sin2 y / cosy'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$RightAnswer,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-130, -65),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('d) sin y / sin2 y'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(-130, -90),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									_Utils_eq(model.answer, $author$project$FundamentalIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$red : (_Utils_eq(model.answer, $author$project$FundamentalIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$green : $MacCASOutreach$graphicsvg$GraphicSVG$white),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$size,
-										12,
-										$MacCASOutreach$graphicsvg$GraphicSVG$text(
-											_Utils_eq(model.answer, $author$project$FundamentalIdentities$Incorrect) ? 'Incorrect' : (_Utils_eq(model.answer, $author$project$FundamentalIdentities$Correct) ? 'Correct' : ''))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$GoToStep4,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-100, -110),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										_Utils_eq(model.answer, $author$project$FundamentalIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$blank : (_Utils_eq(model.answer, $author$project$FundamentalIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$orange : $MacCASOutreach$graphicsvg$GraphicSVG$blank),
-										A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 60, 25)))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$GoToStep4,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-112, -113),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										_Utils_eq(model.answer, $author$project$FundamentalIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$blank : (_Utils_eq(model.answer, $author$project$FundamentalIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$white : $MacCASOutreach$graphicsvg$GraphicSVG$blank),
-										$MacCASOutreach$graphicsvg$GraphicSVG$text('Next'))))
-							]);
-					case 'Step4':
-						return _List_fromArray(
-							[
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(55, 0),
-								A3(
-									$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
-									$MacCASOutreach$graphicsvg$GraphicSVG$solid(2),
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$blank,
-										A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 400, 290)))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(20, 120),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											16,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('Question 2'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$GoToQuestion1,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-50, 125),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$rotate,
-										$elm$core$Basics$degrees(-60),
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-											A3($MacCASOutreach$graphicsvg$GraphicSVG$rgb, 230, 125, 50),
-											$MacCASOutreach$graphicsvg$GraphicSVG$triangle(8))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(-130, 95),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('Prove that tan y / sin y = sec y'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(-130, 75),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$size,
-										12,
-										$MacCASOutreach$graphicsvg$GraphicSVG$text('Step 1: (sin y / cos y) * (1 / sin y)')))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(-130, 55),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$size,
-										12,
-										$MacCASOutreach$graphicsvg$GraphicSVG$text('Step 2: sin y * (csc2 y)')))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(-130, 35),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$size,
-										12,
-										$MacCASOutreach$graphicsvg$GraphicSVG$text('Step 3: sin y / sin2 y')))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(-130, 5),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$size,
-										12,
-										$MacCASOutreach$graphicsvg$GraphicSVG$text('What is the fourth step?')))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$RightAnswer,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-130, -15),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('a) 1 / sin y'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$WrongAnswer,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-130, -35),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('b) sin y / (1 + tan2 y)'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$WrongAnswer,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-130, -55),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('c) (1 + sin y) / sin y'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$WrongAnswer,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-130, -75),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('d) 1 / sin2 y'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(-130, -100),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									_Utils_eq(model.answer, $author$project$FundamentalIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$red : (_Utils_eq(model.answer, $author$project$FundamentalIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$green : $MacCASOutreach$graphicsvg$GraphicSVG$white),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$size,
-										12,
-										$MacCASOutreach$graphicsvg$GraphicSVG$text(
-											_Utils_eq(model.answer, $author$project$FundamentalIdentities$Incorrect) ? 'Incorrect' : (_Utils_eq(model.answer, $author$project$FundamentalIdentities$Correct) ? 'Correct' : ''))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$GoToStep5,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-100, -120),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										_Utils_eq(model.answer, $author$project$FundamentalIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$blank : (_Utils_eq(model.answer, $author$project$FundamentalIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$orange : $MacCASOutreach$graphicsvg$GraphicSVG$blank),
-										A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 60, 25)))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$GoToStep5,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-112, -123),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										_Utils_eq(model.answer, $author$project$FundamentalIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$blank : (_Utils_eq(model.answer, $author$project$FundamentalIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$white : $MacCASOutreach$graphicsvg$GraphicSVG$blank),
-										$MacCASOutreach$graphicsvg$GraphicSVG$text('Next'))))
-							]);
-					default:
-						return _List_fromArray(
-							[
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(55, 0),
-								A3(
-									$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
-									$MacCASOutreach$graphicsvg$GraphicSVG$solid(2),
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$blank,
-										A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 400, 290)))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(20, 120),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											16,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('Question 2'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$GoToQuestion1,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-50, 125),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$rotate,
-										$elm$core$Basics$degrees(-60),
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-											A3($MacCASOutreach$graphicsvg$GraphicSVG$rgb, 230, 125, 50),
-											$MacCASOutreach$graphicsvg$GraphicSVG$triangle(8))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(-130, 95),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('Prove that tan y / sin y = sec y'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(-130, 75),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$size,
-										12,
-										$MacCASOutreach$graphicsvg$GraphicSVG$text('Step 1: (sin y / cos y) * (1 / sin y)')))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(-130, 55),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$size,
-										12,
-										$MacCASOutreach$graphicsvg$GraphicSVG$text('Step 2: sin y * (csc2 y)')))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(-130, 35),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$size,
-										12,
-										$MacCASOutreach$graphicsvg$GraphicSVG$text('Step 3: sin y / sin2 y')))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(-130, 15),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$size,
-										12,
-										$MacCASOutreach$graphicsvg$GraphicSVG$text('Step 4: 1 / sin y')))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(-130, -25),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$size,
-										12,
-										$MacCASOutreach$graphicsvg$GraphicSVG$text('What is the fifth step?')))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$WrongAnswer,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-130, -45),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('a) cos y / sin2 y'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$RightAnswer,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-130, -65),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('b) csc y'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$WrongAnswer,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-130, -85),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('c) tan y / (sin y * tan y)'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-								$author$project$FundamentalIdentities$WrongAnswer,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(-130, -105),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-										$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$size,
-											12,
-											$MacCASOutreach$graphicsvg$GraphicSVG$text('d) cot y'))))),
-								A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$move,
-								_Utils_Tuple2(-130, -130),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									_Utils_eq(model.answer, $author$project$FundamentalIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$red : (_Utils_eq(model.answer, $author$project$FundamentalIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$green : $MacCASOutreach$graphicsvg$GraphicSVG$white),
-									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$size,
-										12,
-										$MacCASOutreach$graphicsvg$GraphicSVG$text(
-											_Utils_eq(model.answer, $author$project$FundamentalIdentities$Incorrect) ? 'Incorrect' : (_Utils_eq(model.answer, $author$project$FundamentalIdentities$Correct) ? 'Correct! You have solved the problem.' : '')))))
-							]);
-				}
-			}
-		}(),
+		_List_fromArray(
+			[
+				A2(
+				$MacCASOutreach$graphicsvg$GraphicSVG$move,
+				_Utils_Tuple2(55, 0),
+				A3(
+					$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
+					$MacCASOutreach$graphicsvg$GraphicSVG$solid(2),
+					$MacCASOutreach$graphicsvg$GraphicSVG$orange,
+					A2(
+						$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+						$MacCASOutreach$graphicsvg$GraphicSVG$blank,
+						A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 400, 290)))),
+				A2(
+				$MacCASOutreach$graphicsvg$GraphicSVG$move,
+				_Utils_Tuple2(20, 120),
+				A2(
+					$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+					$MacCASOutreach$graphicsvg$GraphicSVG$orange,
+					$MacCASOutreach$graphicsvg$GraphicSVG$bold(
+						A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$size,
+							16,
+							$MacCASOutreach$graphicsvg$GraphicSVG$text(
+								$author$project$FundamentalIdentities$questionTitleStr(model.question)))))),
+				A2(
+				$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
+				$author$project$FundamentalIdentities$NextQuestion,
+				A2(
+					$MacCASOutreach$graphicsvg$GraphicSVG$move,
+					_Utils_Tuple2(150, 125),
+					A2(
+						$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+						A3($MacCASOutreach$graphicsvg$GraphicSVG$rgb, 230, 125, 50),
+						$MacCASOutreach$graphicsvg$GraphicSVG$triangle(8)))),
+				A2(
+				$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
+				$author$project$FundamentalIdentities$PreviousQuestion,
+				A2(
+					$MacCASOutreach$graphicsvg$GraphicSVG$move,
+					_Utils_Tuple2(-50, 125),
+					A2(
+						$MacCASOutreach$graphicsvg$GraphicSVG$rotate,
+						$elm$core$Basics$degrees(-60),
+						A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+							A3($MacCASOutreach$graphicsvg$GraphicSVG$rgb, 230, 125, 50),
+							$MacCASOutreach$graphicsvg$GraphicSVG$triangle(8))))),
+				A2(
+				$MacCASOutreach$graphicsvg$GraphicSVG$move,
+				_Utils_Tuple2(-130, 95),
+				A2(
+					$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+					$MacCASOutreach$graphicsvg$GraphicSVG$orange,
+					$MacCASOutreach$graphicsvg$GraphicSVG$bold(
+						A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$size,
+							12,
+							$MacCASOutreach$graphicsvg$GraphicSVG$text(
+								$author$project$FundamentalIdentities$questionStr(model.question)))))),
+				A3($author$project$FundamentalIdentities$resultsSection, model.question, model.step, model.answer)
+			]),
 		_Utils_ap(
 			_List_fromArray(
 				[
-					$MacCASOutreach$graphicsvg$GraphicSVG$group(
+					A2($author$project$FundamentalIdentities$solutionSection, model.question, model.step)
+				]),
+			_Utils_ap(
+				_List_fromArray(
+					[
+						A2($author$project$FundamentalIdentities$optionsSection, model.question, model.step)
+					]),
+				_Utils_ap(
 					_List_fromArray(
 						[
-							A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$notifyLeave,
-							$author$project$FundamentalIdentities$ExitHint,
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyEnter,
-								A2($author$project$FundamentalIdentities$ClickedHint, model.question, model.step),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(234, 125),
+							$MacCASOutreach$graphicsvg$GraphicSVG$group(
+							_List_fromArray(
+								[
 									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$makeTransparent,
-										0.75,
-										A3(
-											$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
-											$MacCASOutreach$graphicsvg$GraphicSVG$solid(3),
-											$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-											A2(
-												$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-												$MacCASOutreach$graphicsvg$GraphicSVG$blank,
-												$MacCASOutreach$graphicsvg$GraphicSVG$circle(12))))))),
-							A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$notifyLeave,
-							$author$project$FundamentalIdentities$ExitHint,
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyEnter,
-								A2($author$project$FundamentalIdentities$ClickedHint, model.question, model.step),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$move,
-									_Utils_Tuple2(228, 118),
+									$MacCASOutreach$graphicsvg$GraphicSVG$notifyLeave,
+									$author$project$FundamentalIdentities$ExitHint,
 									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$makeTransparent,
-										0.75,
+										$MacCASOutreach$graphicsvg$GraphicSVG$notifyEnter,
+										A2($author$project$FundamentalIdentities$ClickedHint, model.question, model.step),
 										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-											$MacCASOutreach$graphicsvg$GraphicSVG$orange,
+											$MacCASOutreach$graphicsvg$GraphicSVG$move,
+											_Utils_Tuple2(234, 125),
 											A2(
-												$MacCASOutreach$graphicsvg$GraphicSVG$size,
-												20,
-												$MacCASOutreach$graphicsvg$GraphicSVG$sansserif(
-													$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-														$MacCASOutreach$graphicsvg$GraphicSVG$text('?')))))))))
-						]))
-				]),
-			function () {
-				var _v3 = model.hintState;
-				if (_v3.$ === 'PopUp') {
-					var question = _v3.a;
-					var step = _v3.b;
-					return _List_fromArray(
-						[
-							A2($author$project$FundamentalIdentities$hintCard, question, step)
-						]);
-				} else {
-					var otherwise = _v3;
-					return _List_Nil;
-				}
-			}()));
+												$MacCASOutreach$graphicsvg$GraphicSVG$makeTransparent,
+												0.75,
+												A3(
+													$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
+													$MacCASOutreach$graphicsvg$GraphicSVG$solid(3),
+													$MacCASOutreach$graphicsvg$GraphicSVG$orange,
+													A2(
+														$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+														$MacCASOutreach$graphicsvg$GraphicSVG$blank,
+														$MacCASOutreach$graphicsvg$GraphicSVG$circle(12))))))),
+									A2(
+									$MacCASOutreach$graphicsvg$GraphicSVG$notifyLeave,
+									$author$project$FundamentalIdentities$ExitHint,
+									A2(
+										$MacCASOutreach$graphicsvg$GraphicSVG$notifyEnter,
+										A2($author$project$FundamentalIdentities$ClickedHint, model.question, model.step),
+										A2(
+											$MacCASOutreach$graphicsvg$GraphicSVG$move,
+											_Utils_Tuple2(228, 118),
+											A2(
+												$MacCASOutreach$graphicsvg$GraphicSVG$makeTransparent,
+												0.75,
+												A2(
+													$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+													$MacCASOutreach$graphicsvg$GraphicSVG$orange,
+													A2(
+														$MacCASOutreach$graphicsvg$GraphicSVG$size,
+														20,
+														$MacCASOutreach$graphicsvg$GraphicSVG$sansserif(
+															$MacCASOutreach$graphicsvg$GraphicSVG$bold(
+																$MacCASOutreach$graphicsvg$GraphicSVG$text('?')))))))))
+								]))
+						]),
+					function () {
+						var _v0 = model.hintState;
+						if (_v0.$ === 'PopUp') {
+							var question = _v0.a;
+							var step = _v0.b;
+							return _List_fromArray(
+								[
+									A2($author$project$FundamentalIdentities$hintCard, question, step)
+								]);
+						} else {
+							var otherwise = _v0;
+							return _List_Nil;
+						}
+					}()))));
 };
 var $author$project$OtherFormulas$GoToQuestion1 = {$: 'GoToQuestion1'};
 var $author$project$OtherFormulas$GoToQuestion2 = {$: 'GoToQuestion2'};

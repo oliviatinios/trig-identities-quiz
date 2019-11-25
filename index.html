@@ -8547,7 +8547,8 @@ var $author$project$FundamentalIdentities$NoPopUp = {$: 'NoPopUp'};
 var $author$project$FundamentalIdentities$NotifyTap = {$: 'NotifyTap'};
 var $author$project$FundamentalIdentities$Question1 = {$: 'Question1'};
 var $author$project$FundamentalIdentities$Step1 = {$: 'Step1'};
-var $author$project$FundamentalIdentities$init = {answer: $author$project$FundamentalIdentities$Default, hintState: $author$project$FundamentalIdentities$NoPopUp, notify: $author$project$FundamentalIdentities$NotifyTap, question: $author$project$FundamentalIdentities$Question1, step: $author$project$FundamentalIdentities$Step1, time: 0};
+var $MacCASOutreach$graphicsvg$GraphicSVG$orange = A4($MacCASOutreach$graphicsvg$GraphicSVG$RGBA, 245, 121, 0, 1);
+var $author$project$FundamentalIdentities$init = {answer: $author$project$FundamentalIdentities$Default, hintState: $author$project$FundamentalIdentities$NoPopUp, notify: $author$project$FundamentalIdentities$NotifyTap, optionColourA: $MacCASOutreach$graphicsvg$GraphicSVG$orange, optionColourB: $MacCASOutreach$graphicsvg$GraphicSVG$orange, optionColourC: $MacCASOutreach$graphicsvg$GraphicSVG$orange, optionColourD: $MacCASOutreach$graphicsvg$GraphicSVG$orange, question: $author$project$FundamentalIdentities$Question1, step: $author$project$FundamentalIdentities$Step1, time: 0};
 var $author$project$OtherFormulas$Default = {$: 'Default'};
 var $author$project$OtherFormulas$NotifyTap = {$: 'NotifyTap'};
 var $author$project$OtherFormulas$Question1 = {$: 'Question1'};
@@ -8703,10 +8704,13 @@ var $author$project$FundamentalIdentities$update = F2(
 					{
 						hintState: A2($author$project$FundamentalIdentities$PopUp, question, step)
 					});
-			default:
+			case 'ExitHint':
 				return _Utils_update(
 					model,
 					{hintState: $author$project$FundamentalIdentities$NoPopUp});
+			default:
+				var t = msg.a;
+				return t(model);
 		}
 	});
 var $author$project$OtherFormulas$Correct = {$: 'Correct'};
@@ -10160,7 +10164,6 @@ var $author$project$Main$oneColour = function (model) {
 		model.oneSat,
 		0.85);
 };
-var $MacCASOutreach$graphicsvg$GraphicSVG$orange = A4($MacCASOutreach$graphicsvg$GraphicSVG$RGBA, 245, 121, 0, 1);
 var $MacCASOutreach$graphicsvg$GraphicSVG$purple = A4($MacCASOutreach$graphicsvg$GraphicSVG$RGBA, 117, 80, 123, 1);
 var $MacCASOutreach$graphicsvg$GraphicSVG$rectangle = F2(
 	function (w, h) {
@@ -10647,28 +10650,96 @@ var $author$project$FundamentalIdentities$optionsStr = F2(
 		var otherwise = _v0;
 		return _List_Nil;
 	});
-var $author$project$FundamentalIdentities$optionsText = function (lst) {
-	return $MacCASOutreach$graphicsvg$GraphicSVG$group(
-		A2(
-			$elm$core$List$indexedMap,
-			F2(
-				function (idx, tuple) {
-					return A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-						tuple.b,
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$move,
-							_Utils_Tuple2(-130, 45 - (20 * idx)),
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-								$MacCASOutreach$graphicsvg$GraphicSVG$orange,
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$size,
-									12,
-									$MacCASOutreach$graphicsvg$GraphicSVG$text(tuple.a)))));
-				}),
-			lst));
+var $author$project$FundamentalIdentities$getOptionColour = F5(
+	function (idx, optionColourA, optionColourB, optionColourC, optionColourD) {
+		switch (idx) {
+			case 0:
+				return optionColourA;
+			case 1:
+				return optionColourB;
+			case 2:
+				return optionColourC;
+			case 3:
+				return optionColourD;
+			default:
+				var otherwise = idx;
+				return optionColourA;
+		}
+	});
+var $MacCASOutreach$graphicsvg$GraphicSVG$lightOrange = A4($MacCASOutreach$graphicsvg$GraphicSVG$RGBA, 252, 175, 62, 1);
+var $author$project$FundamentalIdentities$ChangeOptionColour = function (a) {
+	return {$: 'ChangeOptionColour', a: a};
 };
+var $author$project$FundamentalIdentities$updateOptionColour = F2(
+	function (idx, colour) {
+		switch (idx) {
+			case 0:
+				return $author$project$FundamentalIdentities$ChangeOptionColour(
+					function (m) {
+						return _Utils_update(
+							m,
+							{optionColourA: colour});
+					});
+			case 1:
+				return $author$project$FundamentalIdentities$ChangeOptionColour(
+					function (m) {
+						return _Utils_update(
+							m,
+							{optionColourB: colour});
+					});
+			case 2:
+				return $author$project$FundamentalIdentities$ChangeOptionColour(
+					function (m) {
+						return _Utils_update(
+							m,
+							{optionColourC: colour});
+					});
+			case 3:
+				return $author$project$FundamentalIdentities$ChangeOptionColour(
+					function (m) {
+						return _Utils_update(
+							m,
+							{optionColourD: colour});
+					});
+			default:
+				var otherwise = idx;
+				return $author$project$FundamentalIdentities$ChangeOptionColour(
+					function (m) {
+						return _Utils_update(
+							m,
+							{optionColourA: colour});
+					});
+		}
+	});
+var $author$project$FundamentalIdentities$optionsText = F5(
+	function (lst, optionColourA, optionColourB, optionColourC, optionColourD) {
+		return $MacCASOutreach$graphicsvg$GraphicSVG$group(
+			A2(
+				$elm$core$List$indexedMap,
+				F2(
+					function (idx, tuple) {
+						return A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
+							tuple.b,
+							A2(
+								$MacCASOutreach$graphicsvg$GraphicSVG$notifyLeave,
+								A2($author$project$FundamentalIdentities$updateOptionColour, idx, $MacCASOutreach$graphicsvg$GraphicSVG$orange),
+								A2(
+									$MacCASOutreach$graphicsvg$GraphicSVG$notifyEnter,
+									A2($author$project$FundamentalIdentities$updateOptionColour, idx, $MacCASOutreach$graphicsvg$GraphicSVG$lightOrange),
+									A2(
+										$MacCASOutreach$graphicsvg$GraphicSVG$move,
+										_Utils_Tuple2(-130, 45 - (20 * idx)),
+										A2(
+											$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+											A5($author$project$FundamentalIdentities$getOptionColour, idx, optionColourA, optionColourB, optionColourC, optionColourD),
+											A2(
+												$MacCASOutreach$graphicsvg$GraphicSVG$size,
+												12,
+												$MacCASOutreach$graphicsvg$GraphicSVG$text(tuple.a)))))));
+					}),
+				lst));
+	});
 var $author$project$FundamentalIdentities$stepStr = function (step) {
 	switch (step.$) {
 		case 'Step1':
@@ -10683,8 +10754,8 @@ var $author$project$FundamentalIdentities$stepStr = function (step) {
 			return 'What is the fifth step?';
 	}
 };
-var $author$project$FundamentalIdentities$optionsSection = F2(
-	function (question, step) {
+var $author$project$FundamentalIdentities$optionsSection = F6(
+	function (question, step, optionColourA, optionColourB, optionColourC, optionColourD) {
 		return A2(
 			$MacCASOutreach$graphicsvg$GraphicSVG$move,
 			_Utils_Tuple2(
@@ -10704,8 +10775,13 @@ var $author$project$FundamentalIdentities$optionsSection = F2(
 								12,
 								$MacCASOutreach$graphicsvg$GraphicSVG$text(
 									$author$project$FundamentalIdentities$stepStr(step))))),
-						$author$project$FundamentalIdentities$optionsText(
-						A2($author$project$FundamentalIdentities$optionsStr, question, step))
+						A5(
+						$author$project$FundamentalIdentities$optionsText,
+						A2($author$project$FundamentalIdentities$optionsStr, question, step),
+						optionColourA,
+						optionColourB,
+						optionColourC,
+						optionColourD)
 					])));
 	});
 var $author$project$FundamentalIdentities$questionStr = function (question) {
@@ -11135,7 +11211,7 @@ var $author$project$FundamentalIdentities$view = function (model) {
 			_Utils_ap(
 				_List_fromArray(
 					[
-						A2($author$project$FundamentalIdentities$optionsSection, model.question, model.step)
+						A6($author$project$FundamentalIdentities$optionsSection, model.question, model.step, model.optionColourA, model.optionColourB, model.optionColourC, model.optionColourD)
 					]),
 				_Utils_ap(
 					_List_fromArray(

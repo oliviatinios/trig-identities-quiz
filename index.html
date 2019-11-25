@@ -8559,10 +8559,11 @@ var $author$project$ProductIdentities$Question1 = {$: 'Question1'};
 var $author$project$ProductIdentities$Step1 = {$: 'Step1'};
 var $author$project$ProductIdentities$init = {answer: $author$project$ProductIdentities$Default, notify: $author$project$ProductIdentities$NotifyTap, question: $author$project$ProductIdentities$Question1, step: $author$project$ProductIdentities$Step1, time: 0};
 var $author$project$PythagoreanIdentities$Default = {$: 'Default'};
+var $author$project$PythagoreanIdentities$NoPopUp = {$: 'NoPopUp'};
 var $author$project$PythagoreanIdentities$NotifyTap = {$: 'NotifyTap'};
 var $author$project$PythagoreanIdentities$Question1 = {$: 'Question1'};
 var $author$project$PythagoreanIdentities$Step1 = {$: 'Step1'};
-var $author$project$PythagoreanIdentities$init = {answer: $author$project$PythagoreanIdentities$Default, notify: $author$project$PythagoreanIdentities$NotifyTap, question: $author$project$PythagoreanIdentities$Question1, step: $author$project$PythagoreanIdentities$Step1, time: 0};
+var $author$project$PythagoreanIdentities$init = {answer: $author$project$PythagoreanIdentities$Default, hintState: $author$project$PythagoreanIdentities$NoPopUp, notify: $author$project$PythagoreanIdentities$NotifyTap, question: $author$project$PythagoreanIdentities$Question1, step: $author$project$PythagoreanIdentities$Step1, time: 0};
 var $author$project$ReciprocalIdentities$Default = {$: 'Default'};
 var $author$project$ReciprocalIdentities$NotifyTap = {$: 'NotifyTap'};
 var $author$project$ReciprocalIdentities$Question1 = {$: 'Question1'};
@@ -8818,7 +8819,14 @@ var $author$project$ProductIdentities$update = F2(
 	});
 var $author$project$PythagoreanIdentities$Correct = {$: 'Correct'};
 var $author$project$PythagoreanIdentities$Incorrect = {$: 'Incorrect'};
+var $author$project$PythagoreanIdentities$PopUp = F2(
+	function (a, b) {
+		return {$: 'PopUp', a: a, b: b};
+	});
 var $author$project$PythagoreanIdentities$Question2 = {$: 'Question2'};
+var $author$project$PythagoreanIdentities$Question3 = {$: 'Question3'};
+var $author$project$PythagoreanIdentities$Question4 = {$: 'Question4'};
+var $author$project$PythagoreanIdentities$Question5 = {$: 'Question5'};
 var $author$project$PythagoreanIdentities$Step2 = {$: 'Step2'};
 var $author$project$PythagoreanIdentities$Step3 = {$: 'Step3'};
 var $author$project$PythagoreanIdentities$Step4 = {$: 'Step4'};
@@ -8844,30 +8852,83 @@ var $author$project$PythagoreanIdentities$update = F2(
 				return _Utils_update(
 					model,
 					{answer: $author$project$PythagoreanIdentities$Correct});
-			case 'GoToStep2':
+			case 'NextStep':
 				return _Utils_update(
 					model,
-					{answer: $author$project$PythagoreanIdentities$Default, step: $author$project$PythagoreanIdentities$Step2});
-			case 'GoToStep3':
+					{
+						answer: $author$project$PythagoreanIdentities$Default,
+						step: function () {
+							var _v1 = model.step;
+							switch (_v1.$) {
+								case 'Step1':
+									return $author$project$PythagoreanIdentities$Step2;
+								case 'Step2':
+									return $author$project$PythagoreanIdentities$Step3;
+								case 'Step3':
+									return $author$project$PythagoreanIdentities$Step4;
+								case 'Step4':
+									return $author$project$PythagoreanIdentities$Step5;
+								default:
+									return $author$project$PythagoreanIdentities$Step5;
+							}
+						}()
+					});
+			case 'NextQuestion':
 				return _Utils_update(
 					model,
-					{answer: $author$project$PythagoreanIdentities$Default, step: $author$project$PythagoreanIdentities$Step3});
-			case 'GoToStep4':
+					{
+						answer: $author$project$PythagoreanIdentities$Default,
+						question: function () {
+							var _v2 = model.question;
+							switch (_v2.$) {
+								case 'Question1':
+									return $author$project$PythagoreanIdentities$Question2;
+								case 'Question2':
+									return $author$project$PythagoreanIdentities$Question3;
+								case 'Question3':
+									return $author$project$PythagoreanIdentities$Question4;
+								case 'Question4':
+									return $author$project$PythagoreanIdentities$Question5;
+								default:
+									return $author$project$PythagoreanIdentities$Question1;
+							}
+						}(),
+						step: $author$project$PythagoreanIdentities$Step1
+					});
+			case 'PreviousQuestion':
 				return _Utils_update(
 					model,
-					{answer: $author$project$PythagoreanIdentities$Default, step: $author$project$PythagoreanIdentities$Step4});
-			case 'GoToStep5':
+					{
+						answer: $author$project$PythagoreanIdentities$Default,
+						question: function () {
+							var _v3 = model.question;
+							switch (_v3.$) {
+								case 'Question2':
+									return $author$project$PythagoreanIdentities$Question1;
+								case 'Question1':
+									return $author$project$PythagoreanIdentities$Question1;
+								case 'Question3':
+									return $author$project$PythagoreanIdentities$Question2;
+								case 'Question4':
+									return $author$project$PythagoreanIdentities$Question3;
+								default:
+									return $author$project$PythagoreanIdentities$Question4;
+							}
+						}(),
+						step: $author$project$PythagoreanIdentities$Step1
+					});
+			case 'ClickedHint':
+				var question = msg.a;
+				var step = msg.b;
 				return _Utils_update(
 					model,
-					{answer: $author$project$PythagoreanIdentities$Default, step: $author$project$PythagoreanIdentities$Step5});
-			case 'GoToQuestion1':
-				return _Utils_update(
-					model,
-					{answer: $author$project$PythagoreanIdentities$Default, question: $author$project$PythagoreanIdentities$Question1, step: $author$project$PythagoreanIdentities$Step1});
+					{
+						hintState: A2($author$project$PythagoreanIdentities$PopUp, question, step)
+					});
 			default:
 				return _Utils_update(
 					model,
-					{answer: $author$project$PythagoreanIdentities$Default, question: $author$project$PythagoreanIdentities$Question2, step: $author$project$PythagoreanIdentities$Step1});
+					{hintState: $author$project$PythagoreanIdentities$NoPopUp});
 		}
 	});
 var $author$project$ReciprocalIdentities$Correct = {$: 'Correct'};
@@ -12036,453 +12097,708 @@ var $author$project$ProductIdentities$view = function (model) {
 		}
 	}
 };
-var $author$project$PythagoreanIdentities$GoToQuestion1 = {$: 'GoToQuestion1'};
-var $author$project$PythagoreanIdentities$GoToQuestion2 = {$: 'GoToQuestion2'};
-var $author$project$PythagoreanIdentities$view = function (model) {
-	var _v0 = model.question;
-	if (_v0.$ === 'Question1') {
-		var _v1 = model.step;
-		switch (_v1.$) {
-			case 'Step1':
-				return _List_fromArray(
-					[
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(55, 0),
-						A3(
-							$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
-							$MacCASOutreach$graphicsvg$GraphicSVG$solid(2),
-							$MacCASOutreach$graphicsvg$GraphicSVG$purple,
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-								$MacCASOutreach$graphicsvg$GraphicSVG$blank,
-								A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 400, 290)))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(20, 120),
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$purple,
-							$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$size,
-									16,
-									$MacCASOutreach$graphicsvg$GraphicSVG$text('Question 1'))))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-						$author$project$PythagoreanIdentities$GoToQuestion2,
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$move,
-							_Utils_Tuple2(150, 125),
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-								$MacCASOutreach$graphicsvg$GraphicSVG$purple,
-								$MacCASOutreach$graphicsvg$GraphicSVG$triangle(8)))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-						$author$project$PythagoreanIdentities$GoToQuestion1,
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$move,
-							_Utils_Tuple2(-50, 125),
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$rotate,
-								$elm$core$Basics$degrees(-60),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$purple,
-									$MacCASOutreach$graphicsvg$GraphicSVG$triangle(8))))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(-130, 95),
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$purple,
-							$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$size,
-									12,
-									$MacCASOutreach$graphicsvg$GraphicSVG$text('Pythagorean Q1')))))
-					]);
-			case 'Step2':
-				return _List_fromArray(
-					[
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(55, 0),
-						A3(
-							$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
-							$MacCASOutreach$graphicsvg$GraphicSVG$solid(2),
-							$MacCASOutreach$graphicsvg$GraphicSVG$purple,
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-								$MacCASOutreach$graphicsvg$GraphicSVG$blank,
-								A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 400, 290)))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(20, 120),
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$purple,
-							$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$size,
-									16,
-									$MacCASOutreach$graphicsvg$GraphicSVG$text('Question 1'))))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-						$author$project$PythagoreanIdentities$GoToQuestion2,
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$move,
-							_Utils_Tuple2(150, 125),
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-								$MacCASOutreach$graphicsvg$GraphicSVG$purple,
-								$MacCASOutreach$graphicsvg$GraphicSVG$triangle(8)))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-						$author$project$PythagoreanIdentities$GoToQuestion1,
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$move,
-							_Utils_Tuple2(-50, 125),
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$rotate,
-								$elm$core$Basics$degrees(-60),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$purple,
-									$MacCASOutreach$graphicsvg$GraphicSVG$triangle(8))))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(-130, 95),
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$purple,
-							$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$size,
-									12,
-									$MacCASOutreach$graphicsvg$GraphicSVG$text('Pythagorean Q1')))))
-					]);
-			case 'Step3':
-				return _List_fromArray(
-					[
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(55, 0),
-						A3(
-							$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
-							$MacCASOutreach$graphicsvg$GraphicSVG$solid(2),
-							$MacCASOutreach$graphicsvg$GraphicSVG$purple,
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-								$MacCASOutreach$graphicsvg$GraphicSVG$blank,
-								A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 400, 290)))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(20, 120),
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$purple,
-							$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$size,
-									16,
-									$MacCASOutreach$graphicsvg$GraphicSVG$text('Question 1'))))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-						$author$project$PythagoreanIdentities$GoToQuestion2,
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$move,
-							_Utils_Tuple2(150, 125),
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-								$MacCASOutreach$graphicsvg$GraphicSVG$purple,
-								$MacCASOutreach$graphicsvg$GraphicSVG$triangle(8)))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-						$author$project$PythagoreanIdentities$GoToQuestion1,
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$move,
-							_Utils_Tuple2(-50, 125),
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$rotate,
-								$elm$core$Basics$degrees(-60),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$purple,
-									$MacCASOutreach$graphicsvg$GraphicSVG$triangle(8))))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(-130, 95),
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$purple,
-							$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$size,
-									12,
-									$MacCASOutreach$graphicsvg$GraphicSVG$text('Pythagorean Q1')))))
-					]);
-			case 'Step4':
-				return _List_Nil;
-			default:
-				return _List_Nil;
+var $author$project$PythagoreanIdentities$ClickedHint = F2(
+	function (a, b) {
+		return {$: 'ClickedHint', a: a, b: b};
+	});
+var $author$project$PythagoreanIdentities$ExitHint = {$: 'ExitHint'};
+var $author$project$PythagoreanIdentities$NextQuestion = {$: 'NextQuestion'};
+var $author$project$PythagoreanIdentities$PreviousQuestion = {$: 'PreviousQuestion'};
+var $author$project$PythagoreanIdentities$hintStr = F2(
+	function (question, step) {
+		var _v0 = _Utils_Tuple2(question, step);
+		_v0$14:
+		while (true) {
+			switch (_v0.b.$) {
+				case 'Step1':
+					switch (_v0.a.$) {
+						case 'Question1':
+							var _v1 = _v0.a;
+							var _v2 = _v0.b;
+							return _List_fromArray(
+								['Divide', 'by', 'sine']);
+						case 'Question2':
+							var _v7 = _v0.a;
+							var _v8 = _v0.b;
+							return _List_fromArray(
+								['Use', '1+cot^2(x)=csc^2(x)']);
+						case 'Question3':
+							var _v13 = _v0.a;
+							var _v14 = _v0.b;
+							return _List_fromArray(
+								['Use', '1-cos^2(x)=sin^2(x)']);
+						case 'Question4':
+							var _v17 = _v0.a;
+							var _v18 = _v0.b;
+							return _List_fromArray(
+								['Use', 'sin^x+cos^x=1']);
+						default:
+							var _v23 = _v0.a;
+							var _v24 = _v0.b;
+							return _List_fromArray(
+								['Use', 'cos(x)*sin(x) =', 'sin(2*x)/2']);
+					}
+				case 'Step2':
+					switch (_v0.a.$) {
+						case 'Question1':
+							var _v3 = _v0.a;
+							var _v4 = _v0.b;
+							return _List_fromArray(
+								['Use', 'sin^x+cos^x=1']);
+						case 'Question2':
+							var _v9 = _v0.a;
+							var _v10 = _v0.b;
+							return _List_fromArray(
+								['Simplify', 'the', 'terms']);
+						case 'Question3':
+							var _v15 = _v0.a;
+							var _v16 = _v0.b;
+							return _List_fromArray(
+								['Simplify', '1/(sin(x)) = csc(x)']);
+						case 'Question4':
+							var _v19 = _v0.a;
+							var _v20 = _v0.b;
+							return _List_fromArray(
+								['Refine']);
+						default:
+							var _v25 = _v0.a;
+							var _v26 = _v0.b;
+							return _List_fromArray(
+								['Simplify']);
+					}
+				case 'Step3':
+					switch (_v0.a.$) {
+						case 'Question1':
+							var _v5 = _v0.a;
+							var _v6 = _v0.b;
+							return _List_fromArray(
+								['Multiply', 'the', 'terms', 'in', 'step 1']);
+						case 'Question2':
+							var _v11 = _v0.a;
+							var _v12 = _v0.b;
+							return _List_fromArray(
+								['Express', 'in form', 'of factors']);
+						case 'Question4':
+							var _v21 = _v0.a;
+							var _v22 = _v0.b;
+							return _List_fromArray(
+								['Express in terms of tangent']);
+						case 'Question5':
+							var _v27 = _v0.a;
+							var _v28 = _v0.b;
+							return _List_fromArray(
+								['Add', 'the terms', 'in step 3']);
+						default:
+							break _v0$14;
+					}
+				default:
+					break _v0$14;
+			}
 		}
-	} else {
-		var _v2 = model.step;
-		switch (_v2.$) {
-			case 'Step1':
-				return _List_fromArray(
-					[
-						A2(
+		var otherwise = _v0;
+		return _List_Nil;
+	});
+var $author$project$PythagoreanIdentities$hintText = function (lst) {
+	return $MacCASOutreach$graphicsvg$GraphicSVG$group(
+		A2(
+			$elm$core$List$indexedMap,
+			F2(
+				function (idx, line) {
+					return A2(
 						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(55, 0),
+						_Utils_Tuple2(0, 14 - (7 * idx)),
+						A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+							$MacCASOutreach$graphicsvg$GraphicSVG$black,
+							$MacCASOutreach$graphicsvg$GraphicSVG$centered(
+								A2(
+									$MacCASOutreach$graphicsvg$GraphicSVG$size,
+									10,
+									$MacCASOutreach$graphicsvg$GraphicSVG$text(line)))));
+				}),
+			lst));
+};
+var $author$project$PythagoreanIdentities$hintCard = F2(
+	function (question, step) {
+		return A2(
+			$MacCASOutreach$graphicsvg$GraphicSVG$move,
+			_Utils_Tuple2(60, 0),
+			$MacCASOutreach$graphicsvg$GraphicSVG$group(
+				_List_fromArray(
+					[
 						A3(
-							$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
-							$MacCASOutreach$graphicsvg$GraphicSVG$solid(2),
-							$MacCASOutreach$graphicsvg$GraphicSVG$purple,
+						$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
+						$MacCASOutreach$graphicsvg$GraphicSVG$solid(0.3),
+						$MacCASOutreach$graphicsvg$GraphicSVG$black,
+						A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$makeTransparent,
+							0.3,
 							A2(
 								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-								$MacCASOutreach$graphicsvg$GraphicSVG$blank,
-								A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 400, 290)))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(20, 120),
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$purple,
-							$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$size,
-									16,
-									$MacCASOutreach$graphicsvg$GraphicSVG$text('Question 2'))))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-						$author$project$PythagoreanIdentities$GoToQuestion1,
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$move,
-							_Utils_Tuple2(-50, 125),
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$rotate,
-								$elm$core$Basics$degrees(-60),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$purple,
-									$MacCASOutreach$graphicsvg$GraphicSVG$triangle(8))))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(-130, 95),
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$purple,
-							$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$size,
-									12,
-									$MacCASOutreach$graphicsvg$GraphicSVG$text('Pythagorean Q2')))))
-					]);
-			case 'Step2':
-				return _List_fromArray(
-					[
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(55, 0),
-						A3(
-							$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
-							$MacCASOutreach$graphicsvg$GraphicSVG$solid(2),
-							$MacCASOutreach$graphicsvg$GraphicSVG$purple,
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-								$MacCASOutreach$graphicsvg$GraphicSVG$blank,
-								A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 400, 290)))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(20, 120),
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$purple,
-							$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$size,
-									16,
-									$MacCASOutreach$graphicsvg$GraphicSVG$text('Question 2'))))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-						$author$project$PythagoreanIdentities$GoToQuestion1,
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$move,
-							_Utils_Tuple2(-50, 125),
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$rotate,
-								$elm$core$Basics$degrees(-60),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$purple,
-									$MacCASOutreach$graphicsvg$GraphicSVG$triangle(8))))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(-130, 95),
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$purple,
-							$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$size,
-									12,
-									$MacCASOutreach$graphicsvg$GraphicSVG$text('Pythagorean Q2')))))
-					]);
-			case 'Step3':
-				return _List_fromArray(
-					[
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(55, 0),
-						A3(
-							$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
-							$MacCASOutreach$graphicsvg$GraphicSVG$solid(2),
-							$MacCASOutreach$graphicsvg$GraphicSVG$purple,
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-								$MacCASOutreach$graphicsvg$GraphicSVG$blank,
-								A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 400, 290)))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(20, 120),
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$purple,
-							$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$size,
-									16,
-									$MacCASOutreach$graphicsvg$GraphicSVG$text('Question 2'))))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-						$author$project$PythagoreanIdentities$GoToQuestion1,
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$move,
-							_Utils_Tuple2(-50, 125),
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$rotate,
-								$elm$core$Basics$degrees(-60),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$purple,
-									$MacCASOutreach$graphicsvg$GraphicSVG$triangle(8))))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(-130, 95),
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$purple,
-							$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$size,
-									12,
-									$MacCASOutreach$graphicsvg$GraphicSVG$text('Pythagorean Q2')))))
-					]);
-			case 'Step4':
-				return _List_fromArray(
-					[
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(55, 0),
-						A3(
-							$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
-							$MacCASOutreach$graphicsvg$GraphicSVG$solid(2),
-							$MacCASOutreach$graphicsvg$GraphicSVG$purple,
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-								$MacCASOutreach$graphicsvg$GraphicSVG$blank,
-								A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 400, 290)))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(20, 120),
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$purple,
-							$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$size,
-									16,
-									$MacCASOutreach$graphicsvg$GraphicSVG$text('Question 2'))))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-						$author$project$PythagoreanIdentities$GoToQuestion1,
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$move,
-							_Utils_Tuple2(-50, 125),
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$rotate,
-								$elm$core$Basics$degrees(-60),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$purple,
-									$MacCASOutreach$graphicsvg$GraphicSVG$triangle(8))))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(-130, 95),
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$purple,
-							$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$size,
-									12,
-									$MacCASOutreach$graphicsvg$GraphicSVG$text('Pythagorean Q2')))))
-					]);
-			default:
-				return _List_fromArray(
-					[
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(55, 0),
-						A3(
-							$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
-							$MacCASOutreach$graphicsvg$GraphicSVG$solid(2),
-							$MacCASOutreach$graphicsvg$GraphicSVG$purple,
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-								$MacCASOutreach$graphicsvg$GraphicSVG$blank,
-								A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 400, 290)))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(20, 120),
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$purple,
-							$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$size,
-									16,
-									$MacCASOutreach$graphicsvg$GraphicSVG$text('Question 2'))))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-						$author$project$PythagoreanIdentities$GoToQuestion1,
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$move,
-							_Utils_Tuple2(-50, 125),
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$rotate,
-								$elm$core$Basics$degrees(-60),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$purple,
-									$MacCASOutreach$graphicsvg$GraphicSVG$triangle(8))))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(-130, 95),
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$purple,
-							$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$size,
-									12,
-									$MacCASOutreach$graphicsvg$GraphicSVG$text('Pythagorean Q2')))))
-					]);
-		}
+								$MacCASOutreach$graphicsvg$GraphicSVG$black,
+								A2($MacCASOutreach$graphicsvg$GraphicSVG$rect, 90, 90)))),
+						$author$project$PythagoreanIdentities$hintText(
+						A2($author$project$PythagoreanIdentities$hintStr, question, step))
+					])));
+	});
+var $author$project$PythagoreanIdentities$getIndexFromStep = function (step) {
+	switch (step.$) {
+		case 'Step1':
+			return 0;
+		case 'Step2':
+			return 1;
+		case 'Step3':
+			return 2;
+		case 'Step4':
+			return 3;
+		default:
+			return 4;
 	}
+};
+var $author$project$PythagoreanIdentities$RightAnswer = {$: 'RightAnswer'};
+var $author$project$PythagoreanIdentities$WrongAnswer = {$: 'WrongAnswer'};
+var $author$project$PythagoreanIdentities$optionsStr = F2(
+	function (question, step) {
+		var _v0 = _Utils_Tuple2(question, step);
+		_v0$14:
+		while (true) {
+			switch (_v0.b.$) {
+				case 'Step1':
+					switch (_v0.a.$) {
+						case 'Question1':
+							var _v1 = _v0.a;
+							var _v2 = _v0.b;
+							return _List_fromArray(
+								[
+									_Utils_Tuple2('a) tan y * (sin y / cos y)', $author$project$PythagoreanIdentities$WrongAnswer),
+									_Utils_Tuple2('b) tan y * (cos y / sin y)', $author$project$PythagoreanIdentities$WrongAnswer),
+									_Utils_Tuple2('c) (cos y / sin y) * (1 / sin y)', $author$project$PythagoreanIdentities$WrongAnswer),
+									_Utils_Tuple2('d) sin y(cos^2(y)-1)', $author$project$PythagoreanIdentities$RightAnswer)
+								]);
+						case 'Question2':
+							var _v7 = _v0.a;
+							var _v8 = _v0.b;
+							return _List_fromArray(
+								[
+									_Utils_Tuple2('a) (1 / tan2 y)', $author$project$PythagoreanIdentities$WrongAnswer),
+									_Utils_Tuple2('b) 1+cot^2(y)-cot(y)-3', $author$project$PythagoreanIdentities$RightAnswer),
+									_Utils_Tuple2('c) cos y + (sin y / tan2 y)', $author$project$PythagoreanIdentities$WrongAnswer),
+									_Utils_Tuple2('d) (sin y * cos2 y) / sin2 y', $author$project$PythagoreanIdentities$WrongAnswer)
+								]);
+						case 'Question3':
+							var _v13 = _v0.a;
+							var _v14 = _v0.b;
+							return _List_fromArray(
+								[
+									_Utils_Tuple2('a) cos2 y / sin2 y', $author$project$PythagoreanIdentities$WrongAnswer),
+									_Utils_Tuple2('b) 1/sin^2(y)', $author$project$PythagoreanIdentities$RightAnswer),
+									_Utils_Tuple2('c) secy / (tan y * tan y)', $author$project$PythagoreanIdentities$WrongAnswer),
+									_Utils_Tuple2('d) sin y', $author$project$PythagoreanIdentities$WrongAnswer)
+								]);
+						case 'Question4':
+							var _v17 = _v0.a;
+							var _v18 = _v0.b;
+							return _List_fromArray(
+								[
+									_Utils_Tuple2('a) cos2 y / sin2 y', $author$project$PythagoreanIdentities$WrongAnswer),
+									_Utils_Tuple2('b) (cos(y)/sin(y))/csc(y)', $author$project$PythagoreanIdentities$WrongAnswer),
+									_Utils_Tuple2('c) sin^2(y)/(cos(y)sin(y))', $author$project$PythagoreanIdentities$RightAnswer),
+									_Utils_Tuple2('d) csc y', $author$project$PythagoreanIdentities$WrongAnswer)
+								]);
+						default:
+							var _v23 = _v0.a;
+							var _v24 = _v0.b;
+							return _List_fromArray(
+								[
+									_Utils_Tuple2('a) sin2 y', $author$project$PythagoreanIdentities$WrongAnswer),
+									_Utils_Tuple2('b) cos2(y)/csc(y)', $author$project$PythagoreanIdentities$WrongAnswer),
+									_Utils_Tuple2('c) (cos(y)/sin(y))+(sin(y)/cos(y))', $author$project$PythagoreanIdentities$WrongAnswer),
+									_Utils_Tuple2('d) (sin(2y)/2)+(cos(y)*cot(2*y)*sin(y))', $author$project$PythagoreanIdentities$RightAnswer)
+								]);
+					}
+				case 'Step2':
+					switch (_v0.a.$) {
+						case 'Question1':
+							var _v3 = _v0.a;
+							var _v4 = _v0.b;
+							return _List_fromArray(
+								[
+									_Utils_Tuple2('a) csc y / cos y', $author$project$PythagoreanIdentities$WrongAnswer),
+									_Utils_Tuple2('b) sin y(-sin^2(y))', $author$project$PythagoreanIdentities$RightAnswer),
+									_Utils_Tuple2('c) 2 / sin y', $author$project$PythagoreanIdentities$WrongAnswer),
+									_Utils_Tuple2('d) (cos2 y * sin y)', $author$project$PythagoreanIdentities$WrongAnswer)
+								]);
+						case 'Question2':
+							var _v9 = _v0.a;
+							var _v10 = _v0.b;
+							return _List_fromArray(
+								[
+									_Utils_Tuple2('a) (1 + (cos2 y / sin2 y))', $author$project$PythagoreanIdentities$WrongAnswer),
+									_Utils_Tuple2('b) (1 + (sin2 y / cos2 y))', $author$project$PythagoreanIdentities$WrongAnswer),
+									_Utils_Tuple2('c) cot^2(y)-cot(y)-2', $author$project$PythagoreanIdentities$RightAnswer),
+									_Utils_Tuple2('d) cot y * (cot2 y)', $author$project$PythagoreanIdentities$WrongAnswer)
+								]);
+						case 'Question3':
+							var _v15 = _v0.a;
+							var _v16 = _v0.b;
+							return _List_fromArray(
+								[
+									_Utils_Tuple2('a) cos3 y / sin3 y', $author$project$PythagoreanIdentities$WrongAnswer),
+									_Utils_Tuple2('b) (cos(y)/sin(y))/csc(y)', $author$project$PythagoreanIdentities$WrongAnswer),
+									_Utils_Tuple2('c) csc^2(y)', $author$project$PythagoreanIdentities$RightAnswer),
+									_Utils_Tuple2('d) sin y', $author$project$PythagoreanIdentities$WrongAnswer)
+								]);
+						case 'Question4':
+							var _v19 = _v0.a;
+							var _v20 = _v0.b;
+							return _List_fromArray(
+								[
+									_Utils_Tuple2('a) sin(y)/cos(y)', $author$project$PythagoreanIdentities$RightAnswer),
+									_Utils_Tuple2('b) (cos(y)/sin(y))/sin(y)', $author$project$PythagoreanIdentities$WrongAnswer),
+									_Utils_Tuple2('c) cos(y)/(1/cos(y)', $author$project$PythagoreanIdentities$WrongAnswer),
+									_Utils_Tuple2('d) cot y', $author$project$PythagoreanIdentities$WrongAnswer)
+								]);
+						default:
+							var _v25 = _v0.a;
+							var _v26 = _v0.b;
+							return _List_fromArray(
+								[
+									_Utils_Tuple2('a) (sin(2y)/2)+(sin(2y)*cot(2y))/2', $author$project$PythagoreanIdentities$RightAnswer),
+									_Utils_Tuple2('b) csc y/(cos(y)/sin(y))', $author$project$PythagoreanIdentities$WrongAnswer),
+									_Utils_Tuple2('c) tan(y)/(1/tan(y)', $author$project$PythagoreanIdentities$WrongAnswer),
+									_Utils_Tuple2('d) cos y', $author$project$PythagoreanIdentities$WrongAnswer)
+								]);
+					}
+				case 'Step3':
+					switch (_v0.a.$) {
+						case 'Question1':
+							var _v5 = _v0.a;
+							var _v6 = _v0.b;
+							return _List_fromArray(
+								[
+									_Utils_Tuple2('a) sin^3(y)', $author$project$PythagoreanIdentities$RightAnswer),
+									_Utils_Tuple2('b) tan y', $author$project$PythagoreanIdentities$WrongAnswer),
+									_Utils_Tuple2('c) cos y', $author$project$PythagoreanIdentities$WrongAnswer),
+									_Utils_Tuple2('d) sin y', $author$project$PythagoreanIdentities$WrongAnswer)
+								]);
+						case 'Question2':
+							var _v11 = _v0.a;
+							var _v12 = _v0.b;
+							return _List_fromArray(
+								[
+									_Utils_Tuple2('a) cot y * (1 / cos2 y)', $author$project$PythagoreanIdentities$WrongAnswer),
+									_Utils_Tuple2('b) sin y * (cos2 y / cot2 y)', $author$project$PythagoreanIdentities$WrongAnswer),
+									_Utils_Tuple2('c) (sin2 y / cot y+1)', $author$project$PythagoreanIdentities$WrongAnswer),
+									_Utils_Tuple2('d) (cot(y)-2)*(cot(y)+1)', $author$project$PythagoreanIdentities$RightAnswer)
+								]);
+						case 'Question4':
+							var _v21 = _v0.a;
+							var _v22 = _v0.b;
+							return _List_fromArray(
+								[
+									_Utils_Tuple2('a) cos y / sin y', $author$project$PythagoreanIdentities$WrongAnswer),
+									_Utils_Tuple2('b) (sin(y))/csc(y)', $author$project$PythagoreanIdentities$WrongAnswer),
+									_Utils_Tuple2('c) tan(y)', $author$project$PythagoreanIdentities$RightAnswer),
+									_Utils_Tuple2('d) sec y', $author$project$PythagoreanIdentities$WrongAnswer)
+								]);
+						case 'Question5':
+							var _v27 = _v0.a;
+							var _v28 = _v0.b;
+							return _List_fromArray(
+								[
+									_Utils_Tuple2('a) (sin(2y)+sin(2y)cot(2y))/2', $author$project$PythagoreanIdentities$RightAnswer),
+									_Utils_Tuple2('b) (cot(y))/csc(y)', $author$project$PythagoreanIdentities$WrongAnswer),
+									_Utils_Tuple2('c) (csc(y)*sin(y)', $author$project$PythagoreanIdentities$WrongAnswer),
+									_Utils_Tuple2('d) csc y', $author$project$PythagoreanIdentities$WrongAnswer)
+								]);
+						default:
+							break _v0$14;
+					}
+				default:
+					break _v0$14;
+			}
+		}
+		var otherwise = _v0;
+		return _List_Nil;
+	});
+var $author$project$PythagoreanIdentities$optionsText = function (lst) {
+	return $MacCASOutreach$graphicsvg$GraphicSVG$group(
+		A2(
+			$elm$core$List$indexedMap,
+			F2(
+				function (idx, tuple) {
+					return A2(
+						$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
+						tuple.b,
+						A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$move,
+							_Utils_Tuple2(-130, 45 - (20 * idx)),
+							A2(
+								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+								$MacCASOutreach$graphicsvg$GraphicSVG$purple,
+								A2(
+									$MacCASOutreach$graphicsvg$GraphicSVG$size,
+									12,
+									$MacCASOutreach$graphicsvg$GraphicSVG$text(tuple.a)))));
+				}),
+			lst));
+};
+var $author$project$PythagoreanIdentities$stepStr = function (step) {
+	switch (step.$) {
+		case 'Step1':
+			return 'What is the first step?';
+		case 'Step2':
+			return 'What is the second step?';
+		case 'Step3':
+			return 'What is the third step?';
+		case 'Step4':
+			return 'What is the fourth step?';
+		default:
+			return 'What is the fifth step?';
+	}
+};
+var $author$project$PythagoreanIdentities$optionsSection = F2(
+	function (question, step) {
+		return A2(
+			$MacCASOutreach$graphicsvg$GraphicSVG$move,
+			_Utils_Tuple2(
+				0,
+				(-20) * $author$project$PythagoreanIdentities$getIndexFromStep(step)),
+			$MacCASOutreach$graphicsvg$GraphicSVG$group(
+				_List_fromArray(
+					[
+						A2(
+						$MacCASOutreach$graphicsvg$GraphicSVG$move,
+						_Utils_Tuple2(-130, 65),
+						A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+							$MacCASOutreach$graphicsvg$GraphicSVG$purple,
+							A2(
+								$MacCASOutreach$graphicsvg$GraphicSVG$size,
+								12,
+								$MacCASOutreach$graphicsvg$GraphicSVG$text(
+									$author$project$PythagoreanIdentities$stepStr(step))))),
+						$author$project$PythagoreanIdentities$optionsText(
+						A2($author$project$PythagoreanIdentities$optionsStr, question, step))
+					])));
+	});
+var $author$project$PythagoreanIdentities$questionStr = function (question) {
+	switch (question.$) {
+		case 'Question1':
+			return 'Simplify sin(y)*cos^2*(y)-sin(y)';
+		case 'Question2':
+			return 'Simplify csc^2(y)-cot(y)-3';
+		case 'Question3':
+			return 'Simplify 1 / (1-cos^2(y))';
+		case 'Question4':
+			return 'Simplify (1-cos^2(y))/(sin(y)*cos(y))';
+		default:
+			return 'Simplify cot(2y)*cos(y)*sin(y)+cos(y)*sin(y)';
+	}
+};
+var $author$project$PythagoreanIdentities$questionTitleStr = function (question) {
+	switch (question.$) {
+		case 'Question1':
+			return 'Question 1';
+		case 'Question2':
+			return 'Question 2';
+		case 'Question3':
+			return 'Question 3';
+		case 'Question4':
+			return 'Question 4';
+		default:
+			return 'Question 5';
+	}
+};
+var $author$project$PythagoreanIdentities$NextStep = {$: 'NextStep'};
+var $author$project$PythagoreanIdentities$isLastStep = F2(
+	function (question, step) {
+		var _v0 = _Utils_Tuple2(question, step);
+		_v0$5:
+		while (true) {
+			switch (_v0.b.$) {
+				case 'Step2':
+					if (_v0.a.$ === 'Question3') {
+						var _v5 = _v0.a;
+						var _v6 = _v0.b;
+						return true;
+					} else {
+						break _v0$5;
+					}
+				case 'Step3':
+					switch (_v0.a.$) {
+						case 'Question1':
+							var _v1 = _v0.a;
+							var _v2 = _v0.b;
+							return true;
+						case 'Question2':
+							var _v3 = _v0.a;
+							var _v4 = _v0.b;
+							return true;
+						case 'Question4':
+							var _v7 = _v0.a;
+							var _v8 = _v0.b;
+							return true;
+						case 'Question5':
+							var _v9 = _v0.a;
+							var _v10 = _v0.b;
+							return true;
+						default:
+							break _v0$5;
+					}
+				default:
+					break _v0$5;
+			}
+		}
+		var otherwise = _v0;
+		return false;
+	});
+var $author$project$PythagoreanIdentities$resultsSection = F3(
+	function (question, step, answer) {
+		return A2($author$project$PythagoreanIdentities$isLastStep, question, step) ? $MacCASOutreach$graphicsvg$GraphicSVG$group(
+			_List_fromArray(
+				[
+					A2(
+					$MacCASOutreach$graphicsvg$GraphicSVG$move,
+					_Utils_Tuple2(
+						-130,
+						(-40) - (20 * $author$project$PythagoreanIdentities$getIndexFromStep(step))),
+					A2(
+						$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+						_Utils_eq(answer, $author$project$PythagoreanIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$red : (_Utils_eq(answer, $author$project$PythagoreanIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$green : $MacCASOutreach$graphicsvg$GraphicSVG$white),
+						A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$size,
+							12,
+							$MacCASOutreach$graphicsvg$GraphicSVG$text(
+								_Utils_eq(answer, $author$project$PythagoreanIdentities$Incorrect) ? 'Incorrect' : (_Utils_eq(answer, $author$project$PythagoreanIdentities$Correct) ? 'Correct! You have solved the problem.' : '')))))
+				])) : $MacCASOutreach$graphicsvg$GraphicSVG$group(
+			_List_fromArray(
+				[
+					A2(
+					$MacCASOutreach$graphicsvg$GraphicSVG$move,
+					_Utils_Tuple2(
+						-130,
+						(-40) - (20 * $author$project$PythagoreanIdentities$getIndexFromStep(step))),
+					A2(
+						$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+						_Utils_eq(answer, $author$project$PythagoreanIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$red : (_Utils_eq(answer, $author$project$PythagoreanIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$green : $MacCASOutreach$graphicsvg$GraphicSVG$white),
+						A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$size,
+							12,
+							$MacCASOutreach$graphicsvg$GraphicSVG$text(
+								_Utils_eq(answer, $author$project$PythagoreanIdentities$Incorrect) ? 'Incorrect' : (_Utils_eq(answer, $author$project$PythagoreanIdentities$Correct) ? 'Correct' : ''))))),
+					A2(
+					$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
+					$author$project$PythagoreanIdentities$NextStep,
+					A2(
+						$MacCASOutreach$graphicsvg$GraphicSVG$move,
+						_Utils_Tuple2(
+							-100,
+							(-60) - (20 * $author$project$PythagoreanIdentities$getIndexFromStep(step))),
+						A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+							_Utils_eq(answer, $author$project$PythagoreanIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$blank : (_Utils_eq(answer, $author$project$PythagoreanIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$purple : $MacCASOutreach$graphicsvg$GraphicSVG$blank),
+							A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 60, 25)))),
+					A2(
+					$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
+					$author$project$PythagoreanIdentities$NextStep,
+					A2(
+						$MacCASOutreach$graphicsvg$GraphicSVG$move,
+						_Utils_Tuple2(
+							-112,
+							(-63) - (20 * $author$project$PythagoreanIdentities$getIndexFromStep(step))),
+						A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+							_Utils_eq(answer, $author$project$PythagoreanIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$blank : (_Utils_eq(answer, $author$project$PythagoreanIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$white : $MacCASOutreach$graphicsvg$GraphicSVG$blank),
+							$MacCASOutreach$graphicsvg$GraphicSVG$text('Next'))))
+				]));
+	});
+var $author$project$PythagoreanIdentities$solutionStr = function (question) {
+	switch (question.$) {
+		case 'Question1':
+			return _List_fromArray(
+				['Step 1: sin y(cos^2(y)-1)', 'Step 2: sin y(-sin^2(y))', 'Step 3: sin^3(y)']);
+		case 'Question2':
+			return _List_fromArray(
+				['Step 1: 1+cot^2(y)-cot(y)-3', 'Step 2: cot^2(y)-cot(y)-2', 'Step 3: (cot(y)-2)*(cot(y)+1)']);
+		case 'Question3':
+			return _List_fromArray(
+				['Step 1: 1/sin^2(y)', 'Step 2: csc^2(y)']);
+		case 'Question4':
+			return _List_fromArray(
+				['Step 1: sin^2(y)/(cos(y)sin(y))', 'Step 2: sin(y)/cos(y)', 'Step 3: tan(y)']);
+		default:
+			return _List_fromArray(
+				['Step 1: (sin(2y)/2)+(cos(y)*cot(2*y)*sin(y))', 'Step 2: (sin(2y)/2)+(sin(2y)*cot(2y))/2', 'Step 3: (sin(2y)+sin(2y)cot(2y))/2']);
+	}
+};
+var $author$project$PythagoreanIdentities$solutionText = F2(
+	function (step, lst) {
+		return $MacCASOutreach$graphicsvg$GraphicSVG$group(
+			A2(
+				$elm$core$List$indexedMap,
+				F2(
+					function (idx, line) {
+						return A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$move,
+							_Utils_Tuple2(-130, 75 - (20 * idx)),
+							A2(
+								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+								$MacCASOutreach$graphicsvg$GraphicSVG$purple,
+								A2(
+									$MacCASOutreach$graphicsvg$GraphicSVG$size,
+									12,
+									$MacCASOutreach$graphicsvg$GraphicSVG$text(line))));
+					}),
+				A2(
+					$elm$core$List$take,
+					$author$project$PythagoreanIdentities$getIndexFromStep(step),
+					lst)));
+	});
+var $author$project$PythagoreanIdentities$solutionSection = F2(
+	function (question, step) {
+		return A2(
+			$author$project$PythagoreanIdentities$solutionText,
+			step,
+			$author$project$PythagoreanIdentities$solutionStr(question));
+	});
+var $author$project$PythagoreanIdentities$view = function (model) {
+	return _Utils_ap(
+		_List_fromArray(
+			[
+				A2(
+				$MacCASOutreach$graphicsvg$GraphicSVG$move,
+				_Utils_Tuple2(55, 0),
+				A3(
+					$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
+					$MacCASOutreach$graphicsvg$GraphicSVG$solid(2),
+					$MacCASOutreach$graphicsvg$GraphicSVG$purple,
+					A2(
+						$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+						$MacCASOutreach$graphicsvg$GraphicSVG$blank,
+						A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 400, 290)))),
+				A2(
+				$MacCASOutreach$graphicsvg$GraphicSVG$move,
+				_Utils_Tuple2(20, 120),
+				A2(
+					$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+					$MacCASOutreach$graphicsvg$GraphicSVG$purple,
+					$MacCASOutreach$graphicsvg$GraphicSVG$bold(
+						A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$size,
+							16,
+							$MacCASOutreach$graphicsvg$GraphicSVG$text(
+								$author$project$PythagoreanIdentities$questionTitleStr(model.question)))))),
+				A2(
+				$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
+				$author$project$PythagoreanIdentities$NextQuestion,
+				A2(
+					$MacCASOutreach$graphicsvg$GraphicSVG$move,
+					_Utils_Tuple2(150, 125),
+					A2(
+						$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+						A3($MacCASOutreach$graphicsvg$GraphicSVG$rgb, 230, 125, 50),
+						$MacCASOutreach$graphicsvg$GraphicSVG$triangle(8)))),
+				A2(
+				$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
+				$author$project$PythagoreanIdentities$PreviousQuestion,
+				A2(
+					$MacCASOutreach$graphicsvg$GraphicSVG$move,
+					_Utils_Tuple2(-50, 125),
+					A2(
+						$MacCASOutreach$graphicsvg$GraphicSVG$rotate,
+						$elm$core$Basics$degrees(-60),
+						A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+							A3($MacCASOutreach$graphicsvg$GraphicSVG$rgb, 230, 125, 50),
+							$MacCASOutreach$graphicsvg$GraphicSVG$triangle(8))))),
+				A2(
+				$MacCASOutreach$graphicsvg$GraphicSVG$move,
+				_Utils_Tuple2(-130, 95),
+				A2(
+					$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+					$MacCASOutreach$graphicsvg$GraphicSVG$purple,
+					$MacCASOutreach$graphicsvg$GraphicSVG$bold(
+						A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$size,
+							12,
+							$MacCASOutreach$graphicsvg$GraphicSVG$text(
+								$author$project$PythagoreanIdentities$questionStr(model.question)))))),
+				A3($author$project$PythagoreanIdentities$resultsSection, model.question, model.step, model.answer)
+			]),
+		_Utils_ap(
+			_List_fromArray(
+				[
+					A2($author$project$PythagoreanIdentities$solutionSection, model.question, model.step)
+				]),
+			_Utils_ap(
+				_List_fromArray(
+					[
+						A2($author$project$PythagoreanIdentities$optionsSection, model.question, model.step)
+					]),
+				_Utils_ap(
+					_List_fromArray(
+						[
+							$MacCASOutreach$graphicsvg$GraphicSVG$group(
+							_List_fromArray(
+								[
+									A2(
+									$MacCASOutreach$graphicsvg$GraphicSVG$notifyLeave,
+									$author$project$PythagoreanIdentities$ExitHint,
+									A2(
+										$MacCASOutreach$graphicsvg$GraphicSVG$notifyEnter,
+										A2($author$project$PythagoreanIdentities$ClickedHint, model.question, model.step),
+										A2(
+											$MacCASOutreach$graphicsvg$GraphicSVG$move,
+											_Utils_Tuple2(234, 125),
+											A2(
+												$MacCASOutreach$graphicsvg$GraphicSVG$makeTransparent,
+												0.75,
+												A3(
+													$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
+													$MacCASOutreach$graphicsvg$GraphicSVG$solid(3),
+													$MacCASOutreach$graphicsvg$GraphicSVG$purple,
+													A2(
+														$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+														$MacCASOutreach$graphicsvg$GraphicSVG$blank,
+														$MacCASOutreach$graphicsvg$GraphicSVG$circle(12))))))),
+									A2(
+									$MacCASOutreach$graphicsvg$GraphicSVG$notifyLeave,
+									$author$project$PythagoreanIdentities$ExitHint,
+									A2(
+										$MacCASOutreach$graphicsvg$GraphicSVG$notifyEnter,
+										A2($author$project$PythagoreanIdentities$ClickedHint, model.question, model.step),
+										A2(
+											$MacCASOutreach$graphicsvg$GraphicSVG$move,
+											_Utils_Tuple2(228, 118),
+											A2(
+												$MacCASOutreach$graphicsvg$GraphicSVG$makeTransparent,
+												0.75,
+												A2(
+													$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+													$MacCASOutreach$graphicsvg$GraphicSVG$purple,
+													A2(
+														$MacCASOutreach$graphicsvg$GraphicSVG$size,
+														20,
+														$MacCASOutreach$graphicsvg$GraphicSVG$sansserif(
+															$MacCASOutreach$graphicsvg$GraphicSVG$bold(
+																$MacCASOutreach$graphicsvg$GraphicSVG$text('?')))))))))
+								]))
+						]),
+					function () {
+						var _v0 = model.hintState;
+						if (_v0.$ === 'PopUp') {
+							var question = _v0.a;
+							var step = _v0.b;
+							return _List_fromArray(
+								[
+									A2($author$project$PythagoreanIdentities$hintCard, question, step)
+								]);
+						} else {
+							var otherwise = _v0;
+							return _List_Nil;
+						}
+					}()))));
 };
 var $author$project$ReciprocalIdentities$GoToQuestion1 = {$: 'GoToQuestion1'};
 var $author$project$ReciprocalIdentities$GoToQuestion2 = {$: 'GoToQuestion2'};

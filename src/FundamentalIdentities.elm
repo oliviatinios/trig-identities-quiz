@@ -89,8 +89,8 @@ update msg model =
                 , step = Step1
                 , question =
                     case model.question of
+                        Question1 -> Question5
                         Question2 -> Question1
-                        Question1 -> Question1
                         Question3 -> Question2
                         Question4 -> Question3
                         Question5 -> Question4

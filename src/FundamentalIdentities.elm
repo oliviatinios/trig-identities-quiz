@@ -154,13 +154,13 @@ stepStr step = case step of
 
             
 solutionStr question = case question of
-                Question1 -> [ "Step 1: (sin y / cos y) * (1 / sin y)"
-                             , "Step 2: 1 / cos y"
+                Question1 -> [ "Step 1: LHS = (sin y / cos y) * (1 / sin y)"
+                             , "Step 2: LHS = 1 / cos y"
                              ]
-                Question2 -> [ "Step 1: sin y * (1 + cot2 y)"
-                             , "Step 2: sin y * (csc2 y)"
-                             , "Step 3: (sin y / sin2 y)"
-                             , "Step 4: 1 / sin y"
+                Question2 -> [ "Step 1: LHS = sin y * (1 + cot2 y)"
+                             , "Step 2: LHS = sin y * (csc2 y)"
+                             , "Step 3: LHS = (sin y / sin2 y)"
+                             , "Step 4: LHS = 1 / sin y"
                              ]
 
 
@@ -174,45 +174,45 @@ solutionSection question step = solutionText step (solutionStr question)
 
 
 optionsStr question step = case (question, step) of
-                (Question1, Step1) -> [ ( "a) tan y * (sin y / cos y)", WrongAnswer)
-                                      , ( "b) tan y * (cos y / sin y)", WrongAnswer)
-                                      , ("c) (cos y / sin y) * (1 / sin y)", WrongAnswer)
-                                      , ("d) (sin y / cos y) * (1 / sin y)", RightAnswer)
+                (Question1, Step1) -> [ ( "a) LHS = tan y * (sin y / cos y)", WrongAnswer)
+                                      , ( "b) LHS = tan y * (cos y / sin y)", WrongAnswer)
+                                      , ( "c) LHS = (cos y / sin y) * (1 / sin y)", WrongAnswer)
+                                      , ( "d) LHS = (sin y / cos y) * (1 / sin y)", RightAnswer)
                                       ]
-                (Question1, Step2) -> [ ( "a) sin y / cos y", WrongAnswer)
-                                      , ( "b) 1 / cos y", RightAnswer)
-                                      , ( "c) 1 / sin y", WrongAnswer)
-                                      , ( "d) (sin y * cos y)/(cos2 y * sin y)", WrongAnswer)
+                (Question1, Step2) -> [ ( "a) LHS = sin y / cos y", WrongAnswer)
+                                      , ( "b) LHS = 1 / cos y", RightAnswer)
+                                      , ( "c) LHS = 1 / sin y", WrongAnswer)
+                                      , ( "d) LHS = (sin y * cos y)/(cos2 y * sin y)", WrongAnswer)
                                       ]
-                (Question1, Step3) -> [ ( "a) sec y", RightAnswer)
-                                      , ( "b) tan y", WrongAnswer)
-                                      , ( "c) cos y", WrongAnswer)
-                                      , ( "d) sin y * cos y", WrongAnswer)
+                (Question1, Step3) -> [ ( "a) LHS = sec y", RightAnswer)
+                                      , ( "b) LHS = tan y", WrongAnswer)
+                                      , ( "c) LHS = cos y", WrongAnswer)
+                                      , ( "d) LHS = sin y * cos y", WrongAnswer)
                                       ]
-                (Question2, Step1) -> [ ( "a) sin y + sin y * (1 / tan2 y)", WrongAnswer)
-                                      , ( "b) sin y * (1 + cot2 y)", RightAnswer)
-                                      , ( "c) sin y + (sin y / tan2 y)", WrongAnswer)
-                                      , ( "d) sin y + ( (sin y * cos2 y) / sin2 y", WrongAnswer)
+                (Question2, Step1) -> [ ( "a) LHS = sin y + sin y * (1 / tan2 y)", WrongAnswer)
+                                      , ( "b) LHS = sin y * (1 + cot2 y)", RightAnswer)
+                                      , ( "c) LHS = sin y + (sin y / tan2 y)", WrongAnswer)
+                                      , ( "d) LHS = sin y + ( (sin y * cos2 y) / sin2 y", WrongAnswer)
                                       ]
-                (Question2, Step2) -> [ ( "a) sin y * (1 + (cos2 y / sin2 y))", WrongAnswer)
-                                      , ( "b) sin y * (1 + (sin2 y / cos2 y))", WrongAnswer)
-                                      , ( "c) sin y * (csc2 y)", RightAnswer)
-                                      , ( "d) sin y * (cos2 y)", WrongAnswer)
+                (Question2, Step2) -> [ ( "a) LHS = sin y * (1 + (cos2 y / sin2 y))", WrongAnswer)
+                                      , ( "b) LHS = sin y * (1 + (sin2 y / cos2 y))", WrongAnswer)
+                                      , ( "c) LHS = sin y * (csc2 y)", RightAnswer)
+                                      , ( "d) LHS = sin y * (cos2 y)", WrongAnswer)
                                       ]
-                (Question2, Step3) -> [ ( "a) sin y * (1 / cos2 y)", WrongAnswer)
-                                      , ( "b) sin y * (cos2 y / sin2 y)", WrongAnswer)
-                                      , ( "c) (sin2 y / cos y)", WrongAnswer)
-                                      , ( "d) (sin y / sin2 y)", RightAnswer)
+                (Question2, Step3) -> [ ( "a) LHS = sin y * (1 / cos2 y)", WrongAnswer)
+                                      , ( "b) LHS = sin y * (cos2 y / sin2 y)", WrongAnswer)
+                                      , ( "c) LHS = (sin2 y / cos y)", WrongAnswer)
+                                      , ( "d) LHS = (sin y / sin2 y)", RightAnswer)
                                       ]
-                (Question2, Step4) -> [ ( "a) 1 / sin y", RightAnswer)
-                                      , ( "b) sin y / (1 + tan2 y)", WrongAnswer)
-                                      , ( "c) (1 + sin y) / sin y", WrongAnswer)
-                                      , ( "d) 1 / sin2 y", WrongAnswer)
+                (Question2, Step4) -> [ ( "a) LHS = 1 / sin y", RightAnswer)
+                                      , ( "b) LHS = sin y / (1 + tan2 y)", WrongAnswer)
+                                      , ( "c) LHS = (1 + sin y) / sin y", WrongAnswer)
+                                      , ( "d) LHS = 1 / sin2 y", WrongAnswer)
                                       ]
-                (Question2, Step5) -> [ ( "a) cos y / sin2 y", WrongAnswer)
-                                      , ( "b) csc y", RightAnswer)
-                                      , ( "c) tan y / (sin y * tan y)", WrongAnswer)
-                                      , ( "d) cot y", WrongAnswer)
+                (Question2, Step5) -> [ ( "a) LHS = cos y / sin2 y", WrongAnswer)
+                                      , ( "b) LHS = csc y", RightAnswer)
+                                      , ( "c) LHS = tan y / (sin y * tan y)", WrongAnswer)
+                                      , ( "d) LHS = cot y", WrongAnswer)
                                       ]
                 otherwise -> []
 

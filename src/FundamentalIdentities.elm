@@ -15,6 +15,10 @@ init =
     , step = Step1
     , question = Question1
     , hintState = NoPopUp
+    , optionColourA = orange
+    , optionColourB = orange
+    , optionColourC = orange
+    , optionColourD = orange
     }
 
 type HintState = NoPopUp | PopUp Questions Steps
@@ -101,6 +105,9 @@ update msg model =
 
         ExitHint -> {model | hintState = NoPopUp }
 
+        ChangeOptionColour t -> 
+            t model
+
 --         -- ran out of room for notifications, but left them here for a possible future improvement
 --         Notif notif ->
 --             { model | notify = notif }
@@ -118,7 +125,7 @@ view model =
     , resultsSection model.question model.step model.answer
     ]
     ++ [solutionSection model.question model.step]
-    ++ [optionsSection model.question model.step]
+    ++ [optionsSection model.question model.step model.optionColourA model.optionColourB model.optionColourC model.optionColourD]
     ++ [ group
             [ circle 12 |> filled blank |> addOutline (solid 3) orange |> makeTransparent 0.75 |> move ( 234, 125 ) |> notifyEnter (ClickedHint model.question model.step) |> notifyLeave ExitHint
             , text "?" |> bold |> sansserif |> size 20 |> filled orange |> makeTransparent 0.75 |> move ( 228, 118 ) |> notifyEnter (ClickedHint model.question model.step) |> notifyLeave ExitHint ]
@@ -283,19 +290,39 @@ optionsStr question step = case (question, step) of
                 otherwise -> []
 
 
-optionsText lst = group (List.indexedMap (\idx tuple -> text (Tuple.first tuple)
-                                                            |> size 12
-                                                            |> filled orange
-                                                            |> move ( -130, 45-20*(Basics.toFloat idx))
-                                                            |> notifyTap (Tuple.second tuple) ) lst)
+-- this could be improved
+getOptionColour idx optionColourA optionColourB optionColourC optionColourD = case idx of
+                                                                                0 -> optionColourA
+                                                                                1 -> optionColourB
+                                                                                2 -> optionColourC
+                                                                                3 -> optionColourD
+                                                                                otherwise -> optionColourA
 
 
-optionsSection question step = group [ text (stepStr step)
-                                            |> size 12
-                                            |> filled orange
-                                            |> move ( -130, 65 )
-                                     , optionsText (optionsStr question step)
-                                     ] |> move ( 0, -20*(Basics.toFloat(getIndexFromStep step)) )
+-- there's probably a more efficient way of doing this
+updateOptionColour idx colour = case idx of
+                                    0 -> ChangeOptionColour (\m -> { m | optionColourA = colour })
+                                    1 -> ChangeOptionColour (\m -> { m | optionColourB = colour })
+                                    2 -> ChangeOptionColour (\m -> { m | optionColourC = colour })
+                                    3 -> ChangeOptionColour (\m -> { m | optionColourD = colour })
+                                    otherwise -> ChangeOptionColour (\m -> { m | optionColourA = colour })
+
+
+optionsText lst optionColourA optionColourB optionColourC optionColourD = group (List.indexedMap (\idx tuple -> text (Tuple.first tuple)
+                                                                                                                    |> size 12
+                                                                                                                    |> filled (getOptionColour idx optionColourA optionColourB optionColourC optionColourD)
+                                                                                                                    |> move ( -130, 45-20*(Basics.toFloat idx))
+                                                                                                                    |> notifyEnter (updateOptionColour idx lightOrange)
+                                                                                                                    |> notifyLeave (updateOptionColour idx orange)
+                                                                                                                    |> notifyTap (Tuple.second tuple) ) lst)
+
+
+optionsSection question step optionColourA optionColourB optionColourC optionColourD = group [ text (stepStr step)
+                                                                                                    |> size 12
+                                                                                                    |> filled orange
+                                                                                                    |> move ( -130, 65 )
+                                                                                                , optionsText (optionsStr question step) optionColourA optionColourB optionColourC optionColourD
+                                                                                                ] |> move ( 0, -20*(Basics.toFloat(getIndexFromStep step)) )
 
 
 -- helper function, this could probably be improved by putting the steps in a list
@@ -412,6 +439,7 @@ type Msg m
     | PreviousQuestion
     | ClickedHint Questions Steps
     | ExitHint
+    | ChangeOptionColour (m -> m)
 
 
 type Notifications

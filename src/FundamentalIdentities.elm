@@ -210,7 +210,7 @@ questionTitleStr question = case question of
 
 questionStr question = case question of
                 Question1 -> "Prove that tan y / sin y = sec y"
-                Question2 -> "Prove that sin y + sin y * cot2 y = cscy"
+                Question2 -> "Prove that sin y + sin y * cot^2 y = cscy"
                 Question3 -> "Prove that cot y / csc y = cos y"
                 Question4 -> "Prove that cot(y)+tan(y)=sec(y)*csc(y)"
                 Question5 -> "Prove that (1-sin(y))(1+csc(y))=cos(y)*cot(y)"
@@ -450,23 +450,23 @@ resultsSection question step answer option =
 
 
 hintStr question step = case (question, step) of
-                (Question1, Step1) -> ["Express", "with", "sine", "and", "cosine" ]
-                (Question1, Step2) -> ["Use", "the" , "relationship", "between secant", "and cosine", "to simplify"]
-                (Question1, Step3) -> ["Simplify", "the" , "derived", "result", "from", "step 2"]
+                (Question1, Step1) -> ["Express", "tan", "in", "terms","of","sine", "and", "cosine" ]
+                (Question1, Step2) -> ["Reduce", "the" , "fraction", "obtained in", "Step1"]
+                (Question1, Step3) -> ["Express", "Step2" , "in", "terms", "of", "sec"]
                 (Question2, Step1) -> ["Take the", "comon", "denominator", "sine" ]
-                (Question2, Step2) -> ["Express", "as" , "secant"]
-                (Question2, Step3) -> ["Express", "as" , "sine"]
-                (Question2, Step4) -> ["Simplify"]
+                (Question2, Step2) -> ["Use the equation", "cot^2 y=-1+csc^2 y" , "to simplify", "Step1"]
+                (Question2, Step3) -> ["Express", "csc as", "sine and", "simplify"]
+                (Question2, Step4) -> ["Reduce", "the fraction", "obtained in", "Step3"]
                 (Question2, Step5) -> ["Express", "as" , "cosecant"]
-                (Question3, Step1) -> ["Express", "with", "sine", "and", "cosine" ]
-                (Question3, Step2) -> ["Simplify", "cot"]
-                (Question3, Step3) -> ["Simplify", "csc"]
-                (Question4, Step1) -> ["Express", "with", "sine", "and", "cosine" ]
-                (Question4, Step2) -> ["Add the", "terms in", "step 1" ]
-                (Question4, Step3) -> ["Use", "sin^2y+cos^2y=1"]
-                (Question5, Step1) -> ["Express", "with", "sine", "and", "cosine" ]
-                (Question5, Step2) -> ["Simplify", "terms in", "step 1" ]
-                (Question5, Step3) -> ["Use", "1-sin^2(y)=cos^2(y)"]
+                (Question3, Step1) -> ["Use", "cot(y)", "=", "cos(y)/sin(y)" ]
+                (Question3, Step2) -> ["Use", "csc(y)=1/sin(y)"]
+                (Question3, Step3) -> ["Reduce the", "fractions obtained", "in Step2"]
+                (Question4, Step1) -> ["Use tan(y)=sin(y)/cos(y)", "and", "cot(y)=cos(y)/sin(y)"]
+                (Question4, Step2) -> ["Add the", "terms obtained", "Step1" ]
+                (Question4, Step3) -> ["Use", "sin^2y+cos^2y=1", "to simplify", "Step2"]
+                (Question5, Step1) -> ["Use", "csc(y)=1/sin(y)", "to", "simplify" ]
+                (Question5, Step2) -> ["Simplify", "the fraction", "obtained in", "Step1" ]
+                (Question5, Step3) -> ["Use", "1-sin^2(y)=cos^2(y)", "to simplify Step2"]
                 otherwise -> []
 
 explainationStr question step option = case (question, step) of

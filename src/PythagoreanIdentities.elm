@@ -211,7 +211,7 @@ optionsStr question step = case (question, step) of
                                       , ( "c) 2 / sin y", WrongAnswer)
                                       , ( "d) (cos2 y * sin y)", WrongAnswer)
                                       ]
-                (Question1, Step3) -> [ ( "a) sin^3(y)", RightAnswer)
+                (Question1, Step3) -> [ ( "a) -sin^3(y)", RightAnswer)
                                       , ( "b) tan y", WrongAnswer)
                                       , ( "c) cos y", WrongAnswer)
                                       , ( "d) sin y", WrongAnswer)
@@ -373,20 +373,20 @@ resultsSection question step answer =
 
 
 hintStr question step = case (question, step) of
-                (Question1, Step1) -> ["Divide", "by", "sine" ]
-                (Question1, Step2) -> ["Use" , "sin^x+cos^x=1"]
+                (Question1, Step1) -> ["Factor out", "sine"]
+                (Question1, Step2) -> ["Use" , "sin^x+cos^x=1", "to simplify Step1"]
                 (Question1, Step3) -> ["Multiply", "the" , "terms", "in", "step 1"]
                 (Question2, Step1) -> ["Use", "1+cot^2(x)=csc^2(x)" ]
-                (Question2, Step2) -> ["Simplify", "the" , "terms"]
+                (Question2, Step2) -> ["Simplify", "the" , "constants in Step1"]
                 (Question2, Step3) -> ["Express", "in form" , "of factors"]
                 (Question3, Step1) -> ["Use", "1-cos^2(x)=sin^2(x)" ]
                 (Question3, Step2) -> ["Simplify", "1/(sin(x)) = csc(x)"]
                 (Question4, Step1) -> ["Use" , "sin^x+cos^x=1" ]
-                (Question4, Step2) -> ["Refine"]
-                (Question4, Step3) -> ["Express in terms of tangent"]
+                (Question4, Step2) -> ["Reduce Step1", "to one", "term"]
+                (Question4, Step3) -> ["Use tan(y)=sin(y)/cos(y)"]
                 (Question5, Step1) -> ["Use", "cos(x)*sin(x) =", "sin(2*x)/2" ]
-                (Question5, Step2) -> ["Simplify" ]
-                (Question5, Step3) -> ["Add", "the terms", "in step 3"]
+                (Question5, Step2) -> ["Reduce","fraction obtained", "in Step1" ]
+                (Question5, Step3) -> ["Add", "the terms", "in Step2", "and simplify further"]
                 otherwise -> []
 
 
@@ -398,7 +398,7 @@ hintText lst =  group (List.indexedMap (\idx line -> text line
                                                         |> move (0, 14-7*(Basics.toFloat idx)) ) lst)
 
 
-hintCard question step = group [rect 90 90 |> filled black |> makeTransparent 0.3 |> addOutline (solid 0.3) black
+hintCard question step = group [rect 150 150 |> filled white |> makeTransparent 0.8 |> addOutline (solid 0.3) black
                                , hintText (hintStr question step)
                                ] |> move ( 60, 0 )
 

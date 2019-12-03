@@ -1,4 +1,4 @@
-module OtherFormulas exposing (..)
+module Summary exposing (..)
 
 import GraphicSVG exposing (..)
 import GraphicSVG.EllieApp exposing (..)

@@ -6,7 +6,7 @@ import GraphicSVG.EllieApp exposing (..)
 import List
 import ReciprocalIdentities
 import FundamentalIdentities
-import OtherFormulas exposing (..)
+import Summary exposing (..)
 import PythagoreanIdentities
 
 
@@ -26,7 +26,7 @@ type Pages
     | PythagoreanIdentities
     | ReciprocalIdentities
     | ProductIdentities
-    | OtherFormulas
+    | Summary
 
 
 init =
@@ -35,7 +35,7 @@ init =
     , model2 = PythagoreanIdentities.init
     , model3 = ReciprocalIdentities.init
     , model4 = ProductIdentities.init
-    , model5 = OtherFormulas.init
+    , model5 = Summary.init
     , oneSat = 0
     , twoSat = 0
     , threeSat = 0
@@ -91,7 +91,7 @@ type Msg m1 m2 m3 m4 m5
     | Msg2 (PythagoreanIdentities.Msg m2)
     | Msg3 (ReciprocalIdentities.Msg m3)
     | Msg4 (ProductIdentities.Msg m4)
-    | Msg5 (OtherFormulas.Msg m5)
+    | Msg5 (Summary.Msg m5)
     | Goto1
     | Goto2
     | Goto3
@@ -131,8 +131,8 @@ view model =
             ProductIdentities ->
                 List.map (map Msg4) (ProductIdentities.view model.model4)
 
-            OtherFormulas ->
-                List.map (map Msg5) (OtherFormulas.view model.model5)
+            Summary ->
+                List.map (map Msg5) (Summary.view model.model5)
 
         )
             ++ [ rect 200 70 |> filled blank |> move ( 0, -190 ) |> notifyMouseMoveAt MoveInRect ]
@@ -220,7 +220,7 @@ view model =
                     [ rectangle 150 50
                         |> filled (fiveColour model)
                         |> addOutline (solid 2)
-                            (if model.page == OtherFormulas then
+                            (if model.page == Summary then
                                 darkRed
 
                              else if model.fiveSat == 0 then
@@ -308,7 +308,7 @@ update msg model =
             { model
                 | fiveSat =
                     case model.page of
-                        OtherFormulas ->
+                        Summary ->
                             model.fiveSat
 
                         _ ->
@@ -357,7 +357,7 @@ update msg model =
 
                         Goto5 ->
                             { model
-                                | page = OtherFormulas
+                                | page = Summary
                                 , twoSat = 0
                                 , threeSat = 0
                                 , fourSat = 0
@@ -424,7 +424,7 @@ update msg model =
 
                         Goto5 ->
                             { model
-                                | page = OtherFormulas
+                                | page = Summary
                                 , twoSat = 0
                                 , threeSat = 0
                                 , fourSat = 0
@@ -492,7 +492,7 @@ update msg model =
 
                         Goto5 ->
                             { model
-                                | page = OtherFormulas
+                                | page = Summary
                                 , twoSat = 0
                                 , threeSat = 0
                                 , fourSat = 0
@@ -560,7 +560,7 @@ update msg model =
 
                         Goto5 ->
                             { model
-                                | page = OtherFormulas
+                                | page = Summary
                                 , twoSat = 0
                                 , threeSat = 0
                                 , fourSat = 0
@@ -628,7 +628,7 @@ update msg model =
 
                         Goto5 ->
                             { model
-                                | page = OtherFormulas
+                                | page = Summary
                                 , twoSat = 0
                                 , threeSat = 0
                                 , fourSat = 0
@@ -638,10 +638,10 @@ update msg model =
                         _ ->
                             model
 
-                OtherFormulas ->
+                Summary ->
                     case msg of
                         Tick f g ->
-                            { model | model5 = OtherFormulas.update (OtherFormulas.Tick f g) model.model5 }
+                            { model | model5 = Summary.update (Summary.Tick f g) model.model5 }
 
                         Msg1 _ ->
                             model
@@ -656,7 +656,7 @@ update msg model =
                             model
 
                         Msg5 m5 ->
-                            { model | model5 = OtherFormulas.update m5 model.model5 }
+                            { model | model5 = Summary.update m5 model.model5 }
 
                         Goto1 ->
                             { model
@@ -696,7 +696,7 @@ update msg model =
 
                         Goto5 ->
                             { model
-                                | page = OtherFormulas
+                                | page = Summary
                                 , twoSat = 0
                                 , threeSat = 0
                                 , fourSat = 0

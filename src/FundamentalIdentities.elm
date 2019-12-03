@@ -15,13 +15,18 @@ init =
     , step = Step1
     , question = Question1
     , hintState = NoPopUp
+    , choiceState = NoPopUpChoice
     , optionColourA = orange
     , optionColourB = orange
     , optionColourC = orange
     , optionColourD = orange
+    , option = Option1
+    , state = None
     }
 
 type HintState = NoPopUp | PopUp Questions Steps
+
+type ChoiceState = NoPopUpChoice | PopUpChoice Questions Steps Options
 
 type Choices = Default | Incorrect | Correct
 
@@ -39,6 +44,16 @@ type Questions
     | Question4
     | Question5
 
+type Options
+    = Option1
+    | Option2
+    | Option3
+    | RightOption
+
+type State
+    = None
+    | Hint
+    | Choice
 
 -- change you app's state based on your new messages
 update msg model =
@@ -52,14 +67,28 @@ update msg model =
         Notif notif ->
             { model | notify = notif }
 
-        WrongAnswer
+        WrongAnswer1
             -> { model
                 | answer = Incorrect
+                , option = Option1
+                }
+
+        WrongAnswer2
+            -> { model
+                | answer = Incorrect
+                , option = Option2
+                }
+
+        WrongAnswer3
+            -> { model
+                | answer = Incorrect
+                , option = Option3
                 }
 
         RightAnswer
             -> { model
                 | answer = Correct
+                , option = RightOption
                 }
 
         NextStep
@@ -101,11 +130,31 @@ update msg model =
                         -- Add to this if more questions are added
                 }
 
-        ClickedHint question step -> {model | hintState = PopUp question step }
+        ClickedHint question step
+            -> {model
+                | state = Hint
+                , hintState = PopUp question step
+                }
 
-        ExitHint -> {model | hintState = NoPopUp }
+        ClickedChoice question step option
+            -> {model
+                | state = Choice
+                , choiceState = PopUpChoice question step option
+                }
 
-        ChangeOptionColour t -> 
+        ExitHint
+            -> {model
+                | state = None
+                , hintState = NoPopUp
+                }
+
+        ExitChoice
+            -> {model
+                | state = None
+                , choiceState = NoPopUpChoice
+                }
+
+        ChangeOptionColour t ->
             t model
 
 --         -- ran out of room for notifications, but left them here for a possible future improvement
@@ -122,7 +171,7 @@ view model =
     , triangle 8|> filled (rgb 230 125 50) |> move ( 150, 125 ) |> notifyTap NextQuestion
     , triangle 8|> filled (rgb 230 125 50) |> rotate (degrees -60) |> move ( -50, 125 ) |> notifyTap PreviousQuestion
     , text (questionStr model.question) |> size 12 |> bold |> filled orange |> move ( -130, 95 )
-    , resultsSection model.question model.step model.answer
+    , resultsSection model.question model.step model.answer model.option
     ]
     ++ [solutionSection model.question model.step]
     ++ [optionsSection model.question model.step model.optionColourA model.optionColourB model.optionColourC model.optionColourD]
@@ -131,9 +180,15 @@ view model =
             , text "?" |> bold |> sansserif |> size 20 |> filled orange |> makeTransparent 0.75 |> move ( 228, 118 ) |> notifyEnter (ClickedHint model.question model.step) |> notifyLeave ExitHint ]
        ]
     ++
-        case model.hintState of
-            PopUp question step -> [hintCard question step]
+        case model.state of
+            Hint -> case model.hintState of
+                        PopUp question step -> [hintCard question step]
+                        otherwise -> []
+            Choice -> case model.choiceState of
+                        PopUpChoice question step option -> [choiceCard question step option]
+                        otherwise -> []
             otherwise -> []
+
 
 
 -- helper function
@@ -202,90 +257,90 @@ solutionSection question step = solutionText step (solutionStr question)
 
 
 optionsStr question step = case (question, step) of
-                (Question1, Step1) -> [ ( "a) LHS = tan y * (sin y / cos y)", WrongAnswer)
-                                      , ( "b) LHS = tan y * (cos y / sin y)", WrongAnswer)
-                                      , ( "c) LHS = (cos y / sin y) * (1 / sin y)", WrongAnswer)
+                (Question1, Step1) -> [ ( "a) LHS = tan y * (sin y / cos y)", WrongAnswer1)
+                                      , ( "b) LHS = tan y * (cos y / sin y)", WrongAnswer2)
+                                      , ( "c) LHS = (cos y / sin y) * (1 / sin y)", WrongAnswer3)
                                       , ( "d) LHS = (sin y / cos y) * (1 / sin y)", RightAnswer)
                                       ]
-                (Question1, Step2) -> [ ( "a) LHS = sin y / cos y", WrongAnswer)
+                (Question1, Step2) -> [ ( "a) LHS = sin y / cos y", WrongAnswer1)
                                       , ( "b) LHS = 1 / cos y", RightAnswer)
-                                      , ( "c) LHS = 1 / sin y", WrongAnswer)
-                                      , ( "d) LHS = (sin y * cos y)/(cos2 y * sin y)", WrongAnswer)
+                                      , ( "c) LHS = 1 / sin y", WrongAnswer2)
+                                      , ( "d) LHS = (sin y * cos y)/(cos2 y * sin y)", WrongAnswer3)
                                       ]
                 (Question1, Step3) -> [ ( "a) LHS = sec y", RightAnswer)
-                                      , ( "b) LHS = tan y", WrongAnswer)
-                                      , ( "c) LHS = cos y", WrongAnswer)
-                                      , ( "d) LHS = sin y * cos y", WrongAnswer)
+                                      , ( "b) LHS = tan y", WrongAnswer1)
+                                      , ( "c) LHS = cos y", WrongAnswer2)
+                                      , ( "d) LHS = sin y * cos y", WrongAnswer3)
                                       ]
-                (Question2, Step1) -> [ ( "a) LHS = sin y + sin y * (1 / tan2 y)", WrongAnswer)
-                                      , ( "b) LHS = sin y * (1 + cot2 y)", RightAnswer)
-                                      , ( "c) LHS = sin y + (sin y / tan2 y)", WrongAnswer)
-                                      , ( "d) LHS = sin y + ( (sin y * cos2 y) / sin2 y", WrongAnswer)
+                (Question2, Step1) -> [ ( "a) LHS = sin y + sin y * (1 / tan2 y)", WrongAnswer1)
+                                      , ( "b) LHS = sin y * (1 + cot^2 y)", RightAnswer)
+                                      , ( "c) LHS = sin y + (sin y / tan2 y)", WrongAnswer2)
+                                      , ( "d) LHS = sin y + ( (sin y * cos2 y) / sin2 y", WrongAnswer3)
                                       ]
-                (Question2, Step2) -> [ ( "a) LHS = sin y * (1 + (cos2 y / sin2 y))", WrongAnswer)
-                                      , ( "b) LHS = sin y * (1 + (sin2 y / cos2 y))", WrongAnswer)
-                                      , ( "c) LHS = sin y * (csc2 y)", RightAnswer)
-                                      , ( "d) LHS = sin y * (cos2 y)", WrongAnswer)
+                (Question2, Step2) -> [ ( "a) LHS = sin y * (1 + (cos2 y / sin2 y))", WrongAnswer1)
+                                      , ( "b) LHS = sin y * (1 + (sin2 y / cos2 y))", WrongAnswer2)
+                                      , ( "c) LHS = sin y * (csc^2 y)", RightAnswer)
+                                      , ( "d) LHS = sin y * (cos^2 y)", WrongAnswer3)
                                       ]
-                (Question2, Step3) -> [ ( "a) LHS = sin y * (1 / cos2 y)", WrongAnswer)
-                                      , ( "b) LHS = sin y * (cos2 y / sin2 y)", WrongAnswer)
-                                      , ( "c) LHS = (sin2 y / cos y)", WrongAnswer)
-                                      , ( "d) LHS = (sin y / sin2 y)", RightAnswer)
+                (Question2, Step3) -> [ ( "a) LHS = sin y * (1 / cos2 y)", WrongAnswer1)
+                                      , ( "b) LHS = sin y * (cos2 y / sin2 y)", WrongAnswer2)
+                                      , ( "c) LHS = (sin2 y / cos y)", WrongAnswer3)
+                                      , ( "d) LHS = (sin y / sin^2 y)", RightAnswer)
                                       ]
-                (Question2, Step4) -> [ ( "a) LHS = 1 / sin y", RightAnswer)
-                                      , ( "b) LHS = sin y / (1 + tan2 y)", WrongAnswer)
-                                      , ( "c) LHS = (1 + sin y) / sin y", WrongAnswer)
-                                      , ( "d) LHS = 1 / sin2 y", WrongAnswer)
+                (Question2, Step4) -> [ ( "a) LHS = 1 / sin y = csc y", RightAnswer)
+                                      , ( "b) LHS = sin y / (1 + tan2 y)=csc y", WrongAnswer1)
+                                      , ( "c) LHS = (1 + sin y) / sin y = csc y", WrongAnswer2)
+                                      , ( "d) LHS = 1 / sin2 y = csc y", WrongAnswer3)
                                       ]
-                (Question2, Step5) -> [ ( "a) LHS = cos y / sin2 y", WrongAnswer)
+                (Question2, Step5) -> [ ( "a) LHS = cos y / sin2 y", WrongAnswer1)
                                       , ( "b) LHS = csc y", RightAnswer)
-                                      , ( "c) LHS = tan y / (sin y * tan y)", WrongAnswer)
-                                      , ( "d) LHS = cot y", WrongAnswer)
+                                      , ( "c) LHS = tan y / (sin y * tan y)", WrongAnswer2)
+                                      , ( "d) LHS = cot y", WrongAnswer3)
                                       ]
-                (Question3, Step1) -> [ ( "a) LHS = cos2 y / sin2 y", WrongAnswer)
+                (Question3, Step1) -> [ ( "a) LHS = cos2 y / sin2 y",  WrongAnswer1)
                                       , ( "b) LHS = (cos(y)/sin(y))/csc(y)", RightAnswer)
-                                      , ( "c) LHS = secy / (tan y * tan y)", WrongAnswer)
-                                      , ( "d) LHS = cot y", WrongAnswer)
+                                      , ( "c) LHS = secy / (tan y * tan y)", WrongAnswer2)
+                                      , ( "d) LHS = cot y", WrongAnswer3)
                                       ]
-                (Question3, Step2) -> [ ( "a) LHS = cos3 y / sin3 y", WrongAnswer)
-                                      , ( "b) LHS = (cos(y)/sin(y))/csc(y)", WrongAnswer)
+                (Question3, Step2) -> [ ( "a) LHS = cos3 y / sin3 y", WrongAnswer1)
+                                      , ( "b) LHS = (cos(y)/sin(y))/csc(y)", WrongAnswer2)
                                       , ( "c) LHS = (cos(y)/sin(y))/(1/sin(y))", RightAnswer)
-                                      , ( "d) LHS = cot y", WrongAnswer)
+                                      , ( "d) LHS = cot y", WrongAnswer3)
                                       ]
-                (Question3, Step3) -> [ ( "a) LHS = cos3 y / sin3 y", WrongAnswer)
-                                      , ( "b) LHS = (cos(y)/sin(y))/csc(y)", WrongAnswer)
+                (Question3, Step3) -> [ ( "a) LHS = cos3 y / sin3 y", WrongAnswer1)
+                                      , ( "b) LHS = (cos(y)/sin(y))/csc(y)", WrongAnswer2)
                                       , ( "c) LHS = cos(y)", RightAnswer)
-                                      , ( "d) LHS = csc y", WrongAnswer)
+                                      , ( "d) LHS = csc y", WrongAnswer3)
                                       ]
-                (Question4, Step1) -> [ ( "a) LHS = cos2 y / sin2 y", WrongAnswer)
-                                      , ( "b) LHS = (cos(y)/sin(y))/csc(y)", WrongAnswer)
+                (Question4, Step1) -> [ ( "a) LHS = cos2 y / sin2 y", WrongAnswer1)
+                                      , ( "b) LHS = (cos(y)/sin(y))/csc(y)", WrongAnswer2)
                                       , ( "c) LHS = (cos(y)/sin(y))+(sin(y)/cos(y))", RightAnswer)
-                                      , ( "d) LHS = cot y", WrongAnswer)
+                                      , ( "d) LHS = cot y", WrongAnswer3)
                                       ]
                 (Question4, Step2) -> [ ( "a) LHS = (cos^2(y)+sin^2(y))/(cos(y)*sin(y))", RightAnswer)
-                                      , ( "b) LHS = (cos(y)/sin(y))/csc(y)", WrongAnswer)
-                                      , ( "c) LHS = cos(y)/(1/sin(y)", WrongAnswer)
-                                      , ( "d) LHS = cot y", WrongAnswer)
+                                      , ( "b) LHS = (cos(y)/sin(y))/csc(y)", WrongAnswer1)
+                                      , ( "c) LHS = cos(y)/(1/sin(y)", WrongAnswer2)
+                                      , ( "d) LHS = cot y", WrongAnswer3)
                                       ]
-                (Question4, Step3) -> [ ( "a) LHS = cos y / sin y", WrongAnswer)
-                                      , ( "b) LHS = (sin(y))/csc(y)", WrongAnswer)
+                (Question4, Step3) -> [ ( "a) LHS = cos y / sin y", WrongAnswer1)
+                                      , ( "b) LHS = (sin(y))/csc(y)", WrongAnswer2)
                                       , ( "c) LHS = 1/(cos(y)*sin(y))", RightAnswer)
-                                      , ( "d) LHS = sec y", WrongAnswer)
+                                      , ( "d) LHS = sec y", WrongAnswer3)
                                       ]
-                (Question5, Step1) -> [ ( "a) LHS =  sin2 y", WrongAnswer)
-                                      , ( "b) LHS =  cos(y)/csc(y)", WrongAnswer)
-                                      , ( "c) LHS = (cos(y)/sin(y))+(sin(y)/cos(y))", WrongAnswer)
+                (Question5, Step1) -> [ ( "a) LHS =  sin2 y", WrongAnswer1)
+                                      , ( "b) LHS =  cos(y)/csc(y)", WrongAnswer2)
+                                      , ( "c) LHS = (cos(y)/sin(y))+(sin(y)/cos(y))", WrongAnswer3)
                                       , ( "d) LHS = (1+(1/sin(y)))(1-(sin(y)))", RightAnswer)
                                       ]
                 (Question5, Step2) -> [ ( "a) LHS = (1+sin(y))*(1-sin(y))/sin(y)", RightAnswer)
-                                      , ( "b) LHS = (cos(y)/sin(y))", WrongAnswer)
-                                      , ( "c) LHS = sin(y)/(1/tan(y)", WrongAnswer)
-                                      , ( "d) LHS = sin y", WrongAnswer)
+                                      , ( "b) LHS = (cos(y)/sin(y))", WrongAnswer1)
+                                      , ( "c) LHS = sin(y)/(1/tan(y)", WrongAnswer2)
+                                      , ( "d) LHS = sin y", WrongAnswer3)
                                       ]
                 (Question5, Step3) -> [ ( "a) LHS = (cos^2(y))/sin(y)", RightAnswer)
-                                      , ( "b) LHS = (sin(y))/csc(y)", WrongAnswer)
-                                      , ( "c) LHS = (cos(y)*sin(y)", WrongAnswer)
-                                      , ( "d) LHS = csc y", WrongAnswer)
+                                      , ( "b) LHS = (sin(y))/csc(y)", WrongAnswer1)
+                                      , ( "c) LHS = (cos(y)*sin(y)", WrongAnswer2)
+                                      , ( "d) LHS = csc y", WrongAnswer3)
                                       ]
                 otherwise -> []
 
@@ -335,7 +390,7 @@ isLastStep question step = case (question, step) of
                 otherwise -> False
 
 
-resultsSection question step answer =
+resultsSection question step answer option =
                 if (isLastStep question step)
                     then group [ text (if answer == Incorrect
                                     then "Incorrect"
@@ -352,39 +407,45 @@ resultsSection question step answer =
                                                 )
                                     |> move ( -130, -40 - 20*(Basics.toFloat(getIndexFromStep step)) )
                                 ]
-                    else group [ text (if answer == Incorrect
-                                    then "Incorrect"
-                                    else if answer == Correct
-                                        then "Correct"
-                                        else ""
-                                    )
+                    else if (answer == Incorrect)
+                        then group [
+                                text "Incorrect"
                                     |> size 12
-                                    |> filled (if answer == Incorrect
-                                                    then red
-                                                    else if answer == Correct
-                                                        then green
-                                                        else white
-                                                )
+                                    |> filled red
                                     |> move ( -130, -40 - 20*(Basics.toFloat(getIndexFromStep step)) )
-                                , rectangle 60 25
-                                    |> filled (if answer == Incorrect
-                                                    then blank
-                                                    else if answer == Correct
-                                                        then orange
-                                                        else blank
-                                                )
+                                , rectangle 90 25
+                                    |> filled orange
+                                    |> move ( -85, -60 - 20*(Basics.toFloat(getIndexFromStep step)) )
+                                    |> notifyTap (ClickedChoice question step option)
+                                , text "Explaination"
+                                    |> filled white
+                                    |> move ( -115, -63 - 20*(Basics.toFloat(getIndexFromStep step)) )
+                                    |> notifyTap (ClickedChoice question step option)
+                                ]
+                        else if (answer == Correct)
+                            then group [
+                                text "Correct"
+                                    |> size 12
+                                    |> filled green
+                                    |> move ( -130, -40 - 20*(Basics.toFloat(getIndexFromStep step)) )
+                                 , rectangle 60 25
+                                    |> filled orange
                                     |> move ( -100, -60 - 20*(Basics.toFloat(getIndexFromStep step)) )
                                     |> notifyTap NextStep
                                 , text "Next"
-                                    |> filled (if answer == Incorrect
-                                                    then blank
-                                                    else if answer == Correct
-                                                        then white
-                                                        else blank
-                                                )
+                                    |> filled white
                                     |> move ( -112, -63 - 20*(Basics.toFloat(getIndexFromStep step)) )
                                     |> notifyTap NextStep
+                                , rectangle 90 25
+                                    |> filled orange
+                                    |> move ( -5, -60 - 20*(Basics.toFloat(getIndexFromStep step)) )
+                                    |> notifyTap (ClickedChoice question step option)
+                                , text "Explaination"
+                                    |> filled white
+                                    |> move ( -35, -63 - 20*(Basics.toFloat(getIndexFromStep step)) )
+                                    |> notifyTap (ClickedChoice question step option)
                                 ]
+                            else group []
 
 
 
@@ -408,18 +469,111 @@ hintStr question step = case (question, step) of
                 (Question5, Step3) -> ["Use", "1-sin^2(y)=cos^2(y)"]
                 otherwise -> []
 
+explainationStr question step option = case (question, step) of
+                (Question1, Step1) -> case option of
+                                        Option1 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "sin y / cos y" ]
+                                        Option2 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "cos y / sin y" ]
+                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
+                                        RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
+                (Question1, Step2) -> case option of
+                                        Option1 -> ["By multiplying the fractions, ", "it is not possible to", "get this expression" ]
+                                        Option2 -> ["By multiplying the fractions, ", "it is not possible to", "get this expression" ]
+                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
+                                        RightOption -> ["By multiplying the fractions", "the sin y in the", "numerator and denominator", "can be cancelled out.", "Therefore, this option is correct"]
+                (Question1, Step3) -> case option of
+                                        Option1 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "sin y / cos y" ]
+                                        Option2 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "cos y / sin y" ]
+                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
+                                        RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
+                (Question2, Step1) -> case option of
+                                        Option1 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "sin y / cos y" ]
+                                        Option2 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "cos y / sin y" ]
+                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
+                                        RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
+                (Question2, Step2) -> case option of
+                                        Option1 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "sin y / cos y" ]
+                                        Option2 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "cos y / sin y" ]
+                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
+                                        RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
+                (Question2, Step3) -> case option of
+                                        Option1 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "sin y / cos y" ]
+                                        Option2 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "cos y / sin y" ]
+                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
+                                        RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
+                (Question2, Step4) -> case option of
+                                        Option1 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "sin y / cos y" ]
+                                        Option2 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "cos y / sin y" ]
+                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
+                                        RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
+                (Question2, Step5) -> case option of
+                                        Option1 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "sin y / cos y" ]
+                                        Option2 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "cos y / sin y" ]
+                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
+                                        RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
+                (Question3, Step1) -> case option of
+                                        Option1 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "sin y / cos y" ]
+                                        Option2 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "cos y / sin y" ]
+                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
+                                        RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
+                (Question3, Step2) -> case option of
+                                        Option1 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "sin y / cos y" ]
+                                        Option2 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "cos y / sin y" ]
+                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
+                                        RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
+                (Question3, Step3) -> case option of
+                                        Option1 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "sin y / cos y" ]
+                                        Option2 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "cos y / sin y" ]
+                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
+                                        RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
+                (Question4, Step1) -> case option of
+                                        Option1 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "sin y / cos y" ]
+                                        Option2 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "cos y / sin y" ]
+                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
+                                        RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
+                (Question4, Step2) -> case option of
+                                        Option1 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "sin y / cos y" ]
+                                        Option2 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "cos y / sin y" ]
+                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
+                                        RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
+                (Question4, Step3) -> case option of
+                                        Option1 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "sin y / cos y" ]
+                                        Option2 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "cos y / sin y" ]
+                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
+                                        RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
+                (Question5, Step1) -> case option of
+                                        Option1 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "sin y / cos y" ]
+                                        Option2 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "cos y / sin y" ]
+                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
+                                        RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
+                (Question5, Step2) -> case option of
+                                        Option1 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "sin y / cos y" ]
+                                        Option2 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "cos y / sin y" ]
+                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
+                                        RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
+                (Question5, Step3) -> case option of
+                                        Option1 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "sin y / cos y" ]
+                                        Option2 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "cos y / sin y" ]
+                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
+                                        RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
+                otherwise -> []
+
 
 hintText lst =  group (List.indexedMap (\idx line -> text line
                                                         -- |> sansserif
                                                         |> size 10
                                                         |> centered
                                                         |> filled black
-                                                        |> move (0, 14-7*(Basics.toFloat idx)) ) lst)
+                                                        |> move (0, 14-10*(Basics.toFloat idx)) ) lst)
 
 
-hintCard question step = group [rect 70 70 |> filled black |> makeTransparent 0.3 |> addOutline (solid 0.3) black
+hintCard question step = group [rect 130 130 |> filled grey |> addOutline (solid 0.3) black
                                , hintText (hintStr question step)
                                ] |> move ( 60, 0 )
+
+choiceCard question step option = group [rect 170 130 |> filled grey |> addOutline (solid 0.3) black
+                                , hintText (explainationStr question step option)
+                                , text "X" |> bold |> sansserif |> size 14 |> filled black |> makeTransparent 0.75 |> move (65, 45) |> notifyTap ExitChoice
+                                ] |> move ( 60, 0 )
 
 
 
@@ -432,13 +586,17 @@ hintCard question step = group [rect 70 70 |> filled black |> makeTransparent 0.
 type Msg m
     = Tick Float GetKeyState
     | Notif Notifications
-    | WrongAnswer
+    | WrongAnswer1
+    | WrongAnswer2
+    | WrongAnswer3
     | RightAnswer
     | NextStep
     | NextQuestion
     | PreviousQuestion
     | ClickedHint Questions Steps
     | ExitHint
+    | ClickedChoice Questions Steps Options
+    | ExitChoice
     | ChangeOptionColour (m -> m)
 
 

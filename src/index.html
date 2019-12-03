@@ -10436,17 +10436,17 @@ var $author$project$FundamentalIdentities$hintStr = F2(
 							var _v9 = _v0.a;
 							var _v10 = _v0.b;
 							return _List_fromArray(
-								['Use the equation', 'cot^2 y=-1+csc^2 y', 'to simplify', 'Step1']);
+								['Express', 'as', 'secant']);
 						case 'Step3':
 							var _v11 = _v0.a;
 							var _v12 = _v0.b;
 							return _List_fromArray(
-								['Express', 'csc as', 'sine and', 'simplify']);
+								['Express', 'as', 'sine']);
 						case 'Step4':
 							var _v13 = _v0.a;
 							var _v14 = _v0.b;
 							return _List_fromArray(
-								['Reduce', 'the fraction', 'obtained in', 'Step3']);
+								['Simplify']);
 						default:
 							var _v15 = _v0.a;
 							var _v16 = _v0.b;
@@ -10459,17 +10459,17 @@ var $author$project$FundamentalIdentities$hintStr = F2(
 							var _v17 = _v0.a;
 							var _v18 = _v0.b;
 							return _List_fromArray(
-								['Use', 'cot(y)', '=', 'cos(y)/sin(y)']);
+								['Express', 'with', 'sine', 'and', 'cosine']);
 						case 'Step2':
 							var _v19 = _v0.a;
 							var _v20 = _v0.b;
 							return _List_fromArray(
-								['Use', 'csc(y)=1/sin(y)']);
+								['Simplify', 'cot']);
 						case 'Step3':
 							var _v21 = _v0.a;
 							var _v22 = _v0.b;
 							return _List_fromArray(
-								['Reduce the', 'fractions obtained', 'in Step2']);
+								['Simplify', 'csc']);
 						default:
 							break _v0$17;
 					}
@@ -10479,17 +10479,17 @@ var $author$project$FundamentalIdentities$hintStr = F2(
 							var _v23 = _v0.a;
 							var _v24 = _v0.b;
 							return _List_fromArray(
-								['Use tan(y)=sin(y)/cos(y)', 'and', 'cot(y)=cos(y)/sin(y)']);
+								['Express', 'with', 'sine', 'and', 'cosine']);
 						case 'Step2':
 							var _v25 = _v0.a;
 							var _v26 = _v0.b;
 							return _List_fromArray(
-								['Add the', 'terms obtained', 'Step1']);
+								['Add the', 'terms in', 'step 1']);
 						case 'Step3':
 							var _v27 = _v0.a;
 							var _v28 = _v0.b;
 							return _List_fromArray(
-								['Use', 'sin^2y+cos^2y=1', 'to simplify', 'Step2']);
+								['Use', 'sin^2y+cos^2y=1']);
 						default:
 							break _v0$17;
 					}
@@ -10499,17 +10499,17 @@ var $author$project$FundamentalIdentities$hintStr = F2(
 							var _v29 = _v0.a;
 							var _v30 = _v0.b;
 							return _List_fromArray(
-								['Use', 'csc(y)=1/sin(y)', 'to', 'simplify']);
+								['Express', 'with', 'sine', 'and', 'cosine']);
 						case 'Step2':
 							var _v31 = _v0.a;
 							var _v32 = _v0.b;
 							return _List_fromArray(
-								['Simplify', 'the fraction', 'obtained in', 'Step1']);
+								['Simplify', 'terms in', 'step 1']);
 						case 'Step3':
 							var _v33 = _v0.a;
 							var _v34 = _v0.b;
 							return _List_fromArray(
-								['Use', '1-sin^2(y)=cos^2(y)', 'to simplify Step2']);
+								['Use', '1-sin^2(y)=cos^2(y)']);
 						default:
 							break _v0$17;
 					}
@@ -10552,11 +10552,11 @@ var $author$project$FundamentalIdentities$hintCard = F2(
 						$MacCASOutreach$graphicsvg$GraphicSVG$black,
 						A2(
 							$MacCASOutreach$graphicsvg$GraphicSVG$makeTransparent,
-							0.8,
+							0.3,
 							A2(
 								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-								$MacCASOutreach$graphicsvg$GraphicSVG$white,
-								A2($MacCASOutreach$graphicsvg$GraphicSVG$rect, 150, 150)))),
+								$MacCASOutreach$graphicsvg$GraphicSVG$black,
+								A2($MacCASOutreach$graphicsvg$GraphicSVG$rect, 70, 70)))),
 						$author$project$FundamentalIdentities$hintText(
 						A2($author$project$FundamentalIdentities$hintStr, question, step))
 					])));
@@ -10626,7 +10626,7 @@ var $author$project$FundamentalIdentities$optionsStr = F2(
 							return _List_fromArray(
 								[
 									_Utils_Tuple2('a) LHS = sin y + sin y * (1 / tan2 y)', $author$project$FundamentalIdentities$WrongAnswer),
-									_Utils_Tuple2('b) LHS = sin y * (1 + cot^2 y)', $author$project$FundamentalIdentities$RightAnswer),
+									_Utils_Tuple2('b) LHS = sin y * (1 + cot2 y)', $author$project$FundamentalIdentities$RightAnswer),
 									_Utils_Tuple2('c) LHS = sin y + (sin y / tan2 y)', $author$project$FundamentalIdentities$WrongAnswer),
 									_Utils_Tuple2('d) LHS = sin y + ( (sin y * cos2 y) / sin2 y', $author$project$FundamentalIdentities$WrongAnswer)
 								]);
@@ -10637,8 +10637,8 @@ var $author$project$FundamentalIdentities$optionsStr = F2(
 								[
 									_Utils_Tuple2('a) LHS = sin y * (1 + (cos2 y / sin2 y))', $author$project$FundamentalIdentities$WrongAnswer),
 									_Utils_Tuple2('b) LHS = sin y * (1 + (sin2 y / cos2 y))', $author$project$FundamentalIdentities$WrongAnswer),
-									_Utils_Tuple2('c) LHS = sin y * (csc^2 y)', $author$project$FundamentalIdentities$RightAnswer),
-									_Utils_Tuple2('d) LHS = sin y * (cos^2 y)', $author$project$FundamentalIdentities$WrongAnswer)
+									_Utils_Tuple2('c) LHS = sin y * (csc2 y)', $author$project$FundamentalIdentities$RightAnswer),
+									_Utils_Tuple2('d) LHS = sin y * (cos2 y)', $author$project$FundamentalIdentities$WrongAnswer)
 								]);
 						case 'Step3':
 							var _v11 = _v0.a;
@@ -10648,17 +10648,17 @@ var $author$project$FundamentalIdentities$optionsStr = F2(
 									_Utils_Tuple2('a) LHS = sin y * (1 / cos2 y)', $author$project$FundamentalIdentities$WrongAnswer),
 									_Utils_Tuple2('b) LHS = sin y * (cos2 y / sin2 y)', $author$project$FundamentalIdentities$WrongAnswer),
 									_Utils_Tuple2('c) LHS = (sin2 y / cos y)', $author$project$FundamentalIdentities$WrongAnswer),
-									_Utils_Tuple2('d) LHS = (sin y / sin^2 y)', $author$project$FundamentalIdentities$RightAnswer)
+									_Utils_Tuple2('d) LHS = (sin y / sin2 y)', $author$project$FundamentalIdentities$RightAnswer)
 								]);
 						case 'Step4':
 							var _v13 = _v0.a;
 							var _v14 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) LHS = 1 / sin y = csc y', $author$project$FundamentalIdentities$RightAnswer),
-									_Utils_Tuple2('b) LHS = sin y / (1 + tan2 y)=csc y', $author$project$FundamentalIdentities$WrongAnswer),
-									_Utils_Tuple2('c) LHS = (1 + sin y) / sin y = csc y', $author$project$FundamentalIdentities$WrongAnswer),
-									_Utils_Tuple2('d) LHS = 1 / sin2 y = csc y', $author$project$FundamentalIdentities$WrongAnswer)
+									_Utils_Tuple2('a) LHS = 1 / sin y', $author$project$FundamentalIdentities$RightAnswer),
+									_Utils_Tuple2('b) LHS = sin y / (1 + tan2 y)', $author$project$FundamentalIdentities$WrongAnswer),
+									_Utils_Tuple2('c) LHS = (1 + sin y) / sin y', $author$project$FundamentalIdentities$WrongAnswer),
+									_Utils_Tuple2('d) LHS = 1 / sin2 y', $author$project$FundamentalIdentities$WrongAnswer)
 								]);
 						default:
 							var _v15 = _v0.a;
@@ -10920,7 +10920,7 @@ var $author$project$FundamentalIdentities$questionStr = function (question) {
 		case 'Question1':
 			return 'Prove that tan y / sin y = sec y';
 		case 'Question2':
-			return 'Prove that sin y + sin y * cot^2 y = cscy';
+			return 'Prove that sin y + sin y * cot2 y = cscy';
 		case 'Question3':
 			return 'Prove that cot y / csc y = cos y';
 		case 'Question4':
@@ -12637,7 +12637,7 @@ var $author$project$PythagoreanIdentities$hintStr = F2(
 							var _v1 = _v0.a;
 							var _v2 = _v0.b;
 							return _List_fromArray(
-								['Factor out', 'sine']);
+								['Divide', 'by', 'sine']);
 						case 'Question2':
 							var _v7 = _v0.a;
 							var _v8 = _v0.b;
@@ -12665,12 +12665,12 @@ var $author$project$PythagoreanIdentities$hintStr = F2(
 							var _v3 = _v0.a;
 							var _v4 = _v0.b;
 							return _List_fromArray(
-								['Use', 'sin^x+cos^x=1', 'to simplify Step1']);
+								['Use', 'sin^x+cos^x=1']);
 						case 'Question2':
 							var _v9 = _v0.a;
 							var _v10 = _v0.b;
 							return _List_fromArray(
-								['Simplify', 'the', 'constants in Step1']);
+								['Simplify', 'the', 'terms']);
 						case 'Question3':
 							var _v15 = _v0.a;
 							var _v16 = _v0.b;
@@ -12680,12 +12680,12 @@ var $author$project$PythagoreanIdentities$hintStr = F2(
 							var _v19 = _v0.a;
 							var _v20 = _v0.b;
 							return _List_fromArray(
-								['Reduce Step1', 'to one', 'term']);
+								['Refine']);
 						default:
 							var _v25 = _v0.a;
 							var _v26 = _v0.b;
 							return _List_fromArray(
-								['Reduce', 'fraction obtained', 'in Step1']);
+								['Simplify']);
 					}
 				case 'Step3':
 					switch (_v0.a.$) {
@@ -12703,12 +12703,12 @@ var $author$project$PythagoreanIdentities$hintStr = F2(
 							var _v21 = _v0.a;
 							var _v22 = _v0.b;
 							return _List_fromArray(
-								['Use tan(y)=sin(y)/cos(y)']);
+								['Express in terms of tangent']);
 						case 'Question5':
 							var _v27 = _v0.a;
 							var _v28 = _v0.b;
 							return _List_fromArray(
-								['Add', 'the terms', 'in Step2', 'and simplify further']);
+								['Add', 'the terms', 'in step 3']);
 						default:
 							break _v0$14;
 					}
@@ -12753,11 +12753,11 @@ var $author$project$PythagoreanIdentities$hintCard = F2(
 						$MacCASOutreach$graphicsvg$GraphicSVG$black,
 						A2(
 							$MacCASOutreach$graphicsvg$GraphicSVG$makeTransparent,
-							0.8,
+							0.3,
 							A2(
 								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-								$MacCASOutreach$graphicsvg$GraphicSVG$white,
-								A2($MacCASOutreach$graphicsvg$GraphicSVG$rect, 150, 150)))),
+								$MacCASOutreach$graphicsvg$GraphicSVG$black,
+								A2($MacCASOutreach$graphicsvg$GraphicSVG$rect, 90, 90)))),
 						$author$project$PythagoreanIdentities$hintText(
 						A2($author$project$PythagoreanIdentities$hintStr, question, step))
 					])));
@@ -12897,7 +12897,7 @@ var $author$project$PythagoreanIdentities$optionsStr = F2(
 							var _v6 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) -sin^3(y)', $author$project$PythagoreanIdentities$RightAnswer),
+									_Utils_Tuple2('a) sin^3(y)', $author$project$PythagoreanIdentities$RightAnswer),
 									_Utils_Tuple2('b) tan y', $author$project$PythagoreanIdentities$WrongAnswer),
 									_Utils_Tuple2('c) cos y', $author$project$PythagoreanIdentities$WrongAnswer),
 									_Utils_Tuple2('d) sin y', $author$project$PythagoreanIdentities$WrongAnswer)

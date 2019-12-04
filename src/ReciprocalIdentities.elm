@@ -378,14 +378,14 @@ resultsSection question step answer =
 
 
 hintStr question step = case (question, step) of
-                (Question1, Step1) -> ["Simplify", "the" , "cotangent" ]
-                (Question1, Step2) -> ["Simplify", "the" , "derived", "result", "from", "step 1"]
-                (Question1, Step3) -> ["Simplify", "the" , "derived", "result", "from", "step 2"]
-                (Question1, Step4) -> ["Simplify", "the" , "derived", "result", "from", "step 3"]
+                (Question1, Step1) -> ["Simplify", "the" , "cotangent", "and", "tangent" ]
+                (Question1, Step2) -> ["Try", "rearranging" , "the equation", "using trig", "identities"]
+                (Question1, Step3) -> ["Try factorizing", "the" , "equation", "so you can", "use a trig identity"]
+                (Question1, Step4) -> ["Try expanding", "the" , "equation"]
                 (Question1, Step5) -> ["Simplify", "the" , "derived", "result", "from", "step 4"]
                 (Question2, Step1) -> ["Use that", "sec^2(y) = tan^2(y) + 1"]
                 (Question2, Step2) -> ["Simplify"]
-                (Question2, Step3) -> ["Simplify"]
+                (Question2, Step3) -> ["How else can", "you express", "a fraction?"]
                 (Question2, Step4) -> ["Use", "cos^2(y) = 1/sec^2(y)"]
                 (Question2, Step5) -> ["Use", "a reciprocal", "identity", "then simplify"]
                 (Question3, Step1) -> ["Use a", "fundamental", "trig", "identity" ]

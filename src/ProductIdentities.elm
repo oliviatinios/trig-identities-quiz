@@ -364,15 +364,15 @@ resultsSection question step answer =
 
 
 hintStr question step = case (question, step) of
-                (Question1, Step1) -> ["Simplify!" ]
-                (Question1, Step2) -> ["Simplify!" ]
-                (Question1, Step3) -> ["Simplify!" ]
+                (Question1, Step1) -> ["Try factoring", "out a fraction", "from the", "cosine portion" ]
+                (Question1, Step2) -> ["Perform", "simple subtractions" ]
+                (Question1, Step3) -> ["Simplify" ]
                 (Question2, Step1) -> ["Use the", "product", "of sines" ]
                 (Question2, Step2) -> ["Simplify"]
                 (Question3, Step1) -> ["Use the", "product", "of cosines" ]
                 (Question3, Step2) -> ["Simplify"]
                 (Question4, Step1) -> ["Use the", "difference", "of sines" ]
-                (Question4, Step2) -> ["Simplify"]
+                (Question4, Step2) -> ["Perform", "simple additions", "and", "subtractions"]
                 (Question4, Step3) -> ["Simplify"]
                 (Question5, Step1) -> ["Use a", "double", "angle", "formula" ]
                 (Question5, Step2) -> ["Can you try", "splitting", "the terms?" ]

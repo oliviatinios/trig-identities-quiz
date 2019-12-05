@@ -8976,9 +8976,9 @@ var $author$project$PythagoreanIdentities$update = F2(
 						question: function () {
 							var _v3 = model.question;
 							switch (_v3.$) {
-								case 'Question2':
-									return $author$project$PythagoreanIdentities$Question1;
 								case 'Question1':
+									return $author$project$PythagoreanIdentities$Question5;
+								case 'Question2':
 									return $author$project$PythagoreanIdentities$Question1;
 								case 'Question3':
 									return $author$project$PythagoreanIdentities$Question2;
@@ -12737,10 +12737,10 @@ var $author$project$PythagoreanIdentities$explainationStr = F3(
 										['There are no identities', 'that can be used to', 'get this expression']);
 								case 'Option2':
 									return _List_fromArray(
-										['csc y equals 1/siny', 'and cot y equals 1/tany.', 'It is not possible', 'to get this expression']);
+										['There are no identities', 'that can be used to', 'get this expression']);
 								case 'Option3':
 									return _List_fromArray(
-										['csc y equals 1/siny', 'and cot y equals 1/tany.', 'It is not possible', 'to get this expression']);
+										['There are no identities', 'that can be used to', 'get this expression']);
 								default:
 									return _List_fromArray(
 										['We can use the', '1 + cot2y = csc2y identity', 'and subsitute it in as csc2y.', 'Therefore, this option is correct']);
@@ -12751,16 +12751,16 @@ var $author$project$PythagoreanIdentities$explainationStr = F3(
 							switch (option.$) {
 								case 'Option1':
 									return _List_fromArray(
-										['The LHS can be rewritten', 'as tan y * (1 / sin y).', '1 / sin y cannot be', 'simplified to', 'sin y / cos y']);
+										['There are no identities', 'that can be used to', 'get this expression']);
 								case 'Option2':
 									return _List_fromArray(
-										['The LHS can be rewritten', 'as tan y * (1 / sin y).', '1 / sin y cannot be', 'simplified to', 'cos y / sin y']);
+										['It is not possible', 'to simplify the expression', 'to secy / (tan y * tan y)']);
 								case 'Option3':
 									return _List_fromArray(
-										['The LHS can be rewritten', 'as tan y * (1 / sin y).', 'tan y does not equal', 'cos y / sin y']);
+										['It is not possible', 'to simplify the expression', 'to sin y']);
 								default:
 									return _List_fromArray(
-										['The LHS can be rewritten', 'as tan y * (1 / sin y).', 'tan y can be', 'written as', 'sin y / cos y.', 'Therefore, this option is correct']);
+										['We can use the identity:', 'sin2y + cos2y = 1 by rearranging it to', 'sin2y = 1 - cos2y.', 'We can now substitute the denominator', 'with sin2y.', 'Therefore, this option is correct.']);
 							}
 						case 'Question4':
 							var _v25 = _v0.a;
@@ -12768,16 +12768,16 @@ var $author$project$PythagoreanIdentities$explainationStr = F3(
 							switch (option.$) {
 								case 'Option1':
 									return _List_fromArray(
-										['The LHS can be rewritten', 'as tan y * (1 / sin y).', '1 / sin y cannot be', 'simplified to', 'sin y / cos y']);
+										['It is not possible', 'to simplify the expression', 'to cos2 y/ sin2 y', 'using sin2y + cos2y = 1']);
 								case 'Option2':
 									return _List_fromArray(
-										['The LHS can be rewritten', 'as tan y * (1 / sin y).', '1 / sin y cannot be', 'simplified to', 'cos y / sin y']);
+										['It is not possible', 'to simplify the expression', 'to (cos y/ sin y)/csc y', 'using sin2 y + cos2 y = 1']);
 								case 'Option3':
 									return _List_fromArray(
-										['The LHS can be rewritten', 'as tan y * (1 / sin y).', 'tan y does not equal', 'cos y / sin y']);
+										['It is not possible', 'to simplify the expression', 'to csc y', 'using sin2 y + cos2 y = 1']);
 								default:
 									return _List_fromArray(
-										['The LHS can be rewritten', 'as tan y * (1 / sin y).', 'tan y can be', 'written as', 'sin y / cos y.', 'Therefore, this option is correct']);
+										['We can use the identity:', 'sin2 y + cos2 y = 1 by rearranging it to', 'sin2 y = 1 - cos2 y.', 'We can now substitute the numerator', 'with sin2y.', 'Therefore, this option is correct.']);
 							}
 						default:
 							var _v34 = _v0.a;
@@ -12785,16 +12785,16 @@ var $author$project$PythagoreanIdentities$explainationStr = F3(
 							switch (option.$) {
 								case 'Option1':
 									return _List_fromArray(
-										['The LHS can be rewritten', 'as tan y * (1 / sin y).', '1 / sin y cannot be', 'simplified to', 'sin y / cos y']);
+										['It is not possible', 'to simplify the expression.', 'to sin2 y.']);
 								case 'Option2':
 									return _List_fromArray(
-										['The LHS can be rewritten', 'as tan y * (1 / sin y).', '1 / sin y cannot be', 'simplified to', 'cos y / sin y']);
+										['csc y equals 1 / sin y.', 'It is not possible', 'to simplify the expression.', 'to cos2 y/csc y.']);
 								case 'Option3':
 									return _List_fromArray(
-										['The LHS can be rewritten', 'as tan y * (1 / sin y).', 'tan y does not equal', 'cos y / sin y']);
+										['cot2 y can be simplified to', 'cos2y / sin2 y where sin y can', 'be factored out, but', 'it would still not simplify to', '(cos y/sin y) + (sin y / cos y).', 'There is an easier simplification.']);
 								default:
 									return _List_fromArray(
-										['The LHS can be rewritten', 'as tan y * (1 / sin y).', 'tan y can be', 'written as', 'sin y / cos y.', 'Therefore, this option is correct']);
+										['We can use the identity:', 'cos y * sin y = sin 2y/2', 'and substitute that in.', 'Therefore, this option is correct']);
 							}
 					}
 				case 'Step2':
@@ -12839,16 +12839,16 @@ var $author$project$PythagoreanIdentities$explainationStr = F3(
 							switch (option.$) {
 								case 'Option1':
 									return _List_fromArray(
-										['The LHS can be rewritten', 'as tan y * (1 / sin y).', '1 / sin y cannot be', 'simplified to', 'sin y / cos y']);
+										['It is not possible', 'to simplify the expression', 'to cos3 y/ sin3 y using 1/siny = cscy']);
 								case 'Option2':
 									return _List_fromArray(
-										['The LHS can be rewritten', 'as tan y * (1 / sin y).', '1 / sin y cannot be', 'simplified to', 'cos y / sin y']);
+										['It is not possible', 'to simplify the expression', 'to (cosy/siny)/ csc y using 1/siny = cscy']);
 								case 'Option3':
 									return _List_fromArray(
-										['The LHS can be rewritten', 'as tan y * (1 / sin y).', 'tan y does not equal', 'cos y / sin y']);
+										['It is not possible', 'to simplify the expression', 'to sin y using 1/siny = cscy']);
 								default:
 									return _List_fromArray(
-										['The LHS can be rewritten', 'as tan y * (1 / sin y).', 'tan y can be', 'written as', 'sin y / cos y.', 'Therefore, this option is correct']);
+										['Using 1/siny = cscy', 'the expression simplifies to csc^2y.', 'Therefore, this option is correct']);
 							}
 						case 'Question4':
 							var _v28 = _v0.a;
@@ -12856,16 +12856,16 @@ var $author$project$PythagoreanIdentities$explainationStr = F3(
 							switch (option.$) {
 								case 'Option1':
 									return _List_fromArray(
-										['The LHS can be rewritten', 'as tan y * (1 / sin y).', '1 / sin y cannot be', 'simplified to', 'sin y / cos y']);
+										['It is not possible', 'to simplify the expression.', 'to (cos y / sin y) / sin y.']);
 								case 'Option2':
 									return _List_fromArray(
-										['The LHS can be rewritten', 'as tan y * (1 / sin y).', '1 / sin y cannot be', 'simplified to', 'cos y / sin y']);
+										['It is not possible', 'to simplify the expression.', 'to cos y / (1 / sin y).']);
 								case 'Option3':
 									return _List_fromArray(
-										['The LHS can be rewritten', 'as tan y * (1 / sin y).', 'tan y does not equal', 'cos y / sin y']);
+										['cot y equals cos y / sin y', 'It is not possible', 'to simplify to cot y.']);
 								default:
 									return _List_fromArray(
-										['The LHS can be rewritten', 'as tan y * (1 / sin y).', 'tan y can be', 'written as', 'sin y / cos y.', 'Therefore, this option is correct']);
+										['sin y can be factored out', 'from the numerator and denominator', 'and then cancelled out.', 'Therefore, this option is correct']);
 							}
 						default:
 							var _v37 = _v0.a;
@@ -12873,16 +12873,16 @@ var $author$project$PythagoreanIdentities$explainationStr = F3(
 							switch (option.$) {
 								case 'Option1':
 									return _List_fromArray(
-										['The LHS can be rewritten', 'as tan y * (1 / sin y).', '1 / sin y cannot be', 'simplified to', 'sin y / cos y']);
+										['csc y equals 1 / sin y.', 'It is not possible', 'to simplify the expression.', 'to csc y / (cos y / sin y).']);
 								case 'Option2':
 									return _List_fromArray(
-										['The LHS can be rewritten', 'as tan y * (1 / sin y).', '1 / sin y cannot be', 'simplified to', 'cos y / sin y']);
+										['tan y equals sin y / cos y.', 'It is not possible', 'to simplify the expression.', 'to tan y / (1 / tan y).']);
 								case 'Option3':
 									return _List_fromArray(
-										['The LHS can be rewritten', 'as tan y * (1 / sin y).', 'tan y does not equal', 'cos y / sin y']);
+										['It is not possible', 'to simplify the expression.', 'to cos y.']);
 								default:
 									return _List_fromArray(
-										['The LHS can be rewritten', 'as tan y * (1 / sin y).', 'tan y can be', 'written as', 'sin y / cos y.', 'Therefore, this option is correct']);
+										['We can use the identity:', 'cos y * sin y = sin 2y/2 again', 'and substitute that in the second term.', 'Therefore, this option is correct']);
 							}
 					}
 				case 'Step3':
@@ -12927,16 +12927,16 @@ var $author$project$PythagoreanIdentities$explainationStr = F3(
 							switch (option.$) {
 								case 'Option1':
 									return _List_fromArray(
-										['The LHS can be rewritten', 'as tan y * (1 / sin y).', '1 / sin y cannot be', 'simplified to', 'sin y / cos y']);
+										['It is not possible', 'to simplify the expression.', 'to cos y / sin y.']);
 								case 'Option2':
 									return _List_fromArray(
-										['The LHS can be rewritten', 'as tan y * (1 / sin y).', '1 / sin y cannot be', 'simplified to', 'cos y / sin y']);
+										['csc y equals 1 / sin y.', 'It is not possible', 'to simplify the expression.', 'to sin y / csc y.']);
 								case 'Option3':
 									return _List_fromArray(
-										['The LHS can be rewritten', 'as tan y * (1 / sin y).', 'tan y does not equal', 'cos y / sin y']);
+										['sec y equals 1 / cos y.', 'It is not possible', 'to simplify the expression.', 'to sec y.']);
 								default:
 									return _List_fromArray(
-										['The LHS can be rewritten', 'as tan y * (1 / sin y).', 'tan y can be', 'written as', 'sin y / cos y.', 'Therefore, this option is correct']);
+										['We can use the identity:', 'tan y = sin y / cos y.', 'Therefore, this option is correct']);
 							}
 						case 'Question5':
 							var _v40 = _v0.a;
@@ -12944,16 +12944,16 @@ var $author$project$PythagoreanIdentities$explainationStr = F3(
 							switch (option.$) {
 								case 'Option1':
 									return _List_fromArray(
-										['The LHS can be rewritten', 'as tan y * (1 / sin y).', '1 / sin y cannot be', 'simplified to', 'sin y / cos y']);
+										['cot y equals cos y / sin y', 'and csc y equals 1 / sin y.', 'It is not possible', 'to simplify the expression.', 'to cot y / csc y.']);
 								case 'Option2':
 									return _List_fromArray(
-										['The LHS can be rewritten', 'as tan y * (1 / sin y).', '1 / sin y cannot be', 'simplified to', 'cos y / sin y']);
+										['csc y equals 1 / sin y.', 'It is not possible', 'to simplify the expression.', 'to csc y * sin y.']);
 								case 'Option3':
 									return _List_fromArray(
-										['The LHS can be rewritten', 'as tan y * (1 / sin y).', 'tan y does not equal', 'cos y / sin y']);
+										['It is not possible', 'to simplify the expression.', 'to cos y.']);
 								default:
 									return _List_fromArray(
-										['The LHS can be rewritten', 'as tan y * (1 / sin y).', 'tan y can be', 'written as', 'sin y / cos y.', 'Therefore, this option is correct']);
+										['Since the two terms have', 'the same denominator, ', 'we can add the two fractions together.', 'Therefore, this option is correct']);
 							}
 						default:
 							break _v0$14;
@@ -13078,7 +13078,7 @@ var $author$project$PythagoreanIdentities$hintStr = F2(
 							var _v19 = _v0.a;
 							var _v20 = _v0.b;
 							return _List_fromArray(
-								['Reduce Step1', 'to one', 'term']);
+								['Factor', 'out', 'sin y']);
 						default:
 							var _v25 = _v0.a;
 							var _v26 = _v0.b;

@@ -122,8 +122,8 @@ update msg model =
                 , step = Step1
                 , question =
                     case model.question of
+                        Question1 -> Question5
                         Question2 -> Question1
-                        Question1 -> Question1
                         Question3 -> Question2
                         Question4 -> Question3
                         Question5 -> Question4
@@ -456,7 +456,7 @@ hintStr question step = case (question, step) of
                 (Question3, Step1) -> ["Use", "1-cos^2(x)=sin^2(x)" ]
                 (Question3, Step2) -> ["Simplify", "1/(sin(x)) = csc(x)"]
                 (Question4, Step1) -> ["Use" , "sin^x+cos^x=1" ]
-                (Question4, Step2) -> ["Reduce Step1", "to one", "term"]
+                (Question4, Step2) -> ["Factor", "out", "sin y"]
                 (Question4, Step3) -> ["Use tan(y)=sin(y)/cos(y)"]
                 (Question5, Step1) -> ["Use", "cos(x)*sin(x) =", "sin(2*x)/2" ]
                 (Question5, Step2) -> ["Reduce","fraction obtained", "in Step1" ]
@@ -481,8 +481,8 @@ explainationStr question step option = case (question, step) of
                                         RightOption -> ["Multiplying siny with -sin2y", "equals -sin3y.", "Therefore, this option is correct"]
                 (Question2, Step1) -> case option of
                                         Option1 -> ["There are no identities", "that can be used to", "get this expression" ]
-                                        Option2 -> ["csc y equals 1/siny", "and cot y equals 1/tany.", "It is not possible", "to get this expression" ]
-                                        Option3 -> ["csc y equals 1/siny", "and cot y equals 1/tany.", "It is not possible", "to get this expression" ]
+                                        Option2 -> ["There are no identities", "that can be used to", "get this expression" ]
+                                        Option3 -> ["There are no identities", "that can be used to", "get this expression" ]
                                         RightOption -> ["We can use the", "1 + cot2y = csc2y identity", "and subsitute it in as csc2y.", "Therefore, this option is correct"]
                 (Question2, Step2) -> case option of
                                         Option1 -> ["Leaving the constant 1 as is,", "cot2y - coty - 3 cannot", "be simplified to", "cos2y/sin2y." ]
@@ -493,47 +493,47 @@ explainationStr question step option = case (question, step) of
                                         Option1 -> ["It is not possible", "to simplify to this expression.", "You can double check by", "expanding this expression and checking", "if it equals Step 2.", "cot y * (1/cos2 y) equals cot y / cos2 y.", "This cannot be expanded", "to the expression in Step 2" ]
                                         Option2 -> ["It is not possible to get this expression.", "You can double check by", "expanding this expression and checking", "if it equals Step 2.", "sin y * (cos2 y/cot2 y) equals", "(sin y * cos2 y) / cot2 y.", "This cannot be expanded", "to the expression in Step 2" ]
                                         Option3 -> ["There are no identities", "that can be used to", "get this expression" ]
-                                        RightOption -> ["We can express the expression", "in terms of factors.", "Using the quadratic formula, ", "we get (coty - 2)(coty + 1).", "Therefore, this option is correct"]
+                                        RightOption -> ["We can express the expression", "in terms of factors.", "Using the quadratic formula, ", "we get (cot y - 2)(cot y + 1).", "Therefore, this option is correct"]
                 (Question3, Step1) -> case option of
-                                        Option1 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "sin y / cos y" ]
-                                        Option2 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "cos y / sin y" ]
-                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
-                                        RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
+                                        Option1 -> ["There are no identities", "that can be used to", "get this expression" ]
+                                        Option2 -> ["It is not possible", "to simplify the expression", "to secy / (tan y * tan y)" ]
+                                        Option3 -> ["It is not possible", "to simplify the expression", "to sin y" ]
+                                        RightOption -> ["We can use the identity:", "sin2y + cos2y = 1 by rearranging it to", "sin2y = 1 - cos2y.", "We can now substitute the denominator", "with sin2y.", "Therefore, this option is correct."]
                 (Question3, Step2) -> case option of
-                                        Option1 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "sin y / cos y" ]
-                                        Option2 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "cos y / sin y" ]
-                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
-                                        RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
+                                        Option1 -> ["It is not possible", "to simplify the expression", "to cos3 y/ sin3 y using 1/siny = cscy" ]
+                                        Option2 -> ["It is not possible", "to simplify the expression", "to (cosy/siny)/ csc y using 1/siny = cscy" ]
+                                        Option3 -> ["It is not possible", "to simplify the expression", "to sin y using 1/siny = cscy" ]
+                                        RightOption -> ["Using 1/siny = cscy", "the expression simplifies to csc^2y.", "Therefore, this option is correct"]
                 (Question4, Step1) -> case option of
-                                        Option1 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "sin y / cos y" ]
-                                        Option2 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "cos y / sin y" ]
-                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
-                                        RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
+                                        Option1 -> ["It is not possible", "to simplify the expression", "to cos2 y/ sin2 y", "using sin2y + cos2y = 1" ]
+                                        Option2 -> ["It is not possible", "to simplify the expression", "to (cos y/ sin y)/csc y", "using sin2 y + cos2 y = 1" ]
+                                        Option3 -> ["It is not possible", "to simplify the expression", "to csc y", "using sin2 y + cos2 y = 1" ]
+                                        RightOption -> ["We can use the identity:", "sin2 y + cos2 y = 1 by rearranging it to", "sin2 y = 1 - cos2 y.", "We can now substitute the numerator", "with sin2y.", "Therefore, this option is correct."]
                 (Question4, Step2) -> case option of
-                                        Option1 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "sin y / cos y" ]
-                                        Option2 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "cos y / sin y" ]
-                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
-                                        RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
+                                        Option1 -> ["It is not possible", "to simplify the expression.", "to (cos y / sin y) / sin y." ]
+                                        Option2 -> ["It is not possible", "to simplify the expression.", "to cos y / (1 / sin y)." ]
+                                        Option3 -> ["cot y equals cos y / sin y", "It is not possible", "to simplify to cot y." ]
+                                        RightOption -> ["sin y can be factored out", "from the numerator and denominator", "and then cancelled out.", "Therefore, this option is correct"]
                 (Question4, Step3) -> case option of
-                                        Option1 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "sin y / cos y" ]
-                                        Option2 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "cos y / sin y" ]
-                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
-                                        RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
+                                        Option1 -> ["It is not possible", "to simplify the expression.", "to cos y / sin y." ]
+                                        Option2 -> ["csc y equals 1 / sin y.", "It is not possible", "to simplify the expression.", "to sin y / csc y."]
+                                        Option3 -> ["sec y equals 1 / cos y.", "It is not possible", "to simplify the expression.", "to sec y." ]
+                                        RightOption -> ["We can use the identity:", "tan y = sin y / cos y.", "Therefore, this option is correct"]
                 (Question5, Step1) -> case option of
-                                        Option1 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "sin y / cos y" ]
-                                        Option2 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "cos y / sin y" ]
-                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
-                                        RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
+                                        Option1 -> ["It is not possible", "to simplify the expression.", "to sin2 y." ]
+                                        Option2 -> ["csc y equals 1 / sin y.", "It is not possible", "to simplify the expression.", "to cos2 y/csc y." ]
+                                        Option3 -> ["cot2 y can be simplified to", "cos2y / sin2 y where sin y can", "be factored out, but", "it would still not simplify to", "(cos y/sin y) + (sin y / cos y).", "There is an easier simplification." ]
+                                        RightOption -> ["We can use the identity:", "cos y * sin y = sin 2y/2", "and substitute that in.", "Therefore, this option is correct"]
                 (Question5, Step2) -> case option of
-                                        Option1 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "sin y / cos y" ]
-                                        Option2 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "cos y / sin y" ]
-                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
-                                        RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
+                                        Option1 -> ["csc y equals 1 / sin y.", "It is not possible", "to simplify the expression.", "to csc y / (cos y / sin y)." ]
+                                        Option2 -> ["tan y equals sin y / cos y.", "It is not possible", "to simplify the expression.", "to tan y / (1 / tan y)." ]
+                                        Option3 -> ["It is not possible", "to simplify the expression.", "to cos y." ]
+                                        RightOption -> ["We can use the identity:", "cos y * sin y = sin 2y/2 again", "and substitute that in the second term.", "Therefore, this option is correct"]
                 (Question5, Step3) -> case option of
-                                        Option1 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "sin y / cos y" ]
-                                        Option2 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "cos y / sin y" ]
-                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
-                                        RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
+                                        Option1 -> ["cot y equals cos y / sin y", "and csc y equals 1 / sin y.", "It is not possible", "to simplify the expression.", "to cot y / csc y." ]
+                                        Option2 -> ["csc y equals 1 / sin y.", "It is not possible", "to simplify the expression.", "to csc y * sin y." ]
+                                        Option3 -> ["It is not possible", "to simplify the expression.", "to cos y." ]
+                                        RightOption -> ["Since the two terms have", "the same denominator, ", "we can add the two fractions together.", "Therefore, this option is correct"]
                 otherwise -> []
 
 hintText lst =  group (List.indexedMap (\idx line -> text line

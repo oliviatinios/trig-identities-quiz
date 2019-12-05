@@ -166,7 +166,7 @@ update msg model =
 -- make the Collage fit in VGA screen minus menu bars, for Chromebooks and iPads
 
 view model =
-    [ rectangle 400 290 |> filled blank |> addOutline (solid 2) orange |> move ( 55, 0 )
+    [ rectangle 400 300 |> filled blank |> addOutline (solid 2) orange |> move ( 55, 0 )
     , text (questionTitleStr model.question) |> size 16 |> bold |> filled orange |> move ( 20, 120 )
     , triangle 8|> filled (rgb 230 125 50) |> move ( 150, 125 ) |> notifyTap NextQuestion
     , triangle 8|> filled (rgb 230 125 50) |> rotate (degrees -60) |> move ( -50, 125 ) |> notifyTap PreviousQuestion
@@ -406,6 +406,20 @@ resultsSection question step answer option =
                                                         else white
                                                 )
                                     |> move ( -130, -40 - 20*(Basics.toFloat(getIndexFromStep step)) )
+                                , rectangle 90 25
+                                    |> filled (if answer == Default
+                                            then blank
+                                            else orange
+                                            )
+                                    |> move ( -85, -60 - 20*(Basics.toFloat(getIndexFromStep step)) )
+                                    |> notifyTap (ClickedChoice question step option)
+                                , text "Explaination"
+                                    |> filled (if answer == Default
+                                            then blank
+                                            else white
+                                            )
+                                    |> move ( -115, -63 - 20*(Basics.toFloat(getIndexFromStep step)) )
+                                    |> notifyTap (ClickedChoice question step option)
                                 ]
                     else if (answer == Incorrect)
                         then group [

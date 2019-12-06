@@ -464,7 +464,7 @@ resultsSection question step answer option =
 
 
 hintStr question step = case (question, step) of
-                (Question1, Step1) -> ["Express", "tan", "in", "terms","of","sine", "and", "cosine" ]
+                (Question1, Step1) -> ["Express tan", "in terms of", "sine", "and", "cosine" ]
                 (Question1, Step2) -> ["Reduce", "the" , "fraction", "obtained in", "Step1"]
                 (Question1, Step3) -> ["Express", "Step2" , "in", "terms", "of", "sec"]
                 (Question2, Step1) -> ["Take the", "comon", "denominator", "sine" ]
@@ -500,9 +500,9 @@ explainationStr question step option = case (question, step) of
                                         Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
                                         RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
                 (Question2, Step1) -> case option of
-                                        Option1 -> ["This is not ","what is obtained", "when sin is taken as the comon denominator"  ]
-                                        Option2 -> ["This is not ","what is obtained", "when sin is taken as the comon denominator"  ]
-                                        Option3 -> ["This is not ","what is obtained", "when sin is taken as the comon denominator"  ]
+                                        Option1 -> ["This is not ","what is obtained", "when sin is taken as", "the common denominator"  ]
+                                        Option2 -> ["This is not ","what is obtained", "when sin is taken as", "the common denominator"  ]
+                                        Option3 -> ["This is not ","what is obtained", "when sin is taken as", "the common denominator"  ]
                                         RightOption -> ["This is what is obtained when sin"," is taken as a denominator",  "Therefore, this option is correct"]
                 (Question2, Step2) -> case option of
                                         Option1 -> ["Equation needs to be", "substitued for cotangent"]

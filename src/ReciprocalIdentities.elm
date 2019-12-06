@@ -16,10 +16,10 @@ init =
     , question = Question1
     , hintState = NoPopUp
     , choiceState = NoPopUpChoice
-    , optionColourA = orange
-    , optionColourB = orange
-    , optionColourC = orange
-    , optionColourD = orange
+    , optionColourA = darkBlue
+    , optionColourB = darkBlue
+    , optionColourC = darkBlue
+    , optionColourD = darkBlue
     , option = Option1
     , state = None
     }
@@ -166,18 +166,18 @@ update msg model =
 -- make the Collage fit in VGA screen minus menu bars, for Chromebooks and iPads
 
 view model =
-    [ rectangle 400 290 |> filled blank |> addOutline (solid 2) orange |> move ( 55, 0 )
-    , text (questionTitleStr model.question) |> size 16 |> bold |> filled orange |> move ( 20, 120 )
-    , triangle 8|> filled (rgb 230 125 50) |> move ( 150, 125 ) |> notifyTap NextQuestion
-    , triangle 8|> filled (rgb 230 125 50) |> rotate (degrees -60) |> move ( -50, 125 ) |> notifyTap PreviousQuestion
-    , text (questionStr model.question) |> size 12 |> bold |> filled orange |> move ( -130, 95 )
+    [ rectangle 400 300 |> filled blank |> addOutline (solid 2) darkBlue |> move ( 55, 0 )
+    , text (questionTitleStr model.question) |> size 16 |> bold |> filled darkBlue |> move ( 20, 120 )
+    , triangle 8|> filled darkBlue |> move ( 150, 125 ) |> notifyTap NextQuestion
+    , triangle 8|> filled darkBlue |> rotate (degrees -60) |> move ( -50, 125 ) |> notifyTap PreviousQuestion
+    , text (questionStr model.question) |> size 12 |> bold |> filled darkBlue |> move ( -130, 95 )
     , resultsSection model.question model.step model.answer model.option
     ]
     ++ [solutionSection model.question model.step]
     ++ [optionsSection model.question model.step model.optionColourA model.optionColourB model.optionColourC model.optionColourD]
     ++ [ group
-            [ circle 12 |> filled blank |> addOutline (solid 3) orange |> makeTransparent 0.75 |> move ( 234, 125 ) |> notifyEnter (ClickedHint model.question model.step) |> notifyLeave ExitHint
-            , text "?" |> bold |> sansserif |> size 20 |> filled orange |> makeTransparent 0.75 |> move ( 228, 118 ) |> notifyEnter (ClickedHint model.question model.step) |> notifyLeave ExitHint ]
+            [ circle 12 |> filled blank |> addOutline (solid 3) darkBlue |> makeTransparent 0.75 |> move ( 234, 125 ) |> notifyEnter (ClickedHint model.question model.step) |> notifyLeave ExitHint
+            , text "?" |> bold |> sansserif |> size 20 |> filled darkBlue |> makeTransparent 0.75 |> move ( 228, 118 ) |> notifyEnter (ClickedHint model.question model.step) |> notifyLeave ExitHint ]
        ]
     ++
         case model.state of
@@ -249,7 +249,7 @@ solutionStr question = case question of
 
 solutionText step lst = group (List.indexedMap (\idx line -> text line
                                                             |> size 12
-                                                            |> filled orange
+                                                            |> filled darkBlue
                                                             |> move ( -130, 75-20*(Basics.toFloat idx)) ) (List.take (getIndexFromStep step) lst))
 
 
@@ -357,14 +357,14 @@ optionsText lst optionColourA optionColourB optionColourC optionColourD = group 
                                                                                                                     |> size 12
                                                                                                                     |> filled (getOptionColour idx optionColourA optionColourB optionColourC optionColourD)
                                                                                                                     |> move ( -130, 45-20*(Basics.toFloat idx))
-                                                                                                                    |> notifyEnter (updateOptionColour idx lightOrange)
-                                                                                                                    |> notifyLeave (updateOptionColour idx orange)
+                                                                                                                    |> notifyEnter (updateOptionColour idx lightBlue)
+                                                                                                                    |> notifyLeave (updateOptionColour idx darkBlue)
                                                                                                                     |> notifyTap (Tuple.second tuple) ) lst)
 
 
 optionsSection question step optionColourA optionColourB optionColourC optionColourD = group [ text (stepStr step)
                                                                                                     |> size 12
-                                                                                                    |> filled orange
+                                                                                                    |> filled darkBlue
                                                                                                     |> move ( -130, 65 )
                                                                                                 , optionsText (optionsStr question step) optionColourA optionColourB optionColourC optionColourD
                                                                                                 ] |> move ( 0, -20*(Basics.toFloat(getIndexFromStep step)) )
@@ -396,6 +396,20 @@ resultsSection question step answer option =
                                                         else white
                                                 )
                                     |> move ( -130, -40 - 20*(Basics.toFloat(getIndexFromStep step)) )
+                                , rectangle 90 25
+                                    |> filled (if answer == Default
+                                            then blank
+                                            else darkBlue
+                                            )
+                                    |> move ( -85, -60 - 20*(Basics.toFloat(getIndexFromStep step)) )
+                                    |> notifyTap (ClickedChoice question step option)
+                                , text "Explaination"
+                                    |> filled (if answer == Default
+                                            then blank
+                                            else white
+                                            )
+                                    |> move ( -115, -63 - 20*(Basics.toFloat(getIndexFromStep step)) )
+                                    |> notifyTap (ClickedChoice question step option)
                                 ]
                     else if (answer == Incorrect)
                         then group [
@@ -404,7 +418,7 @@ resultsSection question step answer option =
                                     |> filled red
                                     |> move ( -130, -40 - 20*(Basics.toFloat(getIndexFromStep step)) )
                                 , rectangle 90 25
-                                    |> filled orange
+                                    |> filled darkBlue
                                     |> move ( -85, -60 - 20*(Basics.toFloat(getIndexFromStep step)) )
                                     |> notifyTap (ClickedChoice question step option)
                                 , text "Explaination"
@@ -419,7 +433,7 @@ resultsSection question step answer option =
                                     |> filled green
                                     |> move ( -130, -40 - 20*(Basics.toFloat(getIndexFromStep step)) )
                                  , rectangle 60 25
-                                    |> filled orange
+                                    |> filled darkBlue
                                     |> move ( -100, -60 - 20*(Basics.toFloat(getIndexFromStep step)) )
                                     |> notifyTap NextStep
                                 , text "Next"
@@ -427,7 +441,7 @@ resultsSection question step answer option =
                                     |> move ( -112, -63 - 20*(Basics.toFloat(getIndexFromStep step)) )
                                     |> notifyTap NextStep
                                 , rectangle 90 25
-                                    |> filled orange
+                                    |> filled darkBlue
                                     |> move ( -5, -60 - 20*(Basics.toFloat(getIndexFromStep step)) )
                                     |> notifyTap (ClickedChoice question step option)
                                 , text "Explaination"
@@ -479,36 +493,61 @@ explainationStr question step option = case (question, step) of
                                         Option2 -> ["You cannot derive", "the sin y sin y", "towards the end of this equation" ]
                                         Option3 -> ["You cannot derive", "((siny - 1)(siny-1) / cosy sin y)"  ]
                                         RightOption -> ["You can derive this equtaion.", "Therefore, this option is correct"]
+                (Question1, Step5) -> case option of
+                                        Option1 -> ["You cannot derive", "(tany - 1){siny - 1)" ]
+                                        Option2 -> ["You cannot derive", "(cosy - 1){tany - 1)" ]
+                                        Option3 -> ["You cannot derive", "(tany - 1)(siny - 1)"  ]
+                                        RightOption -> ["You can derive this equtaion.", "Therefore, this option is correct"]
                 (Question2, Step1) -> case option of
                                         Option1 -> ["You cannot derive this.", "Think of one of the fundamental trig identities." ]
                                         Option2 -> ["You cannot derive this.", "Think of one of the fundamental trig identities." ]
                                         Option3 -> ["You cannot derive this.", "Think of one of the fundamental trig identities." ]
                                         RightOption -> ["You can derive this.", "Therefore, this option is correct"]
                 (Question2, Step2) -> case option of
-                                        Option1 -> ["You cannot derive this.", "To get the answer, you only need to perform basic arithmetic!"]
-                                        Option2 -> ["You cannot derive this.", "To get the answer, you only need to perform basic arithmetic!" ]
-                                        Option3 -> ["You cannot derive this.", "To get the answer, you only need to perform basic arithmetic!"]
+                                        Option1 -> ["You cannot derive this.", "To get the answer,", " you only need to perform basic arithmetic!"]
+                                        Option2 -> ["You cannot derive this.", "To get the answer,", " you only need to perform basic arithmetic!" ]
+                                        Option3 -> ["You cannot derive this.", "To get the answer,", " you only need to perform basic arithmetic!"]
                                         RightOption -> ["Yes, 1-1 = 0 so they cancel out.", "Therefore, this option is correct"]
                 (Question2, Step3) -> case option of
                                         Option1 -> ["You cannot derive this.","Try rewriting the equation to represent the", "latter part of this equation as", "a fraction" ]
                                         Option2 -> ["You cannot derive this.","Try rewriting the equation to represent the", "latter part of this equation as", "a fraction" ]
                                         Option3 -> ["You cannot derive this.","Try rewriting the equation to represent the", "latter part of this equation as", "a fraction" ]
-                                        RightOption -> ["You can rewrite the denomitor as 1/sec^2(y)", "Therefore, this option is correct"]
+                                        RightOption -> ["You can rewrite the denomitor", "as 1/sec^2(y)", "Therefore, this option is correct"]
                 (Question2, Step4) -> case option of
                                         Option1 -> ["You cannot derive this.", "Think of one of the fundamental trig identities." ]
                                         Option2 -> ["You cannot derive this.", "Think of one of the fundamental trig identities."]
                                         Option3 -> ["You cannot derive this.", "Think of one of the fundamental trig identities." ]
+                                        RightOption -> ["You can derive this.", "Therefore, this option is correct"]
+                (Question2, Step5) -> case option of
+                                        Option1 -> ["You cannot derive this.", "Think of one of the recipricoal identities." ]
+                                        Option2 -> ["You cannot derive this.", "Think of one of the recipricoal identities."]
+                                        Option3 -> ["You cannot derive this.", "Think of one of the recipricoal identities." ]
                                         RightOption -> ["You can derive this.", "Therefore, this option is correct"]
                 (Question3, Step1) -> case option of
                                         Option1 -> ["No this cannot be correct", "because you can't get 4" ]
                                         Option2 -> ["No this cannot be correct", "because you can't get 4"  ]
                                         Option3 -> ["No this cannot be correct", "because you can't getcos^4(y)"  ]
                                         RightOption -> ["Yes, the cos y can be multiplied to cos^2(y).", "Therefore, this option is correct"]
+                (Question3, Step2) -> case option of
+                                        Option1 -> ["You cannot derive this.", "Try substituting in 1 - sin^2y." ]
+                                        Option2 -> ["You cannot derive this.", "Try substituting in 1 - sin^2y."  ]
+                                        Option3 -> ["You cannot derive this.", "Try substituting in 1 - sin^2y."  ]
+                                        RightOption -> ["Yes, you can derive this.", "Therefore, this option is correct"]
+                (Question4, Step1) -> case option of
+                                        Option1 -> ["You cannot derive this.", "Try using the difference of squares." ]
+                                        Option2 -> ["You cannot derive this.", "Try using the difference of squares."  ]
+                                        Option3 -> ["You cannot derive this.", "Try using the difference of squares."  ]
+                                        RightOption -> ["Yes, you can derive this.", "Therefore, this option is correct"]
                 (Question5, Step1) -> case option of
                                         Option1 -> ["You cannot derive this.", "Think of one of the fundamental trig identities." ]
                                         Option2 -> ["You cannot derive this.", "Think of one of the fundamental trig identities." ]
                                         Option3 -> ["You cannot derive this.", "Think of one of the fundamental trig identities." ]
                                         RightOption -> ["Yes, csc^2(y) can be rewritten", "as 1+cot^2(y)", "Therefore, this option is correct"]
+                (Question5, Step2) -> case option of
+                                        Option1 -> ["You cannot derive this.", "There are terms which you subtract in the expression." ]
+                                        Option2 -> ["You cannot derive this.", "There are terms which you subtract in the expression." ]
+                                        Option3 -> ["You cannot derive this.", "There are terms which you subtract in the expression." ]
+                                        RightOption -> ["Yes, the cot^2y substract each other.", "Therefore, this option is correct"]
                 
                 otherwise -> []
 

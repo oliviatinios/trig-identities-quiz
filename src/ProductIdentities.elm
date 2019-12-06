@@ -16,10 +16,10 @@ init =
     , question = Question1
     , hintState = NoPopUp
     , choiceState = NoPopUpChoice
-    , optionColourA = orange
-    , optionColourB = orange
-    , optionColourC = orange
-    , optionColourD = orange
+    , optionColourA = darkGreen
+    , optionColourB = darkGreen
+    , optionColourC = darkGreen
+    , optionColourD = darkGreen
     , option = Option1
     , state = None
     }
@@ -166,18 +166,18 @@ update msg model =
 -- make the Collage fit in VGA screen minus menu bars, for Chromebooks and iPads
 
 view model =
-    [ rectangle 400 290 |> filled blank |> addOutline (solid 2) orange |> move ( 55, 0 )
-    , text (questionTitleStr model.question) |> size 16 |> bold |> filled orange |> move ( 20, 120 )
-    , triangle 8|> filled (rgb 230 125 50) |> move ( 150, 125 ) |> notifyTap NextQuestion
-    , triangle 8|> filled (rgb 230 125 50) |> rotate (degrees -60) |> move ( -50, 125 ) |> notifyTap PreviousQuestion
-    , text (questionStr model.question) |> size 12 |> bold |> filled orange |> move ( -130, 95 )
+    [ rectangle 400 300 |> filled blank |> addOutline (solid 2) darkGreen |> move ( 55, 0 )
+    , text (questionTitleStr model.question) |> size 16 |> bold |> filled darkGreen |> move ( 20, 120 )
+    , triangle 8|> filled darkGreen |> move ( 150, 125 ) |> notifyTap NextQuestion
+    , triangle 8|> filled darkGreen |> rotate (degrees -60) |> move ( -50, 125 ) |> notifyTap PreviousQuestion
+    , text (questionStr model.question) |> size 12 |> bold |> filled darkGreen |> move ( -130, 95 )
     , resultsSection model.question model.step model.answer model.option
     ]
     ++ [solutionSection model.question model.step]
     ++ [optionsSection model.question model.step model.optionColourA model.optionColourB model.optionColourC model.optionColourD]
     ++ [ group
-            [ circle 12 |> filled blank |> addOutline (solid 3) orange |> makeTransparent 0.75 |> move ( 234, 125 ) |> notifyEnter (ClickedHint model.question model.step) |> notifyLeave ExitHint
-            , text "?" |> bold |> sansserif |> size 20 |> filled orange |> makeTransparent 0.75 |> move ( 228, 118 ) |> notifyEnter (ClickedHint model.question model.step) |> notifyLeave ExitHint ]
+            [ circle 12 |> filled blank |> addOutline (solid 3) darkGreen |> makeTransparent 0.75 |> move ( 234, 125 ) |> notifyEnter (ClickedHint model.question model.step) |> notifyLeave ExitHint
+            , text "?" |> bold |> sansserif |> size 20 |> filled darkGreen |> makeTransparent 0.75 |> move ( 228, 118 ) |> notifyEnter (ClickedHint model.question model.step) |> notifyLeave ExitHint ]
        ]
     ++
         case model.state of
@@ -247,7 +247,7 @@ solutionStr question = case question of
 
 solutionText step lst = group (List.indexedMap (\idx line -> text line
                                                             |> size 12
-                                                            |> filled orange
+                                                            |> filled darkGreen
                                                             |> move ( -130, 75-20*(Basics.toFloat idx)) ) (List.take (getIndexFromStep step) lst))
 
 
@@ -275,10 +275,10 @@ optionsStr question step = case (question, step) of
                                       , ( "c) = 1/2 [sin(5y + 2y) + sin(2y - 2y)]", WrongAnswer2)
                                       , ( "d) = 1/2 [sin(4y + 2y) + sin(2y - 2y)]", WrongAnswer3)
                                       ]
-                (Question2, Step2) -> [ ( "a) = 1/2 [sin(6y) + sin(2y)]", WrongAnswer1)
-                                      , ( "b) = 1/2 [sin(6y) + sin(2y)]", WrongAnswer2)
+                (Question2, Step2) -> [ ( "a) = 1/2 [sin(4y) + sin(2y)]", WrongAnswer1)
+                                      , ( "b) = 1/2 [sin(2y) + sin(2y)]", WrongAnswer2)
                                       , ( "c) = 1/2 [sin(6y) + sin(2y)]", RightAnswer)
-                                      , ( "d) = 1/2 [sin(6y) + sin(2y)]", WrongAnswer3)
+                                      , ( "d) = 1/2 [sin(5y) + sin(2y)]", WrongAnswer3)
                                       ]
                 (Question3, Step1) -> [ ( "a) = 1/2 [ cos(5y - 5y) + cos(3y + 5y)]", WrongAnswer1)
                                       , ( "b) = 1/2 [ cos(3y - 5y) + cos(3y + 5y)]", RightAnswer)
@@ -286,7 +286,7 @@ optionsStr question step = case (question, step) of
                                       , ( "d) = 1/2 [ cos(2y - 5y) + cos(8y + 5y)]", WrongAnswer3)
                                       ]
                 (Question3, Step2) -> [ ( "a) = 1/3 [cos(2y) + cos(8y)]", WrongAnswer1)
-                                      , ( "b) = 1/3 [cos(2y) + cos(8y)]", WrongAnswer2)
+                                      , ( "b) = 1/3 [cos(8y) + cos(8y)]", WrongAnswer2)
                                       , ( "c) = 1/2 [cos(2y) + cos(8y)]", RightAnswer)
                                       , ( "d) = 1/2 [cos(8y) + cos(8y)]", WrongAnswer3)
                                       ]
@@ -345,14 +345,14 @@ optionsText lst optionColourA optionColourB optionColourC optionColourD = group 
                                                                                                                     |> size 12
                                                                                                                     |> filled (getOptionColour idx optionColourA optionColourB optionColourC optionColourD)
                                                                                                                     |> move ( -130, 45-20*(Basics.toFloat idx))
-                                                                                                                    |> notifyEnter (updateOptionColour idx lightOrange)
-                                                                                                                    |> notifyLeave (updateOptionColour idx orange)
+                                                                                                                    |> notifyEnter (updateOptionColour idx lightGreen)
+                                                                                                                    |> notifyLeave (updateOptionColour idx darkGreen)
                                                                                                                     |> notifyTap (Tuple.second tuple) ) lst)
 
 
 optionsSection question step optionColourA optionColourB optionColourC optionColourD = group [ text (stepStr step)
                                                                                                     |> size 12
-                                                                                                    |> filled orange
+                                                                                                    |> filled darkGreen
                                                                                                     |> move ( -130, 65 )
                                                                                                 , optionsText (optionsStr question step) optionColourA optionColourB optionColourC optionColourD
                                                                                                 ] |> move ( 0, -20*(Basics.toFloat(getIndexFromStep step)) )
@@ -384,6 +384,20 @@ resultsSection question step answer option =
                                                         else white
                                                 )
                                     |> move ( -130, -40 - 20*(Basics.toFloat(getIndexFromStep step)) )
+                                , rectangle 90 25
+                                    |> filled (if answer == Default
+                                            then blank
+                                            else darkGreen
+                                            )
+                                    |> move ( -85, -60 - 20*(Basics.toFloat(getIndexFromStep step)) )
+                                    |> notifyTap (ClickedChoice question step option)
+                                , text "Explaination"
+                                    |> filled (if answer == Default
+                                            then blank
+                                            else white
+                                            )
+                                    |> move ( -115, -63 - 20*(Basics.toFloat(getIndexFromStep step)) )
+                                    |> notifyTap (ClickedChoice question step option)
                                 ]
                     else if (answer == Incorrect)
                         then group [
@@ -392,7 +406,7 @@ resultsSection question step answer option =
                                     |> filled red
                                     |> move ( -130, -40 - 20*(Basics.toFloat(getIndexFromStep step)) )
                                 , rectangle 90 25
-                                    |> filled orange
+                                    |> filled darkGreen
                                     |> move ( -85, -60 - 20*(Basics.toFloat(getIndexFromStep step)) )
                                     |> notifyTap (ClickedChoice question step option)
                                 , text "Explaination"
@@ -407,7 +421,7 @@ resultsSection question step answer option =
                                     |> filled green
                                     |> move ( -130, -40 - 20*(Basics.toFloat(getIndexFromStep step)) )
                                  , rectangle 60 25
-                                    |> filled orange
+                                    |> filled darkGreen
                                     |> move ( -100, -60 - 20*(Basics.toFloat(getIndexFromStep step)) )
                                     |> notifyTap NextStep
                                 , text "Next"
@@ -415,7 +429,7 @@ resultsSection question step answer option =
                                     |> move ( -112, -63 - 20*(Basics.toFloat(getIndexFromStep step)) )
                                     |> notifyTap NextStep
                                 , rectangle 90 25
-                                    |> filled orange
+                                    |> filled darkGreen
                                     |> move ( -5, -60 - 20*(Basics.toFloat(getIndexFromStep step)) )
                                     |> notifyTap (ClickedChoice question step option)
                                 , text "Explaination"
@@ -455,15 +469,30 @@ explainationStr question step option = case (question, step) of
                                         Option2 -> ["We cannot derive", "cos(8x/2)" ]
                                         Option3 -> ["We cannot derive", "cos(7x/2)" ]
                                         RightOption -> ["We can rewrite the equation as such.", "Therefore, this option is correct"]
+                (Question1, Step3) -> case option of
+                                        Option1 -> ["We cannot derive", "cos(3x) + cos(7x)" ]
+                                        Option2 -> ["We cannot derive", "cos(5x) + cos(5x)" ]
+                                        Option3 -> ["We cannot derive", "cos(2x) + cos(6x)" ]
+                                        RightOption -> ["We can rewrite the equation as such.", "Therefore, this option is correct"]
                 (Question2, Step1) -> case option of
                                         Option1 -> ["We cannot derive", "sin(5y + 2y)" ]
                                         Option2 -> ["We cannot derive", "sin(5y + 2y)" ]
                                         Option3 -> ["We cannot derive", "sin(2y - 2y)"]
                                         RightOption -> ["Using the product of sines,", "we can derive this equation.", "Therefore, this option is correct"]
+                (Question2, Step2) -> case option of
+                                        Option1 -> ["We cannot derive", "sin(4y + 2y)" ]
+                                        Option2 -> ["We cannot derive", "sin(2y + 2y)" ]
+                                        Option3 -> ["We cannot derive", "sin(5y - 2y)"]
+                                        RightOption -> ["Using the product of sines,", "we can derive this equation.", "Therefore, this option is correct"]
                 (Question3, Step1) -> case option of
                                         Option1 -> ["We cannot derive", "cos(5y - 5y)" ]
                                         Option2 -> ["We cannot derive", "cos(9y - 5y)" ]
                                         Option3 -> ["We cannot derive", "cos(2y - 5y)" ]
+                                        RightOption -> ["Using the product of cosines,", "we can derive this equation.", "Therefore, this option is correct"]
+                (Question3, Step2) -> case option of
+                                        Option1 -> ["We cannot derive", "1/3[cos(2y + 8y)]" ]
+                                        Option2 -> ["We cannot derive", "1/3[cos(8y + 8y)]" ]
+                                        Option3 -> ["We cannot derive", "1/3[cos(8y + 8y)]" ]
                                         RightOption -> ["Using the product of cosines,", "we can derive this equation.", "Therefore, this option is correct"]
                 (Question4, Step1) -> case option of
                                         Option1 -> ["We cannot derive", "the 6 coefficient" ]
@@ -471,6 +500,11 @@ explainationStr question step option = case (question, step) of
                                         Option3 -> ["The 2 cofficient is correct", "however we cannot derive cos(4y+2y)" ]
                                         RightOption -> ["Using the difference of sines,", "we can derive this equation.", "Therefore, this option is correct"]
                 (Question4, Step2) -> case option of
+                                        Option1 -> ["This is not correct.", "Try to perform simple arithmetics." ]
+                                        Option2 -> ["This is not correct.", "Try to perform simple arithmetics." ]
+                                        Option3 -> ["This is not correct.", "Try to perform simple arithmetics."  ]
+                                        RightOption -> ["Yes this is correct. 2y/2=y", "and 6y/2=3y", "Therefore, this option is correct"]
+                (Question4, Step3) -> case option of
                                         Option1 -> ["This is not correct.", "Try to perform simple arithmetics." ]
                                         Option2 -> ["This is not correct.", "Try to perform simple arithmetics." ]
                                         Option3 -> ["This is not correct.", "Try to perform simple arithmetics."  ]
@@ -484,6 +518,11 @@ explainationStr question step option = case (question, step) of
                                         Option1 -> ["We cannot derive the 2 coefficient", "in the first part" ]
                                         Option2 -> ["We cannot derive the 2 coefficient", "in the first part" ]
                                         Option3 -> ["We cannot derive the 1 coefficient", "in both parts" ]
+                                        RightOption -> ["We can derive this by splitting the terms.", "Therefore, this option is correct"]
+                (Question5, Step3) -> case option of
+                                        Option1 -> ["We cannot derive this.", "Try to apply a reciprocal formula" ]
+                                        Option2 -> ["We cannot derive this.", "Try to apply a reciprocal formula" ]
+                                        Option3 -> ["We cannot derive this.", "Try to apply a reciprocal formula" ]
                                         RightOption -> ["We can derive this by splitting the terms.", "Therefore, this option is correct"]
                 otherwise -> []
 

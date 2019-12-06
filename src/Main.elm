@@ -115,7 +115,7 @@ view model =
     collage 640 380 <|
         (case model.page of
             Home ->
-                [ rectangle 400 290 |> filled blank |> addOutline (solid 2) charcoal |> move ( 55, 0 )
+                [ rectangle 400 300 |> filled blank |> addOutline (solid 2) charcoal |> move ( 55, 0 )
                 , text "Welcome!" |> size 20 |> bold |> filled charcoal |> move ( 10, 10 )
                 , text "Please select a lesson in the left panel to get started." |> size 16 |> filled charcoal |> move ( -110, -10 )
                 ]
@@ -137,7 +137,7 @@ view model =
         )
             ++ [ rect 200 70 |> filled blank |> move ( 0, -190 ) |> notifyMouseMoveAt MoveInRect ]
             ++ [ group
-                    [ rectangle 150 50
+                    [ rectangle 150 60
                         |> filled (oneColour model)
                         |> addOutline (solid 2)
                             (if model.page == FundamentalIdentities then
@@ -157,7 +157,7 @@ view model =
                     |> notifyEnter In1
                     |> notifyLeave Out1
                , group
-                    [ rectangle 150 50
+                    [ rectangle 150 60
                         |> filled (twoColour model)
                         |> addOutline (solid 2)
                             (if model.page == PythagoreanIdentities then
@@ -170,14 +170,14 @@ view model =
                                 purple
                             )
                         |> makeTransparent 0.7
-                        |> move ( -230, 60 )
-                    , text "Pythagorean Identities" |> bold |> sansserif |> centered |> filled (twoAccent model) |> move ( -230, 55 )
+                        |> move ( -230, 40 )
+                    , text "Pythagorean Identities" |> bold |> sansserif |> centered |> filled (twoAccent model) |> move ( -230, 35 )
                     ]
                     |> notifyTap Goto2
                     |> notifyEnter In2
                     |> notifyLeave Out2
                , group
-                    [ rectangle 150 50
+                    [ rectangle 150 60
                         |> filled (threeColour model)
                         |> addOutline (solid 2)
                             (if model.page == ReciprocalIdentities then
@@ -190,14 +190,14 @@ view model =
                                 darkBlue
                             )
                         |> makeTransparent 0.7
-                        |> move ( -230, 0 )
-                    , text "Reciprocal Identities" |> bold |> sansserif |> centered |> filled (threeAccent model) |> move ( -230, -5 )
+                        |> move ( -230, -40 )
+                    , text "Reciprocal Identities" |> bold |> sansserif |> centered |> filled (threeAccent model) |> move ( -230, -45 )
                     ]
                     |> notifyTap Goto3
                     |> notifyEnter In3
                     |> notifyLeave Out3
                , group
-                    [ rectangle 150 50
+                    [ rectangle 150 60
                         |> filled (fourColour model)
                         |> addOutline (solid 2)
                             (if model.page == ProductIdentities then
@@ -210,32 +210,12 @@ view model =
                                 darkGreen
                             )
                         |> makeTransparent 0.7
-                        |> move ( -230, -60 )
-                    , text "Product Identities" |> bold |> sansserif |> centered |> filled (fourAccent model) |> move ( -230, -65 )
+                        |> move ( -230, -120 )
+                    , text "Product Identities" |> bold |> sansserif |> centered |> filled (fourAccent model) |> move ( -230, -125 )
                     ]
                     |> notifyTap Goto4
                     |> notifyEnter In4
                     |> notifyLeave Out4
-               , group
-                    [ rectangle 150 50
-                        |> filled (fiveColour model)
-                        |> addOutline (solid 2)
-                            (if model.page == Summary then
-                                darkRed
-
-                             else if model.fiveSat == 0 then
-                                blank
-
-                             else
-                                darkRed
-                            )
-                        |> makeTransparent 0.7
-                        |> move ( -230, -120 )
-                    , text "Other Formulas" |> bold |> sansserif |> centered |> filled (fiveAccent model) |> move ( -230, -125 )
-                    ]
-                    |> notifyTap Goto5
-                    |> notifyEnter In5
-                    |> notifyLeave Out5
                ]
 
 

@@ -166,7 +166,7 @@ update msg model =
 -- make the Collage fit in VGA screen minus menu bars, for Chromebooks and iPads
 
 view model =
-    [ rectangle 400 290 |> filled blank |> addOutline (solid 2) orange |> move ( 55, 0 )
+    [ rectangle 400 300 |> filled blank |> addOutline (solid 2) orange |> move ( 55, 0 )
     , text (questionTitleStr model.question) |> size 16 |> bold |> filled orange |> move ( 20, 120 )
     , triangle 8|> filled (rgb 230 125 50) |> move ( 150, 125 ) |> notifyTap NextQuestion
     , triangle 8|> filled (rgb 230 125 50) |> rotate (degrees -60) |> move ( -50, 125 ) |> notifyTap PreviousQuestion
@@ -406,6 +406,20 @@ resultsSection question step answer option =
                                                         else white
                                                 )
                                     |> move ( -130, -40 - 20*(Basics.toFloat(getIndexFromStep step)) )
+                                , rectangle 90 25
+                                    |> filled (if answer == Default
+                                            then blank
+                                            else orange
+                                            )
+                                    |> move ( -85, -60 - 20*(Basics.toFloat(getIndexFromStep step)) )
+                                    |> notifyTap (ClickedChoice question step option)
+                                , text "Explaination"
+                                    |> filled (if answer == Default
+                                            then blank
+                                            else white
+                                            )
+                                    |> move ( -115, -63 - 20*(Basics.toFloat(getIndexFromStep step)) )
+                                    |> notifyTap (ClickedChoice question step option)
                                 ]
                     else if (answer == Incorrect)
                         then group [
@@ -486,75 +500,75 @@ explainationStr question step option = case (question, step) of
                                         Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
                                         RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
                 (Question2, Step1) -> case option of
-                                        Option1 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "sin y / cos y" ]
-                                        Option2 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "cos y / sin y" ]
-                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
-                                        RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
+                                        Option1 -> ["This is not ","what is obtained", "when sin is taken as the comon denominator"  ]
+                                        Option2 -> ["This is not ","what is obtained", "when sin is taken as the comon denominator"  ]
+                                        Option3 -> ["This is not ","what is obtained", "when sin is taken as the comon denominator"  ]
+                                        RightOption -> ["This is what is obtained when sin"," is taken as a denominator",  "Therefore, this option is correct"]
                 (Question2, Step2) -> case option of
-                                        Option1 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "sin y / cos y" ]
-                                        Option2 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "cos y / sin y" ]
-                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
-                                        RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
+                                        Option1 -> ["Equation needs to be", "substitued for cotangent"]
+                                        Option2 -> ["Equation needs to be", "substitued for cotangent"]
+                                        Option3 -> ["Equation needs to be", "substitued for cotangent"]
+                                        RightOption -> ["Equation is substitued for contangent", "Therefore, this option is correct"]
                 (Question2, Step3) -> case option of
-                                        Option1 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "sin y / cos y" ]
-                                        Option2 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "cos y / sin y" ]
-                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
-                                        RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
+                                        Option1 -> ["Use csc x = 1/sin x" ]
+                                        Option2 -> ["Use csc x = 1/sin x" ]
+                                        Option3 -> ["Use csc x = 1/sin x"  ]
+                                        RightOption -> ["Relationship between secant and csc","is used", "Therefore, this option is correct"]
                 (Question2, Step4) -> case option of
-                                        Option1 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "sin y / cos y" ]
-                                        Option2 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "cos y / sin y" ]
-                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
-                                        RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
+                                        Option1 -> ["constant/constant^2 = 1/constant" ]
+                                        Option2 -> ["constant/constant^2 = 1/constant" ]
+                                        Option3 -> ["constant/constant^2 = 1/constant"  ]
+                                        RightOption -> ["This has been reduced correctly", "Therefore, this option is correct"]
                 (Question2, Step5) -> case option of
-                                        Option1 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "sin y / cos y" ]
-                                        Option2 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "cos y / sin y" ]
-                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
-                                        RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
+                                        Option1 -> ["Use csc x = 1/sin x" ]
+                                        Option2 -> ["Use csc x = 1/sin x" ]
+                                        Option3 -> ["Use csc x = 1/sin x"]
+                                        RightOption -> ["csc x = 1/sin x","has been correctly used", "Therefore, this option is correct"]
                 (Question3, Step1) -> case option of
-                                        Option1 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "sin y / cos y" ]
-                                        Option2 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "cos y / sin y" ]
-                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
-                                        RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
+                                        Option1 -> ["cot x does not equal cos2x" ]
+                                        Option2 -> ["cot x should be substituted", " in with the correct values" ]
+                                        Option3 -> ["The identity has", "not been used", "correctly" ]
+                                        RightOption -> ["The identity has", "been used", "correctly", "Therefore, this option is correct"]
                 (Question3, Step2) -> case option of
-                                        Option1 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "sin y / cos y" ]
-                                        Option2 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "cos y / sin y" ]
-                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
-                                        RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
+                                        Option1 -> ["csc x is equal to 1/sin x","and that should be substituted" ]
+                                        Option2 -> ["csc x is equal to 1/sin x","and that should be substituted" ]
+                                        Option3 -> ["csc x is equal to 1/sin x","and that should be substituted" ]
+                                        RightOption -> ["The fraction has","been substituted correctly", "Therefore, this option is correct"]
                 (Question3, Step3) -> case option of
-                                        Option1 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "sin y / cos y" ]
-                                        Option2 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "cos y / sin y" ]
-                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
-                                        RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
+                                        Option1 -> ["Fractions in the former","step have not been reduced","correctly" ]
+                                        Option2 -> ["Fractions in the former","step have not been reduced","correctly"  ]
+                                        Option3 -> ["Fractions in the former","step have not been reduced","correctly" ]
+                                        RightOption -> ["Fractions have been reduced", "correctly", "Therefore, this option is correct"]
                 (Question4, Step1) -> case option of
-                                        Option1 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "sin y / cos y" ]
-                                        Option2 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "cos y / sin y" ]
-                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
-                                        RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
+                                        Option1 -> ["tan y", "simplified to", "sin y / cos y" ]
+                                        Option2 -> ["tan y", "simplified to", "sin y / cos y"]
+                                        Option3 -> ["tan y", "simplified to", "sin y / cos y" ]
+                                        RightOption -> [ "tan y and cot y", "have been simplified", "correctly", "Therefore, this option is correct"]
                 (Question4, Step2) -> case option of
-                                        Option1 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "sin y / cos y" ]
-                                        Option2 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "cos y / sin y" ]
-                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
-                                        RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
+                                        Option1 -> ["Reduce fractions","in the former step correctly" ]
+                                        Option2 -> ["Reduce fractions","in the former step correctly"  ]
+                                        Option3 -> ["Reduce fractions","in the former step correctly"  ]
+                                        RightOption -> ["Fractions in the former","step have been added ","and reduced correctly", "Therefore, this option is correct"]
                 (Question4, Step3) -> case option of
-                                        Option1 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "sin y / cos y" ]
-                                        Option2 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "cos y / sin y" ]
-                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
-                                        RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
+                                        Option1 -> ["Reduce the fraction by","crossing out the like terms","in numerator and denominator" ]
+                                        Option2 -> ["Reduce the fraction by","crossing out the like terms","in numerator and denominator" ]
+                                        Option3 -> ["Reduce the fraction by","crossing out the like terms","in numerator and denominator"  ]
+                                        RightOption -> ["Fractions have been","reduced correctly", "Therefore, this option is correct"]
                 (Question5, Step1) -> case option of
-                                        Option1 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "sin y / cos y" ]
-                                        Option2 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "cos y / sin y" ]
-                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
-                                        RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
+                                        Option1 -> ["Substitute for csc" ]
+                                        Option2 -> ["Substitute for csc"  ]
+                                        Option3 -> ["Substitute for csc" ]
+                                        RightOption -> ["This has been ","substituted correctly for csc", "Therefore, this option is correct"]
                 (Question5, Step2) -> case option of
-                                        Option1 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "sin y / cos y" ]
-                                        Option2 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "cos y / sin y" ]
-                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
-                                        RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
+                                        Option1 -> ["Please reduce the fraction", " by adding first ","and then multiplying" ]
+                                        Option2 -> ["Please reduce the fraction", " by adding first ","and then multiplying" ] 
+                                        Option3 -> ["Please reduce the fraction", " by adding first ","and then multiplying" ] 
+                                        RightOption -> ["Fractions have been ","reduced correctly", "Therefore, this option is correct"]
                 (Question5, Step3) -> case option of
-                                        Option1 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "sin y / cos y" ]
-                                        Option2 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "1 / sin y cannot be", "simplified to", "cos y / sin y" ]
-                                        Option3 -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y does not equal", "cos y / sin y" ]
-                                        RightOption -> ["The LHS can be rewritten", "as tan y * (1 / sin y).", "tan y can be", "written as", "sin y / cos y.", "Therefore, this option is correct"]
+                                        Option1 -> ["Use the correct identity"," sin^2 x + cos^2 x = 1"," to simplify " ]
+                                        Option2 -> ["Use the correct identity"," sin^2 x + cos^2 x = 1"," to simplify "]
+                                        Option3 -> ["Use the correct identity"," sin^2 x + cos^2 x = 1"," to simplify "]
+                                        RightOption -> ["Correct identity has","been used to simplify", "Therefore, this option is correct"]
                 otherwise -> []
 
 

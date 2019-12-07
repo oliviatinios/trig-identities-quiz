@@ -11,7 +11,7 @@ import Tuple
 init =
     { time = 0
     , notify = NotifyTap
-    , answer = Default
+    , answerState = Default
     , step = Step1
     , question = Question1
     , hintState = NoPopUp
@@ -20,15 +20,16 @@ init =
     , optionColourB = darkBlue
     , optionColourC = darkBlue
     , optionColourD = darkBlue
-    , option = Option1
+    , option = 0
+    , optionSelected = False
     , state = None
     }
 
 type HintState = NoPopUp | PopUp Questions Steps
 
-type ExplanationState = NoPopUpExplanation | PopUpExplanation Questions Steps Options
+type ExplanationState = NoPopUpExplanation | PopUpExplanation Questions Steps Int
 
-type Explanations = Default | Incorrect | Correct
+type AnswerState = Default | Incorrect | Correct
 
 type Steps
     = Step1
@@ -43,12 +44,6 @@ type Questions
     | Question3
     | Question4
     | Question5
-
-type Options
-    = Option1
-    | Option2
-    | Option3
-    | RightOption
 
 type State
     = None
@@ -67,33 +62,21 @@ update msg model =
         Notif notif ->
             { model | notify = notif }
 
-        WrongAnswer1
+        ClickedOption option answerState
             -> { model
-                | answer = Incorrect
-                , option = Option1
-                }
-
-        WrongAnswer2
-            -> { model
-                | answer = Incorrect
-                , option = Option2
-                }
-
-        WrongAnswer3
-            -> { model
-                | answer = Incorrect
-                , option = Option3
-                }
-
-        RightAnswer
-            -> { model
-                | answer = Correct
-                , option = RightOption
+                | option = option
+                , answerState = answerState
+                , optionSelected = True
                 }
 
         NextStep
             -> { model
-                | answer = Default
+                | answerState = Default
+                , optionSelected = False
+                , optionColourA = darkBlue
+                , optionColourB = darkBlue
+                , optionColourC = darkBlue
+                , optionColourD = darkBlue
                 , step =
                     case model.step of
                         Step1 -> Step2
@@ -105,8 +88,13 @@ update msg model =
 
         NextQuestion
             -> { model
-                | answer = Default
+                | answerState = Default
                 , step = Step1
+                , optionSelected = False
+                , optionColourA = darkBlue
+                , optionColourB = darkBlue
+                , optionColourC = darkBlue
+                , optionColourD = darkBlue
                 , question =
                     case model.question of
                         Question1 -> Question2
@@ -118,7 +106,7 @@ update msg model =
 
         PreviousQuestion
             -> { model
-                | answer = Default
+                | answerState = Default
                 , step = Step1
                 , question =
                     case model.question of
@@ -171,10 +159,10 @@ view model =
     , triangle 8|> filled darkBlue |> move ( 150, 125 ) |> notifyTap NextQuestion
     , triangle 8|> filled darkBlue |> rotate (degrees -60) |> move ( -50, 125 ) |> notifyTap PreviousQuestion
     , text (questionStr model.question) |> size 12 |> bold |> filled darkBlue |> move ( -130, 95 )
-    , resultsSection model.question model.step model.answer model.option
+    , resultsSection model.question model.step model.answerState model.option
     ]
     ++ [solutionSection model.question model.step]
-    ++ [optionsSection model.question model.step model.optionColourA model.optionColourB model.optionColourC model.optionColourD]
+    ++ [optionsSection model.question model.step model.optionSelected model.optionColourA model.optionColourB model.optionColourC model.optionColourD]
     ++ [ group
             [ circle 12 |> filled blank |> addOutline (solid 3) darkBlue |> makeTransparent 0.75 |> move ( 234, 125 ) |> notifyEnter (ClickedHint model.question model.step) |> notifyLeave ExitHint
             , text "?" |> bold |> sansserif |> size 20 |> filled darkBlue |> makeTransparent 0.75 |> move ( 228, 118 ) |> notifyEnter (ClickedHint model.question model.step) |> notifyLeave ExitHint ]
@@ -257,80 +245,80 @@ solutionSection question step = solutionText step (solutionStr question)
 
 
 optionsStr question step = case (question, step) of
-                (Question1, Step1) -> [ ( "a) = ((sin y sin y - sin y)/cos y) ((cos y sin y - cos y)/sin y)", WrongAnswer1)
-                                      , ( "b) = ((sin y cos y - sin y)/cos y) ((tan y sin y - cos y)/sin y)", WrongAnswer2)
-                                      , ( "c) = ((tan y cos y - sin y)/cos y) ((tan y sin y - cos y)/tan y)", WrongAnswer3)
-                                      , ( "d) = ((sin y cos y - sin y)/cos y) ((cos y sin y - cos y)/sin y)", RightAnswer)
+                (Question1, Step1) -> [ ( "a) = ((sin y sin y - sin y)/cos y) ((cos y sin y - cos y)/sin y)", Incorrect)
+                                      , ( "b) = ((sin y cos y - sin y)/cos y) ((tan y sin y - cos y)/sin y)", Incorrect)
+                                      , ( "c) = ((tan y cos y - sin y)/cos y) ((tan y sin y - cos y)/tan y)", Incorrect)
+                                      , ( "d) = ((sin y cos y - sin y)/cos y) ((cos y sin y - cos y)/sin y)", Correct)
                                       ]
-                (Question1, Step2) -> [ ( "a) = ((tan y cos y - sin y)/cos y) ((cos y tan y - cos y)/sin y)", WrongAnswer1)
-                                      , ( "b) = ((sin y cos y - sin y)/cos y) ((cos y sin y - cos y)/sin y)", RightAnswer)
-                                      , ( "c) = ((tan y cos y - sin y)/cos y) ((cos y sin y - cos y)/sin y)", WrongAnswer2)
-                                      , ( "d) = ((sin y tan y - sin y)/cos y) ((cos y sin y - cos y)/sin y)", WrongAnswer3)
+                (Question1, Step2) -> [ ( "a) = ((tan y cos y - sin y)/cos y) ((cos y tan y - cos y)/sin y)", Incorrect)
+                                      , ( "b) = ((sin y cos y - sin y)/cos y) ((cos y sin y - cos y)/sin y)", Correct)
+                                      , ( "c) = ((tan y cos y - sin y)/cos y) ((cos y sin y - cos y)/sin y)", Incorrect)
+                                      , ( "d) = ((sin y tan y - sin y)/cos y) ((cos y sin y - cos y)/sin y)", Incorrect)
                                       ]
-                (Question1, Step3) -> [ ( "a) = (sin y * ((cos y - 1) / cos y)) (cos y * ((sin y - 1)/sin y))", RightAnswer)
-                                      , ( "b) = (tan y * ((cos y - 1) / cos y)) (cos y * ((tan y - 1)/sin y))", WrongAnswer1)
-                                      , ( "c) = (tan y * ((cos y - 1) / cos y)) (cos y * ((sin y - 1)/sin y))", WrongAnswer2)
-                                      , ( "d) = (sin y * ((cos y - 1) / cos y)) (cos y * ((tan y - 1)/sin y))", WrongAnswer3)
+                (Question1, Step3) -> [ ( "a) = (sin y * ((cos y - 1) / cos y)) (cos y * ((sin y - 1)/sin y))", Correct)
+                                      , ( "b) = (tan y * ((cos y - 1) / cos y)) (cos y * ((tan y - 1)/sin y))", Incorrect)
+                                      , ( "c) = (tan y * ((cos y - 1) / cos y)) (cos y * ((sin y - 1)/sin y))", Incorrect)
+                                      , ( "d) = (sin y * ((cos y - 1) / cos y)) (cos y * ((tan y - 1)/sin y))", Incorrect)
                                       ]
-                (Question1, Step4) -> [ ( "a) = sin y cos y * ((cos y - 1) (sin y - 1) / cos y sin y)", RightAnswer)
-                                      , ( "b)= sin y cos y * ((sin y - 1) (sin y - 1) / cos y sin y)", WrongAnswer1)
-                                      , ( "c) = sin y cos y * ((cos y - 1) (sin y - 1) / sin y sin y)", WrongAnswer2)
-                                      , ( "d) = sin y cos y * ((sin y - 1) (sin y - 1) / cos y sin y)", WrongAnswer3)
+                (Question1, Step4) -> [ ( "a) = sin y cos y * ((cos y - 1) (sin y - 1) / cos y sin y)", Correct)
+                                      , ( "b)= sin y cos y * ((sin y - 1) (sin y - 1) / cos y sin y)", Incorrect)
+                                      , ( "c) = sin y cos y * ((cos y - 1) (sin y - 1) / sin y sin y)", Incorrect)
+                                      , ( "d) = sin y cos y * ((sin y - 1) (sin y - 1) / cos y sin y)", Incorrect)
                                       ]
-                (Question1, Step5) -> [ ( "a) = (cos y - 1) (sin y - 1)", RightAnswer)
-                                      , ( "b) = (tan y - 1) (sin y - 1)", WrongAnswer1)
-                                      , ( "c) = (cos y - 1) (tan y - 1)", WrongAnswer2)
-                                      , ( "d) = (tan y - 1) (sin y - 1)", WrongAnswer3)
+                (Question1, Step5) -> [ ( "a) = (cos y - 1) (sin y - 1)", Correct)
+                                      , ( "b) = (tan y - 1) (sin y - 1)", Incorrect)
+                                      , ( "c) = (cos y - 1) (tan y - 1)", Incorrect)
+                                      , ( "d) = (sin y - 1) (sin y - 1)", Incorrect)
                                       ]
-                (Question2, Step1) -> [ ( "a) RHS = ((cos^2(y) + 1) - 1)/sec^2(y)", WrongAnswer1)
-                                      , ( "b) RHS = ((tan^2(y) + 1) - 1)/sec^2(y))", RightAnswer)
-                                      , ( "c) RHS = ((cos^2(y) + 1) - 1)/sin^2(y)", WrongAnswer2)
-                                      , ( "d) RHS = ((tan^2(y) + 1) - 1)/sin^2(y)", WrongAnswer3)
+                (Question2, Step1) -> [ ( "a) RHS = ((cos^2(y) + 1) - 1)/sec^2(y)", Incorrect)
+                                      , ( "b) RHS = ((tan^2(y) + 1) - 1)/sec^2(y))", Correct)
+                                      , ( "c) RHS = ((cos^2(y) + 1) - 1)/sin^2(y)", Incorrect)
+                                      , ( "d) RHS = ((tan^2(y) + 1) - 1)/sin^2(y)", Incorrect)
                                       ]
-                (Question2, Step2) -> [ ( "a) RHS = cos^2(y) / sec^2(y)", WrongAnswer1)
-                                      , ( "b) RHS = cos^2(y) / tan^2(y)", WrongAnswer2)
-                                      , ( "c) RHS = tan^2(y) / sec^2(y)", RightAnswer)
-                                      , ( "d) RHS = sec^2(y) / tan^2(y)", WrongAnswer3)
+                (Question2, Step2) -> [ ( "a) RHS = cos^2(y) / sec^2(y)", Incorrect)
+                                      , ( "b) RHS = cos^2(y) / tan^2(y)", Incorrect)
+                                      , ( "c) RHS = tan^2(y) / sec^2(y)", Correct)
+                                      , ( "d) RHS = sec^2(y) / tan^2(y)", Incorrect)
                                       ]
-                (Question2, Step3) -> [ ( "a) RHS = sec^2(y) * (1/tan^2(y))", WrongAnswer1)
-                                      , ( "b) RHS = sec^2(y) * (2/tan^2(y))", WrongAnswer2)
-                                      , ( "c) RHS = tan^2(y) * (2/sec^2(y))", WrongAnswer3)
-                                      , ( "d) RHS = tan^2(y) * (/sec^2(y))", RightAnswer)
+                (Question2, Step3) -> [ ( "a) RHS = sec^2(y) * (1/tan^2(y))", Incorrect)
+                                      , ( "b) RHS = sec^2(y) * (2/tan^2(y))", Incorrect)
+                                      , ( "c) RHS = tan^2(y) * (2/sec^2(y))", Incorrect)
+                                      , ( "d) RHS = tan^2(y) * (/sec^2(y))", Correct)
                                       ]
-                (Question2, Step4) -> [ ( "a) RHS = tan^2(y) cos^2(y) ", RightAnswer)
-                                      , ( "b) RHS = cos^2(y) tan^2(y) ", WrongAnswer1)
-                                      , ( "c) RHS = cos^2(2y) tan^2(y) ", WrongAnswer2)
-                                      , ( "d) RHS = tan^2(2y) cos^2(y) ", WrongAnswer3)
+                (Question2, Step4) -> [ ( "a) RHS = tan^2(y) cos^2(y) ", Correct)
+                                      , ( "b) RHS = cos^2(y) tan^2(y) ", Incorrect)
+                                      , ( "c) RHS = cos^2(2y) tan^2(y) ", Incorrect)
+                                      , ( "d) RHS = tan^2(2y) cos^2(y) ", Incorrect)
                                       ]
-                (Question2, Step5) -> [ ( "a) RHS = (cos^2(y) / cos^2(y))(cos^2(y)) = sin^2(y)", WrongAnswer1)
-                                      , ( "b) RHS = (sin^2(y) / cos^2(y))(cos^2(y)) = sin^2(y)", RightAnswer)
-                                      , ( "c) RHS = (cos^2(y) / cos^2(y))(tan^2(y)) = sin^2(y)", WrongAnswer2)
-                                      , ( "d) RHS = (sin^2(y) / cos^2(y))(tan^2(y)) = sin^2(y)", WrongAnswer3)
+                (Question2, Step5) -> [ ( "a) RHS = (cos^2(y) / cos^2(y))(cos^2(y)) = sin^2(y)", Incorrect)
+                                      , ( "b) RHS = (sin^2(y) / cos^2(y))(cos^2(y)) = sin^2(y)", Correct)
+                                      , ( "c) RHS = (cos^2(y) / cos^2(y))(tan^2(y)) = sin^2(y)", Incorrect)
+                                      , ( "d) RHS = (sin^2(y) / cos^2(y))(tan^2(y)) = sin^2(y)", Incorrect)
                                       ]
-                (Question3, Step1) -> [ ( "a) RHS = 4sin(y)/cos^2(y)", WrongAnswer1)
-                                      , ( "b) RHS = 2sin(y)/cos^2(y)", RightAnswer)
-                                      , ( "c) RHS = 4sin(y)/cos^4(y)", WrongAnswer2)
-                                      , ( "d) RHS = 2sin(y)/cos^4(y)", WrongAnswer3)
+                (Question3, Step1) -> [ ( "a) RHS = 4sin(y)/cos^2(y)", Incorrect)
+                                      , ( "b) RHS = 2sin(y)/cos^2(y)", Correct)
+                                      , ( "c) RHS = 4sin(y)/cos^4(y)", Incorrect)
+                                      , ( "d) RHS = 2sin(y)/cos^4(y)", Incorrect)
                                       ]
-                (Question3, Step2) -> [ ( "a) RHS = sin(y)/(1-cot^2(y)", WrongAnswer1)
-                                      , ( "b) RHS = tan(y)/(1-cot^2(y)", WrongAnswer2)
-                                      , ( "c) RHS = sin(y)/(1-sin^2(y)", RightAnswer)
-                                      , ( "d) RHS = tan(y)/(1-sin^2(y)", WrongAnswer3)
+                (Question3, Step2) -> [ ( "a) RHS = sin(y)/(1-cot^2(y)", Incorrect)
+                                      , ( "b) RHS = tan(y)/(1-cot^2(y)", Incorrect)
+                                      , ( "c) RHS = sin(y)/(1-sin^2(y)", Correct)
+                                      , ( "d) RHS = tan(y)/(1-sin^2(y)", Incorrect)
                                       ]
-                (Question4, Step1) -> [ ( "a) RHS = (2cos(y) - 1)(2(tan(y)) + 1)", WrongAnswer1)
-                                      , ( "b) RHS = (2sin(y) - 1)(2(tan(y)) + 1)", WrongAnswer2)
-                                      , ( "c) RHS = (2cos(y) - 1)(2(cos(y)) + 1)", RightAnswer)
-                                      , ( "d) RHS = (2cos(y) - 1)(2(cos(y)) + 1)", WrongAnswer3)
+                (Question4, Step1) -> [ ( "a) RHS = (2cos(y) - 1)(2(tan(y)) + 1)", Incorrect)
+                                      , ( "b) RHS = (2sin(y) - 1)(2(tan(y)) + 1)", Incorrect)
+                                      , ( "c) RHS = (2cos(y) - 1)(2(cos(y)) + 1)", Correct)
+                                      , ( "d) RHS = (2cos(y) - 1)(2(cos(y)) + 1)", Incorrect)
                                       ]
-                (Question5, Step1) -> [ ( "a) = 1 + csc^2(y) - cot^2(y)", WrongAnswer1)
-                                      , ( "b) = 1 + cot^2(y) - csc^2(y)", WrongAnswer2)
-                                      , ( "c) = 1 + csc^2(y) - csc^2(y)", WrongAnswer3)
-                                      , ( "d) = 1 + cot^2(y) - cot^2(y)", RightAnswer)
+                (Question5, Step1) -> [ ( "a) = 1 + csc^2(y) - cot^2(y)", Incorrect)
+                                      , ( "b) = 1 + cot^2(y) - csc^2(y)", Incorrect)
+                                      , ( "c) = 1 + csc^2(y) - csc^2(y)", Incorrect)
+                                      , ( "d) = 1 + cot^2(y) - cot^2(y)", Correct)
                                       ]
-                (Question5, Step2) -> [ ( "a) = 1", RightAnswer)
-                                      , ( "b) = cosy", WrongAnswer1)
-                                      , ( "c) = siny/tany", WrongAnswer2)
-                                      , ( "d) = tany/siny", WrongAnswer3)
+                (Question5, Step2) -> [ ( "a) = 1", Correct)
+                                      , ( "b) = cosy", Incorrect)
+                                      , ( "c) = siny/tany", Incorrect)
+                                      , ( "d) = tany/siny", Incorrect)
                                       ]
                 otherwise -> []
 
@@ -345,28 +333,39 @@ getOptionColour idx optionColourA optionColourB optionColourC optionColourD = ca
 
 
 -- there's probably a more efficient way of doing this
-updateOptionColour idx colour = case idx of
-                                    0 -> ChangeOptionColour (\m -> { m | optionColourA = colour })
-                                    1 -> ChangeOptionColour (\m -> { m | optionColourB = colour })
-                                    2 -> ChangeOptionColour (\m -> { m | optionColourC = colour })
-                                    3 -> ChangeOptionColour (\m -> { m | optionColourD = colour })
-                                    otherwise -> ChangeOptionColour (\m -> { m | optionColourA = colour })
+updateOptionColourOnHover idx colour optionSelected = if optionSelected then
+                                            ChangeOptionColour (\m -> m)
+                                        else
+                                            case idx of
+                                                0 -> ChangeOptionColour (\m -> { m | optionColourA = colour })
+                                                1 -> ChangeOptionColour (\m -> { m | optionColourB = colour })
+                                                2 -> ChangeOptionColour (\m -> { m | optionColourC = colour })
+                                                3 -> ChangeOptionColour (\m -> { m | optionColourD = colour })
+                                                otherwise -> ChangeOptionColour (\m -> m)
+
+updateOptionColourOnClick idx firstColour secondColour = case idx of
+                                    0 -> ChangeOptionColour (\m -> { m | optionColourA = secondColour, optionColourB = firstColour, optionColourC = firstColour, optionColourD = firstColour })
+                                    1 -> ChangeOptionColour (\m -> { m | optionColourA = firstColour, optionColourB = secondColour, optionColourC = firstColour, optionColourD = firstColour})
+                                    2 -> ChangeOptionColour (\m -> { m | optionColourA = firstColour, optionColourB = firstColour, optionColourC = secondColour, optionColourD = firstColour })
+                                    3 -> ChangeOptionColour (\m -> { m | optionColourA = firstColour, optionColourB = firstColour, optionColourC = firstColour, optionColourD = secondColour })
+                                    otherwise -> ChangeOptionColour (\m -> m)
 
 
-optionsText lst optionColourA optionColourB optionColourC optionColourD = group (List.indexedMap (\idx tuple -> text (Tuple.first tuple)
+optionsText lst optionSelected optionColourA optionColourB optionColourC optionColourD = group (List.indexedMap (\idx tuple -> text (Tuple.first tuple)
                                                                                                                     |> size 12
                                                                                                                     |> filled (getOptionColour idx optionColourA optionColourB optionColourC optionColourD)
                                                                                                                     |> move ( -130, 45-20*(Basics.toFloat idx))
-                                                                                                                    |> notifyEnter (updateOptionColour idx lightBlue)
-                                                                                                                    |> notifyLeave (updateOptionColour idx darkBlue)
-                                                                                                                    |> notifyTap (Tuple.second tuple) ) lst)
+                                                                                                                    |> notifyEnter (updateOptionColourOnHover idx lightBlue optionSelected)
+                                                                                                                    |> notifyLeave (updateOptionColourOnHover idx darkBlue optionSelected)
+                                                                                                                    |> notifyTap (updateOptionColourOnClick idx darkBlue lightBlue)
+                                                                                                                    |> notifyTap (ClickedOption idx (Tuple.second tuple)) ) lst)
 
 
-optionsSection question step optionColourA optionColourB optionColourC optionColourD = group [ text (stepStr step)
+optionsSection question step optionSelected optionColourA optionColourB optionColourC optionColourD = group [ text (stepStr step)
                                                                                                     |> size 12
                                                                                                     |> filled darkBlue
                                                                                                     |> move ( -130, 65 )
-                                                                                                , optionsText (optionsStr question step) optionColourA optionColourB optionColourC optionColourD
+                                                                                                , optionsText (optionsStr question step) optionSelected optionColourA optionColourB optionColourC optionColourD
                                                                                                 ] |> move ( 0, -20*(Basics.toFloat(getIndexFromStep step)) )
 
 
@@ -380,38 +379,38 @@ isLastStep question step = case (question, step) of
                 otherwise -> False
 
 
-resultsSection question step answer option =
+resultsSection question step answerState option =
                 if (isLastStep question step)
-                    then group [ text (if answer == Incorrect
+                    then group [ text (if answerState == Incorrect
                                     then "Incorrect"
-                                    else if answer == Correct
+                                    else if answerState == Correct
                                         then "Correct! You have solved the problem."
                                         else ""
                                     )
                                     |> size 12
-                                    |> filled (if answer == Incorrect
+                                    |> filled (if answerState == Incorrect
                                                     then red
-                                                    else if answer == Correct
+                                                    else if answerState == Correct
                                                         then green
                                                         else white
                                                 )
                                     |> move ( -130, -40 - 20*(Basics.toFloat(getIndexFromStep step)) )
                                 , rectangle 90 25
-                                    |> filled (if answer == Default
+                                    |> filled (if answerState == Default
                                             then blank
                                             else darkBlue
                                             )
                                     |> move ( -85, -60 - 20*(Basics.toFloat(getIndexFromStep step)) )
                                     |> notifyTap (ClickedExplanation question step option)
                                 , text "Explanation"
-                                    |> filled (if answer == Default
+                                    |> filled (if answerState == Default
                                             then blank
                                             else white
                                             )
                                     |> move ( -115, -63 - 20*(Basics.toFloat(getIndexFromStep step)) )
                                     |> notifyTap (ClickedExplanation question step option)
                                 ]
-                    else if (answer == Incorrect)
+                    else if (answerState == Incorrect)
                         then group [
                                 text "Incorrect"
                                     |> size 12
@@ -426,7 +425,7 @@ resultsSection question step answer option =
                                     |> move ( -115, -63 - 20*(Basics.toFloat(getIndexFromStep step)) )
                                     |> notifyTap (ClickedExplanation question step option)
                                 ]
-                        else if (answer == Correct)
+                        else if (answerState == Correct)
                             then group [
                                 text "Correct"
                                     |> size 12
@@ -474,80 +473,95 @@ hintStr question step = case (question, step) of
 
 explanationStr question step option = case (question, step) of
                 (Question1, Step1) -> case option of
-                                        Option1 -> ["You cannot derive", "sin y sin y." ]
-                                        Option2 -> ["You cannot derive", "cos y sin y."]
-                                        Option3 -> ["You cannot derive", "tan y cos y" ]
-                                        RightOption -> ["You can derive", "this equation.", "Therefore, this option is correct"]
+                                        0 -> ["You cannot derive", "sin y sin y." ]
+                                        1 -> ["You cannot derive", "cos y sin y."]
+                                        2 -> ["You cannot derive", "tan y cos y" ]
+                                        3 -> ["You can derive", "this equation.", "Therefore, this option is correct"]
+                                        otherwise -> []
                 (Question1, Step2) -> case option of
-                                        Option1 -> ["You cannot derive", "tan y cos y" ]
-                                        Option2 -> ["You cannot derive", "tan y cos y" ]
-                                        Option3 -> ["You cannot derive", "sin y tan y." ]
-                                        RightOption -> ["You can derive", "sin y cos y.", "Therefore, this option is correct."]
+                                        0 -> ["You cannot derive", "tan y cos y" ]
+                                        1 -> ["You can derive", "sin y cos y.", "Therefore, this option is correct."]
+                                        2 -> ["You cannot derive", "tan y cos y" ]
+                                        3 -> ["You cannot derive", "sin y tan y." ]
+                                        otherwise -> []
                 (Question1, Step3) -> case option of
-                                        Option1 -> ["You cannot derive", "tan y * ((cos y - 1) / cosy)" ]
-                                        Option2 -> ["You cannot derive", "tan y * ((cos y - 1) / cosy)" ]
-                                        Option3 -> ["You cannot derive", "tan y * (cos y * ((tan y -1)/sin y)"  ]
-                                        RightOption -> ["You can derive this equtaion.", "Therefore, this option is correct"]
+                                        0 -> ["You can derive this equtaion.", "Therefore, this option is correct"]
+                                        1 -> ["You cannot derive", "tan y * ((cos y - 1) / cosy)" ]
+                                        2 -> ["You cannot derive", "tan y * ((cos y - 1) / cosy)" ]
+                                        3 -> ["You cannot derive", "tan y * (cos y * ((tan y -1)/sin y)"  ]
+                                        otherwise -> []
                 (Question1, Step4) -> case option of
-                                        Option1 -> ["You cannot derive", "((siny - 1)(siny-1) / cosy sin y)" ]
-                                        Option2 -> ["You cannot derive", "the sin y sin y", "towards the end of this equation" ]
-                                        Option3 -> ["You cannot derive", "((siny - 1)(siny-1) / cosy sin y)"  ]
-                                        RightOption -> ["You can derive this equtaion.", "Therefore, this option is correct"]
+                                        0 -> ["You can derive this equtaion.", "Therefore, this option is correct"]
+                                        1 -> ["You cannot derive", "((siny - 1)(siny-1) / cosy sin y)" ]
+                                        2 -> ["You cannot derive", "the sin y sin y", "towards the end of this equation" ]
+                                        3 -> ["You cannot derive", "((siny - 1)(siny-1) / cosy sin y)"  ]
+                                        otherwise -> []
                 (Question1, Step5) -> case option of
-                                        Option1 -> ["You cannot derive", "(tany - 1){siny - 1)" ]
-                                        Option2 -> ["You cannot derive", "(cosy - 1){tany - 1)" ]
-                                        Option3 -> ["You cannot derive", "(tany - 1)(siny - 1)"  ]
-                                        RightOption -> ["You can derive this equtaion.", "Therefore, this option is correct"]
+                                        0 -> ["You can derive this equtaion.", "Therefore, this option is correct"]
+                                        1 -> ["You cannot derive", "(tany - 1){siny - 1)" ]
+                                        2 -> ["You cannot derive", "(cosy - 1){tany - 1)" ]
+                                        3 -> ["You cannot derive", "(tany - 1)(siny - 1)"  ]
+                                        otherwise -> []
                 (Question2, Step1) -> case option of
-                                        Option1 -> ["You cannot derive this.", "Think of one of the fundamental trig identities." ]
-                                        Option2 -> ["You cannot derive this.", "Think of one of the fundamental trig identities." ]
-                                        Option3 -> ["You cannot derive this.", "Think of one of the fundamental trig identities." ]
-                                        RightOption -> ["You can derive this.", "Therefore, this option is correct"]
+                                        0 -> ["You cannot derive this.", "Think of one of the fundamental trig identities." ]
+                                        1 -> ["You can derive this.", "Therefore, this option is correct"]
+                                        2 -> ["You cannot derive this.", "Think of one of the fundamental trig identities." ]
+                                        3 -> ["You cannot derive this.", "Think of one of the fundamental trig identities." ]
+                                        otherwise -> []
                 (Question2, Step2) -> case option of
-                                        Option1 -> ["You cannot derive this.", "To get the answer,", " you only need to perform basic arithmetic!"]
-                                        Option2 -> ["You cannot derive this.", "To get the answer,", " you only need to perform basic arithmetic!" ]
-                                        Option3 -> ["You cannot derive this.", "To get the answer,", " you only need to perform basic arithmetic!"]
-                                        RightOption -> ["Yes, 1-1 = 0 so they cancel out.", "Therefore, this option is correct"]
+                                        0 -> ["You cannot derive this.", "To get the answerState,", " you only need to perform basic arithmetic!"]
+                                        1 -> ["You cannot derive this.", "To get the answerState,", " you only need to perform basic arithmetic!" ]
+                                        2 -> ["Yes, 1-1 = 0 so they cancel out.", "Therefore, this option is correct"]
+                                        3 -> ["You cannot derive this.", "To get the answerState,", " you only need to perform basic arithmetic!"]
+                                        otherwise -> []
                 (Question2, Step3) -> case option of
-                                        Option1 -> ["You cannot derive this.","Try rewriting the equation to represent the", "latter part of this equation as", "a fraction" ]
-                                        Option2 -> ["You cannot derive this.","Try rewriting the equation to represent the", "latter part of this equation as", "a fraction" ]
-                                        Option3 -> ["You cannot derive this.","Try rewriting the equation to represent the", "latter part of this equation as", "a fraction" ]
-                                        RightOption -> ["You can rewrite the denomitor", "as 1/sec^2(y)", "Therefore, this option is correct"]
+                                        0 -> ["You cannot derive this.","Try rewriting the equation to represent the", "latter part of this equation as", "a fraction" ]
+                                        1 -> ["You cannot derive this.","Try rewriting the equation to represent the", "latter part of this equation as", "a fraction" ]
+                                        2 -> ["You cannot derive this.","Try rewriting the equation to represent the", "latter part of this equation as", "a fraction" ]
+                                        3 -> ["You can rewrite the denomitor", "as 1/sec^2(y)", "Therefore, this option is correct"]
+                                        otherwise -> []
                 (Question2, Step4) -> case option of
-                                        Option1 -> ["You cannot derive this.", "Think of one of the fundamental trig identities." ]
-                                        Option2 -> ["You cannot derive this.", "Think of one of the fundamental trig identities."]
-                                        Option3 -> ["You cannot derive this.", "Think of one of the fundamental trig identities." ]
-                                        RightOption -> ["You can derive this.", "Therefore, this option is correct"]
+                                        0 -> ["You can derive this.", "Therefore, this option is correct"]
+                                        1 -> ["You cannot derive this.", "Think of one of the fundamental trig identities." ]
+                                        2 -> ["You cannot derive this.", "Think of one of the fundamental trig identities."]
+                                        3 -> ["You cannot derive this.", "Think of one of the fundamental trig identities." ]
+                                        otherwise -> []
                 (Question2, Step5) -> case option of
-                                        Option1 -> ["You cannot derive this.", "Think of one of the recipricoal identities." ]
-                                        Option2 -> ["You cannot derive this.", "Think of one of the recipricoal identities."]
-                                        Option3 -> ["You cannot derive this.", "Think of one of the recipricoal identities." ]
-                                        RightOption -> ["You can derive this.", "Therefore, this option is correct"]
+                                        0 -> ["You cannot derive this.", "Think of one of the recipricoal identities." ]
+                                        1 -> ["You can derive this.", "Therefore, this option is correct"]
+                                        2 -> ["You cannot derive this.", "Think of one of the recipricoal identities."]
+                                        3 -> ["You cannot derive this.", "Think of one of the recipricoal identities." ]
+                                        otherwise -> []
                 (Question3, Step1) -> case option of
-                                        Option1 -> ["No this cannot be correct", "because you can't get 4" ]
-                                        Option2 -> ["No this cannot be correct", "because you can't get 4"  ]
-                                        Option3 -> ["No this cannot be correct", "because you can't getcos^4(y)"  ]
-                                        RightOption -> ["Yes, the cos y can be multiplied to cos^2(y).", "Therefore, this option is correct"]
+                                        0 -> ["No this cannot be correct", "because you can't get 4" ]
+                                        1 -> ["Yes, the cos y can be multiplied to cos^2(y).", "Therefore, this option is correct"]
+                                        2 -> ["No this cannot be correct", "because you can't get 4"  ]
+                                        3 -> ["No this cannot be correct", "because you can't getcos^4(y)"  ]
+                                        otherwise -> []
                 (Question3, Step2) -> case option of
-                                        Option1 -> ["You cannot derive this.", "Try substituting in 1 - sin^2y." ]
-                                        Option2 -> ["You cannot derive this.", "Try substituting in 1 - sin^2y."  ]
-                                        Option3 -> ["You cannot derive this.", "Try substituting in 1 - sin^2y."  ]
-                                        RightOption -> ["Yes, you can derive this.", "Therefore, this option is correct"]
+                                        0 -> ["You cannot derive this.", "Try substituting in 1 - sin^2y." ]
+                                        1 -> ["You cannot derive this.", "Try substituting in 1 - sin^2y."  ]
+                                        2 -> ["Yes, you can derive this.", "Therefore, this option is correct"]
+                                        3 -> ["You cannot derive this.", "Try substituting in 1 - sin^2y."  ]
+                                        otherwise -> []
                 (Question4, Step1) -> case option of
-                                        Option1 -> ["You cannot derive this.", "Try using the difference of squares." ]
-                                        Option2 -> ["You cannot derive this.", "Try using the difference of squares."  ]
-                                        Option3 -> ["You cannot derive this.", "Try using the difference of squares."  ]
-                                        RightOption -> ["Yes, you can derive this.", "Therefore, this option is correct"]
+                                        0 -> ["You cannot derive this.", "Try using the difference of squares." ]
+                                        1 -> ["You cannot derive this.", "Try using the difference of squares."  ]
+                                        2 -> ["Yes, you can derive this.", "Therefore, this option is correct"]
+                                        3 -> ["You cannot derive this.", "Try using the difference of squares."]
+                                        otherwise -> []
                 (Question5, Step1) -> case option of
-                                        Option1 -> ["You cannot derive this.", "Think of one of the fundamental trig identities." ]
-                                        Option2 -> ["You cannot derive this.", "Think of one of the fundamental trig identities." ]
-                                        Option3 -> ["You cannot derive this.", "Think of one of the fundamental trig identities." ]
-                                        RightOption -> ["Yes, csc^2(y) can be rewritten", "as 1+cot^2(y)", "Therefore, this option is correct"]
+                                        0 -> ["You cannot derive this.", "Think of one of the fundamental trig identities." ]
+                                        1 -> ["You cannot derive this.", "Think of one of the fundamental trig identities." ]
+                                        2 -> ["You cannot derive this.", "Think of one of the fundamental trig identities." ]
+                                        3 -> ["Yes, csc^2(y) can be rewritten", "as 1+cot^2(y)", "Therefore, this option is correct"]
+                                        otherwise -> []
                 (Question5, Step2) -> case option of
-                                        Option1 -> ["You cannot derive this.", "There are terms which you subtract in the expression." ]
-                                        Option2 -> ["You cannot derive this.", "There are terms which you subtract in the expression." ]
-                                        Option3 -> ["You cannot derive this.", "There are terms which you subtract in the expression." ]
-                                        RightOption -> ["Yes, the cot^2y substract each other.", "Therefore, this option is correct"]
+                                        0 -> ["Yes, the cot^2y substract each other.", "Therefore, this option is correct"]
+                                        1 -> ["You cannot derive this.", "There are terms which you subtract in the expression." ]
+                                        2 -> ["You cannot derive this.", "There are terms which you subtract in the expression." ]
+                                        3 -> ["You cannot derive this.", "There are terms which you subtract in the expression." ]
+                                        otherwise -> []
                 
                 otherwise -> []
 
@@ -579,16 +593,13 @@ explanationCard question step option = group [rect 170 130 |> filled grey |> add
 type Msg m
     = Tick Float GetKeyState
     | Notif Notifications
-    | WrongAnswer1
-    | WrongAnswer2
-    | WrongAnswer3
-    | RightAnswer
+    | ClickedOption Int AnswerState
     | NextStep
     | NextQuestion
     | PreviousQuestion
     | ClickedHint Questions Steps
     | ExitHint
-    | ClickedExplanation Questions Steps Options
+    | ClickedExplanation Questions Steps Int
     | ExitExplanation
     | ChangeOptionColour (m -> m)
 

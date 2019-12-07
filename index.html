@@ -8575,11 +8575,10 @@ var $author$project$ReciprocalIdentities$NoPopUp = {$: 'NoPopUp'};
 var $author$project$ReciprocalIdentities$NoPopUpExplanation = {$: 'NoPopUpExplanation'};
 var $author$project$ReciprocalIdentities$None = {$: 'None'};
 var $author$project$ReciprocalIdentities$NotifyTap = {$: 'NotifyTap'};
-var $author$project$ReciprocalIdentities$Option1 = {$: 'Option1'};
 var $author$project$ReciprocalIdentities$Question1 = {$: 'Question1'};
 var $author$project$ReciprocalIdentities$Step1 = {$: 'Step1'};
 var $MacCASOutreach$graphicsvg$GraphicSVG$darkBlue = A4($MacCASOutreach$graphicsvg$GraphicSVG$RGBA, 32, 74, 135, 1);
-var $author$project$ReciprocalIdentities$init = {answer: $author$project$ReciprocalIdentities$Default, explanationState: $author$project$ReciprocalIdentities$NoPopUpExplanation, hintState: $author$project$ReciprocalIdentities$NoPopUp, notify: $author$project$ReciprocalIdentities$NotifyTap, option: $author$project$ReciprocalIdentities$Option1, optionColourA: $MacCASOutreach$graphicsvg$GraphicSVG$darkBlue, optionColourB: $MacCASOutreach$graphicsvg$GraphicSVG$darkBlue, optionColourC: $MacCASOutreach$graphicsvg$GraphicSVG$darkBlue, optionColourD: $MacCASOutreach$graphicsvg$GraphicSVG$darkBlue, question: $author$project$ReciprocalIdentities$Question1, state: $author$project$ReciprocalIdentities$None, step: $author$project$ReciprocalIdentities$Step1, time: 0};
+var $author$project$ReciprocalIdentities$init = {answerState: $author$project$ReciprocalIdentities$Default, explanationState: $author$project$ReciprocalIdentities$NoPopUpExplanation, hintState: $author$project$ReciprocalIdentities$NoPopUp, notify: $author$project$ReciprocalIdentities$NotifyTap, option: 0, optionColourA: $MacCASOutreach$graphicsvg$GraphicSVG$darkBlue, optionColourB: $MacCASOutreach$graphicsvg$GraphicSVG$darkBlue, optionColourC: $MacCASOutreach$graphicsvg$GraphicSVG$darkBlue, optionColourD: $MacCASOutreach$graphicsvg$GraphicSVG$darkBlue, optionSelected: false, question: $author$project$ReciprocalIdentities$Question1, state: $author$project$ReciprocalIdentities$None, step: $author$project$ReciprocalIdentities$Step1, time: 0};
 var $author$project$Main$init = {currentPage: 1, fiveSat: 0, fourSat: 0, model1: $author$project$FundamentalIdentities$init, model2: $author$project$PythagoreanIdentities$init, model3: $author$project$ReciprocalIdentities$init, model4: $author$project$ProductIdentities$init, oneSat: 0, page: $author$project$Main$Home, threeSat: 0, twoSat: 0};
 var $author$project$Main$FundamentalIdentities = {$: 'FundamentalIdentities'};
 var $author$project$Main$ProductIdentities = {$: 'ProductIdentities'};
@@ -9038,12 +9037,8 @@ var $author$project$PythagoreanIdentities$update = F2(
 				return t(model);
 		}
 	});
-var $author$project$ReciprocalIdentities$Correct = {$: 'Correct'};
 var $author$project$ReciprocalIdentities$Explanation = {$: 'Explanation'};
 var $author$project$ReciprocalIdentities$Hint = {$: 'Hint'};
-var $author$project$ReciprocalIdentities$Incorrect = {$: 'Incorrect'};
-var $author$project$ReciprocalIdentities$Option2 = {$: 'Option2'};
-var $author$project$ReciprocalIdentities$Option3 = {$: 'Option3'};
 var $author$project$ReciprocalIdentities$PopUp = F2(
 	function (a, b) {
 		return {$: 'PopUp', a: a, b: b};
@@ -9056,7 +9051,6 @@ var $author$project$ReciprocalIdentities$Question2 = {$: 'Question2'};
 var $author$project$ReciprocalIdentities$Question3 = {$: 'Question3'};
 var $author$project$ReciprocalIdentities$Question4 = {$: 'Question4'};
 var $author$project$ReciprocalIdentities$Question5 = {$: 'Question5'};
-var $author$project$ReciprocalIdentities$RightOption = {$: 'RightOption'};
 var $author$project$ReciprocalIdentities$Step2 = {$: 'Step2'};
 var $author$project$ReciprocalIdentities$Step3 = {$: 'Step3'};
 var $author$project$ReciprocalIdentities$Step4 = {$: 'Step4'};
@@ -9074,27 +9068,22 @@ var $author$project$ReciprocalIdentities$update = F2(
 				return _Utils_update(
 					model,
 					{notify: notif});
-			case 'WrongAnswer1':
+			case 'ClickedOption':
+				var option = msg.a;
+				var answerState = msg.b;
 				return _Utils_update(
 					model,
-					{answer: $author$project$ReciprocalIdentities$Incorrect, option: $author$project$ReciprocalIdentities$Option1});
-			case 'WrongAnswer2':
-				return _Utils_update(
-					model,
-					{answer: $author$project$ReciprocalIdentities$Incorrect, option: $author$project$ReciprocalIdentities$Option2});
-			case 'WrongAnswer3':
-				return _Utils_update(
-					model,
-					{answer: $author$project$ReciprocalIdentities$Incorrect, option: $author$project$ReciprocalIdentities$Option3});
-			case 'RightAnswer':
-				return _Utils_update(
-					model,
-					{answer: $author$project$ReciprocalIdentities$Correct, option: $author$project$ReciprocalIdentities$RightOption});
+					{answerState: answerState, option: option, optionSelected: true});
 			case 'NextStep':
 				return _Utils_update(
 					model,
 					{
-						answer: $author$project$ReciprocalIdentities$Default,
+						answerState: $author$project$ReciprocalIdentities$Default,
+						optionColourA: $MacCASOutreach$graphicsvg$GraphicSVG$darkBlue,
+						optionColourB: $MacCASOutreach$graphicsvg$GraphicSVG$darkBlue,
+						optionColourC: $MacCASOutreach$graphicsvg$GraphicSVG$darkBlue,
+						optionColourD: $MacCASOutreach$graphicsvg$GraphicSVG$darkBlue,
+						optionSelected: false,
 						step: function () {
 							var _v1 = model.step;
 							switch (_v1.$) {
@@ -9115,7 +9104,12 @@ var $author$project$ReciprocalIdentities$update = F2(
 				return _Utils_update(
 					model,
 					{
-						answer: $author$project$ReciprocalIdentities$Default,
+						answerState: $author$project$ReciprocalIdentities$Default,
+						optionColourA: $MacCASOutreach$graphicsvg$GraphicSVG$darkBlue,
+						optionColourB: $MacCASOutreach$graphicsvg$GraphicSVG$darkBlue,
+						optionColourC: $MacCASOutreach$graphicsvg$GraphicSVG$darkBlue,
+						optionColourD: $MacCASOutreach$graphicsvg$GraphicSVG$darkBlue,
+						optionSelected: false,
 						question: function () {
 							var _v2 = model.question;
 							switch (_v2.$) {
@@ -9137,7 +9131,7 @@ var $author$project$ReciprocalIdentities$update = F2(
 				return _Utils_update(
 					model,
 					{
-						answer: $author$project$ReciprocalIdentities$Default,
+						answerState: $author$project$ReciprocalIdentities$Default,
 						question: function () {
 							var _v3 = model.question;
 							switch (_v3.$) {
@@ -14387,87 +14381,102 @@ var $author$project$ReciprocalIdentities$explanationStr = F3(
 						case 'Step1':
 							var _v1 = _v0.a;
 							var _v2 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
 									return _List_fromArray(
 										['You cannot derive', 'sin y sin y.']);
-								case 'Option2':
+								case 1:
 									return _List_fromArray(
 										['You cannot derive', 'cos y sin y.']);
-								case 'Option3':
+								case 2:
 									return _List_fromArray(
 										['You cannot derive', 'tan y cos y']);
-								default:
+								case 3:
 									return _List_fromArray(
 										['You can derive', 'this equation.', 'Therefore, this option is correct']);
+								default:
+									var otherwise = option;
+									return _List_Nil;
 							}
 						case 'Step2':
 							var _v4 = _v0.a;
 							var _v5 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
 									return _List_fromArray(
 										['You cannot derive', 'tan y cos y']);
-								case 'Option2':
+								case 1:
+									return _List_fromArray(
+										['You can derive', 'sin y cos y.', 'Therefore, this option is correct.']);
+								case 2:
 									return _List_fromArray(
 										['You cannot derive', 'tan y cos y']);
-								case 'Option3':
+								case 3:
 									return _List_fromArray(
 										['You cannot derive', 'sin y tan y.']);
 								default:
-									return _List_fromArray(
-										['You can derive', 'sin y cos y.', 'Therefore, this option is correct.']);
+									var otherwise = option;
+									return _List_Nil;
 							}
 						case 'Step3':
 							var _v7 = _v0.a;
 							var _v8 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
+									return _List_fromArray(
+										['You can derive this equtaion.', 'Therefore, this option is correct']);
+								case 1:
 									return _List_fromArray(
 										['You cannot derive', 'tan y * ((cos y - 1) / cosy)']);
-								case 'Option2':
+								case 2:
 									return _List_fromArray(
 										['You cannot derive', 'tan y * ((cos y - 1) / cosy)']);
-								case 'Option3':
+								case 3:
 									return _List_fromArray(
 										['You cannot derive', 'tan y * (cos y * ((tan y -1)/sin y)']);
 								default:
-									return _List_fromArray(
-										['You can derive this equtaion.', 'Therefore, this option is correct']);
+									var otherwise = option;
+									return _List_Nil;
 							}
 						case 'Step4':
 							var _v10 = _v0.a;
 							var _v11 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
+									return _List_fromArray(
+										['You can derive this equtaion.', 'Therefore, this option is correct']);
+								case 1:
 									return _List_fromArray(
 										['You cannot derive', '((siny - 1)(siny-1) / cosy sin y)']);
-								case 'Option2':
+								case 2:
 									return _List_fromArray(
 										['You cannot derive', 'the sin y sin y', 'towards the end of this equation']);
-								case 'Option3':
+								case 3:
 									return _List_fromArray(
 										['You cannot derive', '((siny - 1)(siny-1) / cosy sin y)']);
 								default:
-									return _List_fromArray(
-										['You can derive this equtaion.', 'Therefore, this option is correct']);
+									var otherwise = option;
+									return _List_Nil;
 							}
 						default:
 							var _v13 = _v0.a;
 							var _v14 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
+									return _List_fromArray(
+										['You can derive this equtaion.', 'Therefore, this option is correct']);
+								case 1:
 									return _List_fromArray(
 										['You cannot derive', '(tany - 1){siny - 1)']);
-								case 'Option2':
+								case 2:
 									return _List_fromArray(
 										['You cannot derive', '(cosy - 1){tany - 1)']);
-								case 'Option3':
+								case 3:
 									return _List_fromArray(
 										['You cannot derive', '(tany - 1)(siny - 1)']);
 								default:
-									return _List_fromArray(
-										['You can derive this equtaion.', 'Therefore, this option is correct']);
+									var otherwise = option;
+									return _List_Nil;
 							}
 					}
 				case 'Question2':
@@ -14475,87 +14484,102 @@ var $author$project$ReciprocalIdentities$explanationStr = F3(
 						case 'Step1':
 							var _v16 = _v0.a;
 							var _v17 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
 									return _List_fromArray(
 										['You cannot derive this.', 'Think of one of the fundamental trig identities.']);
-								case 'Option2':
+								case 1:
+									return _List_fromArray(
+										['You can derive this.', 'Therefore, this option is correct']);
+								case 2:
 									return _List_fromArray(
 										['You cannot derive this.', 'Think of one of the fundamental trig identities.']);
-								case 'Option3':
+								case 3:
 									return _List_fromArray(
 										['You cannot derive this.', 'Think of one of the fundamental trig identities.']);
 								default:
-									return _List_fromArray(
-										['You can derive this.', 'Therefore, this option is correct']);
+									var otherwise = option;
+									return _List_Nil;
 							}
 						case 'Step2':
 							var _v19 = _v0.a;
 							var _v20 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
 									return _List_fromArray(
-										['You cannot derive this.', 'To get the answer,', ' you only need to perform basic arithmetic!']);
-								case 'Option2':
+										['You cannot derive this.', 'To get the answerState,', ' you only need to perform basic arithmetic!']);
+								case 1:
 									return _List_fromArray(
-										['You cannot derive this.', 'To get the answer,', ' you only need to perform basic arithmetic!']);
-								case 'Option3':
-									return _List_fromArray(
-										['You cannot derive this.', 'To get the answer,', ' you only need to perform basic arithmetic!']);
-								default:
+										['You cannot derive this.', 'To get the answerState,', ' you only need to perform basic arithmetic!']);
+								case 2:
 									return _List_fromArray(
 										['Yes, 1-1 = 0 so they cancel out.', 'Therefore, this option is correct']);
+								case 3:
+									return _List_fromArray(
+										['You cannot derive this.', 'To get the answerState,', ' you only need to perform basic arithmetic!']);
+								default:
+									var otherwise = option;
+									return _List_Nil;
 							}
 						case 'Step3':
 							var _v22 = _v0.a;
 							var _v23 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
 									return _List_fromArray(
 										['You cannot derive this.', 'Try rewriting the equation to represent the', 'latter part of this equation as', 'a fraction']);
-								case 'Option2':
+								case 1:
 									return _List_fromArray(
 										['You cannot derive this.', 'Try rewriting the equation to represent the', 'latter part of this equation as', 'a fraction']);
-								case 'Option3':
+								case 2:
 									return _List_fromArray(
 										['You cannot derive this.', 'Try rewriting the equation to represent the', 'latter part of this equation as', 'a fraction']);
-								default:
+								case 3:
 									return _List_fromArray(
 										['You can rewrite the denomitor', 'as 1/sec^2(y)', 'Therefore, this option is correct']);
+								default:
+									var otherwise = option;
+									return _List_Nil;
 							}
 						case 'Step4':
 							var _v25 = _v0.a;
 							var _v26 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
+									return _List_fromArray(
+										['You can derive this.', 'Therefore, this option is correct']);
+								case 1:
 									return _List_fromArray(
 										['You cannot derive this.', 'Think of one of the fundamental trig identities.']);
-								case 'Option2':
+								case 2:
 									return _List_fromArray(
 										['You cannot derive this.', 'Think of one of the fundamental trig identities.']);
-								case 'Option3':
+								case 3:
 									return _List_fromArray(
 										['You cannot derive this.', 'Think of one of the fundamental trig identities.']);
 								default:
-									return _List_fromArray(
-										['You can derive this.', 'Therefore, this option is correct']);
+									var otherwise = option;
+									return _List_Nil;
 							}
 						default:
 							var _v28 = _v0.a;
 							var _v29 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
 									return _List_fromArray(
 										['You cannot derive this.', 'Think of one of the recipricoal identities.']);
-								case 'Option2':
+								case 1:
+									return _List_fromArray(
+										['You can derive this.', 'Therefore, this option is correct']);
+								case 2:
 									return _List_fromArray(
 										['You cannot derive this.', 'Think of one of the recipricoal identities.']);
-								case 'Option3':
+								case 3:
 									return _List_fromArray(
 										['You cannot derive this.', 'Think of one of the recipricoal identities.']);
 								default:
-									return _List_fromArray(
-										['You can derive this.', 'Therefore, this option is correct']);
+									var otherwise = option;
+									return _List_Nil;
 							}
 					}
 				case 'Question3':
@@ -14563,36 +14587,42 @@ var $author$project$ReciprocalIdentities$explanationStr = F3(
 						case 'Step1':
 							var _v31 = _v0.a;
 							var _v32 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
 									return _List_fromArray(
 										['No this cannot be correct', 'because you can\'t get 4']);
-								case 'Option2':
+								case 1:
+									return _List_fromArray(
+										['Yes, the cos y can be multiplied to cos^2(y).', 'Therefore, this option is correct']);
+								case 2:
 									return _List_fromArray(
 										['No this cannot be correct', 'because you can\'t get 4']);
-								case 'Option3':
+								case 3:
 									return _List_fromArray(
 										['No this cannot be correct', 'because you can\'t getcos^4(y)']);
 								default:
-									return _List_fromArray(
-										['Yes, the cos y can be multiplied to cos^2(y).', 'Therefore, this option is correct']);
+									var otherwise = option;
+									return _List_Nil;
 							}
 						case 'Step2':
 							var _v34 = _v0.a;
 							var _v35 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
 									return _List_fromArray(
 										['You cannot derive this.', 'Try substituting in 1 - sin^2y.']);
-								case 'Option2':
+								case 1:
 									return _List_fromArray(
 										['You cannot derive this.', 'Try substituting in 1 - sin^2y.']);
-								case 'Option3':
+								case 2:
+									return _List_fromArray(
+										['Yes, you can derive this.', 'Therefore, this option is correct']);
+								case 3:
 									return _List_fromArray(
 										['You cannot derive this.', 'Try substituting in 1 - sin^2y.']);
 								default:
-									return _List_fromArray(
-										['Yes, you can derive this.', 'Therefore, this option is correct']);
+									var otherwise = option;
+									return _List_Nil;
 							}
 						default:
 							break _v0$15;
@@ -14601,19 +14631,22 @@ var $author$project$ReciprocalIdentities$explanationStr = F3(
 					if (_v0.b.$ === 'Step1') {
 						var _v37 = _v0.a;
 						var _v38 = _v0.b;
-						switch (option.$) {
-							case 'Option1':
+						switch (option) {
+							case 0:
 								return _List_fromArray(
 									['You cannot derive this.', 'Try using the difference of squares.']);
-							case 'Option2':
+							case 1:
 								return _List_fromArray(
 									['You cannot derive this.', 'Try using the difference of squares.']);
-							case 'Option3':
+							case 2:
+								return _List_fromArray(
+									['Yes, you can derive this.', 'Therefore, this option is correct']);
+							case 3:
 								return _List_fromArray(
 									['You cannot derive this.', 'Try using the difference of squares.']);
 							default:
-								return _List_fromArray(
-									['Yes, you can derive this.', 'Therefore, this option is correct']);
+								var otherwise = option;
+								return _List_Nil;
 						}
 					} else {
 						break _v0$15;
@@ -14623,36 +14656,42 @@ var $author$project$ReciprocalIdentities$explanationStr = F3(
 						case 'Step1':
 							var _v40 = _v0.a;
 							var _v41 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
 									return _List_fromArray(
 										['You cannot derive this.', 'Think of one of the fundamental trig identities.']);
-								case 'Option2':
+								case 1:
 									return _List_fromArray(
 										['You cannot derive this.', 'Think of one of the fundamental trig identities.']);
-								case 'Option3':
+								case 2:
 									return _List_fromArray(
 										['You cannot derive this.', 'Think of one of the fundamental trig identities.']);
-								default:
+								case 3:
 									return _List_fromArray(
 										['Yes, csc^2(y) can be rewritten', 'as 1+cot^2(y)', 'Therefore, this option is correct']);
+								default:
+									var otherwise = option;
+									return _List_Nil;
 							}
 						case 'Step2':
 							var _v43 = _v0.a;
 							var _v44 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
+									return _List_fromArray(
+										['Yes, the cot^2y substract each other.', 'Therefore, this option is correct']);
+								case 1:
 									return _List_fromArray(
 										['You cannot derive this.', 'There are terms which you subtract in the expression.']);
-								case 'Option2':
+								case 2:
 									return _List_fromArray(
 										['You cannot derive this.', 'There are terms which you subtract in the expression.']);
-								case 'Option3':
+								case 3:
 									return _List_fromArray(
 										['You cannot derive this.', 'There are terms which you subtract in the expression.']);
 								default:
-									return _List_fromArray(
-										['Yes, the cot^2y substract each other.', 'Therefore, this option is correct']);
+									var otherwise = option;
+									return _List_Nil;
 							}
 						default:
 							break _v0$15;
@@ -14860,10 +14899,8 @@ var $author$project$ReciprocalIdentities$getIndexFromStep = function (step) {
 			return 4;
 	}
 };
-var $author$project$ReciprocalIdentities$RightAnswer = {$: 'RightAnswer'};
-var $author$project$ReciprocalIdentities$WrongAnswer1 = {$: 'WrongAnswer1'};
-var $author$project$ReciprocalIdentities$WrongAnswer2 = {$: 'WrongAnswer2'};
-var $author$project$ReciprocalIdentities$WrongAnswer3 = {$: 'WrongAnswer3'};
+var $author$project$ReciprocalIdentities$Correct = {$: 'Correct'};
+var $author$project$ReciprocalIdentities$Incorrect = {$: 'Incorrect'};
 var $author$project$ReciprocalIdentities$optionsStr = F2(
 	function (question, step) {
 		var _v0 = _Utils_Tuple2(question, step);
@@ -14877,50 +14914,50 @@ var $author$project$ReciprocalIdentities$optionsStr = F2(
 							var _v2 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) = ((sin y sin y - sin y)/cos y) ((cos y sin y - cos y)/sin y)', $author$project$ReciprocalIdentities$WrongAnswer1),
-									_Utils_Tuple2('b) = ((sin y cos y - sin y)/cos y) ((tan y sin y - cos y)/sin y)', $author$project$ReciprocalIdentities$WrongAnswer2),
-									_Utils_Tuple2('c) = ((tan y cos y - sin y)/cos y) ((tan y sin y - cos y)/tan y)', $author$project$ReciprocalIdentities$WrongAnswer3),
-									_Utils_Tuple2('d) = ((sin y cos y - sin y)/cos y) ((cos y sin y - cos y)/sin y)', $author$project$ReciprocalIdentities$RightAnswer)
+									_Utils_Tuple2('a) = ((sin y sin y - sin y)/cos y) ((cos y sin y - cos y)/sin y)', $author$project$ReciprocalIdentities$Incorrect),
+									_Utils_Tuple2('b) = ((sin y cos y - sin y)/cos y) ((tan y sin y - cos y)/sin y)', $author$project$ReciprocalIdentities$Incorrect),
+									_Utils_Tuple2('c) = ((tan y cos y - sin y)/cos y) ((tan y sin y - cos y)/tan y)', $author$project$ReciprocalIdentities$Incorrect),
+									_Utils_Tuple2('d) = ((sin y cos y - sin y)/cos y) ((cos y sin y - cos y)/sin y)', $author$project$ReciprocalIdentities$Correct)
 								]);
 						case 'Step2':
 							var _v3 = _v0.a;
 							var _v4 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) = ((tan y cos y - sin y)/cos y) ((cos y tan y - cos y)/sin y)', $author$project$ReciprocalIdentities$WrongAnswer1),
-									_Utils_Tuple2('b) = ((sin y cos y - sin y)/cos y) ((cos y sin y - cos y)/sin y)', $author$project$ReciprocalIdentities$RightAnswer),
-									_Utils_Tuple2('c) = ((tan y cos y - sin y)/cos y) ((cos y sin y - cos y)/sin y)', $author$project$ReciprocalIdentities$WrongAnswer2),
-									_Utils_Tuple2('d) = ((sin y tan y - sin y)/cos y) ((cos y sin y - cos y)/sin y)', $author$project$ReciprocalIdentities$WrongAnswer3)
+									_Utils_Tuple2('a) = ((tan y cos y - sin y)/cos y) ((cos y tan y - cos y)/sin y)', $author$project$ReciprocalIdentities$Incorrect),
+									_Utils_Tuple2('b) = ((sin y cos y - sin y)/cos y) ((cos y sin y - cos y)/sin y)', $author$project$ReciprocalIdentities$Correct),
+									_Utils_Tuple2('c) = ((tan y cos y - sin y)/cos y) ((cos y sin y - cos y)/sin y)', $author$project$ReciprocalIdentities$Incorrect),
+									_Utils_Tuple2('d) = ((sin y tan y - sin y)/cos y) ((cos y sin y - cos y)/sin y)', $author$project$ReciprocalIdentities$Incorrect)
 								]);
 						case 'Step3':
 							var _v5 = _v0.a;
 							var _v6 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) = (sin y * ((cos y - 1) / cos y)) (cos y * ((sin y - 1)/sin y))', $author$project$ReciprocalIdentities$RightAnswer),
-									_Utils_Tuple2('b) = (tan y * ((cos y - 1) / cos y)) (cos y * ((tan y - 1)/sin y))', $author$project$ReciprocalIdentities$WrongAnswer1),
-									_Utils_Tuple2('c) = (tan y * ((cos y - 1) / cos y)) (cos y * ((sin y - 1)/sin y))', $author$project$ReciprocalIdentities$WrongAnswer2),
-									_Utils_Tuple2('d) = (sin y * ((cos y - 1) / cos y)) (cos y * ((tan y - 1)/sin y))', $author$project$ReciprocalIdentities$WrongAnswer3)
+									_Utils_Tuple2('a) = (sin y * ((cos y - 1) / cos y)) (cos y * ((sin y - 1)/sin y))', $author$project$ReciprocalIdentities$Correct),
+									_Utils_Tuple2('b) = (tan y * ((cos y - 1) / cos y)) (cos y * ((tan y - 1)/sin y))', $author$project$ReciprocalIdentities$Incorrect),
+									_Utils_Tuple2('c) = (tan y * ((cos y - 1) / cos y)) (cos y * ((sin y - 1)/sin y))', $author$project$ReciprocalIdentities$Incorrect),
+									_Utils_Tuple2('d) = (sin y * ((cos y - 1) / cos y)) (cos y * ((tan y - 1)/sin y))', $author$project$ReciprocalIdentities$Incorrect)
 								]);
 						case 'Step4':
 							var _v7 = _v0.a;
 							var _v8 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) = sin y cos y * ((cos y - 1) (sin y - 1) / cos y sin y)', $author$project$ReciprocalIdentities$RightAnswer),
-									_Utils_Tuple2('b)= sin y cos y * ((sin y - 1) (sin y - 1) / cos y sin y)', $author$project$ReciprocalIdentities$WrongAnswer1),
-									_Utils_Tuple2('c) = sin y cos y * ((cos y - 1) (sin y - 1) / sin y sin y)', $author$project$ReciprocalIdentities$WrongAnswer2),
-									_Utils_Tuple2('d) = sin y cos y * ((sin y - 1) (sin y - 1) / cos y sin y)', $author$project$ReciprocalIdentities$WrongAnswer3)
+									_Utils_Tuple2('a) = sin y cos y * ((cos y - 1) (sin y - 1) / cos y sin y)', $author$project$ReciprocalIdentities$Correct),
+									_Utils_Tuple2('b)= sin y cos y * ((sin y - 1) (sin y - 1) / cos y sin y)', $author$project$ReciprocalIdentities$Incorrect),
+									_Utils_Tuple2('c) = sin y cos y * ((cos y - 1) (sin y - 1) / sin y sin y)', $author$project$ReciprocalIdentities$Incorrect),
+									_Utils_Tuple2('d) = sin y cos y * ((sin y - 1) (sin y - 1) / cos y sin y)', $author$project$ReciprocalIdentities$Incorrect)
 								]);
 						default:
 							var _v9 = _v0.a;
 							var _v10 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) = (cos y - 1) (sin y - 1)', $author$project$ReciprocalIdentities$RightAnswer),
-									_Utils_Tuple2('b) = (tan y - 1) (sin y - 1)', $author$project$ReciprocalIdentities$WrongAnswer1),
-									_Utils_Tuple2('c) = (cos y - 1) (tan y - 1)', $author$project$ReciprocalIdentities$WrongAnswer2),
-									_Utils_Tuple2('d) = (tan y - 1) (sin y - 1)', $author$project$ReciprocalIdentities$WrongAnswer3)
+									_Utils_Tuple2('a) = (cos y - 1) (sin y - 1)', $author$project$ReciprocalIdentities$Correct),
+									_Utils_Tuple2('b) = (tan y - 1) (sin y - 1)', $author$project$ReciprocalIdentities$Incorrect),
+									_Utils_Tuple2('c) = (cos y - 1) (tan y - 1)', $author$project$ReciprocalIdentities$Incorrect),
+									_Utils_Tuple2('d) = (sin y - 1) (sin y - 1)', $author$project$ReciprocalIdentities$Incorrect)
 								]);
 					}
 				case 'Question2':
@@ -14930,50 +14967,50 @@ var $author$project$ReciprocalIdentities$optionsStr = F2(
 							var _v12 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) RHS = ((cos^2(y) + 1) - 1)/sec^2(y)', $author$project$ReciprocalIdentities$WrongAnswer1),
-									_Utils_Tuple2('b) RHS = ((tan^2(y) + 1) - 1)/sec^2(y))', $author$project$ReciprocalIdentities$RightAnswer),
-									_Utils_Tuple2('c) RHS = ((cos^2(y) + 1) - 1)/sin^2(y)', $author$project$ReciprocalIdentities$WrongAnswer2),
-									_Utils_Tuple2('d) RHS = ((tan^2(y) + 1) - 1)/sin^2(y)', $author$project$ReciprocalIdentities$WrongAnswer3)
+									_Utils_Tuple2('a) RHS = ((cos^2(y) + 1) - 1)/sec^2(y)', $author$project$ReciprocalIdentities$Incorrect),
+									_Utils_Tuple2('b) RHS = ((tan^2(y) + 1) - 1)/sec^2(y))', $author$project$ReciprocalIdentities$Correct),
+									_Utils_Tuple2('c) RHS = ((cos^2(y) + 1) - 1)/sin^2(y)', $author$project$ReciprocalIdentities$Incorrect),
+									_Utils_Tuple2('d) RHS = ((tan^2(y) + 1) - 1)/sin^2(y)', $author$project$ReciprocalIdentities$Incorrect)
 								]);
 						case 'Step2':
 							var _v13 = _v0.a;
 							var _v14 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) RHS = cos^2(y) / sec^2(y)', $author$project$ReciprocalIdentities$WrongAnswer1),
-									_Utils_Tuple2('b) RHS = cos^2(y) / tan^2(y)', $author$project$ReciprocalIdentities$WrongAnswer2),
-									_Utils_Tuple2('c) RHS = tan^2(y) / sec^2(y)', $author$project$ReciprocalIdentities$RightAnswer),
-									_Utils_Tuple2('d) RHS = sec^2(y) / tan^2(y)', $author$project$ReciprocalIdentities$WrongAnswer3)
+									_Utils_Tuple2('a) RHS = cos^2(y) / sec^2(y)', $author$project$ReciprocalIdentities$Incorrect),
+									_Utils_Tuple2('b) RHS = cos^2(y) / tan^2(y)', $author$project$ReciprocalIdentities$Incorrect),
+									_Utils_Tuple2('c) RHS = tan^2(y) / sec^2(y)', $author$project$ReciprocalIdentities$Correct),
+									_Utils_Tuple2('d) RHS = sec^2(y) / tan^2(y)', $author$project$ReciprocalIdentities$Incorrect)
 								]);
 						case 'Step3':
 							var _v15 = _v0.a;
 							var _v16 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) RHS = sec^2(y) * (1/tan^2(y))', $author$project$ReciprocalIdentities$WrongAnswer1),
-									_Utils_Tuple2('b) RHS = sec^2(y) * (2/tan^2(y))', $author$project$ReciprocalIdentities$WrongAnswer2),
-									_Utils_Tuple2('c) RHS = tan^2(y) * (2/sec^2(y))', $author$project$ReciprocalIdentities$WrongAnswer3),
-									_Utils_Tuple2('d) RHS = tan^2(y) * (/sec^2(y))', $author$project$ReciprocalIdentities$RightAnswer)
+									_Utils_Tuple2('a) RHS = sec^2(y) * (1/tan^2(y))', $author$project$ReciprocalIdentities$Incorrect),
+									_Utils_Tuple2('b) RHS = sec^2(y) * (2/tan^2(y))', $author$project$ReciprocalIdentities$Incorrect),
+									_Utils_Tuple2('c) RHS = tan^2(y) * (2/sec^2(y))', $author$project$ReciprocalIdentities$Incorrect),
+									_Utils_Tuple2('d) RHS = tan^2(y) * (/sec^2(y))', $author$project$ReciprocalIdentities$Correct)
 								]);
 						case 'Step4':
 							var _v17 = _v0.a;
 							var _v18 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) RHS = tan^2(y) cos^2(y) ', $author$project$ReciprocalIdentities$RightAnswer),
-									_Utils_Tuple2('b) RHS = cos^2(y) tan^2(y) ', $author$project$ReciprocalIdentities$WrongAnswer1),
-									_Utils_Tuple2('c) RHS = cos^2(2y) tan^2(y) ', $author$project$ReciprocalIdentities$WrongAnswer2),
-									_Utils_Tuple2('d) RHS = tan^2(2y) cos^2(y) ', $author$project$ReciprocalIdentities$WrongAnswer3)
+									_Utils_Tuple2('a) RHS = tan^2(y) cos^2(y) ', $author$project$ReciprocalIdentities$Correct),
+									_Utils_Tuple2('b) RHS = cos^2(y) tan^2(y) ', $author$project$ReciprocalIdentities$Incorrect),
+									_Utils_Tuple2('c) RHS = cos^2(2y) tan^2(y) ', $author$project$ReciprocalIdentities$Incorrect),
+									_Utils_Tuple2('d) RHS = tan^2(2y) cos^2(y) ', $author$project$ReciprocalIdentities$Incorrect)
 								]);
 						default:
 							var _v19 = _v0.a;
 							var _v20 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) RHS = (cos^2(y) / cos^2(y))(cos^2(y)) = sin^2(y)', $author$project$ReciprocalIdentities$WrongAnswer1),
-									_Utils_Tuple2('b) RHS = (sin^2(y) / cos^2(y))(cos^2(y)) = sin^2(y)', $author$project$ReciprocalIdentities$RightAnswer),
-									_Utils_Tuple2('c) RHS = (cos^2(y) / cos^2(y))(tan^2(y)) = sin^2(y)', $author$project$ReciprocalIdentities$WrongAnswer2),
-									_Utils_Tuple2('d) RHS = (sin^2(y) / cos^2(y))(tan^2(y)) = sin^2(y)', $author$project$ReciprocalIdentities$WrongAnswer3)
+									_Utils_Tuple2('a) RHS = (cos^2(y) / cos^2(y))(cos^2(y)) = sin^2(y)', $author$project$ReciprocalIdentities$Incorrect),
+									_Utils_Tuple2('b) RHS = (sin^2(y) / cos^2(y))(cos^2(y)) = sin^2(y)', $author$project$ReciprocalIdentities$Correct),
+									_Utils_Tuple2('c) RHS = (cos^2(y) / cos^2(y))(tan^2(y)) = sin^2(y)', $author$project$ReciprocalIdentities$Incorrect),
+									_Utils_Tuple2('d) RHS = (sin^2(y) / cos^2(y))(tan^2(y)) = sin^2(y)', $author$project$ReciprocalIdentities$Incorrect)
 								]);
 					}
 				case 'Question3':
@@ -14983,20 +15020,20 @@ var $author$project$ReciprocalIdentities$optionsStr = F2(
 							var _v22 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) RHS = 4sin(y)/cos^2(y)', $author$project$ReciprocalIdentities$WrongAnswer1),
-									_Utils_Tuple2('b) RHS = 2sin(y)/cos^2(y)', $author$project$ReciprocalIdentities$RightAnswer),
-									_Utils_Tuple2('c) RHS = 4sin(y)/cos^4(y)', $author$project$ReciprocalIdentities$WrongAnswer2),
-									_Utils_Tuple2('d) RHS = 2sin(y)/cos^4(y)', $author$project$ReciprocalIdentities$WrongAnswer3)
+									_Utils_Tuple2('a) RHS = 4sin(y)/cos^2(y)', $author$project$ReciprocalIdentities$Incorrect),
+									_Utils_Tuple2('b) RHS = 2sin(y)/cos^2(y)', $author$project$ReciprocalIdentities$Correct),
+									_Utils_Tuple2('c) RHS = 4sin(y)/cos^4(y)', $author$project$ReciprocalIdentities$Incorrect),
+									_Utils_Tuple2('d) RHS = 2sin(y)/cos^4(y)', $author$project$ReciprocalIdentities$Incorrect)
 								]);
 						case 'Step2':
 							var _v23 = _v0.a;
 							var _v24 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) RHS = sin(y)/(1-cot^2(y)', $author$project$ReciprocalIdentities$WrongAnswer1),
-									_Utils_Tuple2('b) RHS = tan(y)/(1-cot^2(y)', $author$project$ReciprocalIdentities$WrongAnswer2),
-									_Utils_Tuple2('c) RHS = sin(y)/(1-sin^2(y)', $author$project$ReciprocalIdentities$RightAnswer),
-									_Utils_Tuple2('d) RHS = tan(y)/(1-sin^2(y)', $author$project$ReciprocalIdentities$WrongAnswer3)
+									_Utils_Tuple2('a) RHS = sin(y)/(1-cot^2(y)', $author$project$ReciprocalIdentities$Incorrect),
+									_Utils_Tuple2('b) RHS = tan(y)/(1-cot^2(y)', $author$project$ReciprocalIdentities$Incorrect),
+									_Utils_Tuple2('c) RHS = sin(y)/(1-sin^2(y)', $author$project$ReciprocalIdentities$Correct),
+									_Utils_Tuple2('d) RHS = tan(y)/(1-sin^2(y)', $author$project$ReciprocalIdentities$Incorrect)
 								]);
 						default:
 							break _v0$15;
@@ -15007,10 +15044,10 @@ var $author$project$ReciprocalIdentities$optionsStr = F2(
 						var _v26 = _v0.b;
 						return _List_fromArray(
 							[
-								_Utils_Tuple2('a) RHS = (2cos(y) - 1)(2(tan(y)) + 1)', $author$project$ReciprocalIdentities$WrongAnswer1),
-								_Utils_Tuple2('b) RHS = (2sin(y) - 1)(2(tan(y)) + 1)', $author$project$ReciprocalIdentities$WrongAnswer2),
-								_Utils_Tuple2('c) RHS = (2cos(y) - 1)(2(cos(y)) + 1)', $author$project$ReciprocalIdentities$RightAnswer),
-								_Utils_Tuple2('d) RHS = (2cos(y) - 1)(2(cos(y)) + 1)', $author$project$ReciprocalIdentities$WrongAnswer3)
+								_Utils_Tuple2('a) RHS = (2cos(y) - 1)(2(tan(y)) + 1)', $author$project$ReciprocalIdentities$Incorrect),
+								_Utils_Tuple2('b) RHS = (2sin(y) - 1)(2(tan(y)) + 1)', $author$project$ReciprocalIdentities$Incorrect),
+								_Utils_Tuple2('c) RHS = (2cos(y) - 1)(2(cos(y)) + 1)', $author$project$ReciprocalIdentities$Correct),
+								_Utils_Tuple2('d) RHS = (2cos(y) - 1)(2(cos(y)) + 1)', $author$project$ReciprocalIdentities$Incorrect)
 							]);
 					} else {
 						break _v0$15;
@@ -15022,20 +15059,20 @@ var $author$project$ReciprocalIdentities$optionsStr = F2(
 							var _v28 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) = 1 + csc^2(y) - cot^2(y)', $author$project$ReciprocalIdentities$WrongAnswer1),
-									_Utils_Tuple2('b) = 1 + cot^2(y) - csc^2(y)', $author$project$ReciprocalIdentities$WrongAnswer2),
-									_Utils_Tuple2('c) = 1 + csc^2(y) - csc^2(y)', $author$project$ReciprocalIdentities$WrongAnswer3),
-									_Utils_Tuple2('d) = 1 + cot^2(y) - cot^2(y)', $author$project$ReciprocalIdentities$RightAnswer)
+									_Utils_Tuple2('a) = 1 + csc^2(y) - cot^2(y)', $author$project$ReciprocalIdentities$Incorrect),
+									_Utils_Tuple2('b) = 1 + cot^2(y) - csc^2(y)', $author$project$ReciprocalIdentities$Incorrect),
+									_Utils_Tuple2('c) = 1 + csc^2(y) - csc^2(y)', $author$project$ReciprocalIdentities$Incorrect),
+									_Utils_Tuple2('d) = 1 + cot^2(y) - cot^2(y)', $author$project$ReciprocalIdentities$Correct)
 								]);
 						case 'Step2':
 							var _v29 = _v0.a;
 							var _v30 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) = 1', $author$project$ReciprocalIdentities$RightAnswer),
-									_Utils_Tuple2('b) = cosy', $author$project$ReciprocalIdentities$WrongAnswer1),
-									_Utils_Tuple2('c) = siny/tany', $author$project$ReciprocalIdentities$WrongAnswer2),
-									_Utils_Tuple2('d) = tany/siny', $author$project$ReciprocalIdentities$WrongAnswer3)
+									_Utils_Tuple2('a) = 1', $author$project$ReciprocalIdentities$Correct),
+									_Utils_Tuple2('b) = cosy', $author$project$ReciprocalIdentities$Incorrect),
+									_Utils_Tuple2('c) = siny/tany', $author$project$ReciprocalIdentities$Incorrect),
+									_Utils_Tuple2('d) = tany/siny', $author$project$ReciprocalIdentities$Incorrect)
 								]);
 						default:
 							break _v0$15;
@@ -15044,6 +15081,10 @@ var $author$project$ReciprocalIdentities$optionsStr = F2(
 		}
 		var otherwise = _v0;
 		return _List_Nil;
+	});
+var $author$project$ReciprocalIdentities$ClickedOption = F2(
+	function (a, b) {
+		return {$: 'ClickedOption', a: a, b: b};
 	});
 var $author$project$ReciprocalIdentities$getOptionColour = F5(
 	function (idx, optionColourA, optionColourB, optionColourC, optionColourD) {
@@ -15065,49 +15106,93 @@ var $MacCASOutreach$graphicsvg$GraphicSVG$lightBlue = A4($MacCASOutreach$graphic
 var $author$project$ReciprocalIdentities$ChangeOptionColour = function (a) {
 	return {$: 'ChangeOptionColour', a: a};
 };
-var $author$project$ReciprocalIdentities$updateOptionColour = F2(
-	function (idx, colour) {
+var $author$project$ReciprocalIdentities$updateOptionColourOnClick = F3(
+	function (idx, firstColour, secondColour) {
 		switch (idx) {
 			case 0:
 				return $author$project$ReciprocalIdentities$ChangeOptionColour(
 					function (m) {
 						return _Utils_update(
 							m,
-							{optionColourA: colour});
+							{optionColourA: secondColour, optionColourB: firstColour, optionColourC: firstColour, optionColourD: firstColour});
 					});
 			case 1:
 				return $author$project$ReciprocalIdentities$ChangeOptionColour(
 					function (m) {
 						return _Utils_update(
 							m,
-							{optionColourB: colour});
+							{optionColourA: firstColour, optionColourB: secondColour, optionColourC: firstColour, optionColourD: firstColour});
 					});
 			case 2:
 				return $author$project$ReciprocalIdentities$ChangeOptionColour(
 					function (m) {
 						return _Utils_update(
 							m,
-							{optionColourC: colour});
+							{optionColourA: firstColour, optionColourB: firstColour, optionColourC: secondColour, optionColourD: firstColour});
 					});
 			case 3:
 				return $author$project$ReciprocalIdentities$ChangeOptionColour(
 					function (m) {
 						return _Utils_update(
 							m,
-							{optionColourD: colour});
+							{optionColourA: firstColour, optionColourB: firstColour, optionColourC: firstColour, optionColourD: secondColour});
 					});
 			default:
 				var otherwise = idx;
 				return $author$project$ReciprocalIdentities$ChangeOptionColour(
 					function (m) {
-						return _Utils_update(
-							m,
-							{optionColourA: colour});
+						return m;
 					});
 		}
 	});
-var $author$project$ReciprocalIdentities$optionsText = F5(
-	function (lst, optionColourA, optionColourB, optionColourC, optionColourD) {
+var $author$project$ReciprocalIdentities$updateOptionColourOnHover = F3(
+	function (idx, colour, optionSelected) {
+		if (optionSelected) {
+			return $author$project$ReciprocalIdentities$ChangeOptionColour(
+				function (m) {
+					return m;
+				});
+		} else {
+			switch (idx) {
+				case 0:
+					return $author$project$ReciprocalIdentities$ChangeOptionColour(
+						function (m) {
+							return _Utils_update(
+								m,
+								{optionColourA: colour});
+						});
+				case 1:
+					return $author$project$ReciprocalIdentities$ChangeOptionColour(
+						function (m) {
+							return _Utils_update(
+								m,
+								{optionColourB: colour});
+						});
+				case 2:
+					return $author$project$ReciprocalIdentities$ChangeOptionColour(
+						function (m) {
+							return _Utils_update(
+								m,
+								{optionColourC: colour});
+						});
+				case 3:
+					return $author$project$ReciprocalIdentities$ChangeOptionColour(
+						function (m) {
+							return _Utils_update(
+								m,
+								{optionColourD: colour});
+						});
+				default:
+					var otherwise = idx;
+					return $author$project$ReciprocalIdentities$ChangeOptionColour(
+						function (m) {
+							return m;
+						});
+			}
+		}
+	});
+var $author$project$ReciprocalIdentities$optionsText = F6(
+	function (lst, optionSelected, optionColourA, optionColourB, optionColourC, optionColourD) {
 		return $MacCASOutreach$graphicsvg$GraphicSVG$group(
 			A2(
 				$elm$core$List$indexedMap,
@@ -15115,23 +15200,26 @@ var $author$project$ReciprocalIdentities$optionsText = F5(
 					function (idx, tuple) {
 						return A2(
 							$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-							tuple.b,
+							A2($author$project$ReciprocalIdentities$ClickedOption, idx, tuple.b),
 							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyLeave,
-								A2($author$project$ReciprocalIdentities$updateOptionColour, idx, $MacCASOutreach$graphicsvg$GraphicSVG$darkBlue),
+								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
+								A3($author$project$ReciprocalIdentities$updateOptionColourOnClick, idx, $MacCASOutreach$graphicsvg$GraphicSVG$darkBlue, $MacCASOutreach$graphicsvg$GraphicSVG$lightBlue),
 								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$notifyEnter,
-									A2($author$project$ReciprocalIdentities$updateOptionColour, idx, $MacCASOutreach$graphicsvg$GraphicSVG$lightBlue),
+									$MacCASOutreach$graphicsvg$GraphicSVG$notifyLeave,
+									A3($author$project$ReciprocalIdentities$updateOptionColourOnHover, idx, $MacCASOutreach$graphicsvg$GraphicSVG$darkBlue, optionSelected),
 									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$move,
-										_Utils_Tuple2(-130, 45 - (20 * idx)),
+										$MacCASOutreach$graphicsvg$GraphicSVG$notifyEnter,
+										A3($author$project$ReciprocalIdentities$updateOptionColourOnHover, idx, $MacCASOutreach$graphicsvg$GraphicSVG$lightBlue, optionSelected),
 										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-											A5($author$project$ReciprocalIdentities$getOptionColour, idx, optionColourA, optionColourB, optionColourC, optionColourD),
+											$MacCASOutreach$graphicsvg$GraphicSVG$move,
+											_Utils_Tuple2(-130, 45 - (20 * idx)),
 											A2(
-												$MacCASOutreach$graphicsvg$GraphicSVG$size,
-												12,
-												$MacCASOutreach$graphicsvg$GraphicSVG$text(tuple.a)))))));
+												$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+												A5($author$project$ReciprocalIdentities$getOptionColour, idx, optionColourA, optionColourB, optionColourC, optionColourD),
+												A2(
+													$MacCASOutreach$graphicsvg$GraphicSVG$size,
+													12,
+													$MacCASOutreach$graphicsvg$GraphicSVG$text(tuple.a))))))));
 					}),
 				lst));
 	});
@@ -15149,8 +15237,8 @@ var $author$project$ReciprocalIdentities$stepStr = function (step) {
 			return 'What is the fifth step?';
 	}
 };
-var $author$project$ReciprocalIdentities$optionsSection = F6(
-	function (question, step, optionColourA, optionColourB, optionColourC, optionColourD) {
+var $author$project$ReciprocalIdentities$optionsSection = F7(
+	function (question, step, optionSelected, optionColourA, optionColourB, optionColourC, optionColourD) {
 		return A2(
 			$MacCASOutreach$graphicsvg$GraphicSVG$move,
 			_Utils_Tuple2(
@@ -15170,9 +15258,10 @@ var $author$project$ReciprocalIdentities$optionsSection = F6(
 								12,
 								$MacCASOutreach$graphicsvg$GraphicSVG$text(
 									$author$project$ReciprocalIdentities$stepStr(step))))),
-						A5(
+						A6(
 						$author$project$ReciprocalIdentities$optionsText,
 						A2($author$project$ReciprocalIdentities$optionsStr, question, step),
+						optionSelected,
 						optionColourA,
 						optionColourB,
 						optionColourC,
@@ -15260,7 +15349,7 @@ var $author$project$ReciprocalIdentities$isLastStep = F2(
 		return false;
 	});
 var $author$project$ReciprocalIdentities$resultsSection = F4(
-	function (question, step, answer, option) {
+	function (question, step, answerState, option) {
 		return A2($author$project$ReciprocalIdentities$isLastStep, question, step) ? $MacCASOutreach$graphicsvg$GraphicSVG$group(
 			_List_fromArray(
 				[
@@ -15271,12 +15360,12 @@ var $author$project$ReciprocalIdentities$resultsSection = F4(
 						(-40) - (20 * $author$project$ReciprocalIdentities$getIndexFromStep(step))),
 					A2(
 						$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-						_Utils_eq(answer, $author$project$ReciprocalIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$red : (_Utils_eq(answer, $author$project$ReciprocalIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$green : $MacCASOutreach$graphicsvg$GraphicSVG$white),
+						_Utils_eq(answerState, $author$project$ReciprocalIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$red : (_Utils_eq(answerState, $author$project$ReciprocalIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$green : $MacCASOutreach$graphicsvg$GraphicSVG$white),
 						A2(
 							$MacCASOutreach$graphicsvg$GraphicSVG$size,
 							12,
 							$MacCASOutreach$graphicsvg$GraphicSVG$text(
-								_Utils_eq(answer, $author$project$ReciprocalIdentities$Incorrect) ? 'Incorrect' : (_Utils_eq(answer, $author$project$ReciprocalIdentities$Correct) ? 'Correct! You have solved the problem.' : ''))))),
+								_Utils_eq(answerState, $author$project$ReciprocalIdentities$Incorrect) ? 'Incorrect' : (_Utils_eq(answerState, $author$project$ReciprocalIdentities$Correct) ? 'Correct! You have solved the problem.' : ''))))),
 					A2(
 					$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
 					A3($author$project$ReciprocalIdentities$ClickedExplanation, question, step, option),
@@ -15287,7 +15376,7 @@ var $author$project$ReciprocalIdentities$resultsSection = F4(
 							(-60) - (20 * $author$project$ReciprocalIdentities$getIndexFromStep(step))),
 						A2(
 							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							_Utils_eq(answer, $author$project$ReciprocalIdentities$Default) ? $MacCASOutreach$graphicsvg$GraphicSVG$blank : $MacCASOutreach$graphicsvg$GraphicSVG$darkBlue,
+							_Utils_eq(answerState, $author$project$ReciprocalIdentities$Default) ? $MacCASOutreach$graphicsvg$GraphicSVG$blank : $MacCASOutreach$graphicsvg$GraphicSVG$darkBlue,
 							A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 90, 25)))),
 					A2(
 					$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
@@ -15299,9 +15388,9 @@ var $author$project$ReciprocalIdentities$resultsSection = F4(
 							(-63) - (20 * $author$project$ReciprocalIdentities$getIndexFromStep(step))),
 						A2(
 							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							_Utils_eq(answer, $author$project$ReciprocalIdentities$Default) ? $MacCASOutreach$graphicsvg$GraphicSVG$blank : $MacCASOutreach$graphicsvg$GraphicSVG$white,
+							_Utils_eq(answerState, $author$project$ReciprocalIdentities$Default) ? $MacCASOutreach$graphicsvg$GraphicSVG$blank : $MacCASOutreach$graphicsvg$GraphicSVG$white,
 							$MacCASOutreach$graphicsvg$GraphicSVG$text('Explanation'))))
-				])) : (_Utils_eq(answer, $author$project$ReciprocalIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$group(
+				])) : (_Utils_eq(answerState, $author$project$ReciprocalIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$group(
 			_List_fromArray(
 				[
 					A2(
@@ -15340,7 +15429,7 @@ var $author$project$ReciprocalIdentities$resultsSection = F4(
 							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
 							$MacCASOutreach$graphicsvg$GraphicSVG$white,
 							$MacCASOutreach$graphicsvg$GraphicSVG$text('Explanation'))))
-				])) : (_Utils_eq(answer, $author$project$ReciprocalIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$group(
+				])) : (_Utils_eq(answerState, $author$project$ReciprocalIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$group(
 			_List_fromArray(
 				[
 					A2(
@@ -15516,7 +15605,7 @@ var $author$project$ReciprocalIdentities$view = function (model) {
 							12,
 							$MacCASOutreach$graphicsvg$GraphicSVG$text(
 								$author$project$ReciprocalIdentities$questionStr(model.question)))))),
-				A4($author$project$ReciprocalIdentities$resultsSection, model.question, model.step, model.answer, model.option)
+				A4($author$project$ReciprocalIdentities$resultsSection, model.question, model.step, model.answerState, model.option)
 			]),
 		_Utils_ap(
 			_List_fromArray(
@@ -15526,7 +15615,7 @@ var $author$project$ReciprocalIdentities$view = function (model) {
 			_Utils_ap(
 				_List_fromArray(
 					[
-						A6($author$project$ReciprocalIdentities$optionsSection, model.question, model.step, model.optionColourA, model.optionColourB, model.optionColourC, model.optionColourD)
+						A7($author$project$ReciprocalIdentities$optionsSection, model.question, model.step, model.optionSelected, model.optionColourA, model.optionColourB, model.optionColourC, model.optionColourD)
 					]),
 				_Utils_ap(
 					_List_fromArray(

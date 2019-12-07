@@ -15,7 +15,7 @@ init =
     , step = Step1
     , question = Question1
     , hintState = NoPopUp
-    , choiceState = NoPopUpChoice
+    , explanationState = NoPopUpExplanation
     , optionColourA = orange
     , optionColourB = orange
     , optionColourC = orange
@@ -26,9 +26,9 @@ init =
 
 type HintState = NoPopUp | PopUp Questions Steps
 
-type ChoiceState = NoPopUpChoice | PopUpChoice Questions Steps Options
+type ExplanationState = NoPopUpExplanation | PopUpExplanation Questions Steps Options
 
-type Choices = Default | Incorrect | Correct
+type Explanations = Default | Incorrect | Correct
 
 type Steps
     = Step1
@@ -53,7 +53,7 @@ type Options
 type State
     = None
     | Hint
-    | Choice
+    | Explanation
 
 -- change you app's state based on your new messages
 update msg model =
@@ -136,10 +136,10 @@ update msg model =
                 , hintState = PopUp question step
                 }
 
-        ClickedChoice question step option
+        ClickedExplanation question step option
             -> {model
-                | state = Choice
-                , choiceState = PopUpChoice question step option
+                | state = Explanation
+                , explanationState = PopUpExplanation question step option
                 }
 
         ExitHint
@@ -148,10 +148,10 @@ update msg model =
                 , hintState = NoPopUp
                 }
 
-        ExitChoice
+        ExitExplanation
             -> {model
                 | state = None
-                , choiceState = NoPopUpChoice
+                , explanationState = NoPopUpExplanation
                 }
 
         ChangeOptionColour t ->
@@ -184,8 +184,8 @@ view model =
             Hint -> case model.hintState of
                         PopUp question step -> [hintCard question step]
                         otherwise -> []
-            Choice -> case model.choiceState of
-                        PopUpChoice question step option -> [choiceCard question step option]
+            Explanation -> case model.explanationState of
+                        PopUpExplanation question step option -> [explanationCard question step option]
                         otherwise -> []
             otherwise -> []
 
@@ -412,14 +412,14 @@ resultsSection question step answer option =
                                             else orange
                                             )
                                     |> move ( -85, -60 - 20*(Basics.toFloat(getIndexFromStep step)) )
-                                    |> notifyTap (ClickedChoice question step option)
+                                    |> notifyTap (ClickedExplanation question step option)
                                 , text "Explanation"
                                     |> filled (if answer == Default
                                             then blank
                                             else white
                                             )
                                     |> move ( -115, -63 - 20*(Basics.toFloat(getIndexFromStep step)) )
-                                    |> notifyTap (ClickedChoice question step option)
+                                    |> notifyTap (ClickedExplanation question step option)
                                 ]
                     else if (answer == Incorrect)
                         then group [
@@ -430,11 +430,11 @@ resultsSection question step answer option =
                                 , rectangle 90 25
                                     |> filled orange
                                     |> move ( -85, -60 - 20*(Basics.toFloat(getIndexFromStep step)) )
-                                    |> notifyTap (ClickedChoice question step option)
+                                    |> notifyTap (ClickedExplanation question step option)
                                 , text "Explanation"
                                     |> filled white
                                     |> move ( -115, -63 - 20*(Basics.toFloat(getIndexFromStep step)) )
-                                    |> notifyTap (ClickedChoice question step option)
+                                    |> notifyTap (ClickedExplanation question step option)
                                 ]
                         else if (answer == Correct)
                             then group [
@@ -453,11 +453,11 @@ resultsSection question step answer option =
                                 , rectangle 90 25
                                     |> filled orange
                                     |> move ( -5, -60 - 20*(Basics.toFloat(getIndexFromStep step)) )
-                                    |> notifyTap (ClickedChoice question step option)
+                                    |> notifyTap (ClickedExplanation question step option)
                                 , text "Explanation"
                                     |> filled white
                                     |> move ( -35, -63 - 20*(Basics.toFloat(getIndexFromStep step)) )
-                                    |> notifyTap (ClickedChoice question step option)
+                                    |> notifyTap (ClickedExplanation question step option)
                                 ]
                             else group []
 
@@ -584,9 +584,9 @@ hintCard question step = group [rect 130 130 |> filled grey |> addOutline (solid
                                , hintText (hintStr question step)
                                ] |> move ( 60, 0 )
 
-choiceCard question step option = group [rect 170 130 |> filled grey |> addOutline (solid 0.3) black
+explanationCard question step option = group [rect 170 130 |> filled grey |> addOutline (solid 0.3) black
                                 , hintText (explanationStr question step option)
-                                , text "X" |> bold |> sansserif |> size 14 |> filled black |> makeTransparent 0.75 |> move (65, 45) |> notifyTap ExitChoice
+                                , text "X" |> bold |> sansserif |> size 14 |> filled black |> makeTransparent 0.75 |> move (65, 45) |> notifyTap ExitExplanation
                                 ] |> move ( 60, 0 )
 
 
@@ -609,8 +609,8 @@ type Msg m
     | PreviousQuestion
     | ClickedHint Questions Steps
     | ExitHint
-    | ClickedChoice Questions Steps Options
-    | ExitChoice
+    | ClickedExplanation Questions Steps Options
+    | ExitExplanation
     | ChangeOptionColour (m -> m)
 
 

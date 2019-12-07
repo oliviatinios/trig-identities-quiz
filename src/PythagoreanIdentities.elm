@@ -396,7 +396,7 @@ resultsSection question step answer option =
                                             )
                                     |> move ( -85, -60 - 20*(Basics.toFloat(getIndexFromStep step)) )
                                     |> notifyTap (ClickedChoice question step option)
-                                , text "Explaination"
+                                , text "Explanation"
                                     |> filled (if answer == Default
                                             then blank
                                             else white
@@ -414,7 +414,7 @@ resultsSection question step answer option =
                                     |> filled purple
                                     |> move ( -85, -60 - 20*(Basics.toFloat(getIndexFromStep step)) )
                                     |> notifyTap (ClickedChoice question step option)
-                                , text "Explaination"
+                                , text "Explanation"
                                     |> filled white
                                     |> move ( -115, -63 - 20*(Basics.toFloat(getIndexFromStep step)) )
                                     |> notifyTap (ClickedChoice question step option)
@@ -437,7 +437,7 @@ resultsSection question step answer option =
                                     |> filled purple
                                     |> move ( -5, -60 - 20*(Basics.toFloat(getIndexFromStep step)) )
                                     |> notifyTap (ClickedChoice question step option)
-                                , text "Explaination"
+                                , text "Explanation"
                                     |> filled white
                                     |> move ( -35, -63 - 20*(Basics.toFloat(getIndexFromStep step)) )
                                     |> notifyTap (ClickedChoice question step option)
@@ -463,7 +463,7 @@ hintStr question step = case (question, step) of
                 (Question5, Step3) -> ["Add", "the terms", "in Step2", "and simplify further"]
                 otherwise -> []
 
-explainationStr question step option = case (question, step) of
+explanationStr question step option = case (question, step) of
                 (Question1, Step1) -> case option of
                                         Option1 -> ["tan y equals sin y/cos y. ", "Multiplying tan y by sin y / cos y", "does not lead back", "to the original expression." ]
                                         Option2 -> ["tan y equals sin y/cos y. ", "Multiplying tan y by cos y / sin y", "does not lead back", "to the original expression." ]
@@ -549,7 +549,7 @@ hintCard question step = group [rect 130 130 |> filled grey |> addOutline (solid
                                ] |> move ( 60, 0 )
 
 choiceCard question step option = group [rect 170 130 |> filled grey |> addOutline (solid 0.3) black
-                                , hintText (explainationStr question step option)
+                                , hintText (explanationStr question step option)
                                 , text "X" |> bold |> sansserif |> size 14 |> filled black |> makeTransparent 0.75 |> move (65, 45) |> notifyTap ExitChoice
                                 ] |> move ( 60, 0 )
 

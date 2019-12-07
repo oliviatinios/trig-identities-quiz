@@ -4,11 +4,11 @@ A quiz meant to help grade 12 students learn how to write proofs for trigonometr
 
 # Installing Dependencies:
 
-elm init
-elm install MacCASOutreach/graphicsvg
+`elm init`
+`elm install MacCASOutreach/graphicsvg`
 
 # Building:
 
-elm make src/Main.elm
+`elm make src/Main.elm`
 
 

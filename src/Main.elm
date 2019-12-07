@@ -6,7 +6,6 @@ import GraphicSVG.EllieApp exposing (..)
 import List
 import ReciprocalIdentities
 import FundamentalIdentities
-import Summary exposing (..)
 import PythagoreanIdentities
 
 

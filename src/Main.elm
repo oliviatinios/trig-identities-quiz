@@ -25,7 +25,6 @@ type Pages
     | PythagoreanIdentities
     | ReciprocalIdentities
     | ProductIdentities
-    | Summary
 
 
 init =
@@ -34,7 +33,6 @@ init =
     , model2 = PythagoreanIdentities.init
     , model3 = ReciprocalIdentities.init
     , model4 = ProductIdentities.init
-    , model5 = Summary.init
     , oneSat = 0
     , twoSat = 0
     , threeSat = 0
@@ -90,7 +88,6 @@ type Msg m1 m2 m3 m4 m5
     | Msg2 (PythagoreanIdentities.Msg m2)
     | Msg3 (ReciprocalIdentities.Msg m3)
     | Msg4 (ProductIdentities.Msg m4)
-    | Msg5 (Summary.Msg m5)
     | Goto1
     | Goto2
     | Goto3
@@ -129,9 +126,6 @@ view model =
 
             ProductIdentities ->
                 List.map (map Msg4) (ProductIdentities.view model.model4)
-
-            Summary ->
-                List.map (map Msg5) (Summary.view model.model5)
 
         )
             ++ [ rect 200 70 |> filled blank |> move ( 0, -190 ) |> notifyMouseMoveAt MoveInRect ]
@@ -283,17 +277,6 @@ update msg model =
                             0
             }
 
-        Out5 ->
-            { model
-                | fiveSat =
-                    case model.page of
-                        Summary ->
-                            model.fiveSat
-
-                        _ ->
-                            0
-            }
-
         _ ->
             case model.page of
                 Home ->
@@ -334,14 +317,6 @@ update msg model =
                                 , fiveSat = 0
                             }
 
-                        Goto5 ->
-                            { model
-                                | page = Summary
-                                , twoSat = 0
-                                , threeSat = 0
-                                , fourSat = 0
-                                , oneSat = 0
-                            }
                         _ ->
                             model
 
@@ -360,9 +335,6 @@ update msg model =
                             model
 
                         Msg4 _ ->
-                            model
-
-                        Msg5 _ ->
                             model
 
                         Goto1 ->
@@ -399,15 +371,6 @@ update msg model =
                                 , threeSat = 0
                                 , oneSat = 0
                                 , fiveSat = 0
-                            }
-
-                        Goto5 ->
-                            { model
-                                | page = Summary
-                                , twoSat = 0
-                                , threeSat = 0
-                                , fourSat = 0
-                                , oneSat = 0
                             }
 
                         _ ->
@@ -430,9 +393,6 @@ update msg model =
                         Msg4 _ ->
                             model
 
-                        Msg5 _ ->
-                            model
-
                         Goto1 ->
                             { model
                                 | page = FundamentalIdentities
@@ -467,15 +427,6 @@ update msg model =
                                 , threeSat = 0
                                 , oneSat = 0
                                 , fiveSat = 0
-                            }
-
-                        Goto5 ->
-                            { model
-                                | page = Summary
-                                , twoSat = 0
-                                , threeSat = 0
-                                , fourSat = 0
-                                , oneSat = 0
                             }
 
                         _ ->
@@ -498,9 +449,6 @@ update msg model =
                         Msg4 _ ->
                             model
 
-                        Msg5 _ ->
-                            model
-
                         Goto1 ->
                             { model
                                 | page = FundamentalIdentities
@@ -535,15 +483,6 @@ update msg model =
                                 , threeSat = 0
                                 , oneSat = 0
                                 , fiveSat = 0
-                            }
-
-                        Goto5 ->
-                            { model
-                                | page = Summary
-                                , twoSat = 0
-                                , threeSat = 0
-                                , fourSat = 0
-                                , oneSat = 0
                             }
 
                         _ ->
@@ -566,9 +505,6 @@ update msg model =
                         Msg4 m4 ->
                             { model | model4 = ProductIdentities.update m4 model.model4 }
 
-                        Msg5 _ ->
-                            model
-
                         Goto1 ->
                             { model
                                 | page = FundamentalIdentities
@@ -603,83 +539,6 @@ update msg model =
                                 , threeSat = 0
                                 , oneSat = 0
                                 , fiveSat = 0
-                            }
-
-                        Goto5 ->
-                            { model
-                                | page = Summary
-                                , twoSat = 0
-                                , threeSat = 0
-                                , fourSat = 0
-                                , oneSat = 0
-                            }
-
-                        _ ->
-                            model
-
-                Summary ->
-                    case msg of
-                        Tick f g ->
-                            { model | model5 = Summary.update (Summary.Tick f g) model.model5 }
-
-                        Msg1 _ ->
-                            model
-
-                        Msg2 _ ->
-                            model
-
-                        Msg3 _ ->
-                            model
-
-                        Msg4 _ ->
-                            model
-
-                        Msg5 m5 ->
-                            { model | model5 = Summary.update m5 model.model5 }
-
-                        Goto1 ->
-                            { model
-                                | page = FundamentalIdentities
-                                , twoSat = 0
-                                , threeSat = 0
-                                , fourSat = 0
-                                , fiveSat = 0
-                            }
-
-                        Goto2 ->
-                            { model
-                                | page = PythagoreanIdentities
-                                , oneSat = 0
-                                , threeSat = 0
-                                , fourSat = 0
-                                , fiveSat = 0
-                            }
-
-                        Goto3 ->
-                            { model
-                                | page = ReciprocalIdentities
-                                , twoSat = 0
-                                , oneSat = 0
-                                , fourSat = 0
-                                , fiveSat = 0
-                            }
-
-                        Goto4 ->
-                            { model
-                                | page = ProductIdentities
-                                , twoSat = 0
-                                , threeSat = 0
-                                , oneSat = 0
-                                , fiveSat = 0
-                            }
-
-                        Goto5 ->
-                            { model
-                                | page = Summary
-                                , twoSat = 0
-                                , threeSat = 0
-                                , fourSat = 0
-                                , oneSat = 0
                             }
 
                         _ ->

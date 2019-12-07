@@ -8582,17 +8582,11 @@ var $author$project$ReciprocalIdentities$Question1 = {$: 'Question1'};
 var $author$project$ReciprocalIdentities$Step1 = {$: 'Step1'};
 var $MacCASOutreach$graphicsvg$GraphicSVG$darkBlue = A4($MacCASOutreach$graphicsvg$GraphicSVG$RGBA, 32, 74, 135, 1);
 var $author$project$ReciprocalIdentities$init = {answer: $author$project$ReciprocalIdentities$Default, choiceState: $author$project$ReciprocalIdentities$NoPopUpChoice, hintState: $author$project$ReciprocalIdentities$NoPopUp, notify: $author$project$ReciprocalIdentities$NotifyTap, option: $author$project$ReciprocalIdentities$Option1, optionColourA: $MacCASOutreach$graphicsvg$GraphicSVG$darkBlue, optionColourB: $MacCASOutreach$graphicsvg$GraphicSVG$darkBlue, optionColourC: $MacCASOutreach$graphicsvg$GraphicSVG$darkBlue, optionColourD: $MacCASOutreach$graphicsvg$GraphicSVG$darkBlue, question: $author$project$ReciprocalIdentities$Question1, state: $author$project$ReciprocalIdentities$None, step: $author$project$ReciprocalIdentities$Step1, time: 0};
-var $author$project$Summary$Default = {$: 'Default'};
-var $author$project$Summary$NotifyTap = {$: 'NotifyTap'};
-var $author$project$Summary$Question1 = {$: 'Question1'};
-var $author$project$Summary$Step1 = {$: 'Step1'};
-var $author$project$Summary$init = {answer: $author$project$Summary$Default, notify: $author$project$Summary$NotifyTap, question: $author$project$Summary$Question1, step: $author$project$Summary$Step1, time: 0};
-var $author$project$Main$init = {currentPage: 1, fiveSat: 0, fourSat: 0, model1: $author$project$FundamentalIdentities$init, model2: $author$project$PythagoreanIdentities$init, model3: $author$project$ReciprocalIdentities$init, model4: $author$project$ProductIdentities$init, model5: $author$project$Summary$init, oneSat: 0, page: $author$project$Main$Home, threeSat: 0, twoSat: 0};
+var $author$project$Main$init = {currentPage: 1, fiveSat: 0, fourSat: 0, model1: $author$project$FundamentalIdentities$init, model2: $author$project$PythagoreanIdentities$init, model3: $author$project$ReciprocalIdentities$init, model4: $author$project$ProductIdentities$init, oneSat: 0, page: $author$project$Main$Home, threeSat: 0, twoSat: 0};
 var $author$project$Main$FundamentalIdentities = {$: 'FundamentalIdentities'};
 var $author$project$Main$ProductIdentities = {$: 'ProductIdentities'};
 var $author$project$Main$PythagoreanIdentities = {$: 'PythagoreanIdentities'};
 var $author$project$Main$ReciprocalIdentities = {$: 'ReciprocalIdentities'};
-var $author$project$Main$Summary = {$: 'Summary'};
 var $author$project$FundamentalIdentities$Tick = F2(
 	function (a, b) {
 		return {$: 'Tick', a: a, b: b};
@@ -8606,10 +8600,6 @@ var $author$project$PythagoreanIdentities$Tick = F2(
 		return {$: 'Tick', a: a, b: b};
 	});
 var $author$project$ReciprocalIdentities$Tick = F2(
-	function (a, b) {
-		return {$: 'Tick', a: a, b: b};
-	});
-var $author$project$Summary$Tick = F2(
 	function (a, b) {
 		return {$: 'Tick', a: a, b: b};
 	});
@@ -9209,60 +9199,6 @@ var $author$project$ReciprocalIdentities$update = F2(
 				return t(model);
 		}
 	});
-var $author$project$Summary$Correct = {$: 'Correct'};
-var $author$project$Summary$Incorrect = {$: 'Incorrect'};
-var $author$project$Summary$Question2 = {$: 'Question2'};
-var $author$project$Summary$Step2 = {$: 'Step2'};
-var $author$project$Summary$Step3 = {$: 'Step3'};
-var $author$project$Summary$Step4 = {$: 'Step4'};
-var $author$project$Summary$Step5 = {$: 'Step5'};
-var $author$project$Summary$update = F2(
-	function (msg, model) {
-		switch (msg.$) {
-			case 'Tick':
-				var t = msg.a;
-				return _Utils_update(
-					model,
-					{time: t});
-			case 'Notif':
-				var notif = msg.a;
-				return _Utils_update(
-					model,
-					{notify: notif});
-			case 'WrongAnswer':
-				return _Utils_update(
-					model,
-					{answer: $author$project$Summary$Incorrect});
-			case 'RightAnswer':
-				return _Utils_update(
-					model,
-					{answer: $author$project$Summary$Correct});
-			case 'GoToStep2':
-				return _Utils_update(
-					model,
-					{answer: $author$project$Summary$Default, step: $author$project$Summary$Step2});
-			case 'GoToStep3':
-				return _Utils_update(
-					model,
-					{answer: $author$project$Summary$Default, step: $author$project$Summary$Step3});
-			case 'GoToStep4':
-				return _Utils_update(
-					model,
-					{answer: $author$project$Summary$Default, step: $author$project$Summary$Step4});
-			case 'GoToStep5':
-				return _Utils_update(
-					model,
-					{answer: $author$project$Summary$Default, step: $author$project$Summary$Step5});
-			case 'GoToQuestion1':
-				return _Utils_update(
-					model,
-					{answer: $author$project$Summary$Default, question: $author$project$Summary$Question1, step: $author$project$Summary$Step1});
-			default:
-				return _Utils_update(
-					model,
-					{answer: $author$project$Summary$Default, question: $author$project$Summary$Question2, step: $author$project$Summary$Step1});
-		}
-	});
 var $author$project$Main$update = F2(
 	function (msg, model) {
 		switch (msg.$) {
@@ -9338,22 +9274,9 @@ var $author$project$Main$update = F2(
 							}
 						}()
 					});
-			case 'Out5':
-				return _Utils_update(
-					model,
-					{
-						fiveSat: function () {
-							var _v5 = model.page;
-							if (_v5.$ === 'Summary') {
-								return model.fiveSat;
-							} else {
-								return 0;
-							}
-						}()
-					});
 			default:
-				var _v6 = model.page;
-				switch (_v6.$) {
+				var _v5 = model.page;
+				switch (_v5.$) {
 					case 'Home':
 						switch (msg.$) {
 							case 'Goto1':
@@ -9372,10 +9295,6 @@ var $author$project$Main$update = F2(
 								return _Utils_update(
 									model,
 									{fiveSat: 0, oneSat: 0, page: $author$project$Main$ProductIdentities, threeSat: 0, twoSat: 0});
-							case 'Goto5':
-								return _Utils_update(
-									model,
-									{fourSat: 0, oneSat: 0, page: $author$project$Main$Summary, threeSat: 0, twoSat: 0});
 							default:
 								return model;
 						}
@@ -9405,8 +9324,6 @@ var $author$project$Main$update = F2(
 								return model;
 							case 'Msg4':
 								return model;
-							case 'Msg5':
-								return model;
 							case 'Goto1':
 								return _Utils_update(
 									model,
@@ -9423,10 +9340,6 @@ var $author$project$Main$update = F2(
 								return _Utils_update(
 									model,
 									{fiveSat: 0, oneSat: 0, page: $author$project$Main$ProductIdentities, threeSat: 0, twoSat: 0});
-							case 'Goto5':
-								return _Utils_update(
-									model,
-									{fourSat: 0, oneSat: 0, page: $author$project$Main$Summary, threeSat: 0, twoSat: 0});
 							default:
 								return model;
 						}
@@ -9456,8 +9369,6 @@ var $author$project$Main$update = F2(
 								return model;
 							case 'Msg4':
 								return model;
-							case 'Msg5':
-								return model;
 							case 'Goto1':
 								return _Utils_update(
 									model,
@@ -9474,10 +9385,6 @@ var $author$project$Main$update = F2(
 								return _Utils_update(
 									model,
 									{fiveSat: 0, oneSat: 0, page: $author$project$Main$ProductIdentities, threeSat: 0, twoSat: 0});
-							case 'Goto5':
-								return _Utils_update(
-									model,
-									{fourSat: 0, oneSat: 0, page: $author$project$Main$Summary, threeSat: 0, twoSat: 0});
 							default:
 								return model;
 						}
@@ -9507,8 +9414,6 @@ var $author$project$Main$update = F2(
 									});
 							case 'Msg4':
 								return model;
-							case 'Msg5':
-								return model;
 							case 'Goto1':
 								return _Utils_update(
 									model,
@@ -9525,14 +9430,10 @@ var $author$project$Main$update = F2(
 								return _Utils_update(
 									model,
 									{fiveSat: 0, oneSat: 0, page: $author$project$Main$ProductIdentities, threeSat: 0, twoSat: 0});
-							case 'Goto5':
-								return _Utils_update(
-									model,
-									{fourSat: 0, oneSat: 0, page: $author$project$Main$Summary, threeSat: 0, twoSat: 0});
 							default:
 								return model;
 						}
-					case 'ProductIdentities':
+					default:
 						switch (msg.$) {
 							case 'Tick':
 								var f = msg.a;
@@ -9558,8 +9459,6 @@ var $author$project$Main$update = F2(
 									{
 										model4: A2($author$project$ProductIdentities$update, m4, model.model4)
 									});
-							case 'Msg5':
-								return model;
 							case 'Goto1':
 								return _Utils_update(
 									model,
@@ -9576,61 +9475,6 @@ var $author$project$Main$update = F2(
 								return _Utils_update(
 									model,
 									{fiveSat: 0, oneSat: 0, page: $author$project$Main$ProductIdentities, threeSat: 0, twoSat: 0});
-							case 'Goto5':
-								return _Utils_update(
-									model,
-									{fourSat: 0, oneSat: 0, page: $author$project$Main$Summary, threeSat: 0, twoSat: 0});
-							default:
-								return model;
-						}
-					default:
-						switch (msg.$) {
-							case 'Tick':
-								var f = msg.a;
-								var g = msg.b;
-								return _Utils_update(
-									model,
-									{
-										model5: A2(
-											$author$project$Summary$update,
-											A2($author$project$Summary$Tick, f, g),
-											model.model5)
-									});
-							case 'Msg1':
-								return model;
-							case 'Msg2':
-								return model;
-							case 'Msg3':
-								return model;
-							case 'Msg4':
-								return model;
-							case 'Msg5':
-								var m5 = msg.a;
-								return _Utils_update(
-									model,
-									{
-										model5: A2($author$project$Summary$update, m5, model.model5)
-									});
-							case 'Goto1':
-								return _Utils_update(
-									model,
-									{fiveSat: 0, fourSat: 0, page: $author$project$Main$FundamentalIdentities, threeSat: 0, twoSat: 0});
-							case 'Goto2':
-								return _Utils_update(
-									model,
-									{fiveSat: 0, fourSat: 0, oneSat: 0, page: $author$project$Main$PythagoreanIdentities, threeSat: 0});
-							case 'Goto3':
-								return _Utils_update(
-									model,
-									{fiveSat: 0, fourSat: 0, oneSat: 0, page: $author$project$Main$ReciprocalIdentities, twoSat: 0});
-							case 'Goto4':
-								return _Utils_update(
-									model,
-									{fiveSat: 0, oneSat: 0, page: $author$project$Main$ProductIdentities, threeSat: 0, twoSat: 0});
-							case 'Goto5':
-								return _Utils_update(
-									model,
-									{fourSat: 0, oneSat: 0, page: $author$project$Main$Summary, threeSat: 0, twoSat: 0});
 							default:
 								return model;
 						}
@@ -9659,9 +9503,6 @@ var $author$project$Main$Msg3 = function (a) {
 };
 var $author$project$Main$Msg4 = function (a) {
 	return {$: 'Msg4', a: a};
-};
-var $author$project$Main$Msg5 = function (a) {
-	return {$: 'Msg5', a: a};
 };
 var $author$project$Main$Out1 = {$: 'Out1'};
 var $author$project$Main$Out2 = {$: 'Out2'};
@@ -15591,455 +15432,6 @@ var $author$project$ReciprocalIdentities$view = function (model) {
 						}
 					}()))));
 };
-var $author$project$Summary$GoToQuestion1 = {$: 'GoToQuestion1'};
-var $author$project$Summary$GoToQuestion2 = {$: 'GoToQuestion2'};
-var $MacCASOutreach$graphicsvg$GraphicSVG$darkRed = A4($MacCASOutreach$graphicsvg$GraphicSVG$RGBA, 164, 0, 0, 1);
-var $author$project$Summary$view = function (model) {
-	var _v0 = model.question;
-	if (_v0.$ === 'Question1') {
-		var _v1 = model.step;
-		switch (_v1.$) {
-			case 'Step1':
-				return _List_fromArray(
-					[
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(55, 0),
-						A3(
-							$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
-							$MacCASOutreach$graphicsvg$GraphicSVG$solid(2),
-							$MacCASOutreach$graphicsvg$GraphicSVG$darkRed,
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-								$MacCASOutreach$graphicsvg$GraphicSVG$blank,
-								A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 400, 290)))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(20, 120),
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$darkRed,
-							$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$size,
-									16,
-									$MacCASOutreach$graphicsvg$GraphicSVG$text('Question 1'))))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-						$author$project$Summary$GoToQuestion2,
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$move,
-							_Utils_Tuple2(150, 125),
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-								$MacCASOutreach$graphicsvg$GraphicSVG$darkRed,
-								$MacCASOutreach$graphicsvg$GraphicSVG$triangle(8)))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-						$author$project$Summary$GoToQuestion1,
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$move,
-							_Utils_Tuple2(-50, 125),
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$rotate,
-								$elm$core$Basics$degrees(-60),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$darkRed,
-									$MacCASOutreach$graphicsvg$GraphicSVG$triangle(8))))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(-130, 95),
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$darkRed,
-							$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$size,
-									12,
-									$MacCASOutreach$graphicsvg$GraphicSVG$text('Other formulas Q1')))))
-					]);
-			case 'Step2':
-				return _List_fromArray(
-					[
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(55, 0),
-						A3(
-							$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
-							$MacCASOutreach$graphicsvg$GraphicSVG$solid(2),
-							$MacCASOutreach$graphicsvg$GraphicSVG$darkRed,
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-								$MacCASOutreach$graphicsvg$GraphicSVG$blank,
-								A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 400, 290)))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(20, 120),
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$darkRed,
-							$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$size,
-									16,
-									$MacCASOutreach$graphicsvg$GraphicSVG$text('Question 1'))))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-						$author$project$Summary$GoToQuestion2,
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$move,
-							_Utils_Tuple2(150, 125),
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-								$MacCASOutreach$graphicsvg$GraphicSVG$darkRed,
-								$MacCASOutreach$graphicsvg$GraphicSVG$triangle(8)))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-						$author$project$Summary$GoToQuestion1,
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$move,
-							_Utils_Tuple2(-50, 125),
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$rotate,
-								$elm$core$Basics$degrees(-60),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$darkRed,
-									$MacCASOutreach$graphicsvg$GraphicSVG$triangle(8))))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(-130, 95),
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$darkRed,
-							$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$size,
-									12,
-									$MacCASOutreach$graphicsvg$GraphicSVG$text('Other formulas Q1')))))
-					]);
-			case 'Step3':
-				return _List_fromArray(
-					[
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(55, 0),
-						A3(
-							$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
-							$MacCASOutreach$graphicsvg$GraphicSVG$solid(2),
-							$MacCASOutreach$graphicsvg$GraphicSVG$darkRed,
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-								$MacCASOutreach$graphicsvg$GraphicSVG$blank,
-								A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 400, 290)))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(20, 120),
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$darkRed,
-							$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$size,
-									16,
-									$MacCASOutreach$graphicsvg$GraphicSVG$text('Question 1'))))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-						$author$project$Summary$GoToQuestion2,
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$move,
-							_Utils_Tuple2(150, 125),
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-								$MacCASOutreach$graphicsvg$GraphicSVG$darkRed,
-								$MacCASOutreach$graphicsvg$GraphicSVG$triangle(8)))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-						$author$project$Summary$GoToQuestion1,
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$move,
-							_Utils_Tuple2(-50, 125),
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$rotate,
-								$elm$core$Basics$degrees(-60),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$darkRed,
-									$MacCASOutreach$graphicsvg$GraphicSVG$triangle(8))))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(-130, 95),
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$darkRed,
-							$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$size,
-									12,
-									$MacCASOutreach$graphicsvg$GraphicSVG$text('Other formulas Q1')))))
-					]);
-			case 'Step4':
-				return _List_Nil;
-			default:
-				return _List_Nil;
-		}
-	} else {
-		var _v2 = model.step;
-		switch (_v2.$) {
-			case 'Step1':
-				return _List_fromArray(
-					[
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(55, 0),
-						A3(
-							$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
-							$MacCASOutreach$graphicsvg$GraphicSVG$solid(2),
-							$MacCASOutreach$graphicsvg$GraphicSVG$darkRed,
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-								$MacCASOutreach$graphicsvg$GraphicSVG$blank,
-								A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 400, 290)))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(20, 120),
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$darkRed,
-							$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$size,
-									16,
-									$MacCASOutreach$graphicsvg$GraphicSVG$text('Question 2'))))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-						$author$project$Summary$GoToQuestion1,
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$move,
-							_Utils_Tuple2(-50, 125),
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$rotate,
-								$elm$core$Basics$degrees(-60),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$darkRed,
-									$MacCASOutreach$graphicsvg$GraphicSVG$triangle(8))))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(-130, 95),
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$darkRed,
-							$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$size,
-									12,
-									$MacCASOutreach$graphicsvg$GraphicSVG$text('Other formulas Q2')))))
-					]);
-			case 'Step2':
-				return _List_fromArray(
-					[
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(55, 0),
-						A3(
-							$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
-							$MacCASOutreach$graphicsvg$GraphicSVG$solid(2),
-							$MacCASOutreach$graphicsvg$GraphicSVG$darkRed,
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-								$MacCASOutreach$graphicsvg$GraphicSVG$blank,
-								A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 400, 290)))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(20, 120),
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$darkRed,
-							$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$size,
-									16,
-									$MacCASOutreach$graphicsvg$GraphicSVG$text('Question 2'))))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-						$author$project$Summary$GoToQuestion1,
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$move,
-							_Utils_Tuple2(-50, 125),
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$rotate,
-								$elm$core$Basics$degrees(-60),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$darkRed,
-									$MacCASOutreach$graphicsvg$GraphicSVG$triangle(8))))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(-130, 95),
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$darkRed,
-							$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$size,
-									12,
-									$MacCASOutreach$graphicsvg$GraphicSVG$text('Other formulas Q2')))))
-					]);
-			case 'Step3':
-				return _List_fromArray(
-					[
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(55, 0),
-						A3(
-							$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
-							$MacCASOutreach$graphicsvg$GraphicSVG$solid(2),
-							$MacCASOutreach$graphicsvg$GraphicSVG$darkRed,
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-								$MacCASOutreach$graphicsvg$GraphicSVG$blank,
-								A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 400, 290)))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(20, 120),
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$darkRed,
-							$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$size,
-									16,
-									$MacCASOutreach$graphicsvg$GraphicSVG$text('Question 2'))))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-						$author$project$Summary$GoToQuestion1,
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$move,
-							_Utils_Tuple2(-50, 125),
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$rotate,
-								$elm$core$Basics$degrees(-60),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$darkRed,
-									$MacCASOutreach$graphicsvg$GraphicSVG$triangle(8))))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(-130, 95),
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$darkRed,
-							$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$size,
-									12,
-									$MacCASOutreach$graphicsvg$GraphicSVG$text('Other formulas Q2')))))
-					]);
-			case 'Step4':
-				return _List_fromArray(
-					[
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(55, 0),
-						A3(
-							$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
-							$MacCASOutreach$graphicsvg$GraphicSVG$solid(2),
-							$MacCASOutreach$graphicsvg$GraphicSVG$darkRed,
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-								$MacCASOutreach$graphicsvg$GraphicSVG$blank,
-								A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 400, 290)))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(20, 120),
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$darkRed,
-							$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$size,
-									16,
-									$MacCASOutreach$graphicsvg$GraphicSVG$text('Question 2'))))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-						$author$project$Summary$GoToQuestion1,
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$move,
-							_Utils_Tuple2(-50, 125),
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$rotate,
-								$elm$core$Basics$degrees(-60),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$darkRed,
-									$MacCASOutreach$graphicsvg$GraphicSVG$triangle(8))))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(-130, 95),
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$darkRed,
-							$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$size,
-									12,
-									$MacCASOutreach$graphicsvg$GraphicSVG$text('Other formulas Q2')))))
-					]);
-			default:
-				return _List_fromArray(
-					[
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(55, 0),
-						A3(
-							$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
-							$MacCASOutreach$graphicsvg$GraphicSVG$solid(2),
-							$MacCASOutreach$graphicsvg$GraphicSVG$darkRed,
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-								$MacCASOutreach$graphicsvg$GraphicSVG$blank,
-								A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 400, 290)))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(20, 120),
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$darkRed,
-							$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$size,
-									16,
-									$MacCASOutreach$graphicsvg$GraphicSVG$text('Question 2'))))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-						$author$project$Summary$GoToQuestion1,
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$move,
-							_Utils_Tuple2(-50, 125),
-							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$rotate,
-								$elm$core$Basics$degrees(-60),
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-									$MacCASOutreach$graphicsvg$GraphicSVG$darkRed,
-									$MacCASOutreach$graphicsvg$GraphicSVG$triangle(8))))),
-						A2(
-						$MacCASOutreach$graphicsvg$GraphicSVG$move,
-						_Utils_Tuple2(-130, 95),
-						A2(
-							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$darkRed,
-							$MacCASOutreach$graphicsvg$GraphicSVG$bold(
-								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$size,
-									12,
-									$MacCASOutreach$graphicsvg$GraphicSVG$text('Other formulas Q2')))))
-					]);
-		}
-	}
-};
 var $author$project$Main$view = function (model) {
 	return A3(
 		$MacCASOutreach$graphicsvg$GraphicSVG$collage,
@@ -16100,16 +15492,11 @@ var $author$project$Main$view = function (model) {
 							$elm$core$List$map,
 							$MacCASOutreach$graphicsvg$GraphicSVG$map($author$project$Main$Msg3),
 							$author$project$ReciprocalIdentities$view(model.model3));
-					case 'ProductIdentities':
+					default:
 						return A2(
 							$elm$core$List$map,
 							$MacCASOutreach$graphicsvg$GraphicSVG$map($author$project$Main$Msg4),
 							$author$project$ProductIdentities$view(model.model4));
-					default:
-						return A2(
-							$elm$core$List$map,
-							$MacCASOutreach$graphicsvg$GraphicSVG$map($author$project$Main$Msg5),
-							$author$project$Summary$view(model.model5));
 				}
 			}(),
 			_Utils_ap(

@@ -8566,11 +8566,10 @@ var $author$project$PythagoreanIdentities$NoPopUp = {$: 'NoPopUp'};
 var $author$project$PythagoreanIdentities$NoPopUpExplanation = {$: 'NoPopUpExplanation'};
 var $author$project$PythagoreanIdentities$None = {$: 'None'};
 var $author$project$PythagoreanIdentities$NotifyTap = {$: 'NotifyTap'};
-var $author$project$PythagoreanIdentities$Option1 = {$: 'Option1'};
 var $author$project$PythagoreanIdentities$Question1 = {$: 'Question1'};
 var $author$project$PythagoreanIdentities$Step1 = {$: 'Step1'};
 var $MacCASOutreach$graphicsvg$GraphicSVG$purple = A4($MacCASOutreach$graphicsvg$GraphicSVG$RGBA, 117, 80, 123, 1);
-var $author$project$PythagoreanIdentities$init = {answer: $author$project$PythagoreanIdentities$Default, explanationState: $author$project$PythagoreanIdentities$NoPopUpExplanation, hintState: $author$project$PythagoreanIdentities$NoPopUp, notify: $author$project$PythagoreanIdentities$NotifyTap, option: $author$project$PythagoreanIdentities$Option1, optionColourA: $MacCASOutreach$graphicsvg$GraphicSVG$purple, optionColourB: $MacCASOutreach$graphicsvg$GraphicSVG$purple, optionColourC: $MacCASOutreach$graphicsvg$GraphicSVG$purple, optionColourD: $MacCASOutreach$graphicsvg$GraphicSVG$purple, question: $author$project$PythagoreanIdentities$Question1, state: $author$project$PythagoreanIdentities$None, step: $author$project$PythagoreanIdentities$Step1, time: 0};
+var $author$project$PythagoreanIdentities$init = {answerState: $author$project$PythagoreanIdentities$Default, explanationState: $author$project$PythagoreanIdentities$NoPopUpExplanation, hintState: $author$project$PythagoreanIdentities$NoPopUp, notify: $author$project$PythagoreanIdentities$NotifyTap, option: 0, optionColourA: $MacCASOutreach$graphicsvg$GraphicSVG$purple, optionColourB: $MacCASOutreach$graphicsvg$GraphicSVG$purple, optionColourC: $MacCASOutreach$graphicsvg$GraphicSVG$purple, optionColourD: $MacCASOutreach$graphicsvg$GraphicSVG$purple, optionSelected: false, question: $author$project$PythagoreanIdentities$Question1, state: $author$project$PythagoreanIdentities$None, step: $author$project$PythagoreanIdentities$Step1, time: 0};
 var $author$project$ReciprocalIdentities$Default = {$: 'Default'};
 var $author$project$ReciprocalIdentities$NoPopUp = {$: 'NoPopUp'};
 var $author$project$ReciprocalIdentities$NoPopUpExplanation = {$: 'NoPopUpExplanation'};
@@ -8644,6 +8643,11 @@ var $author$project$FundamentalIdentities$update = F2(
 					model,
 					{
 						answerState: $author$project$FundamentalIdentities$Default,
+						optionColourA: $MacCASOutreach$graphicsvg$GraphicSVG$orange,
+						optionColourB: $MacCASOutreach$graphicsvg$GraphicSVG$orange,
+						optionColourC: $MacCASOutreach$graphicsvg$GraphicSVG$orange,
+						optionColourD: $MacCASOutreach$graphicsvg$GraphicSVG$orange,
+						optionSelected: false,
 						step: function () {
 							var _v1 = model.step;
 							switch (_v1.$) {
@@ -8665,6 +8669,11 @@ var $author$project$FundamentalIdentities$update = F2(
 					model,
 					{
 						answerState: $author$project$FundamentalIdentities$Default,
+						optionColourA: $MacCASOutreach$graphicsvg$GraphicSVG$orange,
+						optionColourB: $MacCASOutreach$graphicsvg$GraphicSVG$orange,
+						optionColourC: $MacCASOutreach$graphicsvg$GraphicSVG$orange,
+						optionColourD: $MacCASOutreach$graphicsvg$GraphicSVG$orange,
+						optionSelected: false,
 						question: function () {
 							var _v2 = model.question;
 							switch (_v2.$) {
@@ -8885,12 +8894,8 @@ var $author$project$ProductIdentities$update = F2(
 				return t(model);
 		}
 	});
-var $author$project$PythagoreanIdentities$Correct = {$: 'Correct'};
 var $author$project$PythagoreanIdentities$Explanation = {$: 'Explanation'};
 var $author$project$PythagoreanIdentities$Hint = {$: 'Hint'};
-var $author$project$PythagoreanIdentities$Incorrect = {$: 'Incorrect'};
-var $author$project$PythagoreanIdentities$Option2 = {$: 'Option2'};
-var $author$project$PythagoreanIdentities$Option3 = {$: 'Option3'};
 var $author$project$PythagoreanIdentities$PopUp = F2(
 	function (a, b) {
 		return {$: 'PopUp', a: a, b: b};
@@ -8903,7 +8908,6 @@ var $author$project$PythagoreanIdentities$Question2 = {$: 'Question2'};
 var $author$project$PythagoreanIdentities$Question3 = {$: 'Question3'};
 var $author$project$PythagoreanIdentities$Question4 = {$: 'Question4'};
 var $author$project$PythagoreanIdentities$Question5 = {$: 'Question5'};
-var $author$project$PythagoreanIdentities$RightOption = {$: 'RightOption'};
 var $author$project$PythagoreanIdentities$Step2 = {$: 'Step2'};
 var $author$project$PythagoreanIdentities$Step3 = {$: 'Step3'};
 var $author$project$PythagoreanIdentities$Step4 = {$: 'Step4'};
@@ -8921,27 +8925,22 @@ var $author$project$PythagoreanIdentities$update = F2(
 				return _Utils_update(
 					model,
 					{notify: notif});
-			case 'WrongAnswer1':
+			case 'ClickedOption':
+				var option = msg.a;
+				var answerState = msg.b;
 				return _Utils_update(
 					model,
-					{answer: $author$project$PythagoreanIdentities$Incorrect, option: $author$project$PythagoreanIdentities$Option1});
-			case 'WrongAnswer2':
-				return _Utils_update(
-					model,
-					{answer: $author$project$PythagoreanIdentities$Incorrect, option: $author$project$PythagoreanIdentities$Option2});
-			case 'WrongAnswer3':
-				return _Utils_update(
-					model,
-					{answer: $author$project$PythagoreanIdentities$Incorrect, option: $author$project$PythagoreanIdentities$Option3});
-			case 'RightAnswer':
-				return _Utils_update(
-					model,
-					{answer: $author$project$PythagoreanIdentities$Correct, option: $author$project$PythagoreanIdentities$RightOption});
+					{answerState: answerState, option: option, optionSelected: true});
 			case 'NextStep':
 				return _Utils_update(
 					model,
 					{
-						answer: $author$project$PythagoreanIdentities$Default,
+						answerState: $author$project$PythagoreanIdentities$Default,
+						optionColourA: $MacCASOutreach$graphicsvg$GraphicSVG$purple,
+						optionColourB: $MacCASOutreach$graphicsvg$GraphicSVG$purple,
+						optionColourC: $MacCASOutreach$graphicsvg$GraphicSVG$purple,
+						optionColourD: $MacCASOutreach$graphicsvg$GraphicSVG$purple,
+						optionSelected: false,
 						step: function () {
 							var _v1 = model.step;
 							switch (_v1.$) {
@@ -8962,7 +8961,12 @@ var $author$project$PythagoreanIdentities$update = F2(
 				return _Utils_update(
 					model,
 					{
-						answer: $author$project$PythagoreanIdentities$Default,
+						answerState: $author$project$PythagoreanIdentities$Default,
+						optionColourA: $MacCASOutreach$graphicsvg$GraphicSVG$purple,
+						optionColourB: $MacCASOutreach$graphicsvg$GraphicSVG$purple,
+						optionColourC: $MacCASOutreach$graphicsvg$GraphicSVG$purple,
+						optionColourD: $MacCASOutreach$graphicsvg$GraphicSVG$purple,
+						optionSelected: false,
 						question: function () {
 							var _v2 = model.question;
 							switch (_v2.$) {
@@ -8984,7 +8988,7 @@ var $author$project$PythagoreanIdentities$update = F2(
 				return _Utils_update(
 					model,
 					{
-						answer: $author$project$PythagoreanIdentities$Default,
+						answerState: $author$project$PythagoreanIdentities$Default,
 						question: function () {
 							var _v3 = model.question;
 							switch (_v3.$) {
@@ -13104,87 +13108,102 @@ var $author$project$PythagoreanIdentities$explanationStr = F3(
 						case 'Question1':
 							var _v1 = _v0.a;
 							var _v2 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
 									return _List_fromArray(
 										['tan y equals sin y/cos y. ', 'Multiplying tan y by sin y / cos y', 'does not lead back', 'to the original expression.']);
-								case 'Option2':
+								case 1:
 									return _List_fromArray(
 										['tan y equals sin y/cos y. ', 'Multiplying tan y by cos y / sin y', 'does not lead back', 'to the original expression.']);
-								case 'Option3':
+								case 2:
 									return _List_fromArray(
 										['It is not possible', 'to simplify to this expression.', 'You can double check by', 'expanding this expression and checking', 'if it equals the original expression.']);
-								default:
+								case 3:
 									return _List_fromArray(
 										['sin y is common in both', 'the terms around the subtraction.', 'We can factor out sin y. ', 'Therefore, this option is correct']);
+								default:
+									var otherwise = option;
+									return _List_Nil;
 							}
 						case 'Question2':
 							var _v10 = _v0.a;
 							var _v11 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
 									return _List_fromArray(
 										['There are no identities', 'that can be used to', 'get this expression']);
-								case 'Option2':
+								case 1:
+									return _List_fromArray(
+										['We can use the', '1 + cot2y = csc2y identity', 'and subsitute it in as csc2y.', 'Therefore, this option is correct']);
+								case 2:
 									return _List_fromArray(
 										['There are no identities', 'that can be used to', 'get this expression']);
-								case 'Option3':
+								case 3:
 									return _List_fromArray(
 										['There are no identities', 'that can be used to', 'get this expression']);
 								default:
-									return _List_fromArray(
-										['We can use the', '1 + cot2y = csc2y identity', 'and subsitute it in as csc2y.', 'Therefore, this option is correct']);
+									var otherwise = option;
+									return _List_Nil;
 							}
 						case 'Question3':
 							var _v19 = _v0.a;
 							var _v20 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
 									return _List_fromArray(
 										['There are no identities', 'that can be used to', 'get this expression']);
-								case 'Option2':
+								case 1:
+									return _List_fromArray(
+										['We can use the identity:', 'sin2y + cos2y = 1 by rearranging it to', 'sin2y = 1 - cos2y.', 'We can now substitute the denominator', 'with sin2y.', 'Therefore, this option is correct.']);
+								case 2:
 									return _List_fromArray(
 										['It is not possible', 'to simplify the expression', 'to secy / (tan y * tan y)']);
-								case 'Option3':
+								case 3:
 									return _List_fromArray(
 										['It is not possible', 'to simplify the expression', 'to sin y']);
 								default:
-									return _List_fromArray(
-										['We can use the identity:', 'sin2y + cos2y = 1 by rearranging it to', 'sin2y = 1 - cos2y.', 'We can now substitute the denominator', 'with sin2y.', 'Therefore, this option is correct.']);
+									var otherwise = option;
+									return _List_Nil;
 							}
 						case 'Question4':
 							var _v25 = _v0.a;
 							var _v26 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
 									return _List_fromArray(
 										['It is not possible', 'to simplify the expression', 'to cos2 y/ sin2 y', 'using sin2y + cos2y = 1']);
-								case 'Option2':
+								case 1:
 									return _List_fromArray(
 										['It is not possible', 'to simplify the expression', 'to (cos y/ sin y)/csc y', 'using sin2 y + cos2 y = 1']);
-								case 'Option3':
+								case 3:
+									return _List_fromArray(
+										['We can use the identity:', 'sin2 y + cos2 y = 1 by rearranging it to', 'sin2 y = 1 - cos2 y.', 'We can now substitute the numerator', 'with sin2y.', 'Therefore, this option is correct.']);
+								case 2:
 									return _List_fromArray(
 										['It is not possible', 'to simplify the expression', 'to csc y', 'using sin2 y + cos2 y = 1']);
 								default:
-									return _List_fromArray(
-										['We can use the identity:', 'sin2 y + cos2 y = 1 by rearranging it to', 'sin2 y = 1 - cos2 y.', 'We can now substitute the numerator', 'with sin2y.', 'Therefore, this option is correct.']);
+									var otherwise = option;
+									return _List_Nil;
 							}
 						default:
 							var _v34 = _v0.a;
 							var _v35 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
 									return _List_fromArray(
 										['It is not possible', 'to simplify the expression.', 'to sin2 y.']);
-								case 'Option2':
+								case 1:
 									return _List_fromArray(
 										['csc y equals 1 / sin y.', 'It is not possible', 'to simplify the expression.', 'to cos2 y/csc y.']);
-								case 'Option3':
+								case 2:
 									return _List_fromArray(
 										['cot2 y can be simplified to', 'cos2y / sin2 y where sin y can', 'be factored out, but', 'it would still not simplify to', '(cos y/sin y) + (sin y / cos y).', 'There is an easier simplification.']);
-								default:
+								case 3:
 									return _List_fromArray(
 										['We can use the identity:', 'cos y * sin y = sin 2y/2', 'and substitute that in.', 'Therefore, this option is correct']);
+								default:
+									var otherwise = option;
+									return _List_Nil;
 							}
 					}
 				case 'Step2':
@@ -13192,87 +13211,102 @@ var $author$project$PythagoreanIdentities$explanationStr = F3(
 						case 'Question1':
 							var _v4 = _v0.a;
 							var _v5 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
 									return _List_fromArray(
 										['csy equals 1/siny, ', 'This expression would', 'expand to 1/(siny * cosy).', 'This cannot be derived back to Step 1.']);
-								case 'Option2':
+								case 1:
+									return _List_fromArray(
+										['After substituting', '1 as sin2y + cos2y,', 'the expression becomes', 'siny(cos2y - sin2y - cos2y).', 'The cos2y terms cancel out.', 'Therefore, this option is correct']);
+								case 2:
 									return _List_fromArray(
 										['There are no identities', 'that can be used to', 'get this expression']);
-								case 'Option3':
+								case 3:
 									return _List_fromArray(
 										['There are no identities', 'that can be used to', 'get this expression']);
 								default:
-									return _List_fromArray(
-										['After substituting', '1 as sin2y + cos2y,', 'the expression becomes', 'siny(cos2y - sin2y - cos2y).', 'The cos2y terms cancel out.', 'Therefore, this option is correct']);
+									var otherwise = option;
+									return _List_Nil;
 							}
 						case 'Question2':
 							var _v13 = _v0.a;
 							var _v14 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
 									return _List_fromArray(
 										['Leaving the constant 1 as is,', 'cot2y - coty - 3 cannot', 'be simplified to', 'cos2y/sin2y.']);
-								case 'Option2':
+								case 1:
 									return _List_fromArray(
 										['Leaving the constant 1 as is,', 'cot2y - coty - 3 cannot', 'be simplified to', 'sin2y/cos2y.']);
-								case 'Option3':
+								case 2:
+									return _List_fromArray(
+										['We can simplify further by', 'evaluating the constants.', '1 - 3 equals -2.', 'Therefore, this option is correct']);
+								case 3:
 									return _List_fromArray(
 										['It is not possible', 'to simplify to this expression.', 'You can double check by', 'expanding this expression and checking', 'if it equals Step 1.', 'cot y * (cot2 y) equals cot3 y', 'cot3 y cannot be expanded', 'to the expression in Step 1']);
 								default:
-									return _List_fromArray(
-										['We can simplify further by', 'evaluating the constants.', '1 - 3 equals -2.', 'Therefore, this option is correct']);
+									var otherwise = option;
+									return _List_Nil;
 							}
 						case 'Question3':
 							var _v22 = _v0.a;
 							var _v23 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
 									return _List_fromArray(
 										['It is not possible', 'to simplify the expression', 'to cos3 y/ sin3 y using 1/siny = cscy']);
-								case 'Option2':
+								case 1:
 									return _List_fromArray(
 										['It is not possible', 'to simplify the expression', 'to (cosy/siny)/ csc y using 1/siny = cscy']);
-								case 'Option3':
+								case 2:
+									return _List_fromArray(
+										['Using 1/siny = cscy', 'the expression simplifies to csc^2y.', 'Therefore, this option is correct']);
+								case 3:
 									return _List_fromArray(
 										['It is not possible', 'to simplify the expression', 'to sin y using 1/siny = cscy']);
 								default:
-									return _List_fromArray(
-										['Using 1/siny = cscy', 'the expression simplifies to csc^2y.', 'Therefore, this option is correct']);
+									var otherwise = option;
+									return _List_Nil;
 							}
 						case 'Question4':
 							var _v28 = _v0.a;
 							var _v29 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
+									return _List_fromArray(
+										['sin y can be factored out', 'from the numerator and denominator', 'and then cancelled out.', 'Therefore, this option is correct']);
+								case 1:
 									return _List_fromArray(
 										['It is not possible', 'to simplify the expression.', 'to (cos y / sin y) / sin y.']);
-								case 'Option2':
+								case 2:
 									return _List_fromArray(
 										['It is not possible', 'to simplify the expression.', 'to cos y / (1 / sin y).']);
-								case 'Option3':
+								case 3:
 									return _List_fromArray(
 										['cot y equals cos y / sin y', 'It is not possible', 'to simplify to cot y.']);
 								default:
-									return _List_fromArray(
-										['sin y can be factored out', 'from the numerator and denominator', 'and then cancelled out.', 'Therefore, this option is correct']);
+									var otherwise = option;
+									return _List_Nil;
 							}
 						default:
 							var _v37 = _v0.a;
 							var _v38 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
+									return _List_fromArray(
+										['We can use the identity:', 'cos y * sin y = sin 2y/2 again', 'and substitute that in the second term.', 'Therefore, this option is correct']);
+								case 1:
 									return _List_fromArray(
 										['csc y equals 1 / sin y.', 'It is not possible', 'to simplify the expression.', 'to csc y / (cos y / sin y).']);
-								case 'Option2':
+								case 2:
 									return _List_fromArray(
 										['tan y equals sin y / cos y.', 'It is not possible', 'to simplify the expression.', 'to tan y / (1 / tan y).']);
-								case 'Option3':
+								case 3:
 									return _List_fromArray(
 										['It is not possible', 'to simplify the expression.', 'to cos y.']);
 								default:
-									return _List_fromArray(
-										['We can use the identity:', 'cos y * sin y = sin 2y/2 again', 'and substitute that in the second term.', 'Therefore, this option is correct']);
+									var otherwise = option;
+									return _List_Nil;
 							}
 					}
 				case 'Step3':
@@ -13280,70 +13314,82 @@ var $author$project$PythagoreanIdentities$explanationStr = F3(
 						case 'Question1':
 							var _v7 = _v0.a;
 							var _v8 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
-									return _List_fromArray(
-										['It is not possible', 'to get tan y', 'from Step 2.']);
-								case 'Option2':
-									return _List_fromArray(
-										['It is not possible', 'to get cos y', 'from Step 2.']);
-								case 'Option3':
-									return _List_fromArray(
-										['It is not possible', 'to get sin y', 'from Step 2.']);
-								default:
+							switch (option) {
+								case 0:
 									return _List_fromArray(
 										['Multiplying siny with -sin2y', 'equals -sin3y.', 'Therefore, this option is correct']);
+								case 1:
+									return _List_fromArray(
+										['It is not possible', 'to get cos y', 'from Step 2.']);
+								case 2:
+									return _List_fromArray(
+										['It is not possible', 'to get sin y', 'from Step 2.']);
+								case 3:
+									return _List_fromArray(
+										['It is not possible', 'to get cos y', 'from Step 2.']);
+								default:
+									var otherwise = option;
+									return _List_Nil;
 							}
 						case 'Question2':
 							var _v16 = _v0.a;
 							var _v17 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
 									return _List_fromArray(
 										['It is not possible', 'to simplify to this expression.', 'You can double check by', 'expanding this expression and checking', 'if it equals Step 2.', 'cot y * (1/cos2 y) equals cot y / cos2 y.', 'This cannot be expanded', 'to the expression in Step 2']);
-								case 'Option2':
+								case 1:
 									return _List_fromArray(
 										['It is not possible to get this expression.', 'You can double check by', 'expanding this expression and checking', 'if it equals Step 2.', 'sin y * (cos2 y/cot2 y) equals', '(sin y * cos2 y) / cot2 y.', 'This cannot be expanded', 'to the expression in Step 2']);
-								case 'Option3':
+								case 2:
 									return _List_fromArray(
 										['There are no identities', 'that can be used to', 'get this expression']);
-								default:
+								case 3:
 									return _List_fromArray(
 										['We can express the expression', 'in terms of factors.', 'Using the quadratic formula, ', 'we get (cot y - 2)(cot y + 1).', 'Therefore, this option is correct']);
+								default:
+									var otherwise = option;
+									return _List_Nil;
 							}
 						case 'Question4':
 							var _v31 = _v0.a;
 							var _v32 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
 									return _List_fromArray(
 										['It is not possible', 'to simplify the expression.', 'to cos y / sin y.']);
-								case 'Option2':
+								case 1:
 									return _List_fromArray(
 										['csc y equals 1 / sin y.', 'It is not possible', 'to simplify the expression.', 'to sin y / csc y.']);
-								case 'Option3':
+								case 2:
+									return _List_fromArray(
+										['We can use the identity:', 'tan y = sin y / cos y.', 'Therefore, this option is correct']);
+								case 3:
 									return _List_fromArray(
 										['sec y equals 1 / cos y.', 'It is not possible', 'to simplify the expression.', 'to sec y.']);
 								default:
-									return _List_fromArray(
-										['We can use the identity:', 'tan y = sin y / cos y.', 'Therefore, this option is correct']);
+									var otherwise = option;
+									return _List_Nil;
 							}
 						case 'Question5':
 							var _v40 = _v0.a;
 							var _v41 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
+									return _List_fromArray(
+										['Since the two terms have', 'the same denominator, ', 'we can add the two fractions together.', 'Therefore, this option is correct']);
+								case 1:
 									return _List_fromArray(
 										['cot y equals cos y / sin y', 'and csc y equals 1 / sin y.', 'It is not possible', 'to simplify the expression.', 'to cot y / csc y.']);
-								case 'Option2':
+								case 2:
 									return _List_fromArray(
 										['csc y equals 1 / sin y.', 'It is not possible', 'to simplify the expression.', 'to csc y * sin y.']);
-								case 'Option3':
+								case 3:
 									return _List_fromArray(
 										['It is not possible', 'to simplify the expression.', 'to cos y.']);
 								default:
-									return _List_fromArray(
-										['Since the two terms have', 'the same denominator, ', 'we can add the two fractions together.', 'Therefore, this option is correct']);
+									var otherwise = option;
+									return _List_Nil;
 							}
 						default:
 							break _v0$14;
@@ -13541,10 +13587,8 @@ var $author$project$PythagoreanIdentities$getIndexFromStep = function (step) {
 			return 4;
 	}
 };
-var $author$project$PythagoreanIdentities$RightAnswer = {$: 'RightAnswer'};
-var $author$project$PythagoreanIdentities$WrongAnswer1 = {$: 'WrongAnswer1'};
-var $author$project$PythagoreanIdentities$WrongAnswer2 = {$: 'WrongAnswer2'};
-var $author$project$PythagoreanIdentities$WrongAnswer3 = {$: 'WrongAnswer3'};
+var $author$project$PythagoreanIdentities$Correct = {$: 'Correct'};
+var $author$project$PythagoreanIdentities$Incorrect = {$: 'Incorrect'};
 var $author$project$PythagoreanIdentities$optionsStr = F2(
 	function (question, step) {
 		var _v0 = _Utils_Tuple2(question, step);
@@ -13558,50 +13602,50 @@ var $author$project$PythagoreanIdentities$optionsStr = F2(
 							var _v2 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) tan y * (sin y / cos y)', $author$project$PythagoreanIdentities$WrongAnswer1),
-									_Utils_Tuple2('b) tan y * (cos y / sin y)', $author$project$PythagoreanIdentities$WrongAnswer2),
-									_Utils_Tuple2('c) (cos y / sin y) * (1 / sin y)', $author$project$PythagoreanIdentities$WrongAnswer3),
-									_Utils_Tuple2('d) sin y(cos^2(y)-1)', $author$project$PythagoreanIdentities$RightAnswer)
+									_Utils_Tuple2('a) tan y * (sin y / cos y)', $author$project$PythagoreanIdentities$Incorrect),
+									_Utils_Tuple2('b) tan y * (cos y / sin y)', $author$project$PythagoreanIdentities$Incorrect),
+									_Utils_Tuple2('c) (cos y / sin y) * (1 / sin y)', $author$project$PythagoreanIdentities$Incorrect),
+									_Utils_Tuple2('d) sin y(cos^2(y)-1)', $author$project$PythagoreanIdentities$Correct)
 								]);
 						case 'Question2':
 							var _v7 = _v0.a;
 							var _v8 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) (1 / tan2 y)', $author$project$PythagoreanIdentities$WrongAnswer1),
-									_Utils_Tuple2('b) 1+cot^2(y)-cot(y)-3', $author$project$PythagoreanIdentities$RightAnswer),
-									_Utils_Tuple2('c) cos y + (sin y / tan2 y)', $author$project$PythagoreanIdentities$WrongAnswer2),
-									_Utils_Tuple2('d) (sin y * cos2 y) / sin2 y', $author$project$PythagoreanIdentities$WrongAnswer3)
+									_Utils_Tuple2('a) (1 / tan2 y)', $author$project$PythagoreanIdentities$Incorrect),
+									_Utils_Tuple2('b) 1+cot^2(y)-cot(y)-3', $author$project$PythagoreanIdentities$Correct),
+									_Utils_Tuple2('c) cos y + (sin y / tan2 y)', $author$project$PythagoreanIdentities$Incorrect),
+									_Utils_Tuple2('d) (sin y * cos2 y) / sin2 y', $author$project$PythagoreanIdentities$Incorrect)
 								]);
 						case 'Question3':
 							var _v13 = _v0.a;
 							var _v14 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) cos2 y / sin2 y', $author$project$PythagoreanIdentities$WrongAnswer1),
-									_Utils_Tuple2('b) 1/sin^2(y)', $author$project$PythagoreanIdentities$RightAnswer),
-									_Utils_Tuple2('c) secy / (tan y * tan y)', $author$project$PythagoreanIdentities$WrongAnswer2),
-									_Utils_Tuple2('d) sin y', $author$project$PythagoreanIdentities$WrongAnswer3)
+									_Utils_Tuple2('a) cos2 y / sin2 y', $author$project$PythagoreanIdentities$Incorrect),
+									_Utils_Tuple2('b) 1/sin^2(y)', $author$project$PythagoreanIdentities$Correct),
+									_Utils_Tuple2('c) secy / (tan y * tan y)', $author$project$PythagoreanIdentities$Incorrect),
+									_Utils_Tuple2('d) sin y', $author$project$PythagoreanIdentities$Incorrect)
 								]);
 						case 'Question4':
 							var _v17 = _v0.a;
 							var _v18 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) cos2 y / sin2 y', $author$project$PythagoreanIdentities$WrongAnswer1),
-									_Utils_Tuple2('b) (cos(y)/sin(y))/csc(y)', $author$project$PythagoreanIdentities$WrongAnswer2),
-									_Utils_Tuple2('c) sin^2(y)/(cos(y)sin(y))', $author$project$PythagoreanIdentities$RightAnswer),
-									_Utils_Tuple2('d) csc y', $author$project$PythagoreanIdentities$WrongAnswer3)
+									_Utils_Tuple2('a) cos2 y / sin2 y', $author$project$PythagoreanIdentities$Incorrect),
+									_Utils_Tuple2('b) (cos(y)/sin(y))/csc(y)', $author$project$PythagoreanIdentities$Incorrect),
+									_Utils_Tuple2('c) sin^2(y)/(cos(y)sin(y))', $author$project$PythagoreanIdentities$Correct),
+									_Utils_Tuple2('d) csc y', $author$project$PythagoreanIdentities$Incorrect)
 								]);
 						default:
 							var _v23 = _v0.a;
 							var _v24 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) sin2 y', $author$project$PythagoreanIdentities$WrongAnswer1),
-									_Utils_Tuple2('b) cos2(y)/csc(y)', $author$project$PythagoreanIdentities$WrongAnswer2),
-									_Utils_Tuple2('c) (cos(y)/sin(y))+(sin(y)/cos(y))', $author$project$PythagoreanIdentities$WrongAnswer3),
-									_Utils_Tuple2('d) (sin(2y)/2)+(cos(y)*cot(2*y)*sin(y))', $author$project$PythagoreanIdentities$RightAnswer)
+									_Utils_Tuple2('a) sin2 y', $author$project$PythagoreanIdentities$Incorrect),
+									_Utils_Tuple2('b) cos2(y)/csc(y)', $author$project$PythagoreanIdentities$Incorrect),
+									_Utils_Tuple2('c) (cos(y)/sin(y))+(sin(y)/cos(y))', $author$project$PythagoreanIdentities$Incorrect),
+									_Utils_Tuple2('d) (sin(2y)/2)+(cos(y)*cot(2*y)*sin(y))', $author$project$PythagoreanIdentities$Correct)
 								]);
 					}
 				case 'Step2':
@@ -13611,50 +13655,50 @@ var $author$project$PythagoreanIdentities$optionsStr = F2(
 							var _v4 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) csc y / cos y', $author$project$PythagoreanIdentities$WrongAnswer1),
-									_Utils_Tuple2('b) sin y(-sin^2(y))', $author$project$PythagoreanIdentities$RightAnswer),
-									_Utils_Tuple2('c) 2 / sin y', $author$project$PythagoreanIdentities$WrongAnswer2),
-									_Utils_Tuple2('d) (cos2 y * sin y)', $author$project$PythagoreanIdentities$WrongAnswer3)
+									_Utils_Tuple2('a) csc y / cos y', $author$project$PythagoreanIdentities$Incorrect),
+									_Utils_Tuple2('b) sin y(-sin^2(y))', $author$project$PythagoreanIdentities$Correct),
+									_Utils_Tuple2('c) 2 / sin y', $author$project$PythagoreanIdentities$Incorrect),
+									_Utils_Tuple2('d) (cos2 y * sin y)', $author$project$PythagoreanIdentities$Incorrect)
 								]);
 						case 'Question2':
 							var _v9 = _v0.a;
 							var _v10 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) (1 + (cos2 y / sin2 y))', $author$project$PythagoreanIdentities$WrongAnswer1),
-									_Utils_Tuple2('b) (1 + (sin2 y / cos2 y))', $author$project$PythagoreanIdentities$WrongAnswer2),
-									_Utils_Tuple2('c) cot^2(y)-cot(y)-2', $author$project$PythagoreanIdentities$RightAnswer),
-									_Utils_Tuple2('d) cot y * (cot2 y)', $author$project$PythagoreanIdentities$WrongAnswer3)
+									_Utils_Tuple2('a) (1 + (cos2 y / sin2 y))', $author$project$PythagoreanIdentities$Incorrect),
+									_Utils_Tuple2('b) (1 + (sin2 y / cos2 y))', $author$project$PythagoreanIdentities$Incorrect),
+									_Utils_Tuple2('c) cot^2(y)-cot(y)-2', $author$project$PythagoreanIdentities$Correct),
+									_Utils_Tuple2('d) cot y * (cot2 y)', $author$project$PythagoreanIdentities$Incorrect)
 								]);
 						case 'Question3':
 							var _v15 = _v0.a;
 							var _v16 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) cos3 y / sin3 y', $author$project$PythagoreanIdentities$WrongAnswer1),
-									_Utils_Tuple2('b) (cos(y)/sin(y))/csc(y)', $author$project$PythagoreanIdentities$WrongAnswer2),
-									_Utils_Tuple2('c) csc^2(y)', $author$project$PythagoreanIdentities$RightAnswer),
-									_Utils_Tuple2('d) sin y', $author$project$PythagoreanIdentities$WrongAnswer3)
+									_Utils_Tuple2('a) cos3 y / sin3 y', $author$project$PythagoreanIdentities$Incorrect),
+									_Utils_Tuple2('b) (cos(y)/sin(y))/csc(y)', $author$project$PythagoreanIdentities$Incorrect),
+									_Utils_Tuple2('c) csc^2(y)', $author$project$PythagoreanIdentities$Correct),
+									_Utils_Tuple2('d) sin y', $author$project$PythagoreanIdentities$Incorrect)
 								]);
 						case 'Question4':
 							var _v19 = _v0.a;
 							var _v20 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) sin(y)/cos(y)', $author$project$PythagoreanIdentities$RightAnswer),
-									_Utils_Tuple2('b) (cos(y)/sin(y))/sin(y)', $author$project$PythagoreanIdentities$WrongAnswer1),
-									_Utils_Tuple2('c) cos(y)/(1/cos(y)', $author$project$PythagoreanIdentities$WrongAnswer2),
-									_Utils_Tuple2('d) cot y', $author$project$PythagoreanIdentities$WrongAnswer3)
+									_Utils_Tuple2('a) sin(y)/cos(y)', $author$project$PythagoreanIdentities$Correct),
+									_Utils_Tuple2('b) (cos(y)/sin(y))/sin(y)', $author$project$PythagoreanIdentities$Incorrect),
+									_Utils_Tuple2('c) cos(y)/(1/cos(y)', $author$project$PythagoreanIdentities$Incorrect),
+									_Utils_Tuple2('d) cot y', $author$project$PythagoreanIdentities$Incorrect)
 								]);
 						default:
 							var _v25 = _v0.a;
 							var _v26 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) (sin(2y)/2)+(sin(2y)*cot(2y))/2', $author$project$PythagoreanIdentities$RightAnswer),
-									_Utils_Tuple2('b) csc y/(cos(y)/sin(y))', $author$project$PythagoreanIdentities$WrongAnswer1),
-									_Utils_Tuple2('c) tan(y)/(1/tan(y)', $author$project$PythagoreanIdentities$WrongAnswer2),
-									_Utils_Tuple2('d) cos y', $author$project$PythagoreanIdentities$WrongAnswer3)
+									_Utils_Tuple2('a) (sin(2y)/2)+(sin(2y)*cot(2y))/2', $author$project$PythagoreanIdentities$Correct),
+									_Utils_Tuple2('b) csc y/(cos(y)/sin(y))', $author$project$PythagoreanIdentities$Incorrect),
+									_Utils_Tuple2('c) tan(y)/(1/tan(y)', $author$project$PythagoreanIdentities$Incorrect),
+									_Utils_Tuple2('d) cos y', $author$project$PythagoreanIdentities$Incorrect)
 								]);
 					}
 				case 'Step3':
@@ -13664,40 +13708,40 @@ var $author$project$PythagoreanIdentities$optionsStr = F2(
 							var _v6 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) -sin^3(y)', $author$project$PythagoreanIdentities$RightAnswer),
-									_Utils_Tuple2('b) tan y', $author$project$PythagoreanIdentities$WrongAnswer1),
-									_Utils_Tuple2('c) cos y', $author$project$PythagoreanIdentities$WrongAnswer2),
-									_Utils_Tuple2('d) sin y', $author$project$PythagoreanIdentities$WrongAnswer3)
+									_Utils_Tuple2('a) -sin^3(y)', $author$project$PythagoreanIdentities$Correct),
+									_Utils_Tuple2('b) tan y', $author$project$PythagoreanIdentities$Incorrect),
+									_Utils_Tuple2('c) cos y', $author$project$PythagoreanIdentities$Incorrect),
+									_Utils_Tuple2('d) sin y', $author$project$PythagoreanIdentities$Incorrect)
 								]);
 						case 'Question2':
 							var _v11 = _v0.a;
 							var _v12 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) cot y * (1 / cos2 y)', $author$project$PythagoreanIdentities$WrongAnswer1),
-									_Utils_Tuple2('b) sin y * (cos2 y / cot2 y)', $author$project$PythagoreanIdentities$WrongAnswer2),
-									_Utils_Tuple2('c) (sin2 y / cot y+1)', $author$project$PythagoreanIdentities$WrongAnswer3),
-									_Utils_Tuple2('d) (cot(y)-2)*(cot(y)+1)', $author$project$PythagoreanIdentities$RightAnswer)
+									_Utils_Tuple2('a) cot y * (1 / cos2 y)', $author$project$PythagoreanIdentities$Incorrect),
+									_Utils_Tuple2('b) sin y * (cos2 y / cot2 y)', $author$project$PythagoreanIdentities$Incorrect),
+									_Utils_Tuple2('c) (sin2 y / cot y+1)', $author$project$PythagoreanIdentities$Incorrect),
+									_Utils_Tuple2('d) (cot(y)-2)*(cot(y)+1)', $author$project$PythagoreanIdentities$Correct)
 								]);
 						case 'Question4':
 							var _v21 = _v0.a;
 							var _v22 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) cos y / sin y', $author$project$PythagoreanIdentities$WrongAnswer1),
-									_Utils_Tuple2('b) (sin(y))/csc(y)', $author$project$PythagoreanIdentities$WrongAnswer2),
-									_Utils_Tuple2('c) tan(y)', $author$project$PythagoreanIdentities$RightAnswer),
-									_Utils_Tuple2('d) sec y', $author$project$PythagoreanIdentities$WrongAnswer3)
+									_Utils_Tuple2('a) cos y / sin y', $author$project$PythagoreanIdentities$Incorrect),
+									_Utils_Tuple2('b) (sin(y))/csc(y)', $author$project$PythagoreanIdentities$Incorrect),
+									_Utils_Tuple2('c) tan(y)', $author$project$PythagoreanIdentities$Correct),
+									_Utils_Tuple2('d) sec y', $author$project$PythagoreanIdentities$Incorrect)
 								]);
 						case 'Question5':
 							var _v27 = _v0.a;
 							var _v28 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) (sin(2y)+sin(2y)cot(2y))/2', $author$project$PythagoreanIdentities$RightAnswer),
-									_Utils_Tuple2('b) (cot(y))/csc(y)', $author$project$PythagoreanIdentities$WrongAnswer1),
-									_Utils_Tuple2('c) (csc(y)*sin(y)', $author$project$PythagoreanIdentities$WrongAnswer2),
-									_Utils_Tuple2('d) csc y', $author$project$PythagoreanIdentities$WrongAnswer3)
+									_Utils_Tuple2('a) (sin(2y)+sin(2y)cot(2y))/2', $author$project$PythagoreanIdentities$Correct),
+									_Utils_Tuple2('b) (cot(y))/csc(y)', $author$project$PythagoreanIdentities$Incorrect),
+									_Utils_Tuple2('c) (csc(y)*sin(y)', $author$project$PythagoreanIdentities$Incorrect),
+									_Utils_Tuple2('d) csc y', $author$project$PythagoreanIdentities$Incorrect)
 								]);
 						default:
 							break _v0$14;
@@ -13708,6 +13752,10 @@ var $author$project$PythagoreanIdentities$optionsStr = F2(
 		}
 		var otherwise = _v0;
 		return _List_Nil;
+	});
+var $author$project$PythagoreanIdentities$ClickedOption = F2(
+	function (a, b) {
+		return {$: 'ClickedOption', a: a, b: b};
 	});
 var $author$project$PythagoreanIdentities$getOptionColour = F5(
 	function (idx, optionColourA, optionColourB, optionColourC, optionColourD) {
@@ -13729,49 +13777,93 @@ var $MacCASOutreach$graphicsvg$GraphicSVG$lightPurple = A4($MacCASOutreach$graph
 var $author$project$PythagoreanIdentities$ChangeOptionColour = function (a) {
 	return {$: 'ChangeOptionColour', a: a};
 };
-var $author$project$PythagoreanIdentities$updateOptionColour = F2(
-	function (idx, colour) {
+var $author$project$PythagoreanIdentities$updateOptionColourOnClick = F3(
+	function (idx, firstColour, secondColour) {
 		switch (idx) {
 			case 0:
 				return $author$project$PythagoreanIdentities$ChangeOptionColour(
 					function (m) {
 						return _Utils_update(
 							m,
-							{optionColourA: colour});
+							{optionColourA: secondColour, optionColourB: firstColour, optionColourC: firstColour, optionColourD: firstColour});
 					});
 			case 1:
 				return $author$project$PythagoreanIdentities$ChangeOptionColour(
 					function (m) {
 						return _Utils_update(
 							m,
-							{optionColourB: colour});
+							{optionColourA: firstColour, optionColourB: secondColour, optionColourC: firstColour, optionColourD: firstColour});
 					});
 			case 2:
 				return $author$project$PythagoreanIdentities$ChangeOptionColour(
 					function (m) {
 						return _Utils_update(
 							m,
-							{optionColourC: colour});
+							{optionColourA: firstColour, optionColourB: firstColour, optionColourC: secondColour, optionColourD: firstColour});
 					});
 			case 3:
 				return $author$project$PythagoreanIdentities$ChangeOptionColour(
 					function (m) {
 						return _Utils_update(
 							m,
-							{optionColourD: colour});
+							{optionColourA: firstColour, optionColourB: firstColour, optionColourC: firstColour, optionColourD: secondColour});
 					});
 			default:
 				var otherwise = idx;
 				return $author$project$PythagoreanIdentities$ChangeOptionColour(
 					function (m) {
-						return _Utils_update(
-							m,
-							{optionColourA: colour});
+						return m;
 					});
 		}
 	});
-var $author$project$PythagoreanIdentities$optionsText = F5(
-	function (lst, optionColourA, optionColourB, optionColourC, optionColourD) {
+var $author$project$PythagoreanIdentities$updateOptionColourOnHover = F3(
+	function (idx, colour, optionSelected) {
+		if (optionSelected) {
+			return $author$project$PythagoreanIdentities$ChangeOptionColour(
+				function (m) {
+					return m;
+				});
+		} else {
+			switch (idx) {
+				case 0:
+					return $author$project$PythagoreanIdentities$ChangeOptionColour(
+						function (m) {
+							return _Utils_update(
+								m,
+								{optionColourA: colour});
+						});
+				case 1:
+					return $author$project$PythagoreanIdentities$ChangeOptionColour(
+						function (m) {
+							return _Utils_update(
+								m,
+								{optionColourB: colour});
+						});
+				case 2:
+					return $author$project$PythagoreanIdentities$ChangeOptionColour(
+						function (m) {
+							return _Utils_update(
+								m,
+								{optionColourC: colour});
+						});
+				case 3:
+					return $author$project$PythagoreanIdentities$ChangeOptionColour(
+						function (m) {
+							return _Utils_update(
+								m,
+								{optionColourD: colour});
+						});
+				default:
+					var otherwise = idx;
+					return $author$project$PythagoreanIdentities$ChangeOptionColour(
+						function (m) {
+							return m;
+						});
+			}
+		}
+	});
+var $author$project$PythagoreanIdentities$optionsText = F6(
+	function (lst, optionSelected, optionColourA, optionColourB, optionColourC, optionColourD) {
 		return $MacCASOutreach$graphicsvg$GraphicSVG$group(
 			A2(
 				$elm$core$List$indexedMap,
@@ -13779,23 +13871,26 @@ var $author$project$PythagoreanIdentities$optionsText = F5(
 					function (idx, tuple) {
 						return A2(
 							$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-							tuple.b,
+							A2($author$project$PythagoreanIdentities$ClickedOption, idx, tuple.b),
 							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyLeave,
-								A2($author$project$PythagoreanIdentities$updateOptionColour, idx, $MacCASOutreach$graphicsvg$GraphicSVG$purple),
+								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
+								A3($author$project$PythagoreanIdentities$updateOptionColourOnClick, idx, $MacCASOutreach$graphicsvg$GraphicSVG$purple, $MacCASOutreach$graphicsvg$GraphicSVG$lightPurple),
 								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$notifyEnter,
-									A2($author$project$PythagoreanIdentities$updateOptionColour, idx, $MacCASOutreach$graphicsvg$GraphicSVG$lightPurple),
+									$MacCASOutreach$graphicsvg$GraphicSVG$notifyLeave,
+									A3($author$project$PythagoreanIdentities$updateOptionColourOnHover, idx, $MacCASOutreach$graphicsvg$GraphicSVG$purple, optionSelected),
 									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$move,
-										_Utils_Tuple2(-130, 45 - (20 * idx)),
+										$MacCASOutreach$graphicsvg$GraphicSVG$notifyEnter,
+										A3($author$project$PythagoreanIdentities$updateOptionColourOnHover, idx, $MacCASOutreach$graphicsvg$GraphicSVG$lightPurple, optionSelected),
 										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-											A5($author$project$PythagoreanIdentities$getOptionColour, idx, optionColourA, optionColourB, optionColourC, optionColourD),
+											$MacCASOutreach$graphicsvg$GraphicSVG$move,
+											_Utils_Tuple2(-130, 45 - (20 * idx)),
 											A2(
-												$MacCASOutreach$graphicsvg$GraphicSVG$size,
-												12,
-												$MacCASOutreach$graphicsvg$GraphicSVG$text(tuple.a)))))));
+												$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+												A5($author$project$PythagoreanIdentities$getOptionColour, idx, optionColourA, optionColourB, optionColourC, optionColourD),
+												A2(
+													$MacCASOutreach$graphicsvg$GraphicSVG$size,
+													12,
+													$MacCASOutreach$graphicsvg$GraphicSVG$text(tuple.a))))))));
 					}),
 				lst));
 	});
@@ -13813,8 +13908,8 @@ var $author$project$PythagoreanIdentities$stepStr = function (step) {
 			return 'What is the fifth step?';
 	}
 };
-var $author$project$PythagoreanIdentities$optionsSection = F6(
-	function (question, step, optionColourA, optionColourB, optionColourC, optionColourD) {
+var $author$project$PythagoreanIdentities$optionsSection = F7(
+	function (question, step, optionSelected, optionColourA, optionColourB, optionColourC, optionColourD) {
 		return A2(
 			$MacCASOutreach$graphicsvg$GraphicSVG$move,
 			_Utils_Tuple2(
@@ -13834,9 +13929,10 @@ var $author$project$PythagoreanIdentities$optionsSection = F6(
 								12,
 								$MacCASOutreach$graphicsvg$GraphicSVG$text(
 									$author$project$PythagoreanIdentities$stepStr(step))))),
-						A5(
+						A6(
 						$author$project$PythagoreanIdentities$optionsText,
 						A2($author$project$PythagoreanIdentities$optionsStr, question, step),
+						optionSelected,
 						optionColourA,
 						optionColourB,
 						optionColourC,
@@ -13919,7 +14015,7 @@ var $author$project$PythagoreanIdentities$isLastStep = F2(
 		return false;
 	});
 var $author$project$PythagoreanIdentities$resultsSection = F4(
-	function (question, step, answer, option) {
+	function (question, step, answerState, option) {
 		return A2($author$project$PythagoreanIdentities$isLastStep, question, step) ? $MacCASOutreach$graphicsvg$GraphicSVG$group(
 			_List_fromArray(
 				[
@@ -13930,12 +14026,12 @@ var $author$project$PythagoreanIdentities$resultsSection = F4(
 						(-40) - (20 * $author$project$PythagoreanIdentities$getIndexFromStep(step))),
 					A2(
 						$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-						_Utils_eq(answer, $author$project$PythagoreanIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$red : (_Utils_eq(answer, $author$project$PythagoreanIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$green : $MacCASOutreach$graphicsvg$GraphicSVG$white),
+						_Utils_eq(answerState, $author$project$PythagoreanIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$red : (_Utils_eq(answerState, $author$project$PythagoreanIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$green : $MacCASOutreach$graphicsvg$GraphicSVG$white),
 						A2(
 							$MacCASOutreach$graphicsvg$GraphicSVG$size,
 							12,
 							$MacCASOutreach$graphicsvg$GraphicSVG$text(
-								_Utils_eq(answer, $author$project$PythagoreanIdentities$Incorrect) ? 'Incorrect' : (_Utils_eq(answer, $author$project$PythagoreanIdentities$Correct) ? 'Correct! You have solved the problem.' : ''))))),
+								_Utils_eq(answerState, $author$project$PythagoreanIdentities$Incorrect) ? 'Incorrect' : (_Utils_eq(answerState, $author$project$PythagoreanIdentities$Correct) ? 'Correct! You have solved the problem.' : ''))))),
 					A2(
 					$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
 					A3($author$project$PythagoreanIdentities$ClickedExplanation, question, step, option),
@@ -13946,7 +14042,7 @@ var $author$project$PythagoreanIdentities$resultsSection = F4(
 							(-60) - (20 * $author$project$PythagoreanIdentities$getIndexFromStep(step))),
 						A2(
 							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							_Utils_eq(answer, $author$project$PythagoreanIdentities$Default) ? $MacCASOutreach$graphicsvg$GraphicSVG$blank : $MacCASOutreach$graphicsvg$GraphicSVG$purple,
+							_Utils_eq(answerState, $author$project$PythagoreanIdentities$Default) ? $MacCASOutreach$graphicsvg$GraphicSVG$blank : $MacCASOutreach$graphicsvg$GraphicSVG$purple,
 							A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 90, 25)))),
 					A2(
 					$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
@@ -13958,9 +14054,9 @@ var $author$project$PythagoreanIdentities$resultsSection = F4(
 							(-63) - (20 * $author$project$PythagoreanIdentities$getIndexFromStep(step))),
 						A2(
 							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							_Utils_eq(answer, $author$project$PythagoreanIdentities$Default) ? $MacCASOutreach$graphicsvg$GraphicSVG$blank : $MacCASOutreach$graphicsvg$GraphicSVG$white,
+							_Utils_eq(answerState, $author$project$PythagoreanIdentities$Default) ? $MacCASOutreach$graphicsvg$GraphicSVG$blank : $MacCASOutreach$graphicsvg$GraphicSVG$white,
 							$MacCASOutreach$graphicsvg$GraphicSVG$text('Explanation'))))
-				])) : (_Utils_eq(answer, $author$project$PythagoreanIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$group(
+				])) : (_Utils_eq(answerState, $author$project$PythagoreanIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$group(
 			_List_fromArray(
 				[
 					A2(
@@ -13999,7 +14095,7 @@ var $author$project$PythagoreanIdentities$resultsSection = F4(
 							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
 							$MacCASOutreach$graphicsvg$GraphicSVG$white,
 							$MacCASOutreach$graphicsvg$GraphicSVG$text('Explanation'))))
-				])) : (_Utils_eq(answer, $author$project$PythagoreanIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$group(
+				])) : (_Utils_eq(answerState, $author$project$PythagoreanIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$group(
 			_List_fromArray(
 				[
 					A2(
@@ -14175,7 +14271,7 @@ var $author$project$PythagoreanIdentities$view = function (model) {
 							12,
 							$MacCASOutreach$graphicsvg$GraphicSVG$text(
 								$author$project$PythagoreanIdentities$questionStr(model.question)))))),
-				A4($author$project$PythagoreanIdentities$resultsSection, model.question, model.step, model.answer, model.option)
+				A4($author$project$PythagoreanIdentities$resultsSection, model.question, model.step, model.answerState, model.option)
 			]),
 		_Utils_ap(
 			_List_fromArray(
@@ -14185,7 +14281,7 @@ var $author$project$PythagoreanIdentities$view = function (model) {
 			_Utils_ap(
 				_List_fromArray(
 					[
-						A6($author$project$PythagoreanIdentities$optionsSection, model.question, model.step, model.optionColourA, model.optionColourB, model.optionColourC, model.optionColourD)
+						A7($author$project$PythagoreanIdentities$optionsSection, model.question, model.step, model.optionSelected, model.optionColourA, model.optionColourB, model.optionColourC, model.optionColourD)
 					]),
 				_Utils_ap(
 					_List_fromArray(

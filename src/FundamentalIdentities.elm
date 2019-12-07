@@ -72,6 +72,11 @@ update msg model =
         NextStep
             -> { model
                 | answerState = Default
+                , optionSelected = False
+                , optionColourA = orange
+                , optionColourB = orange
+                , optionColourC = orange
+                , optionColourD = orange
                 , step =
                     case model.step of
                         Step1 -> Step2
@@ -85,6 +90,11 @@ update msg model =
             -> { model
                 | answerState = Default
                 , step = Step1
+                , optionSelected = False
+                , optionColourA = orange
+                , optionColourB = orange
+                , optionColourC = orange
+                , optionColourD = orange
                 , question =
                     case model.question of
                         Question1 -> Question2

@@ -1,14 +1,6 @@
-# For WaveCreator Assignment.
+# Trig Identities Quiz
 
-You should modify SinCreator.elm.
-
-It is called from Main.elm, but do not modify Main.elm.  Your submission must compile against the existing modules, with your new SinCreator.elm dropped in.
-
-Other modules can be referred to as examples.
-
-Submit your code on Avenue, with your names and student numbers.
-
-If you want to contribute your changes back to the main ShapeCreator, say so in a comment at the top of your module.
+A quiz meant to help grade 12 students learn how to write proofs for trigonometric identities. Built with Elm.
 
 # Installing Dependencies:
 

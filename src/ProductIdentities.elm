@@ -11,7 +11,7 @@ import Tuple
 init =
     { time = 0
     , notify = NotifyTap
-    , answer = Default
+    , answerState = Default
     , step = Step1
     , question = Question1
     , hintState = NoPopUp
@@ -20,15 +20,16 @@ init =
     , optionColourB = darkGreen
     , optionColourC = darkGreen
     , optionColourD = darkGreen
-    , option = Option1
+    , option = 0
+    , optionSelected = False
     , state = None
     }
 
 type HintState = NoPopUp | PopUp Questions Steps
 
-type ExplanationState = NoPopUpExplanation | PopUpExplanation Questions Steps Options
+type ExplanationState = NoPopUpExplanation | PopUpExplanation Questions Steps Int
 
-type Explanations = Default | Incorrect | Correct
+type AnswerState = Default | Incorrect | Correct
 
 type Steps
     = Step1
@@ -43,12 +44,6 @@ type Questions
     | Question3
     | Question4
     | Question5
-
-type Options
-    = Option1
-    | Option2
-    | Option3
-    | RightOption
 
 type State
     = None
@@ -67,33 +62,21 @@ update msg model =
         Notif notif ->
             { model | notify = notif }
 
-        WrongAnswer1
+        ClickedOption option answerState
             -> { model
-                | answer = Incorrect
-                , option = Option1
-                }
-
-        WrongAnswer2
-            -> { model
-                | answer = Incorrect
-                , option = Option2
-                }
-
-        WrongAnswer3
-            -> { model
-                | answer = Incorrect
-                , option = Option3
-                }
-
-        RightAnswer
-            -> { model
-                | answer = Correct
-                , option = RightOption
+                | option = option
+                , answerState = answerState
+                , optionSelected = True
                 }
 
         NextStep
             -> { model
-                | answer = Default
+                | answerState = Default
+                , optionSelected = False
+                , optionColourA = darkGreen
+                , optionColourB = darkGreen
+                , optionColourC = darkGreen
+                , optionColourD = darkGreen
                 , step =
                     case model.step of
                         Step1 -> Step2
@@ -105,8 +88,13 @@ update msg model =
 
         NextQuestion
             -> { model
-                | answer = Default
+                | answerState = Default
                 , step = Step1
+                , optionSelected = False
+                , optionColourA = darkGreen
+                , optionColourB = darkGreen
+                , optionColourC = darkGreen
+                , optionColourD = darkGreen
                 , question =
                     case model.question of
                         Question1 -> Question2
@@ -118,7 +106,7 @@ update msg model =
 
         PreviousQuestion
             -> { model
-                | answer = Default
+                | answerState = Default
                 , step = Step1
                 , question =
                     case model.question of
@@ -171,10 +159,10 @@ view model =
     , triangle 8|> filled darkGreen |> move ( 150, 125 ) |> notifyTap NextQuestion
     , triangle 8|> filled darkGreen |> rotate (degrees -60) |> move ( -50, 125 ) |> notifyTap PreviousQuestion
     , text (questionStr model.question) |> size 12 |> bold |> filled darkGreen |> move ( -130, 95 )
-    , resultsSection model.question model.step model.answer model.option
+    , resultsSection model.question model.step model.answerState model.option
     ]
     ++ [solutionSection model.question model.step]
-    ++ [optionsSection model.question model.step model.optionColourA model.optionColourB model.optionColourC model.optionColourD]
+    ++ [optionsSection model.question model.step model.optionSelected model.optionColourA model.optionColourB model.optionColourC model.optionColourD]
     ++ [ group
             [ circle 12 |> filled blank |> addOutline (solid 3) darkGreen |> makeTransparent 0.75 |> move ( 234, 125 ) |> notifyEnter (ClickedHint model.question model.step) |> notifyLeave ExitHint
             , text "?" |> bold |> sansserif |> size 20 |> filled darkGreen |> makeTransparent 0.75 |> move ( 228, 118 ) |> notifyEnter (ClickedHint model.question model.step) |> notifyLeave ExitHint ]
@@ -255,70 +243,70 @@ solutionSection question step = solutionText step (solutionStr question)
 
 
 optionsStr question step = case (question, step) of
-                (Question1, Step1) -> [ ( "a) = (2*(1/2)) [ cos(8x/2 - 3x/2) + cos(7x/2 + 3x/2)", WrongAnswer1)
-                                      , ( "b) = (2*(1/2)) [ cos(9x/2 - 3x/2) + cos(6x/2 + x/2)", WrongAnswer2)
-                                      , ( "c) = (2*(1/2)) [ cos(7x/2 - 4x/2) + cos(7x/2 + 3x/2)", WrongAnswer3)
-                                      , ( "d) = (2*(1/2)) [ cos(7x/2 - 3x/2) + cos(7x/2 + 3x/2)", RightAnswer)
+                (Question1, Step1) -> [ ( "a) = (2*(1/2)) [ cos(8x/2 - 3x/2) + cos(7x/2 + 3x/2)", Incorrect)
+                                      , ( "b) = (2*(1/2)) [ cos(9x/2 - 3x/2) + cos(6x/2 + x/2)", Incorrect)
+                                      , ( "c) = (2*(1/2)) [ cos(7x/2 - 4x/2) + cos(7x/2 + 3x/2)", Incorrect)
+                                      , ( "d) = (2*(1/2)) [ cos(7x/2 - 3x/2) + cos(7x/2 + 3x/2)", Correct)
                                       ]
-                (Question1, Step2) -> [ ( "a) = [cos(3x/2) + cos(10x/2)", WrongAnswer1)
-                                      , ( "b) = [cos(8x/2) + cos(10x/2)", WrongAnswer2)
-                                      , ( "c) = [cos(4x/2) + cos(10x/2)", RightAnswer)
-                                      , ( "d) = [cos(7x/2) + cos(10x/2)", WrongAnswer3)
+                (Question1, Step2) -> [ ( "a) = [cos(3x/2) + cos(10x/2)", Incorrect)
+                                      , ( "b) = [cos(8x/2) + cos(10x/2)", Incorrect)
+                                      , ( "c) = [cos(4x/2) + cos(10x/2)", Correct)
+                                      , ( "d) = [cos(7x/2) + cos(10x/2)", Incorrect)
                                       ]
-                (Question1, Step3) -> [ ( "a) = cos2x + cos5x", RightAnswer)
-                                      , ( "b) = cos3x + cos7x", WrongAnswer1)
-                                      , ( "c) = cos5x + cos5x", WrongAnswer2)
-                                      , ( "d) = cos2x + cos6x", WrongAnswer3)
+                (Question1, Step3) -> [ ( "a) = cos2x + cos5x", Correct)
+                                      , ( "b) = cos3x + cos7x", Incorrect)
+                                      , ( "c) = cos5x + cos5x", Incorrect)
+                                      , ( "d) = cos2x + cos6x", Incorrect)
                                       ]
-                (Question2, Step1) -> [ ( "a) = 1/2 [sin(5y + 2y) + sin(4y - 2y)]", WrongAnswer1)
-                                      , ( "b) = 1/2 [sin(4y + 2y) + sin(4y - 2y)]", RightAnswer)
-                                      , ( "c) = 1/2 [sin(5y + 2y) + sin(2y - 2y)]", WrongAnswer2)
-                                      , ( "d) = 1/2 [sin(4y + 2y) + sin(2y - 2y)]", WrongAnswer3)
+                (Question2, Step1) -> [ ( "a) = 1/2 [sin(5y + 2y) + sin(4y - 2y)]", Incorrect)
+                                      , ( "b) = 1/2 [sin(4y + 2y) + sin(4y - 2y)]", Correct)
+                                      , ( "c) = 1/2 [sin(5y + 2y) + sin(2y - 2y)]", Incorrect)
+                                      , ( "d) = 1/2 [sin(4y + 2y) + sin(2y - 2y)]", Incorrect)
                                       ]
-                (Question2, Step2) -> [ ( "a) = 1/2 [sin(4y) + sin(2y)]", WrongAnswer1)
-                                      , ( "b) = 1/2 [sin(2y) + sin(2y)]", WrongAnswer2)
-                                      , ( "c) = 1/2 [sin(6y) + sin(2y)]", RightAnswer)
-                                      , ( "d) = 1/2 [sin(5y) + sin(2y)]", WrongAnswer3)
+                (Question2, Step2) -> [ ( "a) = 1/2 [sin(4y) + sin(2y)]", Incorrect)
+                                      , ( "b) = 1/2 [sin(2y) + sin(2y)]", Incorrect)
+                                      , ( "c) = 1/2 [sin(6y) + sin(2y)]", Correct)
+                                      , ( "d) = 1/2 [sin(5y) + sin(2y)]", Incorrect)
                                       ]
-                (Question3, Step1) -> [ ( "a) = 1/2 [ cos(5y - 5y) + cos(3y + 5y)]", WrongAnswer1)
-                                      , ( "b) = 1/2 [ cos(3y - 5y) + cos(3y + 5y)]", RightAnswer)
-                                      , ( "c) = 1/2 [ cos(9y - 5y) + cos(3y + 5y)]", WrongAnswer2)
-                                      , ( "d) = 1/2 [ cos(2y - 5y) + cos(8y + 5y)]", WrongAnswer3)
+                (Question3, Step1) -> [ ( "a) = 1/2 [ cos(5y - 5y) + cos(3y + 5y)]", Incorrect)
+                                      , ( "b) = 1/2 [ cos(3y - 5y) + cos(3y + 5y)]", Correct)
+                                      , ( "c) = 1/2 [ cos(9y - 5y) + cos(3y + 5y)]", Incorrect)
+                                      , ( "d) = 1/2 [ cos(2y - 5y) + cos(8y + 5y)]", Incorrect)
                                       ]
-                (Question3, Step2) -> [ ( "a) = 1/3 [cos(2y) + cos(8y)]", WrongAnswer1)
-                                      , ( "b) = 1/3 [cos(8y) + cos(8y)]", WrongAnswer2)
-                                      , ( "c) = 1/2 [cos(2y) + cos(8y)]", RightAnswer)
-                                      , ( "d) = 1/2 [cos(8y) + cos(8y)]", WrongAnswer3)
+                (Question3, Step2) -> [ ( "a) = 1/3 [cos(2y) + cos(8y)]", Incorrect)
+                                      , ( "b) = 1/3 [cos(8y) + cos(8y)]", Incorrect)
+                                      , ( "c) = 1/2 [cos(2y) + cos(8y)]", Correct)
+                                      , ( "d) = 1/2 [cos(8y) + cos(8y)]", Incorrect)
                                       ]
-                (Question4, Step1) -> [ ( "a) = 6sin((4y - 2y) / 2) cos((4y + 2y) / 2)", WrongAnswer1)
-                                      , ( "b) = 6sin((4y - 2y) / 2) cos((7y + 2y) / 2)", WrongAnswer2)
-                                      , ( "c) = 2sin((4y - 2y) / 2) cos((4y + 2y) / 2)", RightAnswer)
-                                      , ( "d) = 2sin((4y - 2y) / 2) cos((7y + 2y) / 2)", WrongAnswer3)
+                (Question4, Step1) -> [ ( "a) = 6sin((4y - 2y) / 2) cos((4y + 2y) / 2)", Incorrect)
+                                      , ( "b) = 6sin((4y - 2y) / 2) cos((7y + 2y) / 2)", Incorrect)
+                                      , ( "c) = 2sin((4y - 2y) / 2) cos((4y + 2y) / 2)", Correct)
+                                      , ( "d) = 2sin((4y - 2y) / 2) cos((7y + 2y) / 2)", Incorrect)
                                       ]
-                (Question4, Step2) -> [ ( "a) = 2sin(2y/2)cos(6y/2)", RightAnswer)
-                                      , ( "b) = 2sin(2y/3)cos(6y/2)", WrongAnswer1)
-                                      , ( "c) = 2sin(2y/3)cos(6y/2)", WrongAnswer2)
-                                      , ( "d) = 2sin(2y/2)cos(8y/2)", WrongAnswer3)
+                (Question4, Step2) -> [ ( "a) = 2sin(2y/2)cos(6y/2)", Correct)
+                                      , ( "b) = sin(2y/3)cos(6y/2)", Incorrect)
+                                      , ( "c) = 2sin(2y/3)cos(6y/2)", Incorrect)
+                                      , ( "d) = 2sin(2y/2)cos(8y/2)", Incorrect)
                                       ]
-                (Question4, Step3) -> [ ( "a) = 6sinycos3y", WrongAnswer1)
-                                      , ( "b) = 2sinycos7y", WrongAnswer2)
-                                      , ( "c) = 2sinycos3y", RightAnswer)
-                                      , ( "d) = 2sinycos7y", WrongAnswer3)
+                (Question4, Step3) -> [ ( "a) = 6sinycos3y", Incorrect)
+                                      , ( "b) = 2sinycos7y", Incorrect)
+                                      , ( "c) = 2sinycos3y", Correct)
+                                      , ( "d) = 2sinycos7y", Incorrect)
                                       ]
-                (Question5, Step1) -> [ ( "a) RHS = 1 - 3sin^3(y) / sin^2(y)", WrongAnswer1)
-                                      , ( "b) RHS = 1 - 2sin^2(y) / sin^2(2y)", WrongAnswer2)
-                                      , ( "c) RHS = 1 - 3sin^2(y) / sin^2(2y)", WrongAnswer3)
-                                      , ( "d) RHS = 1 - 2sin^2(y) / sin^2(y)", RightAnswer)
+                (Question5, Step1) -> [ ( "a) RHS = 1 - 3sin^3(y) / sin^2(y)", Incorrect)
+                                      , ( "b) RHS = 1 - 2sin^2(y) / sin^2(2y)", Incorrect)
+                                      , ( "c) RHS = 1 - 3sin^2(y) / sin^2(2y)", Incorrect)
+                                      , ( "d) RHS = 1 - 2sin^2(y) / sin^2(y)", Correct)
                                       ]
-                (Question5, Step2) -> [ ( "a) RHS = 1/sin^2(y) - 2sin^2(y) / sin^2(y)", RightAnswer)
-                                      , ( "b) RHS = 2/sin^2(y) - 2sin^2(y) / sin^2(y)", WrongAnswer1)
-                                      , ( "c) RHS = 2/sin^2(y) - 1sin^2(y) / sin^2(y)", WrongAnswer2)
-                                      , ( "d) RHS = 1/sin^2(y) - 1sin^2(y) / sin^2(y)", WrongAnswer3)
+                (Question5, Step2) -> [ ( "a) RHS = 1/sin^2(y) - 2sin^2(y) / sin^2(y)", Correct)
+                                      , ( "b) RHS = 2/sin^2(y) - 2sin^2(y) / sin^2(y)", Incorrect)
+                                      , ( "c) RHS = 2/sin^2(y) - 1sin^2(y) / sin^2(y)", Incorrect)
+                                      , ( "d) RHS = 1/sin^2(y) - 1sin^2(y) / sin^2(y)", Incorrect)
                                       ]
-                (Question5, Step3) -> [ ( "a) RHS = csc^2(y) - 2", RightAnswer)
-                                      , ( "b) RHS = cot^2(y) - 2", WrongAnswer1)
-                                      , ( "c) RHS = csc^2(y) - 1", WrongAnswer2)
-                                      , ( "d) RHS = cot^2(y) - 1", WrongAnswer3)
+                (Question5, Step3) -> [ ( "a) RHS = csc^2(y) - 2", Correct)
+                                      , ( "b) RHS = cot^2(y) - 2", Incorrect)
+                                      , ( "c) RHS = csc^2(y) - 1", Incorrect)
+                                      , ( "d) RHS = cot^2(y) - 1", Incorrect)
                                       ]
                 otherwise -> []
 
@@ -333,28 +321,39 @@ getOptionColour idx optionColourA optionColourB optionColourC optionColourD = ca
 
 
 -- there's probably a more efficient way of doing this
-updateOptionColour idx colour = case idx of
-                                    0 -> ChangeOptionColour (\m -> { m | optionColourA = colour })
-                                    1 -> ChangeOptionColour (\m -> { m | optionColourB = colour })
-                                    2 -> ChangeOptionColour (\m -> { m | optionColourC = colour })
-                                    3 -> ChangeOptionColour (\m -> { m | optionColourD = colour })
-                                    otherwise -> ChangeOptionColour (\m -> { m | optionColourA = colour })
+updateOptionColourOnHover idx colour optionSelected = if optionSelected then
+                                            ChangeOptionColour (\m -> m)
+                                        else
+                                            case idx of
+                                                0 -> ChangeOptionColour (\m -> { m | optionColourA = colour })
+                                                1 -> ChangeOptionColour (\m -> { m | optionColourB = colour })
+                                                2 -> ChangeOptionColour (\m -> { m | optionColourC = colour })
+                                                3 -> ChangeOptionColour (\m -> { m | optionColourD = colour })
+                                                otherwise -> ChangeOptionColour (\m -> m)
+
+updateOptionColourOnClick idx firstColour secondColour = case idx of
+                                    0 -> ChangeOptionColour (\m -> { m | optionColourA = secondColour, optionColourB = firstColour, optionColourC = firstColour, optionColourD = firstColour })
+                                    1 -> ChangeOptionColour (\m -> { m | optionColourA = firstColour, optionColourB = secondColour, optionColourC = firstColour, optionColourD = firstColour})
+                                    2 -> ChangeOptionColour (\m -> { m | optionColourA = firstColour, optionColourB = firstColour, optionColourC = secondColour, optionColourD = firstColour })
+                                    3 -> ChangeOptionColour (\m -> { m | optionColourA = firstColour, optionColourB = firstColour, optionColourC = firstColour, optionColourD = secondColour })
+                                    otherwise -> ChangeOptionColour (\m -> m)
 
 
-optionsText lst optionColourA optionColourB optionColourC optionColourD = group (List.indexedMap (\idx tuple -> text (Tuple.first tuple)
+optionsText lst optionSelected optionColourA optionColourB optionColourC optionColourD = group (List.indexedMap (\idx tuple -> text (Tuple.first tuple)
                                                                                                                     |> size 12
                                                                                                                     |> filled (getOptionColour idx optionColourA optionColourB optionColourC optionColourD)
                                                                                                                     |> move ( -130, 45-20*(Basics.toFloat idx))
-                                                                                                                    |> notifyEnter (updateOptionColour idx lightGreen)
-                                                                                                                    |> notifyLeave (updateOptionColour idx darkGreen)
-                                                                                                                    |> notifyTap (Tuple.second tuple) ) lst)
+                                                                                                                    |> notifyEnter (updateOptionColourOnHover idx lightGreen optionSelected)
+                                                                                                                    |> notifyLeave (updateOptionColourOnHover idx darkGreen optionSelected)
+                                                                                                                    |> notifyTap (updateOptionColourOnClick idx darkGreen lightGreen)
+                                                                                                                    |> notifyTap (ClickedOption idx (Tuple.second tuple)) ) lst)
 
 
-optionsSection question step optionColourA optionColourB optionColourC optionColourD = group [ text (stepStr step)
+optionsSection question step optionSelected optionColourA optionColourB optionColourC optionColourD = group [ text (stepStr step)
                                                                                                     |> size 12
                                                                                                     |> filled darkGreen
                                                                                                     |> move ( -130, 65 )
-                                                                                                , optionsText (optionsStr question step) optionColourA optionColourB optionColourC optionColourD
+                                                                                                , optionsText (optionsStr question step) optionSelected optionColourA optionColourB optionColourC optionColourD
                                                                                                 ] |> move ( 0, -20*(Basics.toFloat(getIndexFromStep step)) )
 
 
@@ -368,38 +367,38 @@ isLastStep question step = case (question, step) of
                 otherwise -> False
 
 
-resultsSection question step answer option =
+resultsSection question step answerState option =
                 if (isLastStep question step)
-                    then group [ text (if answer == Incorrect
+                    then group [ text (if answerState == Incorrect
                                     then "Incorrect"
-                                    else if answer == Correct
+                                    else if answerState == Correct
                                         then "Correct! You have solved the problem."
                                         else ""
                                     )
                                     |> size 12
-                                    |> filled (if answer == Incorrect
+                                    |> filled (if answerState == Incorrect
                                                     then red
-                                                    else if answer == Correct
+                                                    else if answerState == Correct
                                                         then green
                                                         else white
                                                 )
                                     |> move ( -130, -40 - 20*(Basics.toFloat(getIndexFromStep step)) )
                                 , rectangle 90 25
-                                    |> filled (if answer == Default
+                                    |> filled (if answerState == Default
                                             then blank
                                             else darkGreen
                                             )
                                     |> move ( -85, -60 - 20*(Basics.toFloat(getIndexFromStep step)) )
                                     |> notifyTap (ClickedExplanation question step option)
                                 , text "Explanation"
-                                    |> filled (if answer == Default
+                                    |> filled (if answerState == Default
                                             then blank
                                             else white
                                             )
                                     |> move ( -115, -63 - 20*(Basics.toFloat(getIndexFromStep step)) )
                                     |> notifyTap (ClickedExplanation question step option)
                                 ]
-                    else if (answer == Incorrect)
+                    else if (answerState == Incorrect)
                         then group [
                                 text "Incorrect"
                                     |> size 12
@@ -414,7 +413,7 @@ resultsSection question step answer option =
                                     |> move ( -115, -63 - 20*(Basics.toFloat(getIndexFromStep step)) )
                                     |> notifyTap (ClickedExplanation question step option)
                                 ]
-                        else if (answer == Correct)
+                        else if (answerState == Correct)
                             then group [
                                 text "Correct"
                                     |> size 12
@@ -460,70 +459,83 @@ hintStr question step = case (question, step) of
 
 explanationStr question step option = case (question, step) of
                 (Question1, Step1) -> case option of
-                                        Option1 -> ["We cannot derive", "cos(8x/2)" ]
-                                        Option2 -> ["We cannot derive", "cos(9x/2)" ]
-                                        Option3 -> ["We cannot derive", "cos(7x/2-4x/2)" ]
-                                        RightOption -> ["We can rewrite the equation as such.", "Therefore, this option is correct"]
+                                        0 -> ["We cannot derive", "cos(8x/2)" ]
+                                        1 -> ["We cannot derive", "cos(9x/2)" ]
+                                        2 -> ["We cannot derive", "cos(7x/2-4x/2)" ]
+                                        3 -> ["We can rewrite the equation as such.", "Therefore, this option is correct"]
+                                        otherwise -> []
                 (Question1, Step2) -> case option of
-                                        Option1 -> ["We cannot derive", "cos(3x/2)" ]
-                                        Option2 -> ["We cannot derive", "cos(8x/2)" ]
-                                        Option3 -> ["We cannot derive", "cos(7x/2)" ]
-                                        RightOption -> ["We can rewrite the equation as such.", "Therefore, this option is correct"]
+                                        0 -> ["We cannot derive", "cos(3x/2)" ]
+                                        1 -> ["We cannot derive", "cos(8x/2)" ]
+                                        2 -> ["We can rewrite the equation as such.", "Therefore, this option is correct"]
+                                        3 -> ["We cannot derive", "cos(7x/2)" ]
+                                        otherwise -> []
                 (Question1, Step3) -> case option of
-                                        Option1 -> ["We cannot derive", "cos(3x) + cos(7x)" ]
-                                        Option2 -> ["We cannot derive", "cos(5x) + cos(5x)" ]
-                                        Option3 -> ["We cannot derive", "cos(2x) + cos(6x)" ]
-                                        RightOption -> ["We can rewrite the equation as such.", "Therefore, this option is correct"]
+                                        0 -> ["We can rewrite the equation as such.", "Therefore, this option is correct"]
+                                        1 -> ["We cannot derive", "cos(3x) + cos(7x)" ]
+                                        2 -> ["We cannot derive", "cos(5x) + cos(5x)" ]
+                                        3 -> ["We cannot derive", "cos(2x) + cos(6x)" ]
+                                        otherwise -> []
                 (Question2, Step1) -> case option of
-                                        Option1 -> ["We cannot derive", "sin(5y + 2y)" ]
-                                        Option2 -> ["We cannot derive", "sin(5y + 2y)" ]
-                                        Option3 -> ["We cannot derive", "sin(2y - 2y)"]
-                                        RightOption -> ["Using the product of sines,", "we can derive this equation.", "Therefore, this option is correct"]
+                                        0 -> ["We cannot derive", "sin(5y + 2y)" ]
+                                        1 -> ["Using the product of sines,", "we can derive this equation.", "Therefore, this option is correct"]
+                                        2 -> ["We cannot derive", "sin(5y + 2y)" ]
+                                        3 -> ["We cannot derive", "sin(2y - 2y)"]
+                                        otherwise -> []
                 (Question2, Step2) -> case option of
-                                        Option1 -> ["We cannot derive", "sin(4y + 2y)" ]
-                                        Option2 -> ["We cannot derive", "sin(2y + 2y)" ]
-                                        Option3 -> ["We cannot derive", "sin(5y - 2y)"]
-                                        RightOption -> ["Using the product of sines,", "we can derive this equation.", "Therefore, this option is correct"]
+                                        0 -> ["We cannot derive", "sin(4y + 2y)" ]
+                                        1 -> ["We cannot derive", "sin(2y + 2y)" ]
+                                        2 -> ["Using the product of sines,", "we can derive this equation.", "Therefore, this option is correct"]
+                                        3 -> ["We cannot derive", "sin(5y - 2y)"]
+                                        otherwise -> []
                 (Question3, Step1) -> case option of
-                                        Option1 -> ["We cannot derive", "cos(5y - 5y)" ]
-                                        Option2 -> ["We cannot derive", "cos(9y - 5y)" ]
-                                        Option3 -> ["We cannot derive", "cos(2y - 5y)" ]
-                                        RightOption -> ["Using the product of cosines,", "we can derive this equation.", "Therefore, this option is correct"]
+                                        0 -> ["We cannot derive", "cos(5y - 5y)" ]
+                                        1 -> ["Using the product of cosines,", "we can derive this equation.", "Therefore, this option is correct"]
+                                        2 -> ["We cannot derive", "cos(9y - 5y)" ]
+                                        3 -> ["We cannot derive", "cos(2y - 5y)" ]
+                                        otherwise -> []
                 (Question3, Step2) -> case option of
-                                        Option1 -> ["We cannot derive", "1/3[cos(2y + 8y)]" ]
-                                        Option2 -> ["We cannot derive", "1/3[cos(8y + 8y)]" ]
-                                        Option3 -> ["We cannot derive", "1/3[cos(8y + 8y)]" ]
-                                        RightOption -> ["Using the product of cosines,", "we can derive this equation.", "Therefore, this option is correct"]
+                                        0 -> ["We cannot derive", "1/3[cos(2y + 8y)]" ]
+                                        1 -> ["We cannot derive", "1/3[cos(8y + 8y)]" ]
+                                        2 -> ["Using the product of cosines,", "we can derive this equation.", "Therefore, this option is correct"]
+                                        3 -> ["We cannot derive", "1/3[cos(8y + 8y)]" ]
+                                        otherwise -> []
                 (Question4, Step1) -> case option of
-                                        Option1 -> ["We cannot derive", "the 6 coefficient" ]
-                                        Option2 -> ["We cannot derive", "the 6 coefficient"]
-                                        Option3 -> ["The 2 cofficient is correct", "however we cannot derive cos(4y+2y)" ]
-                                        RightOption -> ["Using the difference of sines,", "we can derive this equation.", "Therefore, this option is correct"]
+                                        0 -> ["We cannot derive", "the 6 coefficient" ]
+                                        1 -> ["We cannot derive", "the 6 coefficient"]
+                                        2 -> ["Using the difference of sines,", "we can derive this equation.", "Therefore, this option is correct"]
+                                        3 -> ["The 2 cofficient is correct", "however we cannot derive cos(4y+2y)" ]
+                                        otherwise -> []
                 (Question4, Step2) -> case option of
-                                        Option1 -> ["This is not correct.", "Try to perform simple arithmetics." ]
-                                        Option2 -> ["This is not correct.", "Try to perform simple arithmetics." ]
-                                        Option3 -> ["This is not correct.", "Try to perform simple arithmetics."  ]
-                                        RightOption -> ["Yes this is correct. 2y/2=y", "and 6y/2=3y", "Therefore, this option is correct"]
+                                        0 -> ["Yes this is correct. 2y/2=y", "and 6y/2=3y", "Therefore, this option is correct"]
+                                        1 -> ["This is not correct.", "Try to perform simple arithmetics." ]
+                                        2 -> ["This is not correct.", "Try to perform simple arithmetics." ]
+                                        3 -> ["This is not correct.", "Try to perform simple arithmetics."  ]
+                                        otherwise -> []
                 (Question4, Step3) -> case option of
-                                        Option1 -> ["This is not correct.", "Try to perform simple arithmetics." ]
-                                        Option2 -> ["This is not correct.", "Try to perform simple arithmetics." ]
-                                        Option3 -> ["This is not correct.", "Try to perform simple arithmetics."  ]
-                                        RightOption -> ["Yes this is correct. 4-2=2", "and 4+2=6", "Therefore, this option is correct"]
+                                        0 -> ["This is not correct.", "Try to perform simple arithmetics." ]
+                                        1 -> ["This is not correct.", "Try to perform simple arithmetics." ]
+                                        2 -> ["Yes this is correct. 4-2=2", "and 4+2=6", "Therefore, this option is correct"]
+                                        3 -> ["This is not correct.", "Try to perform simple arithmetics."  ]
+                                        otherwise -> []
                 (Question5, Step1) -> case option of
-                                        Option1 -> ["We cannot derive this.", "Try to apply a double angle formula" ]
-                                        Option2 -> ["We cannot derive this.", "Try to apply a double angle formula" ]
-                                        Option3 -> ["We cannot derive this.", "Try to apply a double angle formula" ]
-                                        RightOption -> ["Yes, we can derive this since", "cos2y = 1 - 2sin^2(y).", "Therefore, this option is correct"]
+                                        0 -> ["We cannot derive this.", "Try to apply a double angle formula" ]
+                                        1 -> ["We cannot derive this.", "Try to apply a double angle formula" ]
+                                        2 -> ["We cannot derive this.", "Try to apply a double angle formula" ]
+                                        3 -> ["Yes, we can derive this since", "cos2y = 1 - 2sin^2(y).", "Therefore, this option is correct"]
+                                        otherwise -> []
                 (Question5, Step2) -> case option of
-                                        Option1 -> ["We cannot derive the 2 coefficient", "in the first part" ]
-                                        Option2 -> ["We cannot derive the 2 coefficient", "in the first part" ]
-                                        Option3 -> ["We cannot derive the 1 coefficient", "in both parts" ]
-                                        RightOption -> ["We can derive this by splitting the terms.", "Therefore, this option is correct"]
+                                        0 -> ["We can derive this by splitting the terms.", "Therefore, this option is correct"]
+                                        1 -> ["We cannot derive the 2 coefficient", "in the first part" ]
+                                        2 -> ["We cannot derive the 2 coefficient", "in the first part" ]
+                                        3 -> ["We cannot derive the 1 coefficient", "in both parts" ]
+                                        otherwise -> []
                 (Question5, Step3) -> case option of
-                                        Option1 -> ["We cannot derive this.", "Try to apply a reciprocal formula" ]
-                                        Option2 -> ["We cannot derive this.", "Try to apply a reciprocal formula" ]
-                                        Option3 -> ["We cannot derive this.", "Try to apply a reciprocal formula" ]
-                                        RightOption -> ["We can derive this by splitting the terms.", "Therefore, this option is correct"]
+                                        0 -> ["We can derive this by splitting the terms.", "Therefore, this option is correct"]
+                                        1 -> ["We cannot derive this.", "Try to apply a reciprocal formula" ]
+                                        2 -> ["We cannot derive this.", "Try to apply a reciprocal formula" ]
+                                        3 -> ["We cannot derive this.", "Try to apply a reciprocal formula" ]
+                                        otherwise -> []
                 otherwise -> []
 
 hintText lst =  group (List.indexedMap (\idx line -> text line
@@ -554,16 +566,13 @@ explanationCard question step option = group [rect 170 130 |> filled grey |> add
 type Msg m
     = Tick Float GetKeyState
     | Notif Notifications
-    | WrongAnswer1
-    | WrongAnswer2
-    | WrongAnswer3
-    | RightAnswer
+    | ClickedOption Int AnswerState
     | NextStep
     | NextQuestion
     | PreviousQuestion
     | ClickedHint Questions Steps
     | ExitHint
-    | ClickedExplanation Questions Steps Options
+    | ClickedExplanation Questions Steps Int
     | ExitExplanation
     | ChangeOptionColour (m -> m)
 

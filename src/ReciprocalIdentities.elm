@@ -562,7 +562,6 @@ explanationStr question step option = case (question, step) of
                                         2 -> ["You cannot derive this.", "There are terms which you subtract in the expression." ]
                                         3 -> ["You cannot derive this.", "There are terms which you subtract in the expression." ]
                                         otherwise -> []
-                
                 otherwise -> []
 
 hintText lst =  group (List.indexedMap (\idx line -> text line

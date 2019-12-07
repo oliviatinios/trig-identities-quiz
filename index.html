@@ -8556,11 +8556,10 @@ var $author$project$ProductIdentities$NoPopUp = {$: 'NoPopUp'};
 var $author$project$ProductIdentities$NoPopUpExplanation = {$: 'NoPopUpExplanation'};
 var $author$project$ProductIdentities$None = {$: 'None'};
 var $author$project$ProductIdentities$NotifyTap = {$: 'NotifyTap'};
-var $author$project$ProductIdentities$Option1 = {$: 'Option1'};
 var $author$project$ProductIdentities$Question1 = {$: 'Question1'};
 var $author$project$ProductIdentities$Step1 = {$: 'Step1'};
 var $MacCASOutreach$graphicsvg$GraphicSVG$darkGreen = A4($MacCASOutreach$graphicsvg$GraphicSVG$RGBA, 78, 154, 6, 1);
-var $author$project$ProductIdentities$init = {answer: $author$project$ProductIdentities$Default, explanationState: $author$project$ProductIdentities$NoPopUpExplanation, hintState: $author$project$ProductIdentities$NoPopUp, notify: $author$project$ProductIdentities$NotifyTap, option: $author$project$ProductIdentities$Option1, optionColourA: $MacCASOutreach$graphicsvg$GraphicSVG$darkGreen, optionColourB: $MacCASOutreach$graphicsvg$GraphicSVG$darkGreen, optionColourC: $MacCASOutreach$graphicsvg$GraphicSVG$darkGreen, optionColourD: $MacCASOutreach$graphicsvg$GraphicSVG$darkGreen, question: $author$project$ProductIdentities$Question1, state: $author$project$ProductIdentities$None, step: $author$project$ProductIdentities$Step1, time: 0};
+var $author$project$ProductIdentities$init = {answerState: $author$project$ProductIdentities$Default, explanationState: $author$project$ProductIdentities$NoPopUpExplanation, hintState: $author$project$ProductIdentities$NoPopUp, notify: $author$project$ProductIdentities$NotifyTap, option: 0, optionColourA: $MacCASOutreach$graphicsvg$GraphicSVG$darkGreen, optionColourB: $MacCASOutreach$graphicsvg$GraphicSVG$darkGreen, optionColourC: $MacCASOutreach$graphicsvg$GraphicSVG$darkGreen, optionColourD: $MacCASOutreach$graphicsvg$GraphicSVG$darkGreen, optionSelected: false, question: $author$project$ProductIdentities$Question1, state: $author$project$ProductIdentities$None, step: $author$project$ProductIdentities$Step1, time: 0};
 var $author$project$PythagoreanIdentities$Default = {$: 'Default'};
 var $author$project$PythagoreanIdentities$NoPopUp = {$: 'NoPopUp'};
 var $author$project$PythagoreanIdentities$NoPopUpExplanation = {$: 'NoPopUpExplanation'};
@@ -8744,12 +8743,8 @@ var $author$project$FundamentalIdentities$update = F2(
 				return t(model);
 		}
 	});
-var $author$project$ProductIdentities$Correct = {$: 'Correct'};
 var $author$project$ProductIdentities$Explanation = {$: 'Explanation'};
 var $author$project$ProductIdentities$Hint = {$: 'Hint'};
-var $author$project$ProductIdentities$Incorrect = {$: 'Incorrect'};
-var $author$project$ProductIdentities$Option2 = {$: 'Option2'};
-var $author$project$ProductIdentities$Option3 = {$: 'Option3'};
 var $author$project$ProductIdentities$PopUp = F2(
 	function (a, b) {
 		return {$: 'PopUp', a: a, b: b};
@@ -8762,7 +8757,6 @@ var $author$project$ProductIdentities$Question2 = {$: 'Question2'};
 var $author$project$ProductIdentities$Question3 = {$: 'Question3'};
 var $author$project$ProductIdentities$Question4 = {$: 'Question4'};
 var $author$project$ProductIdentities$Question5 = {$: 'Question5'};
-var $author$project$ProductIdentities$RightOption = {$: 'RightOption'};
 var $author$project$ProductIdentities$Step2 = {$: 'Step2'};
 var $author$project$ProductIdentities$Step3 = {$: 'Step3'};
 var $author$project$ProductIdentities$Step4 = {$: 'Step4'};
@@ -8780,27 +8774,22 @@ var $author$project$ProductIdentities$update = F2(
 				return _Utils_update(
 					model,
 					{notify: notif});
-			case 'WrongAnswer1':
+			case 'ClickedOption':
+				var option = msg.a;
+				var answerState = msg.b;
 				return _Utils_update(
 					model,
-					{answer: $author$project$ProductIdentities$Incorrect, option: $author$project$ProductIdentities$Option1});
-			case 'WrongAnswer2':
-				return _Utils_update(
-					model,
-					{answer: $author$project$ProductIdentities$Incorrect, option: $author$project$ProductIdentities$Option2});
-			case 'WrongAnswer3':
-				return _Utils_update(
-					model,
-					{answer: $author$project$ProductIdentities$Incorrect, option: $author$project$ProductIdentities$Option3});
-			case 'RightAnswer':
-				return _Utils_update(
-					model,
-					{answer: $author$project$ProductIdentities$Correct, option: $author$project$ProductIdentities$RightOption});
+					{answerState: answerState, option: option, optionSelected: true});
 			case 'NextStep':
 				return _Utils_update(
 					model,
 					{
-						answer: $author$project$ProductIdentities$Default,
+						answerState: $author$project$ProductIdentities$Default,
+						optionColourA: $MacCASOutreach$graphicsvg$GraphicSVG$darkGreen,
+						optionColourB: $MacCASOutreach$graphicsvg$GraphicSVG$darkGreen,
+						optionColourC: $MacCASOutreach$graphicsvg$GraphicSVG$darkGreen,
+						optionColourD: $MacCASOutreach$graphicsvg$GraphicSVG$darkGreen,
+						optionSelected: false,
 						step: function () {
 							var _v1 = model.step;
 							switch (_v1.$) {
@@ -8821,7 +8810,12 @@ var $author$project$ProductIdentities$update = F2(
 				return _Utils_update(
 					model,
 					{
-						answer: $author$project$ProductIdentities$Default,
+						answerState: $author$project$ProductIdentities$Default,
+						optionColourA: $MacCASOutreach$graphicsvg$GraphicSVG$darkGreen,
+						optionColourB: $MacCASOutreach$graphicsvg$GraphicSVG$darkGreen,
+						optionColourC: $MacCASOutreach$graphicsvg$GraphicSVG$darkGreen,
+						optionColourD: $MacCASOutreach$graphicsvg$GraphicSVG$darkGreen,
+						optionSelected: false,
 						question: function () {
 							var _v2 = model.question;
 							switch (_v2.$) {
@@ -8843,7 +8837,7 @@ var $author$project$ProductIdentities$update = F2(
 				return _Utils_update(
 					model,
 					{
-						answer: $author$project$ProductIdentities$Default,
+						answerState: $author$project$ProductIdentities$Default,
 						question: function () {
 							var _v3 = model.question;
 							switch (_v3.$) {
@@ -11946,87 +11940,102 @@ var $author$project$ProductIdentities$explanationStr = F3(
 						case 'Question1':
 							var _v1 = _v0.a;
 							var _v2 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
 									return _List_fromArray(
 										['We cannot derive', 'cos(8x/2)']);
-								case 'Option2':
+								case 1:
 									return _List_fromArray(
 										['We cannot derive', 'cos(9x/2)']);
-								case 'Option3':
+								case 2:
 									return _List_fromArray(
 										['We cannot derive', 'cos(7x/2-4x/2)']);
-								default:
+								case 3:
 									return _List_fromArray(
 										['We can rewrite the equation as such.', 'Therefore, this option is correct']);
+								default:
+									var otherwise = option;
+									return _List_Nil;
 							}
 						case 'Question2':
 							var _v10 = _v0.a;
 							var _v11 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
 									return _List_fromArray(
 										['We cannot derive', 'sin(5y + 2y)']);
-								case 'Option2':
+								case 1:
+									return _List_fromArray(
+										['Using the product of sines,', 'we can derive this equation.', 'Therefore, this option is correct']);
+								case 2:
 									return _List_fromArray(
 										['We cannot derive', 'sin(5y + 2y)']);
-								case 'Option3':
+								case 3:
 									return _List_fromArray(
 										['We cannot derive', 'sin(2y - 2y)']);
 								default:
-									return _List_fromArray(
-										['Using the product of sines,', 'we can derive this equation.', 'Therefore, this option is correct']);
+									var otherwise = option;
+									return _List_Nil;
 							}
 						case 'Question3':
 							var _v16 = _v0.a;
 							var _v17 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
 									return _List_fromArray(
 										['We cannot derive', 'cos(5y - 5y)']);
-								case 'Option2':
+								case 1:
+									return _List_fromArray(
+										['Using the product of cosines,', 'we can derive this equation.', 'Therefore, this option is correct']);
+								case 2:
 									return _List_fromArray(
 										['We cannot derive', 'cos(9y - 5y)']);
-								case 'Option3':
+								case 3:
 									return _List_fromArray(
 										['We cannot derive', 'cos(2y - 5y)']);
 								default:
-									return _List_fromArray(
-										['Using the product of cosines,', 'we can derive this equation.', 'Therefore, this option is correct']);
+									var otherwise = option;
+									return _List_Nil;
 							}
 						case 'Question4':
 							var _v22 = _v0.a;
 							var _v23 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
 									return _List_fromArray(
 										['We cannot derive', 'the 6 coefficient']);
-								case 'Option2':
+								case 1:
 									return _List_fromArray(
 										['We cannot derive', 'the 6 coefficient']);
-								case 'Option3':
+								case 2:
+									return _List_fromArray(
+										['Using the difference of sines,', 'we can derive this equation.', 'Therefore, this option is correct']);
+								case 3:
 									return _List_fromArray(
 										['The 2 cofficient is correct', 'however we cannot derive cos(4y+2y)']);
 								default:
-									return _List_fromArray(
-										['Using the difference of sines,', 'we can derive this equation.', 'Therefore, this option is correct']);
+									var otherwise = option;
+									return _List_Nil;
 							}
 						default:
 							var _v31 = _v0.a;
 							var _v32 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
 									return _List_fromArray(
 										['We cannot derive this.', 'Try to apply a double angle formula']);
-								case 'Option2':
+								case 1:
 									return _List_fromArray(
 										['We cannot derive this.', 'Try to apply a double angle formula']);
-								case 'Option3':
+								case 2:
 									return _List_fromArray(
 										['We cannot derive this.', 'Try to apply a double angle formula']);
-								default:
+								case 3:
 									return _List_fromArray(
 										['Yes, we can derive this since', 'cos2y = 1 - 2sin^2(y).', 'Therefore, this option is correct']);
+								default:
+									var otherwise = option;
+									return _List_Nil;
 							}
 					}
 				case 'Step2':
@@ -12034,87 +12043,102 @@ var $author$project$ProductIdentities$explanationStr = F3(
 						case 'Question1':
 							var _v4 = _v0.a;
 							var _v5 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
 									return _List_fromArray(
 										['We cannot derive', 'cos(3x/2)']);
-								case 'Option2':
+								case 1:
 									return _List_fromArray(
 										['We cannot derive', 'cos(8x/2)']);
-								case 'Option3':
+								case 2:
+									return _List_fromArray(
+										['We can rewrite the equation as such.', 'Therefore, this option is correct']);
+								case 3:
 									return _List_fromArray(
 										['We cannot derive', 'cos(7x/2)']);
 								default:
-									return _List_fromArray(
-										['We can rewrite the equation as such.', 'Therefore, this option is correct']);
+									var otherwise = option;
+									return _List_Nil;
 							}
 						case 'Question2':
 							var _v13 = _v0.a;
 							var _v14 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
 									return _List_fromArray(
 										['We cannot derive', 'sin(4y + 2y)']);
-								case 'Option2':
+								case 1:
 									return _List_fromArray(
 										['We cannot derive', 'sin(2y + 2y)']);
-								case 'Option3':
+								case 2:
+									return _List_fromArray(
+										['Using the product of sines,', 'we can derive this equation.', 'Therefore, this option is correct']);
+								case 3:
 									return _List_fromArray(
 										['We cannot derive', 'sin(5y - 2y)']);
 								default:
-									return _List_fromArray(
-										['Using the product of sines,', 'we can derive this equation.', 'Therefore, this option is correct']);
+									var otherwise = option;
+									return _List_Nil;
 							}
 						case 'Question3':
 							var _v19 = _v0.a;
 							var _v20 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
 									return _List_fromArray(
 										['We cannot derive', '1/3[cos(2y + 8y)]']);
-								case 'Option2':
+								case 1:
 									return _List_fromArray(
 										['We cannot derive', '1/3[cos(8y + 8y)]']);
-								case 'Option3':
+								case 2:
+									return _List_fromArray(
+										['Using the product of cosines,', 'we can derive this equation.', 'Therefore, this option is correct']);
+								case 3:
 									return _List_fromArray(
 										['We cannot derive', '1/3[cos(8y + 8y)]']);
 								default:
-									return _List_fromArray(
-										['Using the product of cosines,', 'we can derive this equation.', 'Therefore, this option is correct']);
+									var otherwise = option;
+									return _List_Nil;
 							}
 						case 'Question4':
 							var _v25 = _v0.a;
 							var _v26 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
+									return _List_fromArray(
+										['Yes this is correct. 2y/2=y', 'and 6y/2=3y', 'Therefore, this option is correct']);
+								case 1:
 									return _List_fromArray(
 										['This is not correct.', 'Try to perform simple arithmetics.']);
-								case 'Option2':
+								case 2:
 									return _List_fromArray(
 										['This is not correct.', 'Try to perform simple arithmetics.']);
-								case 'Option3':
+								case 3:
 									return _List_fromArray(
 										['This is not correct.', 'Try to perform simple arithmetics.']);
 								default:
-									return _List_fromArray(
-										['Yes this is correct. 2y/2=y', 'and 6y/2=3y', 'Therefore, this option is correct']);
+									var otherwise = option;
+									return _List_Nil;
 							}
 						default:
 							var _v34 = _v0.a;
 							var _v35 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
+									return _List_fromArray(
+										['We can derive this by splitting the terms.', 'Therefore, this option is correct']);
+								case 1:
 									return _List_fromArray(
 										['We cannot derive the 2 coefficient', 'in the first part']);
-								case 'Option2':
+								case 2:
 									return _List_fromArray(
 										['We cannot derive the 2 coefficient', 'in the first part']);
-								case 'Option3':
+								case 3:
 									return _List_fromArray(
 										['We cannot derive the 1 coefficient', 'in both parts']);
 								default:
-									return _List_fromArray(
-										['We can derive this by splitting the terms.', 'Therefore, this option is correct']);
+									var otherwise = option;
+									return _List_Nil;
 							}
 					}
 				case 'Step3':
@@ -12122,53 +12146,62 @@ var $author$project$ProductIdentities$explanationStr = F3(
 						case 'Question1':
 							var _v7 = _v0.a;
 							var _v8 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
+									return _List_fromArray(
+										['We can rewrite the equation as such.', 'Therefore, this option is correct']);
+								case 1:
 									return _List_fromArray(
 										['We cannot derive', 'cos(3x) + cos(7x)']);
-								case 'Option2':
+								case 2:
 									return _List_fromArray(
 										['We cannot derive', 'cos(5x) + cos(5x)']);
-								case 'Option3':
+								case 3:
 									return _List_fromArray(
 										['We cannot derive', 'cos(2x) + cos(6x)']);
 								default:
-									return _List_fromArray(
-										['We can rewrite the equation as such.', 'Therefore, this option is correct']);
+									var otherwise = option;
+									return _List_Nil;
 							}
 						case 'Question4':
 							var _v28 = _v0.a;
 							var _v29 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
 									return _List_fromArray(
 										['This is not correct.', 'Try to perform simple arithmetics.']);
-								case 'Option2':
+								case 1:
 									return _List_fromArray(
 										['This is not correct.', 'Try to perform simple arithmetics.']);
-								case 'Option3':
+								case 2:
+									return _List_fromArray(
+										['Yes this is correct. 4-2=2', 'and 4+2=6', 'Therefore, this option is correct']);
+								case 3:
 									return _List_fromArray(
 										['This is not correct.', 'Try to perform simple arithmetics.']);
 								default:
-									return _List_fromArray(
-										['Yes this is correct. 4-2=2', 'and 4+2=6', 'Therefore, this option is correct']);
+									var otherwise = option;
+									return _List_Nil;
 							}
 						case 'Question5':
 							var _v37 = _v0.a;
 							var _v38 = _v0.b;
-							switch (option.$) {
-								case 'Option1':
+							switch (option) {
+								case 0:
+									return _List_fromArray(
+										['We can derive this by splitting the terms.', 'Therefore, this option is correct']);
+								case 1:
 									return _List_fromArray(
 										['We cannot derive this.', 'Try to apply a reciprocal formula']);
-								case 'Option2':
+								case 2:
 									return _List_fromArray(
 										['We cannot derive this.', 'Try to apply a reciprocal formula']);
-								case 'Option3':
+								case 3:
 									return _List_fromArray(
 										['We cannot derive this.', 'Try to apply a reciprocal formula']);
 								default:
-									return _List_fromArray(
-										['We can derive this by splitting the terms.', 'Therefore, this option is correct']);
+									var otherwise = option;
+									return _List_Nil;
 							}
 						default:
 							break _v0$13;
@@ -12361,10 +12394,8 @@ var $author$project$ProductIdentities$getIndexFromStep = function (step) {
 			return 4;
 	}
 };
-var $author$project$ProductIdentities$RightAnswer = {$: 'RightAnswer'};
-var $author$project$ProductIdentities$WrongAnswer1 = {$: 'WrongAnswer1'};
-var $author$project$ProductIdentities$WrongAnswer2 = {$: 'WrongAnswer2'};
-var $author$project$ProductIdentities$WrongAnswer3 = {$: 'WrongAnswer3'};
+var $author$project$ProductIdentities$Correct = {$: 'Correct'};
+var $author$project$ProductIdentities$Incorrect = {$: 'Incorrect'};
 var $author$project$ProductIdentities$optionsStr = F2(
 	function (question, step) {
 		var _v0 = _Utils_Tuple2(question, step);
@@ -12378,50 +12409,50 @@ var $author$project$ProductIdentities$optionsStr = F2(
 							var _v2 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) = (2*(1/2)) [ cos(8x/2 - 3x/2) + cos(7x/2 + 3x/2)', $author$project$ProductIdentities$WrongAnswer1),
-									_Utils_Tuple2('b) = (2*(1/2)) [ cos(9x/2 - 3x/2) + cos(6x/2 + x/2)', $author$project$ProductIdentities$WrongAnswer2),
-									_Utils_Tuple2('c) = (2*(1/2)) [ cos(7x/2 - 4x/2) + cos(7x/2 + 3x/2)', $author$project$ProductIdentities$WrongAnswer3),
-									_Utils_Tuple2('d) = (2*(1/2)) [ cos(7x/2 - 3x/2) + cos(7x/2 + 3x/2)', $author$project$ProductIdentities$RightAnswer)
+									_Utils_Tuple2('a) = (2*(1/2)) [ cos(8x/2 - 3x/2) + cos(7x/2 + 3x/2)', $author$project$ProductIdentities$Incorrect),
+									_Utils_Tuple2('b) = (2*(1/2)) [ cos(9x/2 - 3x/2) + cos(6x/2 + x/2)', $author$project$ProductIdentities$Incorrect),
+									_Utils_Tuple2('c) = (2*(1/2)) [ cos(7x/2 - 4x/2) + cos(7x/2 + 3x/2)', $author$project$ProductIdentities$Incorrect),
+									_Utils_Tuple2('d) = (2*(1/2)) [ cos(7x/2 - 3x/2) + cos(7x/2 + 3x/2)', $author$project$ProductIdentities$Correct)
 								]);
 						case 'Question2':
 							var _v7 = _v0.a;
 							var _v8 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) = 1/2 [sin(5y + 2y) + sin(4y - 2y)]', $author$project$ProductIdentities$WrongAnswer1),
-									_Utils_Tuple2('b) = 1/2 [sin(4y + 2y) + sin(4y - 2y)]', $author$project$ProductIdentities$RightAnswer),
-									_Utils_Tuple2('c) = 1/2 [sin(5y + 2y) + sin(2y - 2y)]', $author$project$ProductIdentities$WrongAnswer2),
-									_Utils_Tuple2('d) = 1/2 [sin(4y + 2y) + sin(2y - 2y)]', $author$project$ProductIdentities$WrongAnswer3)
+									_Utils_Tuple2('a) = 1/2 [sin(5y + 2y) + sin(4y - 2y)]', $author$project$ProductIdentities$Incorrect),
+									_Utils_Tuple2('b) = 1/2 [sin(4y + 2y) + sin(4y - 2y)]', $author$project$ProductIdentities$Correct),
+									_Utils_Tuple2('c) = 1/2 [sin(5y + 2y) + sin(2y - 2y)]', $author$project$ProductIdentities$Incorrect),
+									_Utils_Tuple2('d) = 1/2 [sin(4y + 2y) + sin(2y - 2y)]', $author$project$ProductIdentities$Incorrect)
 								]);
 						case 'Question3':
 							var _v11 = _v0.a;
 							var _v12 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) = 1/2 [ cos(5y - 5y) + cos(3y + 5y)]', $author$project$ProductIdentities$WrongAnswer1),
-									_Utils_Tuple2('b) = 1/2 [ cos(3y - 5y) + cos(3y + 5y)]', $author$project$ProductIdentities$RightAnswer),
-									_Utils_Tuple2('c) = 1/2 [ cos(9y - 5y) + cos(3y + 5y)]', $author$project$ProductIdentities$WrongAnswer2),
-									_Utils_Tuple2('d) = 1/2 [ cos(2y - 5y) + cos(8y + 5y)]', $author$project$ProductIdentities$WrongAnswer3)
+									_Utils_Tuple2('a) = 1/2 [ cos(5y - 5y) + cos(3y + 5y)]', $author$project$ProductIdentities$Incorrect),
+									_Utils_Tuple2('b) = 1/2 [ cos(3y - 5y) + cos(3y + 5y)]', $author$project$ProductIdentities$Correct),
+									_Utils_Tuple2('c) = 1/2 [ cos(9y - 5y) + cos(3y + 5y)]', $author$project$ProductIdentities$Incorrect),
+									_Utils_Tuple2('d) = 1/2 [ cos(2y - 5y) + cos(8y + 5y)]', $author$project$ProductIdentities$Incorrect)
 								]);
 						case 'Question4':
 							var _v15 = _v0.a;
 							var _v16 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) = 6sin((4y - 2y) / 2) cos((4y + 2y) / 2)', $author$project$ProductIdentities$WrongAnswer1),
-									_Utils_Tuple2('b) = 6sin((4y - 2y) / 2) cos((7y + 2y) / 2)', $author$project$ProductIdentities$WrongAnswer2),
-									_Utils_Tuple2('c) = 2sin((4y - 2y) / 2) cos((4y + 2y) / 2)', $author$project$ProductIdentities$RightAnswer),
-									_Utils_Tuple2('d) = 2sin((4y - 2y) / 2) cos((7y + 2y) / 2)', $author$project$ProductIdentities$WrongAnswer3)
+									_Utils_Tuple2('a) = 6sin((4y - 2y) / 2) cos((4y + 2y) / 2)', $author$project$ProductIdentities$Incorrect),
+									_Utils_Tuple2('b) = 6sin((4y - 2y) / 2) cos((7y + 2y) / 2)', $author$project$ProductIdentities$Incorrect),
+									_Utils_Tuple2('c) = 2sin((4y - 2y) / 2) cos((4y + 2y) / 2)', $author$project$ProductIdentities$Correct),
+									_Utils_Tuple2('d) = 2sin((4y - 2y) / 2) cos((7y + 2y) / 2)', $author$project$ProductIdentities$Incorrect)
 								]);
 						default:
 							var _v21 = _v0.a;
 							var _v22 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) RHS = 1 - 3sin^3(y) / sin^2(y)', $author$project$ProductIdentities$WrongAnswer1),
-									_Utils_Tuple2('b) RHS = 1 - 2sin^2(y) / sin^2(2y)', $author$project$ProductIdentities$WrongAnswer2),
-									_Utils_Tuple2('c) RHS = 1 - 3sin^2(y) / sin^2(2y)', $author$project$ProductIdentities$WrongAnswer3),
-									_Utils_Tuple2('d) RHS = 1 - 2sin^2(y) / sin^2(y)', $author$project$ProductIdentities$RightAnswer)
+									_Utils_Tuple2('a) RHS = 1 - 3sin^3(y) / sin^2(y)', $author$project$ProductIdentities$Incorrect),
+									_Utils_Tuple2('b) RHS = 1 - 2sin^2(y) / sin^2(2y)', $author$project$ProductIdentities$Incorrect),
+									_Utils_Tuple2('c) RHS = 1 - 3sin^2(y) / sin^2(2y)', $author$project$ProductIdentities$Incorrect),
+									_Utils_Tuple2('d) RHS = 1 - 2sin^2(y) / sin^2(y)', $author$project$ProductIdentities$Correct)
 								]);
 					}
 				case 'Step2':
@@ -12431,50 +12462,50 @@ var $author$project$ProductIdentities$optionsStr = F2(
 							var _v4 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) = [cos(3x/2) + cos(10x/2)', $author$project$ProductIdentities$WrongAnswer1),
-									_Utils_Tuple2('b) = [cos(8x/2) + cos(10x/2)', $author$project$ProductIdentities$WrongAnswer2),
-									_Utils_Tuple2('c) = [cos(4x/2) + cos(10x/2)', $author$project$ProductIdentities$RightAnswer),
-									_Utils_Tuple2('d) = [cos(7x/2) + cos(10x/2)', $author$project$ProductIdentities$WrongAnswer3)
+									_Utils_Tuple2('a) = [cos(3x/2) + cos(10x/2)', $author$project$ProductIdentities$Incorrect),
+									_Utils_Tuple2('b) = [cos(8x/2) + cos(10x/2)', $author$project$ProductIdentities$Incorrect),
+									_Utils_Tuple2('c) = [cos(4x/2) + cos(10x/2)', $author$project$ProductIdentities$Correct),
+									_Utils_Tuple2('d) = [cos(7x/2) + cos(10x/2)', $author$project$ProductIdentities$Incorrect)
 								]);
 						case 'Question2':
 							var _v9 = _v0.a;
 							var _v10 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) = 1/2 [sin(4y) + sin(2y)]', $author$project$ProductIdentities$WrongAnswer1),
-									_Utils_Tuple2('b) = 1/2 [sin(2y) + sin(2y)]', $author$project$ProductIdentities$WrongAnswer2),
-									_Utils_Tuple2('c) = 1/2 [sin(6y) + sin(2y)]', $author$project$ProductIdentities$RightAnswer),
-									_Utils_Tuple2('d) = 1/2 [sin(5y) + sin(2y)]', $author$project$ProductIdentities$WrongAnswer3)
+									_Utils_Tuple2('a) = 1/2 [sin(4y) + sin(2y)]', $author$project$ProductIdentities$Incorrect),
+									_Utils_Tuple2('b) = 1/2 [sin(2y) + sin(2y)]', $author$project$ProductIdentities$Incorrect),
+									_Utils_Tuple2('c) = 1/2 [sin(6y) + sin(2y)]', $author$project$ProductIdentities$Correct),
+									_Utils_Tuple2('d) = 1/2 [sin(5y) + sin(2y)]', $author$project$ProductIdentities$Incorrect)
 								]);
 						case 'Question3':
 							var _v13 = _v0.a;
 							var _v14 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) = 1/3 [cos(2y) + cos(8y)]', $author$project$ProductIdentities$WrongAnswer1),
-									_Utils_Tuple2('b) = 1/3 [cos(8y) + cos(8y)]', $author$project$ProductIdentities$WrongAnswer2),
-									_Utils_Tuple2('c) = 1/2 [cos(2y) + cos(8y)]', $author$project$ProductIdentities$RightAnswer),
-									_Utils_Tuple2('d) = 1/2 [cos(8y) + cos(8y)]', $author$project$ProductIdentities$WrongAnswer3)
+									_Utils_Tuple2('a) = 1/3 [cos(2y) + cos(8y)]', $author$project$ProductIdentities$Incorrect),
+									_Utils_Tuple2('b) = 1/3 [cos(8y) + cos(8y)]', $author$project$ProductIdentities$Incorrect),
+									_Utils_Tuple2('c) = 1/2 [cos(2y) + cos(8y)]', $author$project$ProductIdentities$Correct),
+									_Utils_Tuple2('d) = 1/2 [cos(8y) + cos(8y)]', $author$project$ProductIdentities$Incorrect)
 								]);
 						case 'Question4':
 							var _v17 = _v0.a;
 							var _v18 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) = 2sin(2y/2)cos(6y/2)', $author$project$ProductIdentities$RightAnswer),
-									_Utils_Tuple2('b) = 2sin(2y/3)cos(6y/2)', $author$project$ProductIdentities$WrongAnswer1),
-									_Utils_Tuple2('c) = 2sin(2y/3)cos(6y/2)', $author$project$ProductIdentities$WrongAnswer2),
-									_Utils_Tuple2('d) = 2sin(2y/2)cos(8y/2)', $author$project$ProductIdentities$WrongAnswer3)
+									_Utils_Tuple2('a) = 2sin(2y/2)cos(6y/2)', $author$project$ProductIdentities$Correct),
+									_Utils_Tuple2('b) = sin(2y/3)cos(6y/2)', $author$project$ProductIdentities$Incorrect),
+									_Utils_Tuple2('c) = 2sin(2y/3)cos(6y/2)', $author$project$ProductIdentities$Incorrect),
+									_Utils_Tuple2('d) = 2sin(2y/2)cos(8y/2)', $author$project$ProductIdentities$Incorrect)
 								]);
 						default:
 							var _v23 = _v0.a;
 							var _v24 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) RHS = 1/sin^2(y) - 2sin^2(y) / sin^2(y)', $author$project$ProductIdentities$RightAnswer),
-									_Utils_Tuple2('b) RHS = 2/sin^2(y) - 2sin^2(y) / sin^2(y)', $author$project$ProductIdentities$WrongAnswer1),
-									_Utils_Tuple2('c) RHS = 2/sin^2(y) - 1sin^2(y) / sin^2(y)', $author$project$ProductIdentities$WrongAnswer2),
-									_Utils_Tuple2('d) RHS = 1/sin^2(y) - 1sin^2(y) / sin^2(y)', $author$project$ProductIdentities$WrongAnswer3)
+									_Utils_Tuple2('a) RHS = 1/sin^2(y) - 2sin^2(y) / sin^2(y)', $author$project$ProductIdentities$Correct),
+									_Utils_Tuple2('b) RHS = 2/sin^2(y) - 2sin^2(y) / sin^2(y)', $author$project$ProductIdentities$Incorrect),
+									_Utils_Tuple2('c) RHS = 2/sin^2(y) - 1sin^2(y) / sin^2(y)', $author$project$ProductIdentities$Incorrect),
+									_Utils_Tuple2('d) RHS = 1/sin^2(y) - 1sin^2(y) / sin^2(y)', $author$project$ProductIdentities$Incorrect)
 								]);
 					}
 				case 'Step3':
@@ -12484,30 +12515,30 @@ var $author$project$ProductIdentities$optionsStr = F2(
 							var _v6 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) = cos2x + cos5x', $author$project$ProductIdentities$RightAnswer),
-									_Utils_Tuple2('b) = cos3x + cos7x', $author$project$ProductIdentities$WrongAnswer1),
-									_Utils_Tuple2('c) = cos5x + cos5x', $author$project$ProductIdentities$WrongAnswer2),
-									_Utils_Tuple2('d) = cos2x + cos6x', $author$project$ProductIdentities$WrongAnswer3)
+									_Utils_Tuple2('a) = cos2x + cos5x', $author$project$ProductIdentities$Correct),
+									_Utils_Tuple2('b) = cos3x + cos7x', $author$project$ProductIdentities$Incorrect),
+									_Utils_Tuple2('c) = cos5x + cos5x', $author$project$ProductIdentities$Incorrect),
+									_Utils_Tuple2('d) = cos2x + cos6x', $author$project$ProductIdentities$Incorrect)
 								]);
 						case 'Question4':
 							var _v19 = _v0.a;
 							var _v20 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) = 6sinycos3y', $author$project$ProductIdentities$WrongAnswer1),
-									_Utils_Tuple2('b) = 2sinycos7y', $author$project$ProductIdentities$WrongAnswer2),
-									_Utils_Tuple2('c) = 2sinycos3y', $author$project$ProductIdentities$RightAnswer),
-									_Utils_Tuple2('d) = 2sinycos7y', $author$project$ProductIdentities$WrongAnswer3)
+									_Utils_Tuple2('a) = 6sinycos3y', $author$project$ProductIdentities$Incorrect),
+									_Utils_Tuple2('b) = 2sinycos7y', $author$project$ProductIdentities$Incorrect),
+									_Utils_Tuple2('c) = 2sinycos3y', $author$project$ProductIdentities$Correct),
+									_Utils_Tuple2('d) = 2sinycos7y', $author$project$ProductIdentities$Incorrect)
 								]);
 						case 'Question5':
 							var _v25 = _v0.a;
 							var _v26 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) RHS = csc^2(y) - 2', $author$project$ProductIdentities$RightAnswer),
-									_Utils_Tuple2('b) RHS = cot^2(y) - 2', $author$project$ProductIdentities$WrongAnswer1),
-									_Utils_Tuple2('c) RHS = csc^2(y) - 1', $author$project$ProductIdentities$WrongAnswer2),
-									_Utils_Tuple2('d) RHS = cot^2(y) - 1', $author$project$ProductIdentities$WrongAnswer3)
+									_Utils_Tuple2('a) RHS = csc^2(y) - 2', $author$project$ProductIdentities$Correct),
+									_Utils_Tuple2('b) RHS = cot^2(y) - 2', $author$project$ProductIdentities$Incorrect),
+									_Utils_Tuple2('c) RHS = csc^2(y) - 1', $author$project$ProductIdentities$Incorrect),
+									_Utils_Tuple2('d) RHS = cot^2(y) - 1', $author$project$ProductIdentities$Incorrect)
 								]);
 						default:
 							break _v0$13;
@@ -12518,6 +12549,10 @@ var $author$project$ProductIdentities$optionsStr = F2(
 		}
 		var otherwise = _v0;
 		return _List_Nil;
+	});
+var $author$project$ProductIdentities$ClickedOption = F2(
+	function (a, b) {
+		return {$: 'ClickedOption', a: a, b: b};
 	});
 var $author$project$ProductIdentities$getOptionColour = F5(
 	function (idx, optionColourA, optionColourB, optionColourC, optionColourD) {
@@ -12539,49 +12574,93 @@ var $MacCASOutreach$graphicsvg$GraphicSVG$lightGreen = A4($MacCASOutreach$graphi
 var $author$project$ProductIdentities$ChangeOptionColour = function (a) {
 	return {$: 'ChangeOptionColour', a: a};
 };
-var $author$project$ProductIdentities$updateOptionColour = F2(
-	function (idx, colour) {
+var $author$project$ProductIdentities$updateOptionColourOnClick = F3(
+	function (idx, firstColour, secondColour) {
 		switch (idx) {
 			case 0:
 				return $author$project$ProductIdentities$ChangeOptionColour(
 					function (m) {
 						return _Utils_update(
 							m,
-							{optionColourA: colour});
+							{optionColourA: secondColour, optionColourB: firstColour, optionColourC: firstColour, optionColourD: firstColour});
 					});
 			case 1:
 				return $author$project$ProductIdentities$ChangeOptionColour(
 					function (m) {
 						return _Utils_update(
 							m,
-							{optionColourB: colour});
+							{optionColourA: firstColour, optionColourB: secondColour, optionColourC: firstColour, optionColourD: firstColour});
 					});
 			case 2:
 				return $author$project$ProductIdentities$ChangeOptionColour(
 					function (m) {
 						return _Utils_update(
 							m,
-							{optionColourC: colour});
+							{optionColourA: firstColour, optionColourB: firstColour, optionColourC: secondColour, optionColourD: firstColour});
 					});
 			case 3:
 				return $author$project$ProductIdentities$ChangeOptionColour(
 					function (m) {
 						return _Utils_update(
 							m,
-							{optionColourD: colour});
+							{optionColourA: firstColour, optionColourB: firstColour, optionColourC: firstColour, optionColourD: secondColour});
 					});
 			default:
 				var otherwise = idx;
 				return $author$project$ProductIdentities$ChangeOptionColour(
 					function (m) {
-						return _Utils_update(
-							m,
-							{optionColourA: colour});
+						return m;
 					});
 		}
 	});
-var $author$project$ProductIdentities$optionsText = F5(
-	function (lst, optionColourA, optionColourB, optionColourC, optionColourD) {
+var $author$project$ProductIdentities$updateOptionColourOnHover = F3(
+	function (idx, colour, optionSelected) {
+		if (optionSelected) {
+			return $author$project$ProductIdentities$ChangeOptionColour(
+				function (m) {
+					return m;
+				});
+		} else {
+			switch (idx) {
+				case 0:
+					return $author$project$ProductIdentities$ChangeOptionColour(
+						function (m) {
+							return _Utils_update(
+								m,
+								{optionColourA: colour});
+						});
+				case 1:
+					return $author$project$ProductIdentities$ChangeOptionColour(
+						function (m) {
+							return _Utils_update(
+								m,
+								{optionColourB: colour});
+						});
+				case 2:
+					return $author$project$ProductIdentities$ChangeOptionColour(
+						function (m) {
+							return _Utils_update(
+								m,
+								{optionColourC: colour});
+						});
+				case 3:
+					return $author$project$ProductIdentities$ChangeOptionColour(
+						function (m) {
+							return _Utils_update(
+								m,
+								{optionColourD: colour});
+						});
+				default:
+					var otherwise = idx;
+					return $author$project$ProductIdentities$ChangeOptionColour(
+						function (m) {
+							return m;
+						});
+			}
+		}
+	});
+var $author$project$ProductIdentities$optionsText = F6(
+	function (lst, optionSelected, optionColourA, optionColourB, optionColourC, optionColourD) {
 		return $MacCASOutreach$graphicsvg$GraphicSVG$group(
 			A2(
 				$elm$core$List$indexedMap,
@@ -12589,23 +12668,26 @@ var $author$project$ProductIdentities$optionsText = F5(
 					function (idx, tuple) {
 						return A2(
 							$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
-							tuple.b,
+							A2($author$project$ProductIdentities$ClickedOption, idx, tuple.b),
 							A2(
-								$MacCASOutreach$graphicsvg$GraphicSVG$notifyLeave,
-								A2($author$project$ProductIdentities$updateOptionColour, idx, $MacCASOutreach$graphicsvg$GraphicSVG$darkGreen),
+								$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
+								A3($author$project$ProductIdentities$updateOptionColourOnClick, idx, $MacCASOutreach$graphicsvg$GraphicSVG$darkGreen, $MacCASOutreach$graphicsvg$GraphicSVG$lightGreen),
 								A2(
-									$MacCASOutreach$graphicsvg$GraphicSVG$notifyEnter,
-									A2($author$project$ProductIdentities$updateOptionColour, idx, $MacCASOutreach$graphicsvg$GraphicSVG$lightGreen),
+									$MacCASOutreach$graphicsvg$GraphicSVG$notifyLeave,
+									A3($author$project$ProductIdentities$updateOptionColourOnHover, idx, $MacCASOutreach$graphicsvg$GraphicSVG$darkGreen, optionSelected),
 									A2(
-										$MacCASOutreach$graphicsvg$GraphicSVG$move,
-										_Utils_Tuple2(-130, 45 - (20 * idx)),
+										$MacCASOutreach$graphicsvg$GraphicSVG$notifyEnter,
+										A3($author$project$ProductIdentities$updateOptionColourOnHover, idx, $MacCASOutreach$graphicsvg$GraphicSVG$lightGreen, optionSelected),
 										A2(
-											$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-											A5($author$project$ProductIdentities$getOptionColour, idx, optionColourA, optionColourB, optionColourC, optionColourD),
+											$MacCASOutreach$graphicsvg$GraphicSVG$move,
+											_Utils_Tuple2(-130, 45 - (20 * idx)),
 											A2(
-												$MacCASOutreach$graphicsvg$GraphicSVG$size,
-												12,
-												$MacCASOutreach$graphicsvg$GraphicSVG$text(tuple.a)))))));
+												$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+												A5($author$project$ProductIdentities$getOptionColour, idx, optionColourA, optionColourB, optionColourC, optionColourD),
+												A2(
+													$MacCASOutreach$graphicsvg$GraphicSVG$size,
+													12,
+													$MacCASOutreach$graphicsvg$GraphicSVG$text(tuple.a))))))));
 					}),
 				lst));
 	});
@@ -12623,8 +12705,8 @@ var $author$project$ProductIdentities$stepStr = function (step) {
 			return 'What is the fifth step?';
 	}
 };
-var $author$project$ProductIdentities$optionsSection = F6(
-	function (question, step, optionColourA, optionColourB, optionColourC, optionColourD) {
+var $author$project$ProductIdentities$optionsSection = F7(
+	function (question, step, optionSelected, optionColourA, optionColourB, optionColourC, optionColourD) {
 		return A2(
 			$MacCASOutreach$graphicsvg$GraphicSVG$move,
 			_Utils_Tuple2(
@@ -12644,9 +12726,10 @@ var $author$project$ProductIdentities$optionsSection = F6(
 								12,
 								$MacCASOutreach$graphicsvg$GraphicSVG$text(
 									$author$project$ProductIdentities$stepStr(step))))),
-						A5(
+						A6(
 						$author$project$ProductIdentities$optionsText,
 						A2($author$project$ProductIdentities$optionsStr, question, step),
+						optionSelected,
 						optionColourA,
 						optionColourB,
 						optionColourC,
@@ -12730,7 +12813,7 @@ var $author$project$ProductIdentities$isLastStep = F2(
 		return false;
 	});
 var $author$project$ProductIdentities$resultsSection = F4(
-	function (question, step, answer, option) {
+	function (question, step, answerState, option) {
 		return A2($author$project$ProductIdentities$isLastStep, question, step) ? $MacCASOutreach$graphicsvg$GraphicSVG$group(
 			_List_fromArray(
 				[
@@ -12741,12 +12824,12 @@ var $author$project$ProductIdentities$resultsSection = F4(
 						(-40) - (20 * $author$project$ProductIdentities$getIndexFromStep(step))),
 					A2(
 						$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-						_Utils_eq(answer, $author$project$ProductIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$red : (_Utils_eq(answer, $author$project$ProductIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$green : $MacCASOutreach$graphicsvg$GraphicSVG$white),
+						_Utils_eq(answerState, $author$project$ProductIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$red : (_Utils_eq(answerState, $author$project$ProductIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$green : $MacCASOutreach$graphicsvg$GraphicSVG$white),
 						A2(
 							$MacCASOutreach$graphicsvg$GraphicSVG$size,
 							12,
 							$MacCASOutreach$graphicsvg$GraphicSVG$text(
-								_Utils_eq(answer, $author$project$ProductIdentities$Incorrect) ? 'Incorrect' : (_Utils_eq(answer, $author$project$ProductIdentities$Correct) ? 'Correct! You have solved the problem.' : ''))))),
+								_Utils_eq(answerState, $author$project$ProductIdentities$Incorrect) ? 'Incorrect' : (_Utils_eq(answerState, $author$project$ProductIdentities$Correct) ? 'Correct! You have solved the problem.' : ''))))),
 					A2(
 					$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
 					A3($author$project$ProductIdentities$ClickedExplanation, question, step, option),
@@ -12757,7 +12840,7 @@ var $author$project$ProductIdentities$resultsSection = F4(
 							(-60) - (20 * $author$project$ProductIdentities$getIndexFromStep(step))),
 						A2(
 							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							_Utils_eq(answer, $author$project$ProductIdentities$Default) ? $MacCASOutreach$graphicsvg$GraphicSVG$blank : $MacCASOutreach$graphicsvg$GraphicSVG$darkGreen,
+							_Utils_eq(answerState, $author$project$ProductIdentities$Default) ? $MacCASOutreach$graphicsvg$GraphicSVG$blank : $MacCASOutreach$graphicsvg$GraphicSVG$darkGreen,
 							A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 90, 25)))),
 					A2(
 					$MacCASOutreach$graphicsvg$GraphicSVG$notifyTap,
@@ -12769,9 +12852,9 @@ var $author$project$ProductIdentities$resultsSection = F4(
 							(-63) - (20 * $author$project$ProductIdentities$getIndexFromStep(step))),
 						A2(
 							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							_Utils_eq(answer, $author$project$ProductIdentities$Default) ? $MacCASOutreach$graphicsvg$GraphicSVG$blank : $MacCASOutreach$graphicsvg$GraphicSVG$white,
+							_Utils_eq(answerState, $author$project$ProductIdentities$Default) ? $MacCASOutreach$graphicsvg$GraphicSVG$blank : $MacCASOutreach$graphicsvg$GraphicSVG$white,
 							$MacCASOutreach$graphicsvg$GraphicSVG$text('Explanation'))))
-				])) : (_Utils_eq(answer, $author$project$ProductIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$group(
+				])) : (_Utils_eq(answerState, $author$project$ProductIdentities$Incorrect) ? $MacCASOutreach$graphicsvg$GraphicSVG$group(
 			_List_fromArray(
 				[
 					A2(
@@ -12810,7 +12893,7 @@ var $author$project$ProductIdentities$resultsSection = F4(
 							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
 							$MacCASOutreach$graphicsvg$GraphicSVG$white,
 							$MacCASOutreach$graphicsvg$GraphicSVG$text('Explanation'))))
-				])) : (_Utils_eq(answer, $author$project$ProductIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$group(
+				])) : (_Utils_eq(answerState, $author$project$ProductIdentities$Correct) ? $MacCASOutreach$graphicsvg$GraphicSVG$group(
 			_List_fromArray(
 				[
 					A2(
@@ -12986,7 +13069,7 @@ var $author$project$ProductIdentities$view = function (model) {
 							12,
 							$MacCASOutreach$graphicsvg$GraphicSVG$text(
 								$author$project$ProductIdentities$questionStr(model.question)))))),
-				A4($author$project$ProductIdentities$resultsSection, model.question, model.step, model.answer, model.option)
+				A4($author$project$ProductIdentities$resultsSection, model.question, model.step, model.answerState, model.option)
 			]),
 		_Utils_ap(
 			_List_fromArray(
@@ -12996,7 +13079,7 @@ var $author$project$ProductIdentities$view = function (model) {
 			_Utils_ap(
 				_List_fromArray(
 					[
-						A6($author$project$ProductIdentities$optionsSection, model.question, model.step, model.optionColourA, model.optionColourB, model.optionColourC, model.optionColourD)
+						A7($author$project$ProductIdentities$optionsSection, model.question, model.step, model.optionSelected, model.optionColourA, model.optionColourB, model.optionColourC, model.optionColourD)
 					]),
 				_Utils_ap(
 					_List_fromArray(

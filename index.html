@@ -10311,6 +10311,7 @@ var $MacCASOutreach$graphicsvg$GraphicSVG$circle = function (r) {
 	return $MacCASOutreach$graphicsvg$GraphicSVG$Circle(r);
 };
 var $author$project$FundamentalIdentities$ExitExplanation = {$: 'ExitExplanation'};
+var $MacCASOutreach$graphicsvg$GraphicSVG$darkGrey = A4($MacCASOutreach$graphicsvg$GraphicSVG$RGBA, 186, 189, 182, 1);
 var $author$project$FundamentalIdentities$explanationStr = F3(
 	function (question, step, option) {
 		var _v0 = _Utils_Tuple2(question, step);
@@ -10685,7 +10686,6 @@ var $author$project$FundamentalIdentities$explanationStr = F3(
 		var otherwise = _v0;
 		return _List_Nil;
 	});
-var $MacCASOutreach$graphicsvg$GraphicSVG$grey = A4($MacCASOutreach$graphicsvg$GraphicSVG$RGBA, 211, 215, 207, 1);
 var $author$project$FundamentalIdentities$hintText = function (lst) {
 	return $MacCASOutreach$graphicsvg$GraphicSVG$group(
 		A2(
@@ -10714,13 +10714,23 @@ var $author$project$FundamentalIdentities$explanationCard = F3(
 			$MacCASOutreach$graphicsvg$GraphicSVG$group(
 				_List_fromArray(
 					[
+						A2(
+						$MacCASOutreach$graphicsvg$GraphicSVG$move,
+						_Utils_Tuple2(5, -5),
+						A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$makeTransparent,
+							0.5,
+							A2(
+								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+								$MacCASOutreach$graphicsvg$GraphicSVG$darkGrey,
+								A2($MacCASOutreach$graphicsvg$GraphicSVG$rect, 170, 130)))),
 						A3(
 						$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
 						$MacCASOutreach$graphicsvg$GraphicSVG$solid(0.3),
 						$MacCASOutreach$graphicsvg$GraphicSVG$black,
 						A2(
 							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$grey,
+							$MacCASOutreach$graphicsvg$GraphicSVG$white,
 							A2($MacCASOutreach$graphicsvg$GraphicSVG$rect, 170, 130))),
 						$author$project$FundamentalIdentities$hintText(
 						A3($author$project$FundamentalIdentities$explanationStr, question, step, option)),
@@ -10871,14 +10881,34 @@ var $author$project$FundamentalIdentities$hintCard = F2(
 			$MacCASOutreach$graphicsvg$GraphicSVG$group(
 				_List_fromArray(
 					[
+						A2(
+						$MacCASOutreach$graphicsvg$GraphicSVG$move,
+						_Utils_Tuple2(5, -5),
+						A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$makeTransparent,
+							0.5,
+							A2(
+								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+								$MacCASOutreach$graphicsvg$GraphicSVG$darkGrey,
+								A2($MacCASOutreach$graphicsvg$GraphicSVG$rect, 130, 130)))),
 						A3(
 						$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
 						$MacCASOutreach$graphicsvg$GraphicSVG$solid(0.3),
 						$MacCASOutreach$graphicsvg$GraphicSVG$black,
 						A2(
 							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$grey,
+							$MacCASOutreach$graphicsvg$GraphicSVG$white,
 							A2($MacCASOutreach$graphicsvg$GraphicSVG$rect, 130, 130))),
+						A2(
+						$MacCASOutreach$graphicsvg$GraphicSVG$move,
+						_Utils_Tuple2(-55, 45),
+						A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+							$MacCASOutreach$graphicsvg$GraphicSVG$orange,
+							A2(
+								$MacCASOutreach$graphicsvg$GraphicSVG$size,
+								16,
+								$MacCASOutreach$graphicsvg$GraphicSVG$text('Hint!')))),
 						$author$project$FundamentalIdentities$hintText(
 						A2($author$project$FundamentalIdentities$hintStr, question, step))
 					])));
@@ -12213,13 +12243,23 @@ var $author$project$ProductIdentities$explanationCard = F3(
 			$MacCASOutreach$graphicsvg$GraphicSVG$group(
 				_List_fromArray(
 					[
+						A2(
+						$MacCASOutreach$graphicsvg$GraphicSVG$move,
+						_Utils_Tuple2(5, -5),
+						A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$makeTransparent,
+							0.5,
+							A2(
+								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+								$MacCASOutreach$graphicsvg$GraphicSVG$darkGrey,
+								A2($MacCASOutreach$graphicsvg$GraphicSVG$rect, 170, 130)))),
 						A3(
 						$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
 						$MacCASOutreach$graphicsvg$GraphicSVG$solid(0.3),
 						$MacCASOutreach$graphicsvg$GraphicSVG$black,
 						A2(
 							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$grey,
+							$MacCASOutreach$graphicsvg$GraphicSVG$white,
 							A2($MacCASOutreach$graphicsvg$GraphicSVG$rect, 170, 130))),
 						$author$project$ProductIdentities$hintText(
 						A3($author$project$ProductIdentities$explanationStr, question, step, option)),
@@ -12340,14 +12380,34 @@ var $author$project$ProductIdentities$hintCard = F2(
 			$MacCASOutreach$graphicsvg$GraphicSVG$group(
 				_List_fromArray(
 					[
+						A2(
+						$MacCASOutreach$graphicsvg$GraphicSVG$move,
+						_Utils_Tuple2(5, -5),
+						A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$makeTransparent,
+							0.5,
+							A2(
+								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+								$MacCASOutreach$graphicsvg$GraphicSVG$darkGrey,
+								A2($MacCASOutreach$graphicsvg$GraphicSVG$rect, 130, 130)))),
 						A3(
 						$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
 						$MacCASOutreach$graphicsvg$GraphicSVG$solid(0.3),
 						$MacCASOutreach$graphicsvg$GraphicSVG$black,
 						A2(
 							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$grey,
+							$MacCASOutreach$graphicsvg$GraphicSVG$white,
 							A2($MacCASOutreach$graphicsvg$GraphicSVG$rect, 130, 130))),
+						A2(
+						$MacCASOutreach$graphicsvg$GraphicSVG$move,
+						_Utils_Tuple2(-55, 45),
+						A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+							$MacCASOutreach$graphicsvg$GraphicSVG$darkGreen,
+							A2(
+								$MacCASOutreach$graphicsvg$GraphicSVG$size,
+								16,
+								$MacCASOutreach$graphicsvg$GraphicSVG$text('Hint!')))),
 						$author$project$ProductIdentities$hintText(
 						A2($author$project$ProductIdentities$hintStr, question, step))
 					])));
@@ -13478,13 +13538,23 @@ var $author$project$PythagoreanIdentities$explanationCard = F3(
 			$MacCASOutreach$graphicsvg$GraphicSVG$group(
 				_List_fromArray(
 					[
+						A2(
+						$MacCASOutreach$graphicsvg$GraphicSVG$move,
+						_Utils_Tuple2(5, -5),
+						A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$makeTransparent,
+							0.5,
+							A2(
+								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+								$MacCASOutreach$graphicsvg$GraphicSVG$darkGrey,
+								A2($MacCASOutreach$graphicsvg$GraphicSVG$rect, 170, 130)))),
 						A3(
 						$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
 						$MacCASOutreach$graphicsvg$GraphicSVG$solid(0.3),
 						$MacCASOutreach$graphicsvg$GraphicSVG$black,
 						A2(
 							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$grey,
+							$MacCASOutreach$graphicsvg$GraphicSVG$white,
 							A2($MacCASOutreach$graphicsvg$GraphicSVG$rect, 170, 130))),
 						$author$project$PythagoreanIdentities$hintText(
 						A3($author$project$PythagoreanIdentities$explanationStr, question, step, option)),
@@ -13610,14 +13680,34 @@ var $author$project$PythagoreanIdentities$hintCard = F2(
 			$MacCASOutreach$graphicsvg$GraphicSVG$group(
 				_List_fromArray(
 					[
+						A2(
+						$MacCASOutreach$graphicsvg$GraphicSVG$move,
+						_Utils_Tuple2(5, -5),
+						A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$makeTransparent,
+							0.5,
+							A2(
+								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+								$MacCASOutreach$graphicsvg$GraphicSVG$darkGrey,
+								A2($MacCASOutreach$graphicsvg$GraphicSVG$rect, 130, 130)))),
 						A3(
 						$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
 						$MacCASOutreach$graphicsvg$GraphicSVG$solid(0.3),
 						$MacCASOutreach$graphicsvg$GraphicSVG$black,
 						A2(
 							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$grey,
+							$MacCASOutreach$graphicsvg$GraphicSVG$white,
 							A2($MacCASOutreach$graphicsvg$GraphicSVG$rect, 130, 130))),
+						A2(
+						$MacCASOutreach$graphicsvg$GraphicSVG$move,
+						_Utils_Tuple2(-55, 45),
+						A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+							$MacCASOutreach$graphicsvg$GraphicSVG$purple,
+							A2(
+								$MacCASOutreach$graphicsvg$GraphicSVG$size,
+								16,
+								$MacCASOutreach$graphicsvg$GraphicSVG$text('Hint!')))),
 						$author$project$PythagoreanIdentities$hintText(
 						A2($author$project$PythagoreanIdentities$hintStr, question, step))
 					])));
@@ -14784,13 +14874,23 @@ var $author$project$ReciprocalIdentities$explanationCard = F3(
 			$MacCASOutreach$graphicsvg$GraphicSVG$group(
 				_List_fromArray(
 					[
+						A2(
+						$MacCASOutreach$graphicsvg$GraphicSVG$move,
+						_Utils_Tuple2(5, -5),
+						A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$makeTransparent,
+							0.5,
+							A2(
+								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+								$MacCASOutreach$graphicsvg$GraphicSVG$darkGrey,
+								A2($MacCASOutreach$graphicsvg$GraphicSVG$rect, 170, 130)))),
 						A3(
 						$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
 						$MacCASOutreach$graphicsvg$GraphicSVG$solid(0.3),
 						$MacCASOutreach$graphicsvg$GraphicSVG$black,
 						A2(
 							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$grey,
+							$MacCASOutreach$graphicsvg$GraphicSVG$white,
 							A2($MacCASOutreach$graphicsvg$GraphicSVG$rect, 170, 130))),
 						$author$project$ReciprocalIdentities$hintText(
 						A3($author$project$ReciprocalIdentities$explanationStr, question, step, option)),
@@ -14928,14 +15028,34 @@ var $author$project$ReciprocalIdentities$hintCard = F2(
 			$MacCASOutreach$graphicsvg$GraphicSVG$group(
 				_List_fromArray(
 					[
+						A2(
+						$MacCASOutreach$graphicsvg$GraphicSVG$move,
+						_Utils_Tuple2(5, -5),
+						A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$makeTransparent,
+							0.5,
+							A2(
+								$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+								$MacCASOutreach$graphicsvg$GraphicSVG$darkGrey,
+								A2($MacCASOutreach$graphicsvg$GraphicSVG$rect, 130, 130)))),
 						A3(
 						$MacCASOutreach$graphicsvg$GraphicSVG$addOutline,
 						$MacCASOutreach$graphicsvg$GraphicSVG$solid(0.3),
 						$MacCASOutreach$graphicsvg$GraphicSVG$black,
 						A2(
 							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
-							$MacCASOutreach$graphicsvg$GraphicSVG$grey,
+							$MacCASOutreach$graphicsvg$GraphicSVG$white,
 							A2($MacCASOutreach$graphicsvg$GraphicSVG$rect, 130, 130))),
+						A2(
+						$MacCASOutreach$graphicsvg$GraphicSVG$move,
+						_Utils_Tuple2(-55, 45),
+						A2(
+							$MacCASOutreach$graphicsvg$GraphicSVG$filled,
+							$MacCASOutreach$graphicsvg$GraphicSVG$darkBlue,
+							A2(
+								$MacCASOutreach$graphicsvg$GraphicSVG$size,
+								16,
+								$MacCASOutreach$graphicsvg$GraphicSVG$text('Hint!')))),
 						$author$project$ReciprocalIdentities$hintText(
 						A2($author$project$ReciprocalIdentities$hintStr, question, step))
 					])));

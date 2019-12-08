@@ -8578,7 +8578,7 @@ var $author$project$ReciprocalIdentities$Question1 = {$: 'Question1'};
 var $author$project$ReciprocalIdentities$Step1 = {$: 'Step1'};
 var $MacCASOutreach$graphicsvg$GraphicSVG$darkBlue = A4($MacCASOutreach$graphicsvg$GraphicSVG$RGBA, 32, 74, 135, 1);
 var $author$project$ReciprocalIdentities$init = {answerState: $author$project$ReciprocalIdentities$Default, explanationState: $author$project$ReciprocalIdentities$NoPopUpExplanation, hintState: $author$project$ReciprocalIdentities$NoPopUp, notify: $author$project$ReciprocalIdentities$NotifyTap, option: 0, optionColourA: $MacCASOutreach$graphicsvg$GraphicSVG$darkBlue, optionColourB: $MacCASOutreach$graphicsvg$GraphicSVG$darkBlue, optionColourC: $MacCASOutreach$graphicsvg$GraphicSVG$darkBlue, optionColourD: $MacCASOutreach$graphicsvg$GraphicSVG$darkBlue, optionSelected: false, question: $author$project$ReciprocalIdentities$Question1, state: $author$project$ReciprocalIdentities$None, step: $author$project$ReciprocalIdentities$Step1, time: 0};
-var $author$project$Main$init = {currentPage: 1, fiveSat: 0, fourSat: 0, model1: $author$project$FundamentalIdentities$init, model2: $author$project$PythagoreanIdentities$init, model3: $author$project$ReciprocalIdentities$init, model4: $author$project$ProductIdentities$init, oneSat: 0, page: $author$project$Main$Home, threeSat: 0, twoSat: 0};
+var $author$project$Main$init = {currentPage: 1, fourSat: 0, model1: $author$project$FundamentalIdentities$init, model2: $author$project$PythagoreanIdentities$init, model3: $author$project$ReciprocalIdentities$init, model4: $author$project$ProductIdentities$init, oneSat: 0, page: $author$project$Main$Home, threeSat: 0, twoSat: 0};
 var $author$project$Main$FundamentalIdentities = {$: 'FundamentalIdentities'};
 var $author$project$Main$ProductIdentities = {$: 'ProductIdentities'};
 var $author$project$Main$PythagoreanIdentities = {$: 'PythagoreanIdentities'};
@@ -9194,10 +9194,6 @@ var $author$project$Main$update = F2(
 				return _Utils_update(
 					model,
 					{fourSat: 1});
-			case 'In5':
-				return _Utils_update(
-					model,
-					{fiveSat: 1});
 			case 'Out1':
 				return _Utils_update(
 					model,
@@ -9258,19 +9254,19 @@ var $author$project$Main$update = F2(
 							case 'Goto1':
 								return _Utils_update(
 									model,
-									{fiveSat: 0, fourSat: 0, page: $author$project$Main$FundamentalIdentities, threeSat: 0, twoSat: 0});
+									{fourSat: 0, page: $author$project$Main$FundamentalIdentities, threeSat: 0, twoSat: 0});
 							case 'Goto2':
 								return _Utils_update(
 									model,
-									{fiveSat: 0, fourSat: 0, oneSat: 0, page: $author$project$Main$PythagoreanIdentities, threeSat: 0});
+									{fourSat: 0, oneSat: 0, page: $author$project$Main$PythagoreanIdentities, threeSat: 0});
 							case 'Goto3':
 								return _Utils_update(
 									model,
-									{fiveSat: 0, fourSat: 0, oneSat: 0, page: $author$project$Main$ReciprocalIdentities, twoSat: 0});
+									{fourSat: 0, oneSat: 0, page: $author$project$Main$ReciprocalIdentities, twoSat: 0});
 							case 'Goto4':
 								return _Utils_update(
 									model,
-									{fiveSat: 0, oneSat: 0, page: $author$project$Main$ProductIdentities, threeSat: 0, twoSat: 0});
+									{oneSat: 0, page: $author$project$Main$ProductIdentities, threeSat: 0, twoSat: 0});
 							default:
 								return model;
 						}
@@ -9303,19 +9299,19 @@ var $author$project$Main$update = F2(
 							case 'Goto1':
 								return _Utils_update(
 									model,
-									{fiveSat: 0, fourSat: 0, page: $author$project$Main$FundamentalIdentities, threeSat: 0, twoSat: 0});
+									{fourSat: 0, page: $author$project$Main$FundamentalIdentities, threeSat: 0, twoSat: 0});
 							case 'Goto2':
 								return _Utils_update(
 									model,
-									{fiveSat: 0, fourSat: 0, oneSat: 0, page: $author$project$Main$PythagoreanIdentities, threeSat: 0});
+									{fourSat: 0, oneSat: 0, page: $author$project$Main$PythagoreanIdentities, threeSat: 0});
 							case 'Goto3':
 								return _Utils_update(
 									model,
-									{fiveSat: 0, fourSat: 0, oneSat: 0, page: $author$project$Main$ReciprocalIdentities, twoSat: 0});
+									{fourSat: 0, oneSat: 0, page: $author$project$Main$ReciprocalIdentities, twoSat: 0});
 							case 'Goto4':
 								return _Utils_update(
 									model,
-									{fiveSat: 0, oneSat: 0, page: $author$project$Main$ProductIdentities, threeSat: 0, twoSat: 0});
+									{oneSat: 0, page: $author$project$Main$ProductIdentities, threeSat: 0, twoSat: 0});
 							default:
 								return model;
 						}
@@ -9348,19 +9344,19 @@ var $author$project$Main$update = F2(
 							case 'Goto1':
 								return _Utils_update(
 									model,
-									{fiveSat: 0, fourSat: 0, page: $author$project$Main$FundamentalIdentities, threeSat: 0, twoSat: 0});
+									{fourSat: 0, page: $author$project$Main$FundamentalIdentities, threeSat: 0, twoSat: 0});
 							case 'Goto2':
 								return _Utils_update(
 									model,
-									{fiveSat: 0, fourSat: 0, oneSat: 0, page: $author$project$Main$PythagoreanIdentities, threeSat: 0});
+									{fourSat: 0, oneSat: 0, page: $author$project$Main$PythagoreanIdentities, threeSat: 0});
 							case 'Goto3':
 								return _Utils_update(
 									model,
-									{fiveSat: 0, fourSat: 0, oneSat: 0, page: $author$project$Main$ReciprocalIdentities, twoSat: 0});
+									{fourSat: 0, oneSat: 0, page: $author$project$Main$ReciprocalIdentities, twoSat: 0});
 							case 'Goto4':
 								return _Utils_update(
 									model,
-									{fiveSat: 0, oneSat: 0, page: $author$project$Main$ProductIdentities, threeSat: 0, twoSat: 0});
+									{oneSat: 0, page: $author$project$Main$ProductIdentities, threeSat: 0, twoSat: 0});
 							default:
 								return model;
 						}
@@ -9393,19 +9389,19 @@ var $author$project$Main$update = F2(
 							case 'Goto1':
 								return _Utils_update(
 									model,
-									{fiveSat: 0, fourSat: 0, page: $author$project$Main$FundamentalIdentities, threeSat: 0, twoSat: 0});
+									{fourSat: 0, page: $author$project$Main$FundamentalIdentities, threeSat: 0, twoSat: 0});
 							case 'Goto2':
 								return _Utils_update(
 									model,
-									{fiveSat: 0, fourSat: 0, oneSat: 0, page: $author$project$Main$PythagoreanIdentities, threeSat: 0});
+									{fourSat: 0, oneSat: 0, page: $author$project$Main$PythagoreanIdentities, threeSat: 0});
 							case 'Goto3':
 								return _Utils_update(
 									model,
-									{fiveSat: 0, fourSat: 0, oneSat: 0, page: $author$project$Main$ReciprocalIdentities, twoSat: 0});
+									{fourSat: 0, oneSat: 0, page: $author$project$Main$ReciprocalIdentities, twoSat: 0});
 							case 'Goto4':
 								return _Utils_update(
 									model,
-									{fiveSat: 0, oneSat: 0, page: $author$project$Main$ProductIdentities, threeSat: 0, twoSat: 0});
+									{oneSat: 0, page: $author$project$Main$ProductIdentities, threeSat: 0, twoSat: 0});
 							default:
 								return model;
 						}
@@ -9438,19 +9434,19 @@ var $author$project$Main$update = F2(
 							case 'Goto1':
 								return _Utils_update(
 									model,
-									{fiveSat: 0, fourSat: 0, page: $author$project$Main$FundamentalIdentities, threeSat: 0, twoSat: 0});
+									{fourSat: 0, page: $author$project$Main$FundamentalIdentities, threeSat: 0, twoSat: 0});
 							case 'Goto2':
 								return _Utils_update(
 									model,
-									{fiveSat: 0, fourSat: 0, oneSat: 0, page: $author$project$Main$PythagoreanIdentities, threeSat: 0});
+									{fourSat: 0, oneSat: 0, page: $author$project$Main$PythagoreanIdentities, threeSat: 0});
 							case 'Goto3':
 								return _Utils_update(
 									model,
-									{fiveSat: 0, fourSat: 0, oneSat: 0, page: $author$project$Main$ReciprocalIdentities, twoSat: 0});
+									{fourSat: 0, oneSat: 0, page: $author$project$Main$ReciprocalIdentities, twoSat: 0});
 							case 'Goto4':
 								return _Utils_update(
 									model,
-									{fiveSat: 0, oneSat: 0, page: $author$project$Main$ProductIdentities, threeSat: 0, twoSat: 0});
+									{oneSat: 0, page: $author$project$Main$ProductIdentities, threeSat: 0, twoSat: 0});
 							default:
 								return model;
 						}

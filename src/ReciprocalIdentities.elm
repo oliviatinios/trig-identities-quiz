@@ -286,7 +286,7 @@ isLastStep question step = case (question, step) of
 resultsSection question step answerState option =
                 if (isLastStep question step)
                     then group [ text (if answerState == Incorrect
-                                    then "Incorrect"
+                                    then "Incorrect. Try again!"
                                     else if answerState == Correct
                                         then "Correct! You have solved the problem."
                                         else ""
@@ -316,7 +316,7 @@ resultsSection question step answerState option =
                                 ]
                     else if (answerState == Incorrect)
                         then group [
-                                text "Incorrect"
+                                text "Incorrect. Try again!"
                                     |> size 12
                                     |> filled red
                                     |> move ( -130, -40 - 20*(Basics.toFloat(getIndexFromStep step)) )
@@ -331,7 +331,7 @@ resultsSection question step answerState option =
                                 ]
                         else if (answerState == Correct)
                             then group [
-                                text "Correct"
+                                text "Correct!"
                                     |> size 12
                                     |> filled green
                                     |> move ( -130, -40 - 20*(Basics.toFloat(getIndexFromStep step)) )

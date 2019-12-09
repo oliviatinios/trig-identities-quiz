@@ -171,7 +171,7 @@ view model =
         (case model.page of
             -- Home Screen
             Home ->
-                [ rectangle 400 312 |> filled blank |> addOutline (solid 2) charcoal |> move ( 55, 0 )
+                [ rectangle 400 315 |> filled blank |> addOutline (solid 2) charcoal |> move ( 55, 0 )
                 , text "Welcome!" |> size 20 |> bold |> filled charcoal |> move ( 10, 10 )
                 , text "Please select a lesson in the left panel to get started." |> size 16 |> filled charcoal |> move ( -110, -10 )
                 ]
@@ -209,8 +209,8 @@ view model =
                                 orange
                             )
                         |> makeTransparent 0.7
-                        |> move ( -230, 126 )
-                    , text "Fundamental Identities" |> bold |> sansserif |> centered |> filled (oneAccent model) |> move ( -230, 115 )
+                        |> move ( -230, 128 )
+                    , text "Fundamental Identities" |> bold |> sansserif |> centered |> filled (oneAccent model) |> move ( -230, 124 )
                     ]
                     |> notifyTap Goto1
                     |> notifyEnter In1
@@ -230,8 +230,8 @@ view model =
                                 purple
                             )
                         |> makeTransparent 0.7
-                        |> move ( -230, 42 )
-                    , text "Pythagorean Identities" |> bold |> sansserif |> centered |> filled (twoAccent model) |> move ( -230, 35 )
+                        |> move ( -230, 43 )
+                    , text "Pythagorean Identities" |> bold |> sansserif |> centered |> filled (twoAccent model) |> move ( -230, 40 )
                     ]
                     |> notifyTap Goto2
                     |> notifyEnter In2
@@ -272,8 +272,8 @@ view model =
                                 darkGreen
                             )
                         |> makeTransparent 0.7
-                        |> move ( -230, -126 )
-                    , text "Product Identities" |> bold |> sansserif |> centered |> filled (fourAccent model) |> move ( -230, -125 )
+                        |> move ( -230, -128 )
+                    , text "Product Identities" |> bold |> sansserif |> centered |> filled (fourAccent model) |> move ( -230, -132 )
                     ]
                     |> notifyTap Goto4
                     |> notifyEnter In4

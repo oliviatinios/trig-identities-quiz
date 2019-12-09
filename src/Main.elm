@@ -25,7 +25,7 @@ module Main exposing (main)
 
     We designed our application so that it meets Norman's principle in the following way:
 
-    1. Discoveribility:
+    1. Discoverability:
     - We have a welcome page with instructions on what the user should do.
     - Our layout for each lesson is such that all buttons and arrows are visible so that the user knows what actions
     are possible.
@@ -46,10 +46,13 @@ module Main exposing (main)
     5. Signifiers
     - We have arrows at the top of each lesson which tells the user that they can scroll through different practise
     problems.
+    - When the user hovers over the multiple choice options, they change colour. This lets the user know that the
+    text can be clicked on.
 
     6. Mapping
-    - We have designed our application so that each step maps to it's own hint. If the user gets stuck on any step,
-    they can use the hint feature to help them solve the question.
+    - There is a mapping between the hints and the steps in each question. If the user gets stuck on any step,
+    they can use the hint feature to help them solve the question. The user knows that the hint being displayed
+    is associated with the current step they are solving.
 
     7. Constraint
     - The user can only move to the next step once they have selected the correct option. This forces the user to

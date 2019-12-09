@@ -86,7 +86,7 @@ questionStr question = case question of
                 Question1 -> "Write the following product of cosines as a sum: 2cos(7x/2)cos(3x/2)"
                 Question2 -> "Simplify the following: sin(4y)cos(2y)"
                 Question3 -> "Write cos(3y)cos(5y) as a sum or difference."
-                Question4 -> "Write the following difference of sines expression as a product: sin(4y) - sin(2y)"
+                Question4 -> "Write the difference of sines expression as a product: sin(4y) - sin(2y)"
                 Question5 -> "Prove that csc^2(y) - 2 = cos(2y) / sin^2(y)"
 
 

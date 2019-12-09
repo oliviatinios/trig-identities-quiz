@@ -1,158 +1,205 @@
 module Main exposing (main)
 
-import ArcCreator
+{-
+
+    Group 8
+    Olivia Tinios - 400034007
+    Kshitij Mehta - 400012511
+    Navya Sachdeva - 001426466
+    Songyi Jo - 001300927
+
+    ...
+
+    After interviewing 6 students who are currently taking grade 12 advanced functions in school, we found out
+    that many students struggle to write proofs for trigonometric identities. In particular, students have a 
+    hard time figuring out which equation they should substitute in and when. During the interviews, students 
+    told us that they like to learn by completing practise questions but the solutions to the practise 
+    questions in the textbook, which is their only resource for practise problems, lacked detail and they didn't 
+    fully understand the methodology behind writing a trigonometric proof. 
+
+    We decided to create an app which would break practise problems down into individual steps. The practise 
+    problems work like a simple multiple choice question and every time the user selects an answer they are 
+    provided with an explanation of why it is correct or incorrect. This ensures that users know what is 
+    happening at each step of the trigonometric proof. There is also a hint feature which provides users with
+    a clue if they get stuck.
+
+    We designed our application so that it meets Norman's principle in the following way:
+
+    1. Discoverability:
+    - We have a welcome page with instructions on what the user should do.
+    - Our layout for each lesson is such that all buttons and arrows are visible so that the user knows what actions
+    are possible.
+
+    2. Feedback
+    - When the user clicks on an option, they are immediately given a response of whether their answer is correct
+    or incorrect.
+
+    3. Conceptual Model
+    - Due to the simplicity of our design, it gives the user a clear understanding of how our application works
+    - We made the design of our application follow closely to a multiple choice quiz, which is already very well
+    known to our users and this helps them use our application easily.
+
+    4. Affordance
+    - Each lesson gives the affordance of completing practise problems to the users by allowing them to choose the
+    correct option and advance through all the steps.
+
+    5. Signifiers
+    - We have arrows at the top of each lesson which tells the user that they can scroll through different practise
+    problems.
+    - When the user hovers over the multiple choice options, they change colour. This lets the user know that the
+    text can be clicked on.
+
+    6. Mapping
+    - There is a mapping between the hints and the steps in each question. If the user gets stuck on any step,
+    they can use the hint feature to help them solve the question. The user knows that the hint being displayed
+    is associated with the current step they are solving.
+
+    7. Constraint
+    - The user can only move to the next step once they have selected the correct option. This forces the user to
+    follow all the steps required to solve the question and not skip any steps.
+
+
+-}
+
+import ProductIdentities
 import GraphicSVG exposing (..)
 import GraphicSVG.EllieApp exposing (..)
 import List
-import PolygonCreator
-import QuizGame
-import SinCreator exposing (..)
-import TextCreator exposing (..)
-import TriCreator
+import ReciprocalIdentities
+import FundamentalIdentities
+import PythagoreanIdentities
 
 
 
 main =
     gameApp Tick
-        { model = init -- init is the value in the field model
-        , title = "Shape Creator"
+        { model = init
+        , title = "Trig Identites"
         , view = view
         , update = update
         }
 
 
 type Pages
-    = QuizGame
-    | TriCreator
-    | PolygonCreator
-    | ArcCreator
-    | SinCreator
-    | TextCreator
+    = Home
+    | FundamentalIdentities
+    | PythagoreanIdentities
+    | ReciprocalIdentities
+    | ProductIdentities
 
 
 init =
-    { page = QuizGame
-    , model1 = QuizGame.init
-    , model2 = TriCreator.init
-    , model3 = PolygonCreator.init
-    , model4 = ArcCreator.init
-    , model5 = SinCreator.init
-    , model6 = TextCreator.init
-    , oneSat = 1
+    { page = Home
+    , model1 = FundamentalIdentities.init
+    , model2 = PythagoreanIdentities.init
+    , model3 = ReciprocalIdentities.init
+    , model4 = ProductIdentities.init
+    , oneSat = 0
     , twoSat = 0
     , threeSat = 0
     , fourSat = 0
-    , fiveSat = 0
-    , sixSat = 0
     , currentPage = 1
     }
 
 
+-- Main colour for fundamental identities
 oneColour model =
     hsl (degrees 30) model.oneSat 0.85
 
 
+-- Accent colour for fundamental identities
 oneAccent model =
     hsl (degrees 22) model.oneSat 0.6
 
 
+-- Main colour for pythagorean identities
 twoColour model =
     hsl (degrees 285) model.twoSat 0.85
 
 
+-- Accent colour for pythagorean identities
 twoAccent model =
     hsl (degrees 280) model.twoSat 0.6
 
 
+-- Main colour for reciprocal identities
 threeColour model =
     hsl (degrees 250) model.threeSat 0.9
 
 
+-- Accent colour for reciprocal identities
 threeAccent model =
     hsl (degrees 245) model.threeSat 0.6
 
 
+-- Main colour for product identities
 fourColour model =
     hsl (degrees 135) model.fourSat 0.9
 
 
+-- Main colour for product identities
 fourAccent model =
     hsl (degrees 130) model.fourSat 0.6
 
 
-fiveColour model =
-    hsl (degrees 0) model.fiveSat 0.9
-
-
-fiveAccent model =
-    hsl (degrees 355) model.fiveSat 0.75
-
-
-sixColour model =
-    hsl (degrees 180) model.sixSat 0.85
-
-
-sixAccent model =
-    hsl (degrees 180) model.sixSat 0.5
-
-
-type Msg m1 m2 m3 m4 m5 m6
+-- Messages generated by the framework (Tick) and by user interactions
+type Msg m1 m2 m3 m4 m5
     = Tick Float GetKeyState
-    | Msg1 (QuizGame.Msg m1)
-    | Msg2 (TriCreator.Msg m2)
-    | Msg3 (PolygonCreator.Msg m3)
-    | Msg4 (ArcCreator.Msg m4)
-    | Msg5 (SinCreator.Msg m5)
-    | Msg6 (TextCreator.Msg m6)
+    | Msg1 (FundamentalIdentities.Msg m1)
+    | Msg2 (PythagoreanIdentities.Msg m2)
+    | Msg3 (ReciprocalIdentities.Msg m3)
+    | Msg4 (ProductIdentities.Msg m4)
     | Goto1
     | Goto2
     | Goto3
     | Goto4
     | Goto5
-    | Goto6
     | In1
     | In2
     | In3
     | In4
-    | In5
-    | In6
     | Out1
     | Out2
     | Out3
     | Out4
-    | Out5
-    | Out6
     | MoveInRect ( Float, Float )
 
 
+-- Model
 view model =
-    -- collage 512 380 <|
     collage 640 380 <|
         (case model.page of
-            QuizGame ->
-                List.map (map Msg1) (QuizGame.view model.model1)
+            -- Home Screen
+            Home ->
+                [ rectangle 400 315 |> filled blank |> addOutline (solid 2) charcoal |> move ( 55, 0 )
+                , text "Welcome!" |> size 20 |> bold |> filled charcoal |> move ( 10, 10 )
+                , text "Please select a lesson in the left panel to get started." |> size 16 |> filled charcoal |> move ( -110, -10 )
+                ]
+            -- Fundamental Identities Screen
+            FundamentalIdentities ->
+                List.map (map Msg1) (FundamentalIdentities.view model.model1)
 
-            TriCreator ->
-                List.map (map Msg2) (TriCreator.view model.model2)
+            -- Pythagorean Identities Screen
+            PythagoreanIdentities ->
+                List.map (map Msg2) (PythagoreanIdentities.view model.model2)
 
-            PolygonCreator ->
-                List.map (map Msg3) (PolygonCreator.view model.model3)
+            -- Reciprocal Identities Screen
+            ReciprocalIdentities ->
+                List.map (map Msg3) (ReciprocalIdentities.view model.model3)
 
-            ArcCreator ->
-                List.map (map Msg4) (ArcCreator.view model.model4)
+            -- Product Identities Screen
+            ProductIdentities ->
+                List.map (map Msg4) (ProductIdentities.view model.model4)
 
-            SinCreator ->
-                List.map (map Msg5) (SinCreator.view model.model5)
-
-            TextCreator ->
-                List.map (map Msg6) (TextCreator.view model.model6)
         )
+            -- Menu
             ++ [ rect 200 70 |> filled blank |> move ( 0, -190 ) |> notifyMouseMoveAt MoveInRect ]
-            ++ [ group
-                    [ rectangle 150 50
+            ++ [ -- Fundamental Identities Menu Button
+                 group
+                    [ rectangle 150 60
                         |> filled (oneColour model)
                         |> addOutline (solid 2)
-                            (if model.page == QuizGame then
+                            (if model.page == FundamentalIdentities then
                                 orange
 
                              else if model.oneSat == 0 then
@@ -162,17 +209,18 @@ view model =
                                 orange
                             )
                         |> makeTransparent 0.7
-                        |> move ( -230, 120 )
-                    , text "Fundamental Identities" |> bold |> sansserif |> centered |> filled (oneAccent model) |> move ( -230, 115 )
+                        |> move ( -230, 128 )
+                    , text "Fundamental Identities" |> bold |> sansserif |> centered |> filled (oneAccent model) |> move ( -230, 124 )
                     ]
                     |> notifyTap Goto1
                     |> notifyEnter In1
                     |> notifyLeave Out1
+                 -- Pythagorean Identities Menu Button
                , group
-                    [ rectangle 150 50
+                    [ rectangle 150 60
                         |> filled (twoColour model)
                         |> addOutline (solid 2)
-                            (if model.page == TriCreator then
+                            (if model.page == PythagoreanIdentities then
                                 purple
 
                              else if model.twoSat == 0 then
@@ -182,17 +230,18 @@ view model =
                                 purple
                             )
                         |> makeTransparent 0.7
-                        |> move ( -230, 60 )
-                    , text "Pythagorean Identities" |> bold |> sansserif |> centered |> filled (twoAccent model) |> move ( -230, 55 )
+                        |> move ( -230, 43 )
+                    , text "Pythagorean Identities" |> bold |> sansserif |> centered |> filled (twoAccent model) |> move ( -230, 40 )
                     ]
                     |> notifyTap Goto2
                     |> notifyEnter In2
                     |> notifyLeave Out2
+                 -- Reciprocal Identities Menu Button
                , group
-                    [ rectangle 150 50
+                    [ rectangle 150 60
                         |> filled (threeColour model)
                         |> addOutline (solid 2)
-                            (if model.page == PolygonCreator then
+                            (if model.page == ReciprocalIdentities then
                                 darkBlue
 
                              else if model.threeSat == 0 then
@@ -202,17 +251,18 @@ view model =
                                 darkBlue
                             )
                         |> makeTransparent 0.7
-                        |> move ( -230, 0 )
-                    , text "Reciprocal Identities" |> bold |> sansserif |> centered |> filled (threeAccent model) |> move ( -230, -5 )
+                        |> move ( -230, -42 )
+                    , text "Reciprocal Identities" |> bold |> sansserif |> centered |> filled (threeAccent model) |> move ( -230, -45 )
                     ]
                     |> notifyTap Goto3
                     |> notifyEnter In3
                     |> notifyLeave Out3
+                 -- Product Identities Menu Button
                , group
-                    [ rectangle 150 50
+                    [ rectangle 150 60
                         |> filled (fourColour model)
                         |> addOutline (solid 2)
-                            (if model.page == ArcCreator then
+                            (if model.page == ProductIdentities then
                                 darkGreen
 
                              else if model.fourSat == 0 then
@@ -222,39 +272,16 @@ view model =
                                 darkGreen
                             )
                         |> makeTransparent 0.7
-                        |> move ( -230, -60 )
-                    , text "Product Identities" |> bold |> sansserif |> centered |> filled (fourAccent model) |> move ( -230, -65 )
+                        |> move ( -230, -128 )
+                    , text "Product Identities" |> bold |> sansserif |> centered |> filled (fourAccent model) |> move ( -230, -132 )
                     ]
                     |> notifyTap Goto4
                     |> notifyEnter In4
                     |> notifyLeave Out4
-               , group
-                    [ rectangle 150 50
-                        |> filled (fiveColour model)
-                        |> addOutline (solid 2)
-                            (if model.page == SinCreator then
-                                darkRed
-
-                             else if model.fiveSat == 0 then
-                                blank
-
-                             else
-                                darkRed
-                            )
-                        |> makeTransparent 0.7
-                        |> move ( -230, -120 )
-                    , text "Other Formulas" |> bold |> sansserif |> centered |> filled (fiveAccent model) |> move ( -230, -125 )
-                    ]
-                    |> notifyTap Goto5
-                    |> notifyEnter In5
-                    |> notifyLeave Out5
                ]
 
 
-distTo pointA pointB =
-    sqrt ((Tuple.first pointB - Tuple.first pointA) ^ 2 + (Tuple.second pointB - Tuple.second pointA) ^ 2)
-
-
+-- Change app's state based on messages
 update msg model =
     case msg of
         In1 ->
@@ -269,17 +296,11 @@ update msg model =
         In4 ->
             { model | fourSat = 1 }
 
-        In5 ->
-            { model | fiveSat = 1 }
-
-        In6 ->
-            { model | sixSat = 1 }
-
         Out1 ->
             { model
                 | oneSat =
                     case model.page of
-                        QuizGame ->
+                        FundamentalIdentities ->
                             model.oneSat
 
                         _ ->
@@ -290,7 +311,7 @@ update msg model =
             { model
                 | twoSat =
                     case model.page of
-                        TriCreator ->
+                        PythagoreanIdentities ->
                             model.twoSat
 
                         _ ->
@@ -301,7 +322,7 @@ update msg model =
             { model
                 | threeSat =
                     case model.page of
-                        PolygonCreator ->
+                        ReciprocalIdentities ->
                             model.threeSat
 
                         _ ->
@@ -312,30 +333,8 @@ update msg model =
             { model
                 | fourSat =
                     case model.page of
-                        ArcCreator ->
+                        ProductIdentities ->
                             model.fourSat
-
-                        _ ->
-                            0
-            }
-
-        Out5 ->
-            { model
-                | fiveSat =
-                    case model.page of
-                        SinCreator ->
-                            model.fiveSat
-
-                        _ ->
-                            0
-            }
-
-        Out6 ->
-            { model
-                | sixSat =
-                    case model.page of
-                        TextCreator ->
-                            model.sixSat
 
                         _ ->
                             0
@@ -343,13 +342,50 @@ update msg model =
 
         _ ->
             case model.page of
-                QuizGame ->
+                Home ->
+                    case msg of
+                        Goto1 ->
+                            { model
+                                | page = FundamentalIdentities
+                                , twoSat = 0
+                                , threeSat = 0
+                                , fourSat = 0
+                            }
+
+                        Goto2 ->
+                            { model
+                                | page = PythagoreanIdentities
+                                , oneSat = 0
+                                , threeSat = 0
+                                , fourSat = 0
+                            }
+
+                        Goto3 ->
+                            { model
+                                | page = ReciprocalIdentities
+                                , twoSat = 0
+                                , oneSat = 0
+                                , fourSat = 0
+                            }
+
+                        Goto4 ->
+                            { model
+                                | page = ProductIdentities
+                                , twoSat = 0
+                                , threeSat = 0
+                                , oneSat = 0
+                            }
+
+                        _ ->
+                            model
+
+                FundamentalIdentities ->
                     case msg of
                         Tick f g ->
-                            { model | model1 = QuizGame.update (QuizGame.Tick f g) model.model1 }
+                            { model | model1 = FundamentalIdentities.update (FundamentalIdentities.Tick f g) model.model1 }
 
                         Msg1 m1 ->
-                            { model | model1 = QuizGame.update m1 model.model1 }
+                            { model | model1 = FundamentalIdentities.update m1 model.model1 }
 
                         Msg2 _ ->
                             model
@@ -360,85 +396,51 @@ update msg model =
                         Msg4 _ ->
                             model
 
-                        Msg5 _ ->
-                            model
-
-                        Msg6 _ ->
-                            model
-
                         Goto1 ->
                             { model
-                                | page = QuizGame
+                                | page = FundamentalIdentities
                                 , twoSat = 0
                                 , threeSat = 0
                                 , fourSat = 0
-                                , fiveSat = 0
-                                , sixSat = 0
                             }
 
                         Goto2 ->
                             { model
-                                | page = TriCreator
+                                | page = PythagoreanIdentities
                                 , oneSat = 0
                                 , threeSat = 0
                                 , fourSat = 0
-                                , fiveSat = 0
-                                , sixSat = 0
                             }
 
                         Goto3 ->
                             { model
-                                | page = PolygonCreator
+                                | page = ReciprocalIdentities
                                 , twoSat = 0
                                 , oneSat = 0
                                 , fourSat = 0
-                                , fiveSat = 0
-                                , sixSat = 0
                             }
 
                         Goto4 ->
                             { model
-                                | page = ArcCreator
+                                | page = ProductIdentities
                                 , twoSat = 0
                                 , threeSat = 0
                                 , oneSat = 0
-                                , fiveSat = 0
-                                , sixSat = 0
-                            }
-
-                        Goto5 ->
-                            { model
-                                | page = SinCreator
-                                , twoSat = 0
-                                , threeSat = 0
-                                , fourSat = 0
-                                , oneSat = 0
-                                , sixSat = 0
-                            }
-
-                        Goto6 ->
-                            { model
-                                | page = TextCreator
-                                , twoSat = 0
-                                , threeSat = 0
-                                , fourSat = 0
-                                , oneSat = 0
-                                , fiveSat = 0
                             }
 
                         _ ->
                             model
 
-                TriCreator ->
+                PythagoreanIdentities ->
                     case msg of
                         Tick f g ->
-                            { model | model2 = TriCreator.update (TriCreator.Tick f g) model.model2 }
+                            { model | model2 = PythagoreanIdentities.update (PythagoreanIdentities.Tick f g) model.model2 }
 
                         Msg1 _ ->
                             model
 
                         Msg2 m2 ->
-                            { model | model2 = TriCreator.update m2 model.model2 }
+                            { model | model2 = PythagoreanIdentities.update m2 model.model2 }
 
                         Msg3 _ ->
                             model
@@ -446,79 +448,45 @@ update msg model =
                         Msg4 _ ->
                             model
 
-                        Msg5 _ ->
-                            model
-
-                        Msg6 _ ->
-                            model
-
                         Goto1 ->
                             { model
-                                | page = QuizGame
+                                | page = FundamentalIdentities
                                 , twoSat = 0
                                 , threeSat = 0
                                 , fourSat = 0
-                                , fiveSat = 0
-                                , sixSat = 0
                             }
 
                         Goto2 ->
                             { model
-                                | page = TriCreator
+                                | page = PythagoreanIdentities
                                 , oneSat = 0
                                 , threeSat = 0
                                 , fourSat = 0
-                                , fiveSat = 0
-                                , sixSat = 0
                             }
 
                         Goto3 ->
                             { model
-                                | page = PolygonCreator
+                                | page = ReciprocalIdentities
                                 , twoSat = 0
                                 , oneSat = 0
                                 , fourSat = 0
-                                , fiveSat = 0
-                                , sixSat = 0
                             }
 
                         Goto4 ->
                             { model
-                                | page = ArcCreator
+                                | page = ProductIdentities
                                 , twoSat = 0
                                 , threeSat = 0
                                 , oneSat = 0
-                                , fiveSat = 0
-                                , sixSat = 0
-                            }
-
-                        Goto5 ->
-                            { model
-                                | page = SinCreator
-                                , twoSat = 0
-                                , threeSat = 0
-                                , fourSat = 0
-                                , oneSat = 0
-                                , sixSat = 0
-                            }
-
-                        Goto6 ->
-                            { model
-                                | page = TextCreator
-                                , twoSat = 0
-                                , threeSat = 0
-                                , fourSat = 0
-                                , oneSat = 0
-                                , fiveSat = 0
                             }
 
                         _ ->
                             model
 
-                PolygonCreator ->
+                ReciprocalIdentities ->
                     case msg of
                         Tick f g ->
-                            { model | model3 = PolygonCreator.update (PolygonCreator.Tick f g) model.model3 }
+                            { model | model3 = ReciprocalIdentities.update (ReciprocalIdentities.Tick f g) model.model3 }
 
                         Msg1 _ ->
                             model
@@ -527,85 +495,50 @@ update msg model =
                             model
 
                         Msg3 m3 ->
-                            { model | model3 = PolygonCreator.update m3 model.model3 }
+                            { model | model3 = ReciprocalIdentities.update m3 model.model3 }
 
                         Msg4 _ ->
                             model
 
-                        Msg5 _ ->
-                            model
-
-                        Msg6 _ ->
-                            model
-
                         Goto1 ->
                             { model
-                                | page = QuizGame
+                                | page = FundamentalIdentities
                                 , twoSat = 0
                                 , threeSat = 0
                                 , fourSat = 0
-                                , fiveSat = 0
-                                , sixSat = 0
                             }
 
                         Goto2 ->
                             { model
-                                | page = TriCreator
+                                | page = PythagoreanIdentities
                                 , oneSat = 0
                                 , threeSat = 0
                                 , fourSat = 0
-                                , fiveSat = 0
-                                , sixSat = 0
                             }
 
                         Goto3 ->
                             { model
-                                | page = PolygonCreator
+                                | page = ReciprocalIdentities
                                 , twoSat = 0
                                 , oneSat = 0
                                 , fourSat = 0
-                                , fiveSat = 0
-                                , sixSat = 0
                             }
 
                         Goto4 ->
                             { model
-                                | page = ArcCreator
+                                | page = ProductIdentities
                                 , twoSat = 0
                                 , threeSat = 0
                                 , oneSat = 0
-                                , fiveSat = 0
-                                , sixSat = 0
-                            }
-
-                        Goto5 ->
-                            { model
-                                | page = SinCreator
-                                , twoSat = 0
-                                , threeSat = 0
-                                , fourSat = 0
-                                , oneSat = 0
-                                , sixSat = 0
-                            }
-
-                        Goto6 ->
-                            { model
-                                | page = TextCreator
-                                , twoSat = 0
-                                , threeSat = 0
-                                , fourSat = 0
-                                , oneSat = 0
-                                , fiveSat = 0
-                                , sixSat = 0
                             }
 
                         _ ->
                             model
 
-                ArcCreator ->
+                ProductIdentities ->
                     case msg of
                         Tick f g ->
-                            { model | model4 = ArcCreator.update (ArcCreator.Tick f g) model.model4 }
+                            { model | model4 = ProductIdentities.update (ProductIdentities.Tick f g) model.model4 }
 
                         Msg1 _ ->
                             model
@@ -617,244 +550,38 @@ update msg model =
                             model
 
                         Msg4 m4 ->
-                            { model | model4 = ArcCreator.update m4 model.model4 }
-
-                        Msg5 _ ->
-                            model
-
-                        Msg6 _ ->
-                            model
+                            { model | model4 = ProductIdentities.update m4 model.model4 }
 
                         Goto1 ->
                             { model
-                                | page = QuizGame
+                                | page = FundamentalIdentities
                                 , twoSat = 0
                                 , threeSat = 0
                                 , fourSat = 0
-                                , fiveSat = 0
-                                , sixSat = 0
                             }
 
                         Goto2 ->
                             { model
-                                | page = TriCreator
+                                | page = PythagoreanIdentities
                                 , oneSat = 0
                                 , threeSat = 0
                                 , fourSat = 0
-                                , fiveSat = 0
-                                , sixSat = 0
                             }
 
                         Goto3 ->
                             { model
-                                | page = PolygonCreator
+                                | page = ReciprocalIdentities
                                 , twoSat = 0
                                 , oneSat = 0
                                 , fourSat = 0
-                                , fiveSat = 0
-                                , sixSat = 0
                             }
 
                         Goto4 ->
                             { model
-                                | page = ArcCreator
+                                | page = ProductIdentities
                                 , twoSat = 0
                                 , threeSat = 0
                                 , oneSat = 0
-                                , fiveSat = 0
-                                , sixSat = 0
-                            }
-
-                        Goto5 ->
-                            { model
-                                | page = SinCreator
-                                , twoSat = 0
-                                , threeSat = 0
-                                , fourSat = 0
-                                , oneSat = 0
-                                , sixSat = 0
-                            }
-
-                        Goto6 ->
-                            { model
-                                | page = TextCreator
-                                , twoSat = 0
-                                , threeSat = 0
-                                , fourSat = 0
-                                , oneSat = 0
-                                , fiveSat = 0
-                            }
-
-                        _ ->
-                            model
-
-                SinCreator ->
-                    case msg of
-                        Tick f g ->
-                            { model | model5 = SinCreator.update (SinCreator.Tick f g) model.model5 }
-
-                        Msg1 _ ->
-                            model
-
-                        Msg2 _ ->
-                            model
-
-                        Msg3 _ ->
-                            model
-
-                        Msg4 _ ->
-                            model
-
-                        Msg5 m5 ->
-                            { model | model5 = SinCreator.update m5 model.model5 }
-
-                        Msg6 _ ->
-                            model
-
-                        Goto1 ->
-                            { model
-                                | page = QuizGame
-                                , twoSat = 0
-                                , threeSat = 0
-                                , fourSat = 0
-                                , fiveSat = 0
-                                , sixSat = 0
-                            }
-
-                        Goto2 ->
-                            { model
-                                | page = TriCreator
-                                , oneSat = 0
-                                , threeSat = 0
-                                , fourSat = 0
-                                , fiveSat = 0
-                                , sixSat = 0
-                            }
-
-                        Goto3 ->
-                            { model
-                                | page = PolygonCreator
-                                , twoSat = 0
-                                , oneSat = 0
-                                , fourSat = 0
-                                , fiveSat = 0
-                                , sixSat = 0
-                            }
-
-                        Goto4 ->
-                            { model
-                                | page = ArcCreator
-                                , twoSat = 0
-                                , threeSat = 0
-                                , oneSat = 0
-                                , fiveSat = 0
-                                , sixSat = 0
-                            }
-
-                        Goto5 ->
-                            { model
-                                | page = SinCreator
-                                , twoSat = 0
-                                , threeSat = 0
-                                , fourSat = 0
-                                , oneSat = 0
-                                , sixSat = 0
-                            }
-
-                        Goto6 ->
-                            { model
-                                | page = TextCreator
-                                , twoSat = 0
-                                , threeSat = 0
-                                , fourSat = 0
-                                , oneSat = 0
-                                , fiveSat = 0
-                            }
-
-                        _ ->
-                            model
-
-                TextCreator ->
-                    case msg of
-                        Tick f g ->
-                            { model | model6 = TextCreator.update (TextCreator.Tick f g) model.model6 }
-
-                        Msg1 _ ->
-                            model
-
-                        Msg2 _ ->
-                            model
-
-                        Msg3 _ ->
-                            model
-
-                        Msg4 _ ->
-                            model
-
-                        Msg5 _ ->
-                            model
-
-                        Msg6 m6 ->
-                            { model | model6 = TextCreator.update m6 model.model6 }
-
-                        Goto1 ->
-                            { model
-                                | page = QuizGame
-                                , twoSat = 0
-                                , threeSat = 0
-                                , fourSat = 0
-                                , fiveSat = 0
-                                , sixSat = 0
-                            }
-
-                        Goto2 ->
-                            { model
-                                | page = TriCreator
-                                , oneSat = 0
-                                , threeSat = 0
-                                , fourSat = 0
-                                , fiveSat = 0
-                                , sixSat = 0
-                            }
-
-                        Goto3 ->
-                            { model
-                                | page = PolygonCreator
-                                , twoSat = 0
-                                , oneSat = 0
-                                , fourSat = 0
-                                , fiveSat = 0
-                                , sixSat = 0
-                            }
-
-                        Goto4 ->
-                            { model
-                                | page = ArcCreator
-                                , twoSat = 0
-                                , threeSat = 0
-                                , oneSat = 0
-                                , fiveSat = 0
-                                , sixSat = 0
-                            }
-
-                        Goto5 ->
-                            { model
-                                | page = SinCreator
-                                , twoSat = 0
-                                , threeSat = 0
-                                , fourSat = 0
-                                , oneSat = 0
-                                , sixSat = 0
-                            }
-
-                        Goto6 ->
-                            { model
-                                | page = TextCreator
-                                , twoSat = 0
-                                , threeSat = 0
-                                , fourSat = 0
-                                , oneSat = 0
-                                , fiveSat = 0
                             }
 
                         _ ->

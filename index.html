@@ -11778,7 +11778,7 @@ var $author$project$FundamentalIdentities$view = function (model) {
 					A2(
 						$MacCASOutreach$graphicsvg$GraphicSVG$filled,
 						$MacCASOutreach$graphicsvg$GraphicSVG$blank,
-						A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 400, 300)))),
+						A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 400, 315)))),
 				A2(
 				$MacCASOutreach$graphicsvg$GraphicSVG$move,
 				_Utils_Tuple2(20, 120),
@@ -11954,7 +11954,7 @@ var $author$project$ProductIdentities$explanationStr = F3(
 										['We cannot derive', 'cos(7x/2-4x/2)']);
 								case 3:
 									return _List_fromArray(
-										['We can rewrite the equation as such.', 'Therefore, this option is correct']);
+										['We can derive this equation using', 'the product of cosines.', 'cos(a)cos(b) = (1/2)*[cos(a-b)+cos(a+b)]', 'by substituting a=7x/2 and b = 3x/2', 'Therefore, this option is correct']);
 								default:
 									var otherwise = option;
 									return _List_Nil;
@@ -11968,7 +11968,7 @@ var $author$project$ProductIdentities$explanationStr = F3(
 										['We cannot derive', 'sin(5y + 2y)']);
 								case 1:
 									return _List_fromArray(
-										['Using the product of sines,', 'we can derive this equation.', 'Therefore, this option is correct']);
+										['We can derive this equation using', 'the product of sine and cosine.', 'sin(a)cos(b) = (1/2)*[sin(a+b)+sin(a-b)]', 'by substituting a = 4y and b=2y', 'Therefore, this option is correct']);
 								case 2:
 									return _List_fromArray(
 										['We cannot derive', 'sin(5y + 2y)']);
@@ -11988,7 +11988,7 @@ var $author$project$ProductIdentities$explanationStr = F3(
 										['We cannot derive', 'cos(5y - 5y)']);
 								case 1:
 									return _List_fromArray(
-										['Using the product of cosines,', 'we can derive this equation.', 'Therefore, this option is correct']);
+										['We can derive this equation using', 'the product of cosines,', 'cos(a)cos(b) = (1/2)*[cos(a-b) + cos(a+b)]', 'by substituting a = 3y and b = 5y', 'Therefore, this option is correct']);
 								case 2:
 									return _List_fromArray(
 										['We cannot derive', 'cos(9y - 5y)']);
@@ -12011,7 +12011,7 @@ var $author$project$ProductIdentities$explanationStr = F3(
 										['We cannot derive', 'the 6 coefficient']);
 								case 2:
 									return _List_fromArray(
-										['Using the difference of sines,', 'we can derive this equation.', 'Therefore, this option is correct']);
+										['We can derive this equation using', 'the difference of sines', 'sin(a)-sin(b) = 2sin((a-b)/2)cos((a+b)/2)', 'by substituting a = 4y and b = 2y', 'Therefore, this option is correct']);
 								case 3:
 									return _List_fromArray(
 										['The 2 cofficient is correct', 'however we cannot derive cos(4y+2y)']);
@@ -12054,7 +12054,7 @@ var $author$project$ProductIdentities$explanationStr = F3(
 										['We cannot derive', 'cos(8x/2)']);
 								case 2:
 									return _List_fromArray(
-										['We can rewrite the equation as such.', 'Therefore, this option is correct']);
+										['We can derive this equation since', '7x/2 - 3x/2 = 4x/2 and', '7x/2 + 3x/2 = 10x/2.', 'Therefore, this option is correct']);
 								case 3:
 									return _List_fromArray(
 										['We cannot derive', 'cos(7x/2)']);
@@ -12074,7 +12074,7 @@ var $author$project$ProductIdentities$explanationStr = F3(
 										['We cannot derive', 'sin(2y + 2y)']);
 								case 2:
 									return _List_fromArray(
-										['Using the product of sines,', 'we can derive this equation.', 'Therefore, this option is correct']);
+										['We can derive this equation since', '4y+2y = 6y and', '4y-2y = 2y', 'Therefore, this option is correct']);
 								case 3:
 									return _List_fromArray(
 										['We cannot derive', 'sin(5y - 2y)']);
@@ -12094,7 +12094,7 @@ var $author$project$ProductIdentities$explanationStr = F3(
 										['We cannot derive', '1/3[cos(8y + 8y)]']);
 								case 2:
 									return _List_fromArray(
-										['Using the product of cosines,', 'we can derive this equation.', 'Therefore, this option is correct']);
+										['3y - 5y = 2y and ', '3y + 5y = 8y', 'Therefore, this option is correct']);
 								case 3:
 									return _List_fromArray(
 										['We cannot derive', '1/3[cos(8y + 8y)]']);
@@ -12108,7 +12108,7 @@ var $author$project$ProductIdentities$explanationStr = F3(
 							switch (option) {
 								case 0:
 									return _List_fromArray(
-										['Yes this is correct. 2y/2=y', 'and 6y/2=3y', 'Therefore, this option is correct']);
+										['Yes this is correct. 4-2=2', 'and 4+2=6', 'Therefore, this option is correct']);
 								case 1:
 									return _List_fromArray(
 										['This is not correct.', 'Try to perform simple arithmetics.']);
@@ -12128,16 +12128,16 @@ var $author$project$ProductIdentities$explanationStr = F3(
 							switch (option) {
 								case 0:
 									return _List_fromArray(
-										['We can derive this by splitting the terms.', 'Therefore, this option is correct']);
+										['We can derive this by', 'expanding the equation through', 'applying 1/sin^2(y) to each part', 'Therefore, this option is correct']);
 								case 1:
 									return _List_fromArray(
-										['We cannot derive the 2 coefficient', 'in the first part']);
+										['We cannot derive this.', 'How can you rearrange the equation?']);
 								case 2:
 									return _List_fromArray(
-										['We cannot derive the 2 coefficient', 'in the first part']);
+										['We cannot derive this.', 'How can you rearrange the equation?']);
 								case 3:
 									return _List_fromArray(
-										['We cannot derive the 1 coefficient', 'in both parts']);
+										['We cannot derive this.', 'How can you rearrange the equation?']);
 								default:
 									var otherwise = option;
 									return _List_Nil;
@@ -12151,7 +12151,7 @@ var $author$project$ProductIdentities$explanationStr = F3(
 							switch (option) {
 								case 0:
 									return _List_fromArray(
-										['We can rewrite the equation as such.', 'Therefore, this option is correct']);
+										['We can derive this equation since', '4/2 = 2 and 10/2 = 5.', 'Therefore, this option is correct']);
 								case 1:
 									return _List_fromArray(
 										['We cannot derive', 'cos(3x) + cos(7x)']);
@@ -12177,7 +12177,7 @@ var $author$project$ProductIdentities$explanationStr = F3(
 										['This is not correct.', 'Try to perform simple arithmetics.']);
 								case 2:
 									return _List_fromArray(
-										['Yes this is correct. 4-2=2', 'and 4+2=6', 'Therefore, this option is correct']);
+										['2y/2 = y', 'and 6y/2 = 3y', 'Therefore, this option is correct']);
 								case 3:
 									return _List_fromArray(
 										['This is not correct.', 'Try to perform simple arithmetics.']);
@@ -12191,7 +12191,7 @@ var $author$project$ProductIdentities$explanationStr = F3(
 							switch (option) {
 								case 0:
 									return _List_fromArray(
-										['We can derive this by splitting the terms.', 'Therefore, this option is correct']);
+										['We can derive this since the sin^2(y)', 'is cancelled out and ', '1/sin^2(y) = csc^2(y)', 'Therefore, this option is correct']);
 								case 1:
 									return _List_fromArray(
 										['We cannot derive this.', 'Try to apply a reciprocal formula']);
@@ -12295,7 +12295,7 @@ var $author$project$ProductIdentities$hintStr = F2(
 							var _v1 = _v0.a;
 							var _v2 = _v0.b;
 							return _List_fromArray(
-								['Try factoring', 'out a fraction', 'from the', 'cosine portion']);
+								['Try using the', 'product of', 'cosines']);
 						case 'Question2':
 							var _v7 = _v0.a;
 							var _v8 = _v0.b;
@@ -12441,10 +12441,10 @@ var $author$project$ProductIdentities$optionsStr = F2(
 							var _v2 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) = (2*(1/2)) [ cos(8x/2 - 3x/2) + cos(7x/2 + 3x/2)', $author$project$ProductIdentities$Incorrect),
-									_Utils_Tuple2('b) = (2*(1/2)) [ cos(9x/2 - 3x/2) + cos(6x/2 + x/2)', $author$project$ProductIdentities$Incorrect),
-									_Utils_Tuple2('c) = (2*(1/2)) [ cos(7x/2 - 4x/2) + cos(7x/2 + 3x/2)', $author$project$ProductIdentities$Incorrect),
-									_Utils_Tuple2('d) = (2*(1/2)) [ cos(7x/2 - 3x/2) + cos(7x/2 + 3x/2)', $author$project$ProductIdentities$Correct)
+									_Utils_Tuple2('a) = (2*(1/2)) [ cos(8x/2 - 3x/2) + cos(7x/2 + 3x/2)]', $author$project$ProductIdentities$Incorrect),
+									_Utils_Tuple2('b) = (2*(1/2)) [ cos(9x/2 - 3x/2) + cos(6x/2 + x/2)]', $author$project$ProductIdentities$Incorrect),
+									_Utils_Tuple2('c) = (2*(1/2)) [ cos(7x/2 - 4x/2) + cos(7x/2 + 3x/2)]', $author$project$ProductIdentities$Incorrect),
+									_Utils_Tuple2('d) = (2*(1/2)) [ cos(7x/2 - 3x/2) + cos(7x/2 + 3x/2)]', $author$project$ProductIdentities$Correct)
 								]);
 						case 'Question2':
 							var _v7 = _v0.a;
@@ -12481,10 +12481,10 @@ var $author$project$ProductIdentities$optionsStr = F2(
 							var _v22 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) RHS = 1 - 3sin^3(y) / sin^2(y)', $author$project$ProductIdentities$Incorrect),
-									_Utils_Tuple2('b) RHS = 1 - 2sin^2(y) / sin^2(2y)', $author$project$ProductIdentities$Incorrect),
-									_Utils_Tuple2('c) RHS = 1 - 3sin^2(y) / sin^2(2y)', $author$project$ProductIdentities$Incorrect),
-									_Utils_Tuple2('d) RHS = 1 - 2sin^2(y) / sin^2(y)', $author$project$ProductIdentities$Correct)
+									_Utils_Tuple2('a) RHS = (1 - 3sin^3(y)) / sin^2(y)', $author$project$ProductIdentities$Incorrect),
+									_Utils_Tuple2('b) RHS = (1 - 2sin^2(y)) / sin^2(2y)', $author$project$ProductIdentities$Incorrect),
+									_Utils_Tuple2('c) RHS = (1 - 3sin^2(y)) / sin^2(2y)', $author$project$ProductIdentities$Incorrect),
+									_Utils_Tuple2('d) RHS = (1 - 2sin^2(y)) / sin^2(y)', $author$project$ProductIdentities$Correct)
 								]);
 					}
 				case 'Step2':
@@ -12494,10 +12494,10 @@ var $author$project$ProductIdentities$optionsStr = F2(
 							var _v4 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) = [cos(3x/2) + cos(10x/2)', $author$project$ProductIdentities$Incorrect),
-									_Utils_Tuple2('b) = [cos(8x/2) + cos(10x/2)', $author$project$ProductIdentities$Incorrect),
-									_Utils_Tuple2('c) = [cos(4x/2) + cos(10x/2)', $author$project$ProductIdentities$Correct),
-									_Utils_Tuple2('d) = [cos(7x/2) + cos(10x/2)', $author$project$ProductIdentities$Incorrect)
+									_Utils_Tuple2('a) = [cos(3x/2) + cos(10x/2)]', $author$project$ProductIdentities$Incorrect),
+									_Utils_Tuple2('b) = [cos(8x/2) + cos(10x/2)]', $author$project$ProductIdentities$Incorrect),
+									_Utils_Tuple2('c) = [cos(4x/2) + cos(10x/2)]', $author$project$ProductIdentities$Correct),
+									_Utils_Tuple2('d) = [cos(7x/2) + cos(10x/2)]', $author$project$ProductIdentities$Incorrect)
 								]);
 						case 'Question2':
 							var _v9 = _v0.a;
@@ -12777,7 +12777,7 @@ var $author$project$ProductIdentities$questionStr = function (question) {
 		case 'Question3':
 			return 'Write cos(3y)cos(5y) as a sum or difference.';
 		case 'Question4':
-			return 'Write the following difference of sines expression as a product: sin(4y) - sin(2y)';
+			return 'Write the difference of sines expression as a product: sin(4y) - sin(2y)';
 		default:
 			return 'Prove that csc^2(y) - 2 = cos(2y) / sin^2(y)';
 	}
@@ -13006,7 +13006,7 @@ var $author$project$ProductIdentities$solutionStr = function (question) {
 				['Step 1: = 2sin((4y - 2y) / 2) cos((4y + 2y) / 2)', 'Step 2: = 2sin(2y/2)cos(6y/2)', 'Step 3: = 2sinycos3y']);
 		default:
 			return _List_fromArray(
-				['Step 1: RHS = 1 - 2sin^2(y) / sin^2(y)', 'Step 2: RHS = 1/sin^2(y) - 2sin^2(y) / sin^2(y)', 'Step 3: RHS = csc^2(y) - 2']);
+				['Step 1: RHS = (1 - 2sin^2(y)) / sin^2(y)', 'Step 2: RHS = 1/sin^2(y) - 2sin^2(y) / sin^2(y)', 'Step 3: RHS = csc^2(y) - 2']);
 	}
 };
 var $author$project$ProductIdentities$solutionText = F2(
@@ -13053,7 +13053,7 @@ var $author$project$ProductIdentities$view = function (model) {
 					A2(
 						$MacCASOutreach$graphicsvg$GraphicSVG$filled,
 						$MacCASOutreach$graphicsvg$GraphicSVG$blank,
-						A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 400, 300)))),
+						A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 400, 315)))),
 				A2(
 				$MacCASOutreach$graphicsvg$GraphicSVG$move,
 				_Utils_Tuple2(20, 120),
@@ -14362,7 +14362,7 @@ var $author$project$PythagoreanIdentities$view = function (model) {
 					A2(
 						$MacCASOutreach$graphicsvg$GraphicSVG$filled,
 						$MacCASOutreach$graphicsvg$GraphicSVG$blank,
-						A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 400, 300)))),
+						A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 400, 315)))),
 				A2(
 				$MacCASOutreach$graphicsvg$GraphicSVG$move,
 				_Utils_Tuple2(20, 120),
@@ -14529,16 +14529,16 @@ var $author$project$ReciprocalIdentities$explanationStr = F3(
 							switch (option) {
 								case 0:
 									return _List_fromArray(
-										['You cannot derive', 'sin y sin y.']);
+										['tan y cannot be derived from the equation']);
 								case 1:
 									return _List_fromArray(
-										['You cannot derive', 'cos y sin y.']);
+										['tan y does not equal cos y / sin y']);
 								case 2:
 									return _List_fromArray(
-										['You cannot derive', 'tan y cos y']);
+										['cot y does not equal sin y / cos y']);
 								case 3:
 									return _List_fromArray(
-										['You can derive', 'this equation.', 'Therefore, this option is correct']);
+										['tan y = sin y / cosy and ', 'cot y = cos y /sin y', 'so we have converted each', 'in the equation.', 'Therefore, this option is correct']);
 								default:
 									var otherwise = option;
 									return _List_Nil;
@@ -14552,7 +14552,7 @@ var $author$project$ReciprocalIdentities$explanationStr = F3(
 										['You cannot derive', 'tan y cos y']);
 								case 1:
 									return _List_fromArray(
-										['You can derive', 'sin y cos y.', 'Therefore, this option is correct.']);
+										['We have manipulated the equation so that', 'we multiply sin y and cos y', 'by cos y and sin y respectively', 'so that we can include them as', ' denominators.', 'Therefore, this option is correct.']);
 								case 2:
 									return _List_fromArray(
 										['You cannot derive', 'tan y cos y']);
@@ -14569,7 +14569,7 @@ var $author$project$ReciprocalIdentities$explanationStr = F3(
 							switch (option) {
 								case 0:
 									return _List_fromArray(
-										['You can derive this equtaion.', 'Therefore, this option is correct']);
+										['You can derive this equation by ', 'factoring out sin y and cos y', 'from each part of the equation.', 'Therefore, this option is correct']);
 								case 1:
 									return _List_fromArray(
 										['You cannot derive', 'tan y * ((cos y - 1) / cosy)']);
@@ -14589,7 +14589,7 @@ var $author$project$ReciprocalIdentities$explanationStr = F3(
 							switch (option) {
 								case 0:
 									return _List_fromArray(
-										['You can derive this equtaion.', 'Therefore, this option is correct']);
+										['You can derive this equation by', 'factoring out sin y cos y.', 'Therefore, this option is correct']);
 								case 1:
 									return _List_fromArray(
 										['You cannot derive', '((siny - 1)(siny-1) / cosy sin y)']);
@@ -14609,7 +14609,7 @@ var $author$project$ReciprocalIdentities$explanationStr = F3(
 							switch (option) {
 								case 0:
 									return _List_fromArray(
-										['You can derive this equtaion.', 'Therefore, this option is correct']);
+										['You can derive this equation since', 'sin y cos y is cancelled out.', 'Therefore, this option is correct']);
 								case 1:
 									return _List_fromArray(
 										['You cannot derive', '(tany - 1){siny - 1)']);
@@ -14632,16 +14632,16 @@ var $author$project$ReciprocalIdentities$explanationStr = F3(
 							switch (option) {
 								case 0:
 									return _List_fromArray(
-										['You cannot derive this.', 'Think of one of the fundamental trig identities.']);
+										['You cannot derive this.', 'Think of one of the reciprocal trig identities.']);
 								case 1:
 									return _List_fromArray(
-										['You can derive this.', 'Therefore, this option is correct']);
+										['You can derive this.', 'sec^2(y) = tan^2(y) + 1.', 'Therefore, this option is correct']);
 								case 2:
 									return _List_fromArray(
-										['You cannot derive this.', 'Think of one of the fundamental trig identities.']);
+										['You cannot derive this.', 'Think of one of the reciprocal trig identities.']);
 								case 3:
 									return _List_fromArray(
-										['You cannot derive this.', 'Think of one of the fundamental trig identities.']);
+										['You cannot derive this.', 'Think of one of the reciprocal trig identities.']);
 								default:
 									var otherwise = option;
 									return _List_Nil;
@@ -14652,16 +14652,16 @@ var $author$project$ReciprocalIdentities$explanationStr = F3(
 							switch (option) {
 								case 0:
 									return _List_fromArray(
-										['You cannot derive this.', 'To get the answerState,', ' you only need to perform basic arithmetic!']);
+										['You cannot derive this.', 'To get the answer,', ' you only need to perform', 'basic arithmetic!']);
 								case 1:
 									return _List_fromArray(
-										['You cannot derive this.', 'To get the answerState,', ' you only need to perform basic arithmetic!']);
+										['You cannot derive this.', 'To get the answer,', ' you only need to perform', 'basic arithmetic!']);
 								case 2:
 									return _List_fromArray(
 										['Yes, 1-1 = 0 so they cancel out.', 'Therefore, this option is correct']);
 								case 3:
 									return _List_fromArray(
-										['You cannot derive this.', 'To get the answerState,', ' you only need to perform basic arithmetic!']);
+										['You cannot derive this.', 'To get the answer,', ' you only need to perform', 'basic arithmetic!']);
 								default:
 									var otherwise = option;
 									return _List_Nil;
@@ -14681,7 +14681,7 @@ var $author$project$ReciprocalIdentities$explanationStr = F3(
 										['You cannot derive this.', 'Try rewriting the equation to represent the', 'latter part of this equation as', 'a fraction']);
 								case 3:
 									return _List_fromArray(
-										['You can rewrite the denomitor', 'as 1/sec^2(y)', 'Therefore, this option is correct']);
+										['You can rewrite the denominator', 'as 1/sec^2(y)', 'Therefore, this option is correct']);
 								default:
 									var otherwise = option;
 									return _List_Nil;
@@ -14692,16 +14692,16 @@ var $author$project$ReciprocalIdentities$explanationStr = F3(
 							switch (option) {
 								case 0:
 									return _List_fromArray(
-										['You can derive this.', 'Therefore, this option is correct']);
+										['You can derive this.', '1/sec^2(y) = cos^2(y)', 'Therefore, this option is correct']);
 								case 1:
 									return _List_fromArray(
-										['You cannot derive this.', 'Think of one of the fundamental trig identities.']);
+										['You cannot derive this.', 'Think of one of the reciprocal trig identities.']);
 								case 2:
 									return _List_fromArray(
-										['You cannot derive this.', 'Think of one of the fundamental trig identities.']);
+										['You cannot derive this.', 'Think of one of the reciprocal trig identities.']);
 								case 3:
 									return _List_fromArray(
-										['You cannot derive this.', 'Think of one of the fundamental trig identities.']);
+										['You cannot derive this.', 'Think of one of the reciprocal trig identities.']);
 								default:
 									var otherwise = option;
 									return _List_Nil;
@@ -14715,7 +14715,7 @@ var $author$project$ReciprocalIdentities$explanationStr = F3(
 										['You cannot derive this.', 'Think of one of the recipricoal identities.']);
 								case 1:
 									return _List_fromArray(
-										['You can derive this.', 'Therefore, this option is correct']);
+										['You can derive this.', 'tan^2(y) = sin^2(y)/cos^2(y)', 'and the cos^2(y) will cancel each', 'other out to finally get', 'sin^2(y)', 'Therefore, this option is correct']);
 								case 2:
 									return _List_fromArray(
 										['You cannot derive this.', 'Think of one of the recipricoal identities.']);
@@ -14738,13 +14738,13 @@ var $author$project$ReciprocalIdentities$explanationStr = F3(
 										['No this cannot be correct', 'because you can\'t get 4']);
 								case 1:
 									return _List_fromArray(
-										['Yes, the cos y can be multiplied to cos^2(y).', 'Therefore, this option is correct']);
+										['Yes, the cos y can be multiplied', 'to cos^2(y).', 'Therefore, this option is correct']);
 								case 2:
 									return _List_fromArray(
 										['No this cannot be correct', 'because you can\'t get 4']);
 								case 3:
 									return _List_fromArray(
-										['No this cannot be correct', 'because you can\'t getcos^4(y)']);
+										['No this cannot be correct', 'because you can\'t get cos^4(y)']);
 								default:
 									var otherwise = option;
 									return _List_Nil;
@@ -14761,7 +14761,7 @@ var $author$project$ReciprocalIdentities$explanationStr = F3(
 										['You cannot derive this.', 'Try substituting in 1 - sin^2y.']);
 								case 2:
 									return _List_fromArray(
-										['Yes, you can derive this.', 'Therefore, this option is correct']);
+										['Yes, you can derive this.', 'We substitute 1 - sin^2(y) for cos^2(y).', 'Therefore, this option is correct']);
 								case 3:
 									return _List_fromArray(
 										['You cannot derive this.', 'Try substituting in 1 - sin^2y.']);
@@ -14785,7 +14785,7 @@ var $author$project$ReciprocalIdentities$explanationStr = F3(
 									['You cannot derive this.', 'Try using the difference of squares.']);
 							case 2:
 								return _List_fromArray(
-									['Yes, you can derive this.', 'Therefore, this option is correct']);
+									['Yes, you can derive this.', 'The difference of squares is ', '4x^2 -1 = (2x - 1)(2x + 1). ', 'If we substitute x = cosx, we get', 'this option.', 'Therefore, this option is correct']);
 							case 3:
 								return _List_fromArray(
 									['You cannot derive this.', 'Try using the difference of squares.']);
@@ -14804,13 +14804,13 @@ var $author$project$ReciprocalIdentities$explanationStr = F3(
 							switch (option) {
 								case 0:
 									return _List_fromArray(
-										['You cannot derive this.', 'Think of one of the fundamental trig identities.']);
+										['You cannot derive this.', 'Think of one of the reciprocal trig identities.']);
 								case 1:
 									return _List_fromArray(
-										['You cannot derive this.', 'Think of one of the fundamental trig identities.']);
+										['You cannot derive this.', 'Think of one of the reciprocal trig identities.']);
 								case 2:
 									return _List_fromArray(
-										['You cannot derive this.', 'Think of one of the fundamental trig identities.']);
+										['You cannot derive this.', 'Think of one of the reciprocal trig identities.']);
 								case 3:
 									return _List_fromArray(
 										['Yes, csc^2(y) can be rewritten', 'as 1+cot^2(y)', 'Therefore, this option is correct']);
@@ -14824,7 +14824,7 @@ var $author$project$ReciprocalIdentities$explanationStr = F3(
 							switch (option) {
 								case 0:
 									return _List_fromArray(
-										['Yes, the cot^2y substract each other.', 'Therefore, this option is correct']);
+										['Yes, the cot^2y cancel each other.', 'Therefore, this option is correct']);
 								case 1:
 									return _List_fromArray(
 										['You cannot derive this.', 'There are terms which you subtract in the expression.']);
@@ -15089,10 +15089,10 @@ var $author$project$ReciprocalIdentities$optionsStr = F2(
 							var _v2 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) = ((sin y sin y - sin y)/cos y) ((cos y sin y - cos y)/sin y)', $author$project$ReciprocalIdentities$Incorrect),
-									_Utils_Tuple2('b) = ((sin y cos y - sin y)/cos y) ((tan y sin y - cos y)/sin y)', $author$project$ReciprocalIdentities$Incorrect),
-									_Utils_Tuple2('c) = ((tan y cos y - sin y)/cos y) ((tan y sin y - cos y)/tan y)', $author$project$ReciprocalIdentities$Incorrect),
-									_Utils_Tuple2('d) = ((sin y cos y - sin y)/cos y) ((cos y sin y - cos y)/sin y)', $author$project$ReciprocalIdentities$Correct)
+									_Utils_Tuple2('a) = (sin y - (sin y / cos y))(tan y - (cos y / sin y))', $author$project$ReciprocalIdentities$Incorrect),
+									_Utils_Tuple2('b) = (sin y - (cos y / sin y))(cos y - (cos y / sin y))', $author$project$ReciprocalIdentities$Incorrect),
+									_Utils_Tuple2('c) = (sin y - (sin y / cos y))(cos y - (sin y / cos y))', $author$project$ReciprocalIdentities$Incorrect),
+									_Utils_Tuple2('d) = (sin y - (sin y / cos y))(cos y - (cos y / sin y))', $author$project$ReciprocalIdentities$Correct)
 								]);
 						case 'Step2':
 							var _v3 = _v0.a;
@@ -15205,10 +15205,10 @@ var $author$project$ReciprocalIdentities$optionsStr = F2(
 							var _v24 = _v0.b;
 							return _List_fromArray(
 								[
-									_Utils_Tuple2('a) RHS = sin(y)/(1-cot^2(y)', $author$project$ReciprocalIdentities$Incorrect),
-									_Utils_Tuple2('b) RHS = tan(y)/(1-cot^2(y)', $author$project$ReciprocalIdentities$Incorrect),
-									_Utils_Tuple2('c) RHS = sin(y)/(1-sin^2(y)', $author$project$ReciprocalIdentities$Correct),
-									_Utils_Tuple2('d) RHS = tan(y)/(1-sin^2(y)', $author$project$ReciprocalIdentities$Incorrect)
+									_Utils_Tuple2('a) RHS = 2sin(y)/(1-cot^2(y))', $author$project$ReciprocalIdentities$Incorrect),
+									_Utils_Tuple2('b) RHS = 2tan(y)/(1-cot^2(y))', $author$project$ReciprocalIdentities$Incorrect),
+									_Utils_Tuple2('c) RHS = 2sin(y)/(1-sin^2(y))', $author$project$ReciprocalIdentities$Correct),
+									_Utils_Tuple2('d) RHS = 2tan(y)/(1-sin^2(y))', $author$project$ReciprocalIdentities$Incorrect)
 								]);
 						default:
 							break _v0$15;
@@ -15732,7 +15732,7 @@ var $author$project$ReciprocalIdentities$view = function (model) {
 					A2(
 						$MacCASOutreach$graphicsvg$GraphicSVG$filled,
 						$MacCASOutreach$graphicsvg$GraphicSVG$blank,
-						A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 400, 300)))),
+						A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 400, 315)))),
 				A2(
 				$MacCASOutreach$graphicsvg$GraphicSVG$move,
 				_Utils_Tuple2(20, 120),
@@ -15899,7 +15899,7 @@ var $author$project$Main$view = function (model) {
 									A2(
 										$MacCASOutreach$graphicsvg$GraphicSVG$filled,
 										$MacCASOutreach$graphicsvg$GraphicSVG$blank,
-										A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 400, 300)))),
+										A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 400, 315)))),
 								A2(
 								$MacCASOutreach$graphicsvg$GraphicSVG$move,
 								_Utils_Tuple2(10, 10),
@@ -15974,7 +15974,7 @@ var $author$project$Main$view = function (model) {
 										[
 											A2(
 											$MacCASOutreach$graphicsvg$GraphicSVG$move,
-											_Utils_Tuple2(-230, 120),
+											_Utils_Tuple2(-230, 128),
 											A2(
 												$MacCASOutreach$graphicsvg$GraphicSVG$makeTransparent,
 												0.7,
@@ -15988,7 +15988,7 @@ var $author$project$Main$view = function (model) {
 														A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 150, 60))))),
 											A2(
 											$MacCASOutreach$graphicsvg$GraphicSVG$move,
-											_Utils_Tuple2(-230, 115),
+											_Utils_Tuple2(-230, 124),
 											A2(
 												$MacCASOutreach$graphicsvg$GraphicSVG$filled,
 												$author$project$Main$oneAccent(model),
@@ -16011,7 +16011,7 @@ var $author$project$Main$view = function (model) {
 										[
 											A2(
 											$MacCASOutreach$graphicsvg$GraphicSVG$move,
-											_Utils_Tuple2(-230, 40),
+											_Utils_Tuple2(-230, 43),
 											A2(
 												$MacCASOutreach$graphicsvg$GraphicSVG$makeTransparent,
 												0.7,
@@ -16025,7 +16025,7 @@ var $author$project$Main$view = function (model) {
 														A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 150, 60))))),
 											A2(
 											$MacCASOutreach$graphicsvg$GraphicSVG$move,
-											_Utils_Tuple2(-230, 35),
+											_Utils_Tuple2(-230, 40),
 											A2(
 												$MacCASOutreach$graphicsvg$GraphicSVG$filled,
 												$author$project$Main$twoAccent(model),
@@ -16048,7 +16048,7 @@ var $author$project$Main$view = function (model) {
 										[
 											A2(
 											$MacCASOutreach$graphicsvg$GraphicSVG$move,
-											_Utils_Tuple2(-230, -40),
+											_Utils_Tuple2(-230, -42),
 											A2(
 												$MacCASOutreach$graphicsvg$GraphicSVG$makeTransparent,
 												0.7,
@@ -16085,7 +16085,7 @@ var $author$project$Main$view = function (model) {
 										[
 											A2(
 											$MacCASOutreach$graphicsvg$GraphicSVG$move,
-											_Utils_Tuple2(-230, -120),
+											_Utils_Tuple2(-230, -128),
 											A2(
 												$MacCASOutreach$graphicsvg$GraphicSVG$makeTransparent,
 												0.7,
@@ -16099,7 +16099,7 @@ var $author$project$Main$view = function (model) {
 														A2($MacCASOutreach$graphicsvg$GraphicSVG$rectangle, 150, 60))))),
 											A2(
 											$MacCASOutreach$graphicsvg$GraphicSVG$move,
-											_Utils_Tuple2(-230, -125),
+											_Utils_Tuple2(-230, -132),
 											A2(
 												$MacCASOutreach$graphicsvg$GraphicSVG$filled,
 												$author$project$Main$fourAccent(model),

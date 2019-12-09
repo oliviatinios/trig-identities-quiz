@@ -534,7 +534,7 @@ type Msg m
 
 -- Model
 view model =
-    [ rectangle 400 300 |> filled blank |> addOutline (solid 2) orange |> move ( 55, 0 )
+    [ rectangle 400 315 |> filled blank |> addOutline (solid 2) orange |> move ( 55, 0 )
     , text (questionTitleStr model.question) |> size 16 |> bold |> filled orange |> move ( 20, 120 )
     , triangle 8|> filled (rgb 230 125 50) |> move ( 150, 125 ) |> notifyTap NextQuestion
     , triangle 8|> filled (rgb 230 125 50) |> rotate (degrees -60) |> move ( -50, 125 ) |> notifyTap PreviousQuestion

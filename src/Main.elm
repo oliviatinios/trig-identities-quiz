@@ -4,20 +4,57 @@ module Main exposing (main)
 
     Group 8
     Olivia Tinios - 400034007
+    Kshitij Mehta - 400012511
+    Navya Sachdeva - 001426466
+    Songyi Jo - 001300927
+
     ...
 
     After interviewing 6 students who are currently taking grade 12 advanced functions in school, we found out
     that many students struggle to write proofs for trigonometric identities. In particular, students have a 
     hard time figuring out which equation they should substitute in and when. During the interviews, students 
-    told us that they like to learn by completing practise questions but that the solutions to the practise 
+    told us that they like to learn by completing practise questions but the solutions to the practise 
     questions in the textbook, which is their only resource for practise problems, lacked detail and they didn't 
     fully understand the methodology behind writing a trigonometric proof. 
-    
+
     We decided to create an app which would break practise problems down into individual steps. The practise 
     problems work like a simple multiple choice question and every time the user selects an answer they are 
     provided with an explanation of why it is correct or incorrect. This ensures that users know what is 
     happening at each step of the trigonometric proof. There is also a hint feature which provides users with
     a clue if they get stuck.
+
+    We designed our application so that it meets Norman's principle in the following way:
+
+    1. Discoveribility:
+    - We have a welcome page with instructions on what the user should do.
+    - Our layout for each lesson is such that all buttons and arrows are visible so that the user knows what actions
+    are possible.
+
+    2. Feedback
+    - When the user clicks on an option, they are immediately given a response of whether their answer is correct
+    or incorrect.
+
+    3. Conceptual Model
+    - Due to the simplicity of our design, it gives the user a clear understanding of how our application works
+    - We made the design of our application follow closely to a multiple choice quiz, which is already very well
+    known to our users and this helps them use our application easily.
+
+    4. Affordance
+    - Each lesson gives the affordance of completing practise problems to the users by allowing them to choose the
+    correct option and advance through all the steps.
+
+    5. Signifiers
+    - We have arrows at the top of each lesson which tells the user that they can scroll through different practise
+    problems.
+
+    6. Mapping
+    - We have designed our application so that each step maps to it's own hint. If the user gets stuck on any step,
+    they can use the hint feature to help them solve the question.
+
+    7. Constraint
+    - The user can only move to the next step once they have selected the correct option. This forces the user to
+    follow all the steps required to solve the question and not skip any steps.
+
 
 -}
 

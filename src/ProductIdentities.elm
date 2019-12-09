@@ -115,7 +115,7 @@ solutionStr question = case question of
                                "Step 2: = 2sin(2y/2)cos(6y/2)",
                                "Step 3: = 2sinycos3y"
                              ]
-                Question5 -> [ "Step 1: RHS = 1 - 2sin^2(y) / sin^2(y)",
+                Question5 -> [ "Step 1: RHS = (1 - 2sin^2(y)) / sin^2(y)",
                                "Step 2: RHS = 1/sin^2(y) - 2sin^2(y) / sin^2(y)",
                                "Step 3: RHS = csc^2(y) - 2"
                              ]
@@ -137,15 +137,15 @@ solutionSection question step = solutionText step (solutionStr question)
 -- Each multiple choice option is a tuple containing a string with option that will be displayed to the screen
 -- and an indication of whether or not the option is correct or incorrect
 optionsStr question step = case (question, step) of
-                (Question1, Step1) -> [ ( "a) = (2*(1/2)) [ cos(8x/2 - 3x/2) + cos(7x/2 + 3x/2)", Incorrect)
-                                      , ( "b) = (2*(1/2)) [ cos(9x/2 - 3x/2) + cos(6x/2 + x/2)", Incorrect)
-                                      , ( "c) = (2*(1/2)) [ cos(7x/2 - 4x/2) + cos(7x/2 + 3x/2)", Incorrect)
-                                      , ( "d) = (2*(1/2)) [ cos(7x/2 - 3x/2) + cos(7x/2 + 3x/2)", Correct)
+                (Question1, Step1) -> [ ( "a) = (2*(1/2)) [ cos(8x/2 - 3x/2) + cos(7x/2 + 3x/2)]", Incorrect)
+                                      , ( "b) = (2*(1/2)) [ cos(9x/2 - 3x/2) + cos(6x/2 + x/2)]", Incorrect)
+                                      , ( "c) = (2*(1/2)) [ cos(7x/2 - 4x/2) + cos(7x/2 + 3x/2)]", Incorrect)
+                                      , ( "d) = (2*(1/2)) [ cos(7x/2 - 3x/2) + cos(7x/2 + 3x/2)]", Correct)
                                       ]
-                (Question1, Step2) -> [ ( "a) = [cos(3x/2) + cos(10x/2)", Incorrect)
-                                      , ( "b) = [cos(8x/2) + cos(10x/2)", Incorrect)
-                                      , ( "c) = [cos(4x/2) + cos(10x/2)", Correct)
-                                      , ( "d) = [cos(7x/2) + cos(10x/2)", Incorrect)
+                (Question1, Step2) -> [ ( "a) = [cos(3x/2) + cos(10x/2)]", Incorrect)
+                                      , ( "b) = [cos(8x/2) + cos(10x/2)]", Incorrect)
+                                      , ( "c) = [cos(4x/2) + cos(10x/2)]", Correct)
+                                      , ( "d) = [cos(7x/2) + cos(10x/2)]", Incorrect)
                                       ]
                 (Question1, Step3) -> [ ( "a) = cos2x + cos5x", Correct)
                                       , ( "b) = cos3x + cos7x", Incorrect)
@@ -187,10 +187,10 @@ optionsStr question step = case (question, step) of
                                       , ( "c) = 2sinycos3y", Correct)
                                       , ( "d) = 2sinycos7y", Incorrect)
                                       ]
-                (Question5, Step1) -> [ ( "a) RHS = 1 - 3sin^3(y) / sin^2(y)", Incorrect)
-                                      , ( "b) RHS = 1 - 2sin^2(y) / sin^2(2y)", Incorrect)
-                                      , ( "c) RHS = 1 - 3sin^2(y) / sin^2(2y)", Incorrect)
-                                      , ( "d) RHS = 1 - 2sin^2(y) / sin^2(y)", Correct)
+                (Question5, Step1) -> [ ( "a) RHS = (1 - 3sin^3(y)) / sin^2(y)", Incorrect)
+                                      , ( "b) RHS = (1 - 2sin^2(y)) / sin^2(2y)", Incorrect)
+                                      , ( "c) RHS = (1 - 3sin^2(y)) / sin^2(2y)", Incorrect)
+                                      , ( "d) RHS = (1 - 2sin^2(y)) / sin^2(y)", Correct)
                                       ]
                 (Question5, Step2) -> [ ( "a) RHS = 1/sin^2(y) - 2sin^2(y) / sin^2(y)", Correct)
                                       , ( "b) RHS = 2/sin^2(y) - 2sin^2(y) / sin^2(y)", Incorrect)
@@ -345,7 +345,7 @@ resultsSection question step answerState option =
 
 -- Takes two parameters of type Questions and Steps and returns the corresponding hint
 hintStr question step = case (question, step) of
-                (Question1, Step1) -> ["Try factoring", "out a fraction", "from the", "cosine portion" ]
+                (Question1, Step1) -> ["Try using the", "product of", "cosines" ]
                 (Question1, Step2) -> ["Perform", "simple subtractions" ]
                 (Question1, Step3) -> ["Simplify" ]
                 (Question2, Step1) -> ["Use the", "product", "of sines" ]
@@ -367,52 +367,52 @@ explanationStr question step option = case (question, step) of
                                         0 -> ["We cannot derive", "cos(8x/2)" ]
                                         1 -> ["We cannot derive", "cos(9x/2)" ]
                                         2 -> ["We cannot derive", "cos(7x/2-4x/2)" ]
-                                        3 -> ["We can rewrite the equation as such.", "Therefore, this option is correct"]
+                                        3 -> ["We can derive this equation using", "the product of cosines.", "cos(a)cos(b) = (1/2)*[cos(a-b)+cos(a+b)]", "by substituting a=7x/2 and b = 3x/2", "Therefore, this option is correct"]
                                         otherwise -> []
                 (Question1, Step2) -> case option of
                                         0 -> ["We cannot derive", "cos(3x/2)" ]
                                         1 -> ["We cannot derive", "cos(8x/2)" ]
-                                        2 -> ["We can rewrite the equation as such.", "Therefore, this option is correct"]
+                                        2 -> ["We can derive this equation since", "7x/2 - 3x/2 = 4x/2 and", "7x/2 + 3x/2 = 10x/2.", "Therefore, this option is correct"]
                                         3 -> ["We cannot derive", "cos(7x/2)" ]
                                         otherwise -> []
                 (Question1, Step3) -> case option of
-                                        0 -> ["We can rewrite the equation as such.", "Therefore, this option is correct"]
+                                        0 -> ["We can derive this equation since", "4/2 = 2 and 10/2 = 5.", "Therefore, this option is correct"]
                                         1 -> ["We cannot derive", "cos(3x) + cos(7x)" ]
                                         2 -> ["We cannot derive", "cos(5x) + cos(5x)" ]
                                         3 -> ["We cannot derive", "cos(2x) + cos(6x)" ]
                                         otherwise -> []
                 (Question2, Step1) -> case option of
                                         0 -> ["We cannot derive", "sin(5y + 2y)" ]
-                                        1 -> ["Using the product of sines,", "we can derive this equation.", "Therefore, this option is correct"]
+                                        1 -> ["We can derive this equation using", "the product of sine and cosine.", "sin(a)cos(b) = (1/2)*[sin(a+b)+sin(a-b)]", "by substituting a = 4y and b=2y", "Therefore, this option is correct"]
                                         2 -> ["We cannot derive", "sin(5y + 2y)" ]
                                         3 -> ["We cannot derive", "sin(2y - 2y)"]
                                         otherwise -> []
                 (Question2, Step2) -> case option of
                                         0 -> ["We cannot derive", "sin(4y + 2y)" ]
                                         1 -> ["We cannot derive", "sin(2y + 2y)" ]
-                                        2 -> ["Using the product of sines,", "we can derive this equation.", "Therefore, this option is correct"]
+                                        2 -> ["We can derive this equation since", "4y+2y = 6y and", "4y-2y = 2y", "Therefore, this option is correct"]
                                         3 -> ["We cannot derive", "sin(5y - 2y)"]
                                         otherwise -> []
                 (Question3, Step1) -> case option of
                                         0 -> ["We cannot derive", "cos(5y - 5y)" ]
-                                        1 -> ["Using the product of cosines,", "we can derive this equation.", "Therefore, this option is correct"]
+                                        1 -> ["We can derive this equation using", "the product of cosines,", "cos(a)cos(b) = (1/2)*[cos(a-b) + cos(a+b)]", "by substituting a = 3y and b = 5y", "Therefore, this option is correct"]
                                         2 -> ["We cannot derive", "cos(9y - 5y)" ]
                                         3 -> ["We cannot derive", "cos(2y - 5y)" ]
                                         otherwise -> []
                 (Question3, Step2) -> case option of
                                         0 -> ["We cannot derive", "1/3[cos(2y + 8y)]" ]
                                         1 -> ["We cannot derive", "1/3[cos(8y + 8y)]" ]
-                                        2 -> ["Using the product of cosines,", "we can derive this equation.", "Therefore, this option is correct"]
+                                        2 -> ["3y - 5y = 2y and ", "3y + 5y = 8y", "Therefore, this option is correct"]
                                         3 -> ["We cannot derive", "1/3[cos(8y + 8y)]" ]
                                         otherwise -> []
                 (Question4, Step1) -> case option of
                                         0 -> ["We cannot derive", "the 6 coefficient" ]
                                         1 -> ["We cannot derive", "the 6 coefficient"]
-                                        2 -> ["Using the difference of sines,", "we can derive this equation.", "Therefore, this option is correct"]
+                                        2 -> ["We can derive this equation using", "the difference of sines","sin(a)-sin(b) = 2sin((a-b)/2)cos((a+b)/2)", "by substituting a = 4y and b = 2y", "Therefore, this option is correct"]
                                         3 -> ["The 2 cofficient is correct", "however we cannot derive cos(4y+2y)" ]
                                         otherwise -> []
                 (Question4, Step2) -> case option of
-                                        0 -> ["Yes this is correct. 2y/2=y", "and 6y/2=3y", "Therefore, this option is correct"]
+                                        0 -> ["Yes this is correct. 4-2=2", "and 4+2=6", "Therefore, this option is correct"]
                                         1 -> ["This is not correct.", "Try to perform simple arithmetics." ]
                                         2 -> ["This is not correct.", "Try to perform simple arithmetics." ]
                                         3 -> ["This is not correct.", "Try to perform simple arithmetics."  ]
@@ -420,7 +420,7 @@ explanationStr question step option = case (question, step) of
                 (Question4, Step3) -> case option of
                                         0 -> ["This is not correct.", "Try to perform simple arithmetics." ]
                                         1 -> ["This is not correct.", "Try to perform simple arithmetics." ]
-                                        2 -> ["Yes this is correct. 4-2=2", "and 4+2=6", "Therefore, this option is correct"]
+                                        2 -> ["2y/2 = y", "and 6y/2 = 3y", "Therefore, this option is correct" ]
                                         3 -> ["This is not correct.", "Try to perform simple arithmetics."  ]
                                         otherwise -> []
                 (Question5, Step1) -> case option of
@@ -430,13 +430,13 @@ explanationStr question step option = case (question, step) of
                                         3 -> ["Yes, we can derive this since", "cos2y = 1 - 2sin^2(y).", "Therefore, this option is correct"]
                                         otherwise -> []
                 (Question5, Step2) -> case option of
-                                        0 -> ["We can derive this by splitting the terms.", "Therefore, this option is correct"]
-                                        1 -> ["We cannot derive the 2 coefficient", "in the first part" ]
-                                        2 -> ["We cannot derive the 2 coefficient", "in the first part" ]
-                                        3 -> ["We cannot derive the 1 coefficient", "in both parts" ]
+                                        0 -> ["We can derive this by", "expanding the equation through", "applying 1/sin^2(y) to each part", "Therefore, this option is correct"]
+                                        1 -> ["We cannot derive this.", "How can you rearrange the equation?" ]
+                                        2 -> ["We cannot derive this.", "How can you rearrange the equation?" ]
+                                        3 -> ["We cannot derive this.", "How can you rearrange the equation?" ]
                                         otherwise -> []
                 (Question5, Step3) -> case option of
-                                        0 -> ["We can derive this by splitting the terms.", "Therefore, this option is correct"]
+                                        0 -> ["We can derive this since the sin^2(y)", "is cancelled out and ", "1/sin^2(y) = csc^2(y)", "Therefore, this option is correct"]
                                         1 -> ["We cannot derive this.", "Try to apply a reciprocal formula" ]
                                         2 -> ["We cannot derive this.", "Try to apply a reciprocal formula" ]
                                         3 -> ["We cannot derive this.", "Try to apply a reciprocal formula" ]

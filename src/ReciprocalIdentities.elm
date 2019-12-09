@@ -139,10 +139,10 @@ solutionSection question step = solutionText step (solutionStr question)
 -- Each multiple choice option is a tuple containing a string with option that will be displayed to the screen
 -- and an indication of whether or not the option is correct or incorrect
 optionsStr question step = case (question, step) of
-                (Question1, Step1) -> [ ( "a) = ((sin y sin y - sin y)/cos y) ((cos y sin y - cos y)/sin y)", Incorrect)
-                                      , ( "b) = ((sin y cos y - sin y)/cos y) ((tan y sin y - cos y)/sin y)", Incorrect)
-                                      , ( "c) = ((tan y cos y - sin y)/cos y) ((tan y sin y - cos y)/tan y)", Incorrect)
-                                      , ( "d) = ((sin y cos y - sin y)/cos y) ((cos y sin y - cos y)/sin y)", Correct)
+                (Question1, Step1) -> [ ( "a) = (sin y - (sin y / cos y))(tan y - (cos y / sin y))", Incorrect)
+                                      , ( "b) = (sin y - (cos y / sin y))(cos y - (cos y / sin y))", Incorrect)
+                                      , ( "c) = (sin y - (sin y / cos y))(cos y - (sin y / cos y))", Incorrect)
+                                      , ( "d) = (sin y - (sin y / cos y))(cos y - (cos y / sin y))", Correct)
                                       ]
                 (Question1, Step2) -> [ ( "a) = ((tan y cos y - sin y)/cos y) ((cos y tan y - cos y)/sin y)", Incorrect)
                                       , ( "b) = ((sin y cos y - sin y)/cos y) ((cos y sin y - cos y)/sin y)", Correct)
@@ -194,10 +194,10 @@ optionsStr question step = case (question, step) of
                                       , ( "c) RHS = 4sin(y)/cos^4(y)", Incorrect)
                                       , ( "d) RHS = 2sin(y)/cos^4(y)", Incorrect)
                                       ]
-                (Question3, Step2) -> [ ( "a) RHS = sin(y)/(1-cot^2(y)", Incorrect)
-                                      , ( "b) RHS = tan(y)/(1-cot^2(y)", Incorrect)
-                                      , ( "c) RHS = sin(y)/(1-sin^2(y)", Correct)
-                                      , ( "d) RHS = tan(y)/(1-sin^2(y)", Incorrect)
+                (Question3, Step2) -> [ ( "a) RHS = 2sin(y)/(1-cot^2(y))", Incorrect)
+                                      , ( "b) RHS = 2tan(y)/(1-cot^2(y))", Incorrect)
+                                      , ( "c) RHS = 2sin(y)/(1-sin^2(y))", Correct)
+                                      , ( "d) RHS = 2tan(y)/(1-sin^2(y))", Incorrect)
                                       ]
                 (Question4, Step1) -> [ ( "a) RHS = (2cos(y) - 1)(2(tan(y)) + 1)", Incorrect)
                                       , ( "b) RHS = (2sin(y) - 1)(2(tan(y)) + 1)", Incorrect)
@@ -378,91 +378,91 @@ hintStr question step = case (question, step) of
 -- Takes two parameters of type Questions and Steps and returns the corresponding explanation
 explanationStr question step option = case (question, step) of
                 (Question1, Step1) -> case option of
-                                        0 -> ["You cannot derive", "sin y sin y." ]
-                                        1 -> ["You cannot derive", "cos y sin y."]
-                                        2 -> ["You cannot derive", "tan y cos y" ]
-                                        3 -> ["You can derive", "this equation.", "Therefore, this option is correct"]
+                                        0 -> ["tan y cannot be derived from the equation" ]
+                                        1 -> ["tan y does not equal cos y / sin y"]
+                                        2 -> ["cot y does not equal sin y / cos y" ]
+                                        3 -> ["tan y = sin y / cosy and ", "cot y = cos y /sin y","so we have converted each", "in the equation.", "Therefore, this option is correct"]
                                         otherwise -> []
                 (Question1, Step2) -> case option of
                                         0 -> ["You cannot derive", "tan y cos y" ]
-                                        1 -> ["You can derive", "sin y cos y.", "Therefore, this option is correct."]
+                                        1 -> ["We have manipulated the equation so that", "we multiply sin y and cos y", "by cos y and sin y respectively", "so that we can include them as", " denominators.","Therefore, this option is correct."]
                                         2 -> ["You cannot derive", "tan y cos y" ]
                                         3 -> ["You cannot derive", "sin y tan y." ]
                                         otherwise -> []
                 (Question1, Step3) -> case option of
-                                        0 -> ["You can derive this equtaion.", "Therefore, this option is correct"]
+                                        0 -> ["You can derive this equation by ", "factoring out sin y and cos y", "from each part of the equation.", "Therefore, this option is correct"]
                                         1 -> ["You cannot derive", "tan y * ((cos y - 1) / cosy)" ]
                                         2 -> ["You cannot derive", "tan y * ((cos y - 1) / cosy)" ]
                                         3 -> ["You cannot derive", "tan y * (cos y * ((tan y -1)/sin y)"  ]
                                         otherwise -> []
                 (Question1, Step4) -> case option of
-                                        0 -> ["You can derive this equtaion.", "Therefore, this option is correct"]
+                                        0 -> ["You can derive this equation by", "factoring out sin y cos y.", "Therefore, this option is correct"]
                                         1 -> ["You cannot derive", "((siny - 1)(siny-1) / cosy sin y)" ]
                                         2 -> ["You cannot derive", "the sin y sin y", "towards the end of this equation" ]
                                         3 -> ["You cannot derive", "((siny - 1)(siny-1) / cosy sin y)"  ]
                                         otherwise -> []
                 (Question1, Step5) -> case option of
-                                        0 -> ["You can derive this equtaion.", "Therefore, this option is correct"]
+                                        0 -> ["You can derive this equation since", "sin y cos y is cancelled out.", "Therefore, this option is correct"]
                                         1 -> ["You cannot derive", "(tany - 1){siny - 1)" ]
                                         2 -> ["You cannot derive", "(cosy - 1){tany - 1)" ]
                                         3 -> ["You cannot derive", "(tany - 1)(siny - 1)"  ]
                                         otherwise -> []
                 (Question2, Step1) -> case option of
-                                        0 -> ["You cannot derive this.", "Think of one of the fundamental trig identities." ]
-                                        1 -> ["You can derive this.", "Therefore, this option is correct"]
-                                        2 -> ["You cannot derive this.", "Think of one of the fundamental trig identities." ]
-                                        3 -> ["You cannot derive this.", "Think of one of the fundamental trig identities." ]
+                                        0 -> ["You cannot derive this.", "Think of one of the reciprocal trig identities." ]
+                                        1 -> ["You can derive this.", "sec^2(y) = tan^2(y) + 1.", "Therefore, this option is correct"]
+                                        2 -> ["You cannot derive this.", "Think of one of the reciprocal trig identities." ]
+                                        3 -> ["You cannot derive this.", "Think of one of the reciprocal trig identities." ]
                                         otherwise -> []
                 (Question2, Step2) -> case option of
-                                        0 -> ["You cannot derive this.", "To get the answerState,", " you only need to perform basic arithmetic!"]
-                                        1 -> ["You cannot derive this.", "To get the answerState,", " you only need to perform basic arithmetic!" ]
+                                        0 -> ["You cannot derive this.", "To get the answer,", " you only need to perform", "basic arithmetic!"]
+                                        1 -> ["You cannot derive this.", "To get the answer,", " you only need to perform", "basic arithmetic!" ]
                                         2 -> ["Yes, 1-1 = 0 so they cancel out.", "Therefore, this option is correct"]
-                                        3 -> ["You cannot derive this.", "To get the answerState,", " you only need to perform basic arithmetic!"]
+                                        3 -> ["You cannot derive this.", "To get the answer,", " you only need to perform", "basic arithmetic!"]
                                         otherwise -> []
                 (Question2, Step3) -> case option of
                                         0 -> ["You cannot derive this.","Try rewriting the equation to represent the", "latter part of this equation as", "a fraction" ]
                                         1 -> ["You cannot derive this.","Try rewriting the equation to represent the", "latter part of this equation as", "a fraction" ]
                                         2 -> ["You cannot derive this.","Try rewriting the equation to represent the", "latter part of this equation as", "a fraction" ]
-                                        3 -> ["You can rewrite the denomitor", "as 1/sec^2(y)", "Therefore, this option is correct"]
+                                        3 -> ["You can rewrite the denominator", "as 1/sec^2(y)", "Therefore, this option is correct"]
                                         otherwise -> []
                 (Question2, Step4) -> case option of
-                                        0 -> ["You can derive this.", "Therefore, this option is correct"]
-                                        1 -> ["You cannot derive this.", "Think of one of the fundamental trig identities." ]
-                                        2 -> ["You cannot derive this.", "Think of one of the fundamental trig identities."]
-                                        3 -> ["You cannot derive this.", "Think of one of the fundamental trig identities." ]
+                                        0 -> ["You can derive this.", "1/sec^2(y) = cos^2(y)", "Therefore, this option is correct"]
+                                        1 -> ["You cannot derive this.", "Think of one of the reciprocal trig identities." ]
+                                        2 -> ["You cannot derive this.", "Think of one of the reciprocal trig identities."]
+                                        3 -> ["You cannot derive this.", "Think of one of the reciprocal trig identities." ]
                                         otherwise -> []
                 (Question2, Step5) -> case option of
                                         0 -> ["You cannot derive this.", "Think of one of the recipricoal identities." ]
-                                        1 -> ["You can derive this.", "Therefore, this option is correct"]
+                                        1 -> ["You can derive this.", "tan^2(y) = sin^2(y)/cos^2(y)", "and the cos^2(y) will cancel each", "other out to finally get", "sin^2(y)", "Therefore, this option is correct"]
                                         2 -> ["You cannot derive this.", "Think of one of the recipricoal identities."]
                                         3 -> ["You cannot derive this.", "Think of one of the recipricoal identities." ]
                                         otherwise -> []
                 (Question3, Step1) -> case option of
                                         0 -> ["No this cannot be correct", "because you can't get 4" ]
-                                        1 -> ["Yes, the cos y can be multiplied to cos^2(y).", "Therefore, this option is correct"]
+                                        1 -> ["Yes, the cos y can be multiplied", "to cos^2(y).", "Therefore, this option is correct"]
                                         2 -> ["No this cannot be correct", "because you can't get 4"  ]
-                                        3 -> ["No this cannot be correct", "because you can't getcos^4(y)"  ]
+                                        3 -> ["No this cannot be correct", "because you can't get cos^4(y)"  ]
                                         otherwise -> []
                 (Question3, Step2) -> case option of
                                         0 -> ["You cannot derive this.", "Try substituting in 1 - sin^2y." ]
                                         1 -> ["You cannot derive this.", "Try substituting in 1 - sin^2y."  ]
-                                        2 -> ["Yes, you can derive this.", "Therefore, this option is correct"]
+                                        2 -> ["Yes, you can derive this.", "We substitute 1 - sin^2(y) for cos^2(y).", "Therefore, this option is correct"]
                                         3 -> ["You cannot derive this.", "Try substituting in 1 - sin^2y."  ]
                                         otherwise -> []
                 (Question4, Step1) -> case option of
                                         0 -> ["You cannot derive this.", "Try using the difference of squares." ]
                                         1 -> ["You cannot derive this.", "Try using the difference of squares."  ]
-                                        2 -> ["Yes, you can derive this.", "Therefore, this option is correct"]
+                                        2 -> ["Yes, you can derive this.", "The difference of squares is ", "4x^2 -1 = (2x - 1)(2x + 1). ", "If we substitute x = cosx, we get", "this option.", "Therefore, this option is correct"]
                                         3 -> ["You cannot derive this.", "Try using the difference of squares."]
                                         otherwise -> []
                 (Question5, Step1) -> case option of
-                                        0 -> ["You cannot derive this.", "Think of one of the fundamental trig identities." ]
-                                        1 -> ["You cannot derive this.", "Think of one of the fundamental trig identities." ]
-                                        2 -> ["You cannot derive this.", "Think of one of the fundamental trig identities." ]
+                                        0 -> ["You cannot derive this.", "Think of one of the reciprocal trig identities." ]
+                                        1 -> ["You cannot derive this.", "Think of one of the reciprocal trig identities." ]
+                                        2 -> ["You cannot derive this.", "Think of one of the reciprocal trig identities." ]
                                         3 -> ["Yes, csc^2(y) can be rewritten", "as 1+cot^2(y)", "Therefore, this option is correct"]
                                         otherwise -> []
                 (Question5, Step2) -> case option of
-                                        0 -> ["Yes, the cot^2y substract each other.", "Therefore, this option is correct"]
+                                        0 -> ["Yes, the cot^2y cancel each other.", "Therefore, this option is correct"]
                                         1 -> ["You cannot derive this.", "There are terms which you subtract in the expression." ]
                                         2 -> ["You cannot derive this.", "There are terms which you subtract in the expression." ]
                                         3 -> ["You cannot derive this.", "There are terms which you subtract in the expression." ]
